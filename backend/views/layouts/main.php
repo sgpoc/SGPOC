@@ -80,6 +80,12 @@ AppAsset::register($this);
                         'type' =>SideNav::TYPE_PRIMARY,                        
                     ],
                     [
+                        'label' => 'Familias', 
+                        'icon' => 'th', 
+                        'url' => Url::to('/sgpoc/backend/web/familias/listar'), 
+                        'type' =>SideNav::TYPE_PRIMARY,                        
+                    ],
+                    [
                         'label' => 'Usuarios', 
                         'icon' => 'user', 
                         'url' => Url::to('/sgpoc/backend/web/usuarios/listar'), 
@@ -103,7 +109,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left"> SGPOC <?= date('Y') ?></p>
+        <p class="pull-left"> SGPOC <?= date('Y/M/D') ?></p>
 
         <!-- <p class="pull-right"><?= Yii::powered() ?></p> -->
     </div>

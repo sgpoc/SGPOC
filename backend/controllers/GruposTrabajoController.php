@@ -4,8 +4,6 @@ namespace backend\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\data\ArrayDataProvider;
-use yii\helpers\ArrayHelper;
-use app\models\GestorUsuarios;
 use app\models\GestorGruposTrabajo;
 use app\models\GruposTrabajo;
 use app\models\GruposTrabajoBuscar;
