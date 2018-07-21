@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'Sistema de Presupuestación de Obras de Construcción';
+$this->title = 'Sistema de Gestión de Presupuestación de Obras de Construcción';
 ?>
 <div class="site-index">
 

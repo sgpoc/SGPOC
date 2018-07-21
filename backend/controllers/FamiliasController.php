@@ -17,7 +17,7 @@ class FamiliasController extends Controller
     }
     
     public function actionListar()
-    {       
+    {   
         $gestor = new GestorFamilias;
         $familias = $gestor->Listar();
         $dataProvider = new ArrayDataProvider([
