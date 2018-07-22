@@ -5,11 +5,6 @@
 
 use backend\assets\AppAsset;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use kartik\sidenav\SideNav;
-use yii\helpers\Url;
-use rmrevin\yii\fontawesome\FA;
 
 
 AppAsset::register($this);
@@ -30,10 +25,8 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 <div class="wrapper">
     <header class="main-header">
-        <a href="../../index2.html" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
+        <a href="/sgpoc/backend/web/site/index" class="logo">
             <span class="logo-mini"><b>POC</b></span>
-            <!-- logo for regular state and mobile devices -->
             <span class="logo-lg"><b>SGPOC</b></span>
         </a>
         <nav class="navbar navbar-static-top">
@@ -42,13 +35,13 @@ AppAsset::register($this);
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="" class="img-circle">
+                            <img src="" class="user-image">
                             <span class="hidden-xs"><?= Yii::$app->user->identity['Nombre']?></span> 
                             <span class="hiddex-xs"><?= Yii::$app->user->identity['Apellido']?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
-                                <img src="" class="img-circle"/>
+                                <img src=""  class="img-circle"/>
                                 <p>
                                     <span class="hidden-xs"><?= Yii::$app->user->identity['Nombre']?></span> 
                                     <span class="hiddex-xs"><?= Yii::$app->user->identity['Apellido']?></span>
@@ -156,25 +149,21 @@ AppAsset::register($this);
         </section>
     </aside>
     
-<div class="content-wrapper">
-    
+    <div class="content-wrapper">
+        <section class="content">
+        <div class="box-body">
+          <?= $content ?>
+        </div>    
+        </section>
+    </div>  
 
-    <section class="content">
-      <div class="callout callout-info">
-        <?= $content ?>
-      </div>    
-    </section>
-  </div>  
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 1.0
+        </div>
+        <strong>Copyright &copy; 2018.</strong> Todos los derecho reservados.
+    </footer>
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left"> Copyright <?= date('Y')?> Ortiz-Ledesma fACET </p>
-
-        <!-- <p class="pull-right"><?= Yii::powered() ?></p> -->
-    </div>
-</footer>
-
 <?php $this->endBody() ?>
 </body>
 </html>

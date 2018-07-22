@@ -39,7 +39,7 @@ $gridColumns = [
         'class' => 'kartik\grid\SerialColumn',
         'contentOptions' => ['class' => 'kartik-sheet-style'],
         'width' => '36px',
-        'header' => '',
+        'header' => '#',
         'headerOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
