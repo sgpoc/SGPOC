@@ -8,7 +8,6 @@ class GruposTrabajo extends Model
     public $IdGT;
     public $GrupoTrabajo;
     public $Mail;
-    public $Password;
     public $Estado;
     
     public static function tableName()
@@ -20,10 +19,9 @@ class GruposTrabajo extends Model
     public function rules()
     {
         return [
-            [['IdGT', 'GrupoTrabajo', 'Mail', 'Password', 'Estado'], 'required'],
+            [['IdGT', 'GrupoTrabajo', 'Mail', 'Estado'], 'required'],
             [['IdGT'], 'integer'],
             [['GrupoTrabajo', 'Mail', 'Estado'], 'string', 'max' => 100],
-            [['Password'], 'string', 'max' => 32],
             [['IdGT'], 'unique'],
             [['GrupoTrabajo'], 'unique'],
             [['Mail'], 'email'],
@@ -39,7 +37,6 @@ class GruposTrabajo extends Model
             'IdGT' => 'Id Gt',
             'GrupoTrabajo' => 'Grupo Trabajo',
             'Mail' => 'Mail',
-            'Password' => 'Password',
             'Estado' => 'Estado',
         ];
     }

@@ -11,16 +11,17 @@ $this->title = 'Usuarios';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div>
-
+    <h1>Alta Usuario</h1>
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($model, 'IdGT')->dropDownList($listData, ['prompt' => 'Seleccione Uno' ])->label('Grupo de Trabajo');  ?>
+    <?= $form->field($model, 'IdRol')->dropDownList($listDataU, ['prompt' => 'Seleccione Uno' ])->label('Rol');  ?>
     <?= $form->field($model, 'Nombre')->textInput() ?>
     <?= $form->field($model, 'Apellido')->textInput() ?>
-    <?= $form->field($model, 'Rol')->textInput() ?>
     <?= $form->field($model, 'Email')->input('email') ?>
     <?= $form->field($model, 'Password')->passwordInput() ?>
 
-    <?= html::submitButton('Alta',['class'=>'btn btn-primary']); ?>
+    <?= html::submitButton('Alta',['class'=>'btn btn-primary pull-left']); ?>
+    <?= Html::a('<i class="fa fa-arrow-circle-left"></i> Volver', Yii::$app->request->referrer,['class'=>'btn btn-primary pull-right']); ?>
     
 <?php ActiveForm::end() ?>
 
