@@ -35,13 +35,13 @@ AppAsset::register($this);
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="" class="user-image">
+                            <img src="https://cdn.instructables.com/ORIG/FCK/XPME/FCZERDQD/FCKXPMEFCZERDQD.jpg" class="user-image">
                             <span class="hidden-xs"><?= Yii::$app->user->identity['Nombre']?></span> 
                             <span class="hiddex-xs"><?= Yii::$app->user->identity['Apellido']?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
-                                <img src=""  class="img-circle"/>
+                                <img src="https://cdn.instructables.com/ORIG/FCK/XPME/FCZERDQD/FCKXPMEFCZERDQD.jpg"  class="img-circle"/>
                                 <p>
                                     <span class="hidden-xs"><?= Yii::$app->user->identity['Nombre']?></span> 
                                     <span class="hiddex-xs"><?= Yii::$app->user->identity['Apellido']?></span>

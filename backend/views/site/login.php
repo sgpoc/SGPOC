@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'rememberMe')->checkbox() ?>
                 <div class="form-group">
                     <?= Html::submitButton('Login', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
-                    <p class="text-center"> OR </p>
+                    <p class="text-center"> - OR - </p>
                     <?= Html::submitButton('Sign in using Google+', ['class' => 'btn btn-block btn-social btn-google btn-flat','name' => 'google-button']) ?>
                 </div>
                 <?php ActiveForm::end(); ?>

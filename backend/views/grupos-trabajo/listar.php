@@ -46,6 +46,7 @@ $gridColumns = [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'GrupoTrabajo',
         'label' => 'Nombre',
+        'vAlign' => 'middle',
         /*'filterType' => GridView::FILTER_SELECT2,
             'filter' => ArrayHelper::map(), 
             'filterWidgetOptions' => [
@@ -58,6 +59,7 @@ $gridColumns = [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'Mail',
         'label' => 'Email',
+        'vAlign' => 'middle',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
@@ -65,7 +67,7 @@ $gridColumns = [
         'attribute' => 'Estado',
         //'trueLabel' => 'Activo', 
         //'falseLabel' => 'Inactivo',
-        'vAlign' => 'center',
+        'vAlign' => 'middle',
         'hAlign' => 'center'
     ],
     [
@@ -100,14 +102,14 @@ $gridColumns = [
 ] 
 
 ?>
-
-
+  
+<?= Yii::$app->session->getFlash('alert'); ?>
+ 
 <div>
     <?= GridView::widget([
         'moduleId' => 'gridviewKrajee',
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
-        'options' => ['style' => 'font-family: Verdana'],
         'columns' => $gridColumns,
         'toolbar' => [
             [

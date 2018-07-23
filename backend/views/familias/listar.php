@@ -46,6 +46,7 @@ $gridColumns = [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'Familia',
         'label' => 'Nombre',
+        'vAlign' => 'middle',
         /*'filterType' => GridView::FILTER_SELECT2,
             'filter' => ArrayHelper::map(), 
             'filterWidgetOptions' => [
@@ -86,7 +87,6 @@ $gridColumns = [
         'moduleId' => 'gridviewKrajee',
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
-        'options' => ['style' => 'font-family: Verdana'],
         'columns' => $gridColumns,
         'toolbar' => [
             [
