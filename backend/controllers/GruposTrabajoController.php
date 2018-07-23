@@ -52,7 +52,7 @@ class GruposTrabajoController extends Controller
             $grupostrabajo = $gestor->Buscar($pCadena, $pIncluyeBajas);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $grupostrabajo,
-                'pagination' => ['pagesize' => 10,],
+                'pagination' => ['pagesize' => 5,],
             ]);
             return $this->render('listar',['dataProvider' => $dataProvider]);
         }
@@ -72,12 +72,19 @@ class GruposTrabajoController extends Controller
         {
             $pGrupoTrabajo = $model->GrupoTrabajo;
             $pMail = $model->Mail;
-            $pPassword = $model->Password;
-            $mensaje = $gestor->Alta($pGrupoTrabajo, $pMail, $pPassword);
-            return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
+            $mensaje = $gestor->Alta($pGrupoTrabajo, $pMail);
+
+            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
+            {
+                return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
+            }
+            else{
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+                return $this->render('alta',['model' => $model]);
+            }
         }
         else{
-           return $this->render('alta',['model' => $model]);
+            return $this->render('alta',['model' => $model]);
         }
     }
     
@@ -90,8 +97,7 @@ class GruposTrabajoController extends Controller
         {
             $pGrupoTrabajo = $model->GrupoTrabajo;
             $pMail = $model->Mail;
-            $pPassword = $model->Password;
-            $mensaje = $gestor->Modificar($pIdGT, $pGrupoTrabajo, $pMail, $pPassword);
+            $mensaje = $gestor->Modificar($pIdGT, $pGrupoTrabajo, $pMail);
             return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
              
         }

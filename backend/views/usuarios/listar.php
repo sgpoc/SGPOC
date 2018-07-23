@@ -65,8 +65,8 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'GrupoTrabajo',
-        'label' => 'Pertenece a',
+        'attribute' => 'Rol',
+        'label' => 'Rol',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [

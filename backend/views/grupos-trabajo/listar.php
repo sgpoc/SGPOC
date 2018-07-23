@@ -100,7 +100,8 @@ $gridColumns = [
 ] 
 
 ?>
-        
+
+
 <div>
     <?= GridView::widget([
         'moduleId' => 'gridviewKrajee',

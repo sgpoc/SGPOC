@@ -55,24 +55,28 @@ class UsuariosController extends Controller
     public function actionAlta()
     {
         $model = new Usuarios;
+        $gestoru = new GestorUsuarios;
         $gestorgt = new GestorGruposTrabajo;
         $gestor = new GestorUsuarios;
         $grupostrabajo = $gestorgt->Listar();
-        $listData=ArrayHelper::map($grupostrabajo,'IdGT','GrupoTrabajo');
+        $listData= ArrayHelper::map($grupostrabajo,'IdGT','GrupoTrabajo');
+        $roles = $gestoru->ListarRoles();
+        $listDataU = ArrayHelper::map($roles,'IdRol','Rol');
         
         if($model->load(Yii::$app->request->post())) //&& $model->validate())
         {
             $pIdGT = $model->IdGT;
+            $pIdRol = $model->IdRol;
             $pNombre = $model->Nombre;
             $pApellido = $model->Apellido;
-            $pRol = $model->Rol;
             $pEmail = $model->Email;
             $pPassword = $model->Password;
-            $mensaje = $gestor->Alta($pIdGT, $pNombre, $pApellido, $pRol, $pEmail, $pPassword);return $this->redirect('/sgpoc/backend/web/usuarios/listar');
+            $mensaje = $gestor->Alta($pIdGT, $pIdRol, $pNombre, $pApellido, $pEmail, $pPassword);
+            return $this->redirect('/sgpoc/backend/web/usuarios/listar');
             
         }
         else{
-            return $this->render('alta',['model' => $model, 'listData' => $listData]);
+            return $this->render('alta',['model' => $model, 'listData' => $listData, 'listDataU' => $listDataU]);
         }
     }
     
@@ -85,10 +89,9 @@ class UsuariosController extends Controller
         {
             $pNombre = $model->Nombre;
             $pApellido = $model->Apellido;
-            $pRol = $model->Rol;
             $pEmail = $model->Email;
             $pPassword = $model->Password;
-            $mensaje = $gestor->Modificar($pIdUsuario, $pNombre, $pApellido, $pRol, $pEmail, $pPassword);
+            $mensaje = $gestor->Modificar($pIdUsuario, $pNombre, $pApellido, $pEmail, $pPassword);
             return $this->redirect('/sgpoc/backend/web/usuarios/listar');
              
         }

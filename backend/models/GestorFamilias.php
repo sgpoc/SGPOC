@@ -36,7 +36,7 @@ class GestorFamilias
         $comando = Yii::$app->db->createCommand($sql)
                  ->bindValue('pIdGT', $pIdGT)
                  ->bindValue('pFamilia', $pFamilia);
-        return $comando->execute();
+        return $comando->queryAll();
     }
     
     public function Modificar($pIdFamilia, $pFamilia)
@@ -45,7 +45,7 @@ class GestorFamilias
         $comando = Yii::$app->db->createCommand($sql)
                  ->bindValue('pIdFamilia', $pIdFamilia)
                  ->bindValue('pFamilia', $pFamilia);
-        return $comando->execute();
+        return $comando->queryAll();
     }
     
     public function Borrar($pIdFamilia)
@@ -53,7 +53,7 @@ class GestorFamilias
         $sql = 'CALL ssp_borrar_familia(:pIdFamilia)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdFamilia', $pIdFamilia);
-        return $comando->execute();
+        return $comando->queryAll();
     }
 
 }
