@@ -9,9 +9,9 @@ class Usuarios extends Model
 {
     public $IdUsuario;
     public $IdGT;
+    public $IdRol;
     public $Nombre;
     public $Apellido;
-    public $Rol;
     public $Email;
     public $Password;
     public $Estado;
@@ -24,11 +24,11 @@ class Usuarios extends Model
     public function rules()
     {
         return [
-            [['IdUsuario','IdGT', 'Nombre', 'Apellido', 'Rol', 'Email', 'Password', 'Estado'], 'required'],
+            [['IdUsuario','IdGT', 'IdRol', 'Nombre', 'Apellido', 'Email', 'Password', 'Estado'], 'required'],
             [['IdGT'], 'integer'],
             [['IdUsuario'], 'integer'],
+            [['IdRol'], 'integer'],
             [['Nombre', 'Apellido', 'Email'], 'string', 'max' => 100],
-            [['Rol'], 'string', 'max' => 20],
             [['Password'], 'string', 'max' => 32],
             [['Estado'], 'string', 'max' => 1],
             [['IdGT'], 'exist', 'skipOnError' => true, 'targetClass' => Grupostrabajo::className(), 'targetAttribute' => ['IdGT' => 'IdGT']],
@@ -43,6 +43,7 @@ class Usuarios extends Model
         return [
             'IdUsuario' => 'Id Usuario',
             'IdGT' => 'Id Gt',
+            'IdRol' => 'Id Rol',
             'Nombre' => 'Nombre',
             'Apellido' => 'Apellido',
             'Rol' => 'Rol',
@@ -59,4 +60,5 @@ class Usuarios extends Model
     {
         return $this->hasOne(Grupostrabajo::className(), ['IdGT' => 'IdGT']);
     }
+    
 }

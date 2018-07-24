@@ -21,7 +21,7 @@ class GestorGruposTrabajo
         $usuarios = $comando->queryAll();
         return $usuarios;
     }
-    //bla
+
     public function Buscar($pCadena,$pIncluyeBajas){
         $sql = 'CALL ssp_buscar_grupotrabajo(:pCadena, :pIncluyeBajas)';
         $comando = Yii::$app->db->createCommand($sql)
@@ -31,25 +31,23 @@ class GestorGruposTrabajo
         return $grupostrabajo;
     }
     
-    public function Alta($pGrupoTrabajo, $pMail, $pPassword)
+    public function Alta($pGrupoTrabajo, $pMail)
     {
-        $sql = 'CALL ssp_alta_grupotrabajo(:pGrupoTrabajo, :pMail, :pPassword)';
+        $sql = 'CALL ssp_alta_grupotrabajo(:pGrupoTrabajo, :pMail)';
         $comando = Yii::$app->db->createCommand($sql)
                  ->bindValue('pGrupoTrabajo', $pGrupoTrabajo)
-                 ->bindValue('pMail', $pMail)
-                 ->bindValue('pPassword', $pPassword);
-        return $comando->execute();
+                 ->bindValue('pMail', $pMail);
+        return $comando->queryAll();
     }
     
-    public function Modificar($pIdGT, $pGrupoTrabajo, $pMail, $pPassword)
+    public function Modificar($pIdGT, $pGrupoTrabajo, $pMail)
     {
-        $sql = 'CALL ssp_modificar_grupotrabajo(:pIdGT, :pGrupoTrabajo, :pMail, :pPassword)';
+        $sql = 'CALL ssp_modificar_grupotrabajo(:pIdGT, :pGrupoTrabajo, :pMail)';
         $comando = Yii::$app->db->createCommand($sql)
                  ->bindValue('pIdGT', $pIdGT)
                  ->bindValue('pGrupoTrabajo', $pGrupoTrabajo)
-                 ->bindValue('pMail', $pMail)
-                 ->bindValue('pPassword', $pPassword);
-        return $comando->execute();
+                 ->bindValue('pMail', $pMail);
+        return $comando->queryAll();
     }
     
     public function Borrar($pIdGT)
@@ -57,7 +55,7 @@ class GestorGruposTrabajo
         $sql = 'CALL ssp_borrar_grupotrabajo(:pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdGT', $pIdGT);
-        return $comando->execute();
+        return $comando->queryAll();
     }
     
     public function Baja($pIdGT)
@@ -65,7 +63,7 @@ class GestorGruposTrabajo
         $sql = 'CALL ssp_baja_grupotrabajo(:pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdGT',$pIdGT);
-        return $comando->execute();
+        return $comando->queryAll();
     }
     
     public function Activar($pIdGT)
@@ -73,6 +71,6 @@ class GestorGruposTrabajo
         $sql = 'CALL ssp_activar_grupotrabajo(:pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdGT',$pIdGT);
-        return $comando->execute();
+        return $comando->queryAll();
     }
 }

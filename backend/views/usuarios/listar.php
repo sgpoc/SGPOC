@@ -39,12 +39,13 @@ $gridColumns = [
         'class' => 'kartik\grid\SerialColumn',
         'contentOptions' => ['class' => 'kartik-sheet-style'],
         'width' => '36px',
-        'header' => '',
+        'header' => '#',
         'headerOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'Nombre',
+        'vAlign' => 'middle',
         /*'filterType' => GridView::FILTER_SELECT2,
             'filter' => ArrayHelper::map(), 
             'filterWidgetOptions' => [
@@ -56,17 +57,20 @@ $gridColumns = [
     [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'Apellido',
+        'vAlign' => 'middle',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'Email',
+        'vAlign' => 'middle',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'GrupoTrabajo',
-        'label' => 'Pertenece a',
+        'attribute' => 'Rol',
+        'label' => 'Rol',
+        'vAlign' => 'middle',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
@@ -74,7 +78,7 @@ $gridColumns = [
         'attribute' => 'Estado',
         //'trueLabel' => 'Activo', 
         //'falseLabel' => 'Inactivo',
-        'vAlign' => 'center',
+        'vAlign' => 'middle',
         'hAlign' => 'center'
     ],
     [
@@ -112,7 +116,6 @@ $gridColumns = [
         'moduleId' => 'gridviewKrajee',
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
-        'options' => ['style' => 'font-family: Verdana'],
         'columns' => $gridColumns,
         'toolbar' => [
             [

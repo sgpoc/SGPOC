@@ -4,20 +4,13 @@ namespace backend\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\data\ArrayDataProvider;
-use yii\helpers\ArrayHelper;
-use app\models\GestorUsuarios;
 use app\models\GestorGruposTrabajo;
 use app\models\GruposTrabajo;
 use app\models\GruposTrabajoBuscar;
 
 
 class GruposTrabajoController extends Controller
-{
-    public function actionIndex()
-    {
-        
-    }
-    
+{   
     public function actionListar()
     {       
         $gestor = new GestorGruposTrabajo;
@@ -54,7 +47,7 @@ class GruposTrabajoController extends Controller
             $grupostrabajo = $gestor->Buscar($pCadena, $pIncluyeBajas);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $grupostrabajo,
-                'pagination' => ['pagesize' => 10,],
+                'pagination' => ['pagesize' => 5,],
             ]);
             return $this->render('listar',['dataProvider' => $dataProvider]);
         }
@@ -74,12 +67,19 @@ class GruposTrabajoController extends Controller
         {
             $pGrupoTrabajo = $model->GrupoTrabajo;
             $pMail = $model->Mail;
-            $pPassword = $model->Password;
-            $mensaje = $gestor->Alta($pGrupoTrabajo, $pMail, $pPassword);
-            return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
+            $mensaje = $gestor->Alta($pGrupoTrabajo, $pMail);
+
+            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
+            {
+                return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
+            }
+            else{
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+                return $this->render('alta',['model' => $model]);
+            }
         }
         else{
-           return $this->render('alta',['model' => $model]);
+            return $this->render('alta',['model' => $model]);
         }
     }
     
@@ -92,10 +92,15 @@ class GruposTrabajoController extends Controller
         {
             $pGrupoTrabajo = $model->GrupoTrabajo;
             $pMail = $model->Mail;
-            $pPassword = $model->Password;
-            $mensaje = $gestor->Modificar($pIdGT, $pGrupoTrabajo, $pMail, $pPassword);
-            return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
-             
+            $mensaje = $gestor->Modificar($pIdGT, $pGrupoTrabajo, $pMail);
+            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
+            {
+                return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
+            }
+            else{
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+                return $this->render('modificar',['model' => $model]);
+            }
         }
         else{
            return $this->render('modificar',['model' => $model]);
@@ -106,24 +111,46 @@ class GruposTrabajoController extends Controller
     {
         $gestor = new GestorGruposTrabajo;
         $pIdGT = Yii::$app->request->get('IdGT');
-        $gestor->Borrar($pIdGT);
-        return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
+        $mensaje = $gestor->Borrar($pIdGT);
+        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
+        {
+            return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
+        }
+        else{
+            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+            return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
+        }
+        
     }
 
     public function actionBaja()
     {
         $gestor = new GestorGruposTrabajo;
         $pIdGT = Yii::$app->request->get('IdGT');
-        $gestor->Baja($pIdGT);
-        return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
+        $mensaje = $gestor->Baja($pIdGT);
+        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
+        {
+            return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
+        }
+        else{
+            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+            return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
+        }
     }
     
     public function actionActivar()
     {
         $gestor = new GestorGruposTrabajo;
         $pIdGT = Yii::$app->request->get('IdGT');
-        $gestor->Activar($pIdGT);
-        return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
+        $mensaje = $gestor->Activar($pIdGT);
+        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
+        {
+            return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
+        }
+        else{
+            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+            return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
+        }
     }
     
 }

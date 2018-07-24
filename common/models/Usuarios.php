@@ -99,24 +99,24 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
         
     }
 
-public function getAuthKey(): string {
-throw new \yii\base\NotSupportedException;
-}
+    public function getAuthKey(): string {
+        throw new \yii\base\NotSupportedException;
+    }   
 
-public function getId() {
- return $this->IdUsuario;
-}
+    public function getId() {
+        return $this->IdUsuario;
+    }
 
-public function validateAuthKey($authKey): bool {
-throw new \yii\base\NotSupportedException;
-}
+    public function validateAuthKey($authKey): bool {
+        throw new \yii\base\NotSupportedException;
+    }
 
-public static function findIdentity($id): \yii\web\IdentityInterface {
- return self::findOne($id);
-}
+    public static function findIdentity($id): \yii\web\IdentityInterface {
+        return self::findOne($id);
+    }
 
-public static function findIdentityByAccessToken($token, $type = null): \yii\web\IdentityInterface {
-   throw new \yii\base\NotSupportedException;
-}
+    public static function findIdentityByAccessToken($token, $type = null): \yii\web\IdentityInterface {
+        throw new \yii\base\NotSupportedException;
+    }
 
 }
