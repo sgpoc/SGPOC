@@ -47,12 +47,6 @@ $gridColumns = [
         'attribute' => 'Familia',
         'label' => 'Nombre',
         'vAlign' => 'middle',
-        /*'filterType' => GridView::FILTER_SELECT2,
-            'filter' => ArrayHelper::map(), 
-            'filterWidgetOptions' => [
-            'pluginOptions' => ['allowClear' => true],
-            'options' => ['multiple' => true]
-            ],*/
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
@@ -81,12 +75,16 @@ $gridColumns = [
 ] 
 
 ?>
+
+<?= Yii::$app->session->getFlash('alert'); ?>
         
 <div>
     <?= GridView::widget([
         'moduleId' => 'gridviewKrajee',
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
+        //'filterRowOptions' => ['class' => 'kartik-sheet-style'],
+        //'pjax' => true,
         'columns' => $gridColumns,
         'toolbar' => [
             [

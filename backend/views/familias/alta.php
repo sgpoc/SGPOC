@@ -10,6 +10,7 @@ use yii\widgets\ActiveForm;
 $this->title = 'Familias';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= Yii::$app->session->getFlash('alert'); ?>
 <div>
     <h1>Alta Familia</h1>
     <?php $form = ActiveForm::begin(); ?>

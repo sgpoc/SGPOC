@@ -20,16 +20,16 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                //'only' => ['login','logout'],
+                'only' => ['login', 'logout'],
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
                         'allow' => true,
+                        'actions' => ['login'], 
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'index'],
                         'allow' => true,
+                        'actions' => ['logout','login'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -82,10 +82,7 @@ class SiteController extends Controller
             return $this->goBack();
         } else {
             $model->password = '';
-
-            return $this->render('login', [
-                'model' => $model,
-            ]);
+            return $this->render('login', ['model' => $model]);
         }
     }
 
@@ -96,8 +93,8 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
+        $this->layout = 'login';
         Yii::$app->user->logout();
-
         return $this->redirect('/sgpoc/backend/web/site/login');
     }
 }
