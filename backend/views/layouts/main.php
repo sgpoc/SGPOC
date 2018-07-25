@@ -26,8 +26,8 @@ AppAsset::register($this);
 <div class="wrapper">
     <header class="main-header">
         <a href="/sgpoc/backend/web/site/index" class="logo">
-            <span class="logo-mini"><b>POC</b></span>
-            <span class="logo-lg"><b>SGPOC</b></span>
+            <span class="logo-mini"><img class ="img-circle" src="https://pixel.nymag.com/imgs/custom/tvrecaps/recaps-south-park-160x160.png" alt='logo' width="40" height="40" align="middle" /></span>
+            <span style="font-family:Bahnschrift Light;" class="logo-lg"><img class ="img-circle" src="https://pixel.nymag.com/imgs/custom/tvrecaps/recaps-south-park-160x160.png" alt='logo' width="40" height="40" align="middle" /> SGPOC</span>
         </a>
         <nav class="navbar navbar-static-top">
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"></a>
@@ -35,13 +35,13 @@ AppAsset::register($this);
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="https://cdn.instructables.com/ORIG/FCK/XPME/FCZERDQD/FCKXPMEFCZERDQD.jpg" class="user-image">
+                            <img src="https://pixel.nymag.com/imgs/custom/tvrecaps/recaps-south-park-160x160.png" class="user-image" alt='mario'>
                             <span class="hidden-xs"><?= Yii::$app->user->identity['Nombre']?></span> 
                             <span class="hiddex-xs"><?= Yii::$app->user->identity['Apellido']?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
-                                <img src="https://cdn.instructables.com/ORIG/FCK/XPME/FCZERDQD/FCKXPMEFCZERDQD.jpg"  class="img-circle"/>
+                                <img src="https://pixel.nymag.com/imgs/custom/tvrecaps/recaps-south-park-160x160.png"  class="img-circle" alt='mario'/>
                                 <p>
                                     <span class="hidden-xs"><?= Yii::$app->user->identity['Nombre']?></span> 
                                     <span class="hiddex-xs"><?= Yii::$app->user->identity['Apellido']?></span>
@@ -50,12 +50,12 @@ AppAsset::register($this);
                             </li>
                             <li class="user-body">
                                 <div class="col-xs4 text-center">
-                                    <a href="/sgpoc/backend/web/site/login">Logout</a>
+                                    <a href="/sgpoc/backend/web/site/logout" data-method="post">Logout</a>
                                 </div>
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li class="dropdown user user-menu">
                         <a href="">Contacto</a>
                     </li>
                 </ul>

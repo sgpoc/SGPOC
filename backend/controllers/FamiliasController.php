@@ -20,11 +20,12 @@ class FamiliasController extends Controller
     {   
         $gestor = new GestorFamilias;
         $familias = $gestor->Listar();
+        //$searchModel = new FamiliasBuscar;
         $dataProvider = new ArrayDataProvider([
             'allModels' => $familias,
-            'pagination' => ['pagesize' => 10,],
+            'pagination' => ['pagesize' => 5,],
         ]);
-        return $this->render('listar',['dataProvider' => $dataProvider]);
+        return $this->render('listar',['dataProvider' => $dataProvider]);//, 'searchModel' => $searchModel]);
     }
     
     public function actionListarSubfamilias()
@@ -72,7 +73,14 @@ class FamiliasController extends Controller
             $pIdGT = Yii::$app->user->identity['IdGT'];
             $pFamilia = $model->Familia;
             $mensaje = $gestor->Alta($pIdGT, $pFamilia);
-            return $this->redirect('/sgpoc/backend/web/familias/listar'); 
+            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
+            {
+                return $this->redirect('/sgpoc/backend/web/familias/listar');
+            }
+            else{
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+                return $this->render('alta',['model' => $model]);
+            }
         }
         else{
             return $this->render('alta',['model' => $model]);
@@ -88,8 +96,14 @@ class FamiliasController extends Controller
         {
             $pFamilia = $model->Familia;
             $mensaje = $gestor->Modificar($pIdFamilia, $pFamilia);
-            return $this->redirect('/sgpoc/backend/web/familias/listar');
-             
+            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
+            {
+                return $this->redirect('/sgpoc/backend/web/familias/listar');
+            }
+            else{
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+                return $this->render('modificar',['model' => $model]);
+            }     
         }
         else{
            return $this->render('modificar',['model' => $model]);
@@ -100,8 +114,15 @@ class FamiliasController extends Controller
     {
         $gestor = new GestorFamilias;
         $pIdFamilia = Yii::$app->request->get('IdFamilia');
-        $gestor->Borrar($pIdFamilia);
-        return $this->redirect('/sgpoc/backend/web/familias/listar');
+        $mensaje = $gestor->Borrar($pIdFamilia);
+        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
+        {
+            return $this->redirect('/sgpoc/backend/web/familias/listar');
+        }
+        else{
+            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+            return $this->redirect('/sgpoc/backend/web/familias/listar');
+        }
     }
     
 }
