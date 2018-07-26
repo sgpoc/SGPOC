@@ -10,6 +10,7 @@ use yii\widgets\ActiveForm;
 $this->title = 'Usuarios';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= Yii::$app->session->getFlash('alert'); ?>
 <div>
     <h1>Alta Usuario</h1>
     <?php $form = ActiveForm::begin(); ?>

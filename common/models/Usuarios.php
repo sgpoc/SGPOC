@@ -15,7 +15,7 @@ use Yii;
  * @property string $Email
  * @property string $Password
  * @property string $Estado
- *
+ * @property string $auth_key
  * @property Grupostrabajo $gT
  */
 class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
@@ -36,10 +36,11 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
         return [
             [['IdGT', 'Nombre', 'Apellido', 'Rol', 'Email', 'Password', 'Estado'], 'required'],
             [['IdGT'], 'integer'],
+            [['IdRol'], 'integer'],
             [['Nombre', 'Apellido', 'Email'], 'string', 'max' => 100],
-            [['Rol'], 'string', 'max' => 20],
-            [['Password'], 'string', 'max' => 32],
+            [['Password'], 'string', 'max' => 100],
             [['Estado'], 'string', 'max' => 1],
+            [['auth_key'], 'string', 'max' => 255],
             [['IdGT'], 'exist', 'skipOnError' => true, 'targetClass' => Grupostrabajo::className(), 'targetAttribute' => ['IdGT' => 'IdGT']],
         ];
     }
@@ -58,6 +59,7 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
             'Email' => 'Email',
             'Password' => 'Password',
             'Estado' => 'Estado',
+            'auth_key' => 'auth_key',
         ];
     }
 
@@ -68,26 +70,6 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     {
         return $this->hasOne(Grupostrabajo::className(), ['IdGT' => 'IdGT']);
     }
-//
-//     public function getAuthKey(){
-//        throw new \yii\base\NotSupportedException;
-//    }
-//
-//    public function getId() {
-//        return $this->IdUsuario;
-//    }
-//
-//    public function validateAuthKey($authKey){
-//        throw new \yii\base\NotSupportedException; 
-//    }
-//
-//    public static function findIdentity($id): \yii\web\IdentityInterface {
-//        return self::findOne($id);
-//    }
-//
-//    public static function findIdentityByAccessToken($token, $type = null): \yii\web\IdentityInterface {
-//        throw new \yii\base\NotSupportedException;
-//    }
     
     public static function findByEmail($username){
         return self::findOne(['Email'=>$username]);
@@ -95,12 +77,11 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     }
     
     public function validatePassword($password){
-        return $this->Password === $password;
-        
+        return Yii::$app->getSecurity()->validatePassword($password,$this->Password);  
     }
 
     public function getAuthKey(): string {
-        throw new \yii\base\NotSupportedException;
+        return $this->auth_key;
     }   
 
     public function getId() {
@@ -108,7 +89,7 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     }
 
     public function validateAuthKey($authKey): bool {
-        throw new \yii\base\NotSupportedException;
+        return $this->getAuthKey() === $authKey;
     }
 
     public static function findIdentity($id): \yii\web\IdentityInterface {
