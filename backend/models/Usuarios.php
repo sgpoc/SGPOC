@@ -15,6 +15,7 @@ class Usuarios extends Model
     public $Email;
     public $Password;
     public $Estado;
+    public $auth_key;
     
     public static function tableName()
     {
@@ -29,8 +30,9 @@ class Usuarios extends Model
             [['IdUsuario'], 'integer'],
             [['IdRol'], 'integer'],
             [['Nombre', 'Apellido', 'Email'], 'string', 'max' => 100],
-            [['Password'], 'string', 'max' => 32],
+            [['Password'], 'string', 'max' => 100],
             [['Estado'], 'string', 'max' => 1],
+            [['auth_key'], 'string', 'max' => 255],
             [['IdGT'], 'exist', 'skipOnError' => true, 'targetClass' => Grupostrabajo::className(), 'targetAttribute' => ['IdGT' => 'IdGT']],
         ];
     }
@@ -50,6 +52,7 @@ class Usuarios extends Model
             'Email' => 'Email',
             'Password' => 'Password',
             'Estado' => 'Estado',
+            'auth_key' => 'auth_key',
         ];
     }
 
@@ -61,4 +64,8 @@ class Usuarios extends Model
         return $this->hasOne(Grupostrabajo::className(), ['IdGT' => 'IdGT']);
     }
     
+    public function beforeSave()
+    {
+        return $this->auth_key = Yii::$app->security->generateRandomString();
+    }
 }

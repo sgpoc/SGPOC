@@ -110,7 +110,9 @@ $gridColumns = [
 ] 
 
 ?>
-        
+  
+<?= Yii::$app->session->getFlash('alert'); ?>
+
 <div>
     <?= GridView::widget([
         'moduleId' => 'gridviewKrajee',
