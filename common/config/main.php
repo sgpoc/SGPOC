@@ -23,5 +23,6 @@ return [
         ),
     ],
     ],    
+    'defaultRoute' => 'site/login',    
 ];
 

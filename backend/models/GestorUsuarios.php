@@ -30,16 +30,17 @@ class GestorUsuarios
         return $usuarios;
     }
     
-    public function Alta($pIdGT, $pIdRol, $pNombre, $pApellido, $pEmail, $pPassword)
+    public function Alta($pIdGT, $pIdRol, $pNombre, $pApellido, $pEmail, $pPassword, $pauth_key)
     {
-        $sql = 'CALL ssp_alta_usuario(:pIdGT, :pIdRol, :pNombre, :pApellido, :pEmail, :pPassword)';
+        $sql = 'CALL ssp_alta_usuario(:pIdGT, :pIdRol, :pNombre, :pApellido, :pEmail, :pPassword, :pauth_key)';
         $comando = Yii::$app->db->createCommand($sql)
                  ->bindValue('pIdGT', $pIdGT)
                  ->bindValue('pIdRol',$pIdRol)
                  ->bindValue('pNombre', $pNombre)
                  ->bindValue('pApellido', $pApellido)
                  ->bindValue('pEmail', $pEmail)
-                 ->bindValue('pPassword', $pPassword);
+                 ->bindValue('pPassword', $pPassword)
+                 ->bindValue('pauth_key', $pauth_key);
         return $comando->queryAll();
     }
     

@@ -9,6 +9,7 @@ use yii\helpers\Html;
 
 AppAsset::register($this);
 ?>
+
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -69,7 +70,7 @@ AppAsset::register($this);
                 <li class="header">Barra de Navegación</li>
                 <li>
                     <a href="/sgpoc/backend/web/site/index">
-                    <i class="fa fa-home"></i>
+                        <i class="fa fa-home"></i>
                         <span>Inicio</span>
                     </a>
                 </li>

@@ -57,7 +57,6 @@ class UsuariosController extends Controller
         $model = new Usuarios;
         $gestoru = new GestorUsuarios;
         $gestorgt = new GestorGruposTrabajo;
-        $gestor = new GestorUsuarios;
         $grupostrabajo = $gestorgt->Listar();
         $listData= ArrayHelper::map($grupostrabajo,'IdGT','GrupoTrabajo');
         $roles = $gestoru->ListarRoles();
@@ -70,10 +69,17 @@ class UsuariosController extends Controller
             $pNombre = $model->Nombre;
             $pApellido = $model->Apellido;
             $pEmail = $model->Email;
-            $pPassword = $model->Password;
-            $mensaje = $gestor->Alta($pIdGT, $pIdRol, $pNombre, $pApellido, $pEmail, $pPassword);
-            return $this->redirect('/sgpoc/backend/web/usuarios/listar');
-            
+            $pPassword = Yii::$app->security->generatePasswordHash($model->Password);
+            $pauth_key = $model->beforeSave();
+            $mensaje = $gestoru->Alta($pIdGT, $pIdRol, $pNombre, $pApellido, $pEmail, $pPassword, $pauth_key);
+            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
+            {
+                return $this->redirect('/sgpoc/backend/web/usuarios/listar');
+            }
+            else{
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+                return $this->render('alta',['model' => $model, 'listData' => $listData, 'listDataU' => $listDataU]);
+            }
         }
         else{
             return $this->render('alta',['model' => $model, 'listData' => $listData, 'listDataU' => $listDataU]);
@@ -92,8 +98,14 @@ class UsuariosController extends Controller
             $pEmail = $model->Email;
             $pPassword = $model->Password;
             $mensaje = $gestor->Modificar($pIdUsuario, $pNombre, $pApellido, $pEmail, $pPassword);
-            return $this->redirect('/sgpoc/backend/web/usuarios/listar');
-             
+            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
+            {
+                return $this->redirect('/sgpoc/backend/web/usuarios/listar');
+            }
+            else{
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+                return $this->render('modificar',['model' => $model]);
+            }
         }
         else{
            return $this->render('modificar',['model' => $model]);
@@ -104,15 +116,30 @@ class UsuariosController extends Controller
     {
         $gestor = new GestorUsuarios;
         $pIdUsuario = Yii::$app->request->get('IdUsuario');
-        $gestor->Borrar($pIdUsuario);
-        return $this->redirect('/sgpoc/backend/web/usuarios/listar');
+        $mensaje = $gestor->Borrar($pIdUsuario);
+        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
+         {
+            return $this->redirect('/sgpoc/backend/web/usuarios/listar');
+         }
+         else{
+            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+            return $this->redirect('/sgpoc/backend/web/usuarios/listar');
+         }
     }
 
     public function actionBaja()
     {
         $gestor = new GestorUsuarios;
         $pIdUsuario = Yii::$app->request->get('IdUsuario');
-        $gestor->Baja($pIdUsuario);
+        $mensaje = $gestor->Baja($pIdUsuario);
+        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
+         {
+            return $this->redirect('/sgpoc/backend/web/usuarios/listar');
+         }
+         else{
+            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+            return $this->redirect('/sgpoc/backend/web/usuarios/listar');
+         }
         return $this->redirect('/sgpoc/backend/web/usuarios/listar');
     }
     
@@ -120,8 +147,15 @@ class UsuariosController extends Controller
     {
         $gestor = new GestorUsuarios;
         $pIdUsuario = Yii::$app->request->get('IdUsuario');
-        $gestor->Activar($pIdUsuario);
-        return $this->redirect('/sgpoc/backend/web/usuarios/listar');
+        $mensaje = $gestor->Activar($pIdUsuario);
+        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
+         {
+            return $this->redirect('/sgpoc/backend/web/usuarios/listar');
+         }
+         else{
+            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+            return $this->redirect('/sgpoc/backend/web/usuarios/listar');
+         }
     }
     
 }
