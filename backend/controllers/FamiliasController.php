@@ -11,15 +11,11 @@ use app\models\FamiliasBuscar;
 
 class FamiliasController extends Controller
 {
-    public function actionIndex()
-    {
-        
-    }
-    
     public function actionListar()
     {   
         $gestor = new GestorFamilias;
-        $familias = $gestor->Listar();
+        $pIdGT = Yii::$app->user->identity['IdGT'];
+        $familias = $gestor->Listar($pIdGT);
         //$searchModel = new FamiliasBuscar;
         $dataProvider = new ArrayDataProvider([
             'allModels' => $familias,
