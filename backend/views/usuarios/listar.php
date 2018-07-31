@@ -1,9 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-//use yii\grid\GridView;
 use kartik\grid\GridView;
-use yii\helpers\Url;
 
 
 /* @var $this yii\web\View */
@@ -124,11 +122,12 @@ $gridColumns = [
                 'content' => 
                     Html::a('<i class="glyphicon glyphicon-plus"></i>', ['alta'], ['title' => 'Crear nuevo Usuario.', 'class' => 'btn btn-success']).' '.
                     Html::a('<i class="glyphicon glyphicon-search"></i>', ['buscar'], ['title' => 'Busca Usuario.', 'class' => 'btn btn-default'])
-            ]
+            ],
+            '{export}',
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-user"></i> Usuarios</h3>',
-            'type' => GridView::TYPE_PRIMARY,
+            'type' => GridView::TYPE_SUCCESS,
         ],
     ]);   
     ?>

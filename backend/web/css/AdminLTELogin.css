@@ -1450,7 +1450,7 @@ a:focus {
 
 .form-group.has-error .form-control,
 .form-group.has-error .input-group-addon {
-    border-color: #dd4b39;
+    border-color: #000000;
     box-shadow: none
 }
 
@@ -3720,13 +3720,20 @@ table.text-center th {
 
 .login-page,
 .register-page {
-    background: #d2d6de
+    margin: 0;
+	padding: 0;
+	background: url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/yRF5c-O/green-polygons-low-poly-seamless-looping-motion-background-dci-4k-ultra-hd-full-hd_hm3bp0-ce_thumbnail-full01.png) no-repeat;
+	background-size: cover;
 }
 
 .login-box,
 .register-box {
-    width: 360px;
-    margin: 7% auto;
+    width: 280px;
+    position: absolute;
+	top: 50%;
+	left:  50%;
+	transform: translate(-50%,-50%);
+	color: white;
 }
 
 @media (max-width:768px) {
@@ -3737,12 +3744,31 @@ table.text-center th {
     }
 }
 
+.input-group {
+	border:	none;
+	outline: none;
+	background: none;
+	color: white;
+	font-size: 18px;
+	width: 80px;
+	float: left;
+	margin: 10px;
+}
+
+.input-group i {
+	widht: 26px;
+	float: left;
+	text-align: center;
+}
+
 .login-box-body,
 .register-box-body {
-    background: #fff;
-    padding: 20px;
-    border-top: 0;
-    color: #666
+    width: 100%;
+	overflow: hidden;
+	font-size: 20px;
+	padding: 8px 0;
+	margin: 8px 0;
+	border-bottom: 1px solid #FFFFFF;
 }
 
 .login-box-body .form-control-feedback,
@@ -3750,11 +3776,14 @@ table.text-center th {
     color: #777
 }
 
+
 .login-box-msg,
 .register-box-msg {
-    margin: 0;
-    text-align: center;
-    padding: 0 20px 20px 20px
+    float: middle;
+	font-size: 40px;
+	border-bottom: 2px solid #FFFFFF;
+	margin-bottom: 50px;
+	padding: 13px 0
 }
 
 .social-auth-links {
