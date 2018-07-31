@@ -5,7 +5,7 @@ use Yii;
 use yii\web\Controller;
 use yii\helpers\ArrayHelper;
 use yii\data\ArrayDataProvider;
-use app\models\GestorInsumos;
+use app\models\GestorFamilias;
 use app\models\GestorSubFamilias;
 use app\models\Subfamilias;
 use app\models\SubFamiliaBuscar;
@@ -14,15 +14,12 @@ use app\models\SubFamiliaBuscar;
 
 class SubfamiliasController extends Controller
 {
-    public function actionIndex()
-    {
-        
-    }
     
     public function actionListar()
     {       
         $gestor = new GestorSubFamilias;
-        $subfamilia = $gestor->Listar();
+        $pIdGT = Yii::$app->user->identity['IdGT'];
+        $subfamilia = $gestor->Listar($pIdGT);
         $dataProvider = new ArrayDataProvider([
             'allModels' => $subfamilia,
             'pagination' => ['pagesize' => 10,],
@@ -56,11 +53,9 @@ class SubfamiliasController extends Controller
     {
         $model = new Subfamilias;
         $gestors = new GestorSubFamilias;
-        $gestorf = new \app\models\GestorFamilias();
-        $familia = $gestorf->Listar();
-     //   $gestorinsumo = new GestorInsumos;
-      //  $insumo = $gestorinsumo->Listar();
-     //   $listDataI= ArrayHelper::map($insumo,'IdInsumo','Insumo');
+        $gestorf = new GestorFamilias();
+        $pIdGT = Yii::$app->user->identity['IdGT'];
+        $familia = $gestorf->Listar($pIdGT);
         $listDataF= ArrayHelper::map($familia,'IdFamilia','Familia');
         
         
