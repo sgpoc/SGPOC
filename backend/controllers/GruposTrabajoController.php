@@ -19,7 +19,7 @@ class GruposTrabajoController extends Controller
             'allModels' => $grupostrabajo,
             'pagination' => ['pagesize' => 5,],
         ]);
-        return $this->render('listar',['dataProvider' => $dataProvider]);
+        return $this->render('listar',['dataProvider' => $dataProvider]);//, 'searchModel' => $searchModel]);
     }
     
     public function actionListarUsuarios()

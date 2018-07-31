@@ -10,7 +10,9 @@ use yii\widgets\ActiveForm;
 $this->title = 'Grupos Trabajo';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <?= Yii::$app->session->getFlash('alert'); ?>
+
 <div>
     <h1>Alta Grupo de Trabajo</h1>
     <?php $form = ActiveForm::begin(); ?>

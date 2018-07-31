@@ -28,9 +28,6 @@ class GruposTrabajo extends Model
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
@@ -40,35 +37,26 @@ class GruposTrabajo extends Model
             'Estado' => 'Estado',
         ];
     }
-    
+    /*
     public function dameGrupoTrabajo($pIdGT)
     {
         return $this->queryOne($pIdGT);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getFamilias()
     {
         return $this->hasMany(Familias::className(), ['IdGT' => 'IdGT']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getObras()
     {
         return $this->hasMany(Obras::className(), ['IdGT' => 'IdGT']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getUsuarios()
     {
         return $this->hasMany(Usuarios::className(), ['IdGT' => 'IdGT']);
     }
     
-
+*/
 }
