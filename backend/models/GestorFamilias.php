@@ -5,10 +5,11 @@ use Yii;
 
 class GestorFamilias 
 {
-    public function Listar()
+    public function Listar($pIdGT)
     {       
-        $sql = 'CALL ssp_listar_familias()';
-        $comando = Yii::$app->db->createCommand($sql);
+        $sql = 'CALL ssp_listar_familias(:pIdGT)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdGT',$pIdGT);
         $familias = $comando->queryAll();
         return $familias;
     }
