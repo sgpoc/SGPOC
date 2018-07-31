@@ -22,13 +22,13 @@ AppAsset::register($this);
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <?php $this->head() ?>
 </head>
-<body class="hold-transimition skin-blue fixed sidebar-mini">
+<body class="hold-transimition skin-green fixed sidebar-mini">
 <?php $this->beginBody() ?>
 <div class="wrapper">
     <header class="main-header">
         <a href="/sgpoc/backend/web/site/index" class="logo">
-            <span class="logo-mini"><img class ="img-circle" src="https://pixel.nymag.com/imgs/custom/tvrecaps/recaps-south-park-160x160.png" alt='logo' width="40" height="40" align="middle" /></span>
-            <span style="font-family:Bahnschrift Light;" class="logo-lg"><img class ="img-circle" src="https://pixel.nymag.com/imgs/custom/tvrecaps/recaps-south-park-160x160.png" alt='logo' width="40" height="40" align="middle" /> SGPOC</span>
+            <span class="logo-mini"><img class ="img-circle" src="https://www.suny.edu/media/suny/content-assets/brand-guidelines/SUNY-circle-tm-160x160.jpg" alt='logo' width="40" height="40" align="middle" /></span>
+            <span style="font-family:Bahnschrift Light;" class="logo-lg"><img class ="img-circle" src="https://www.suny.edu/media/suny/content-assets/brand-guidelines/SUNY-circle-tm-160x160.jpg" alt='logo' width="40" height="40" align="middle" /> SGPOC</span>
         </a>
         <nav class="navbar navbar-static-top">
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"></a>

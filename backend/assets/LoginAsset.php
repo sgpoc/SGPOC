@@ -15,7 +15,7 @@ class LoginAsset extends AssetBundle
         'css/bootstrap.min.css',
         'css/font-aweasome.min.css',
         'css/ionicons.min.css',
-        'css/AdminLTE.min.css',
+        'css/AdminLTELogin.css',
         '/plugins/iCheck/square/blue.css',
     ];
     public $js = [

@@ -91,7 +91,8 @@ $gridColumns = [
                 'content' => 
                     Html::a('<i class="glyphicon glyphicon-plus"></i>', ['alta'], ['title' => 'Crear nueva Familia.', 'class' => 'btn btn-success']).' '.
                     Html::a('<i class="glyphicon glyphicon-search"></i>', ['buscar'], ['title' => 'Busca Familia.', 'class' => 'btn btn-default'])
-            ]
+            ],
+            '{export}',
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-list"></i> Familias</h3>',

@@ -1,9 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-//use yii\grid\GridView;
 use kartik\grid\GridView;
-use yii\helpers\Url;
 
 
 /* @var $this yii\web\View */
@@ -47,12 +45,6 @@ $gridColumns = [
         'attribute' => 'GrupoTrabajo',
         'label' => 'Nombre',
         'vAlign' => 'middle',
-        /*'filterType' => GridView::FILTER_SELECT2,
-            'filter' => ArrayHelper::map(), 
-            'filterWidgetOptions' => [
-            'pluginOptions' => ['allowClear' => true],
-            'options' => ['multiple' => true]
-            ],*/
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
@@ -65,8 +57,6 @@ $gridColumns = [
     [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'Estado',
-        //'trueLabel' => 'Activo', 
-        //'falseLabel' => 'Inactivo',
         'vAlign' => 'middle',
         'hAlign' => 'center'
     ],
@@ -116,7 +106,8 @@ $gridColumns = [
                 'content' => 
                     Html::a('<i class="glyphicon glyphicon-plus"></i>', ['alta'], ['title' => 'Crear nuevo Grupo de Trabajo.', 'class' => 'btn btn-success']).' '.
                     Html::a('<i class="glyphicon glyphicon-search"></i>', ['buscar'], ['title' => 'Busca Grupo de Trabajo.', 'class' => 'btn btn-default'])
-            ]
+            ],
+            '{export}',
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-list"></i> Grupos de Trabajo</h3>',

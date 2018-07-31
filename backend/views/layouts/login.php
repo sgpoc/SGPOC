@@ -27,12 +27,6 @@ LoginAsset::register($this);
         </div>  
     </div>
 
-    <footer class="footer">
-        <div class="container">
-            <p class="pull-left"> SGPOC <?= date('Y/M/D') ?></p>
-        </div>
-    </footer>
-
     <?php $this->endBody() ?>
 </body>
 </html>

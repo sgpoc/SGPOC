@@ -2,6 +2,7 @@
 namespace app\models;
 
 use Yii;
+use yii\data\ArrayDataProvider;
 
 class GestorGruposTrabajo 
 {
