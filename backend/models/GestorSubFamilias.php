@@ -6,10 +6,11 @@ use Yii;
 
 class GestorSubFamilias 
 {
-    public function Listar()
+    public function Listar($pIdGT)
     {       
-        $sql = 'CALL ssp_listar_subfamilias';
-        $comando = Yii::$app->db->createCommand($sql);
+        $sql = 'CALL ssp_listar_subfamilias(:pIdGT)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdGT', $pIdGT);
         $subfamilias = $comando->queryAll();
         return $subfamilias;
     }
