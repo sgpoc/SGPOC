@@ -34,6 +34,7 @@ class Usuarios extends Model
             [['Estado'], 'string', 'max' => 1],
             [['auth_key'], 'string', 'max' => 255],
             [['IdGT'], 'exist', 'skipOnError' => true, 'targetClass' => Grupostrabajo::className(), 'targetAttribute' => ['IdGT' => 'IdGT']],
+            [['auth_key'], 'string', 'max' => 255],
         ];
     }
 

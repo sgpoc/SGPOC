@@ -42,6 +42,7 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
             [['Estado'], 'string', 'max' => 1],
             [['auth_key'], 'string', 'max' => 255],
             [['IdGT'], 'exist', 'skipOnError' => true, 'targetClass' => Grupostrabajo::className(), 'targetAttribute' => ['IdGT' => 'IdGT']],
+            [['auth_key'], 'string', 'max' => 255],
         ];
     }
 
@@ -92,7 +93,7 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
         return $this->getAuthKey() === $authKey;
     }
 
-    public static function findIdentity($id): \yii\web\IdentityInterface {
+    public static function findIdentity($id){
         return self::findOne($id);
     }
 
@@ -100,4 +101,6 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
         throw new \yii\base\NotSupportedException;
     }
 
+
+    
 }
