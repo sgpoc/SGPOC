@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
+use kartik\alert\Alert;
 
 
 /* @var $this yii\web\View */
@@ -68,10 +69,10 @@ $gridColumns = [
         'template' => '{modificar} {borrar} {baja} {activar} {listarusuarios}',
         'buttons' => [
                 'modificar' => function($url, $model, $key){ 
-                    return Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['modificar','IdGT' => $model['IdGT']], ['title' => 'Modificar Grupo Trabajo.', 'class' => 'btn btn-link']);
+                    return Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['modificar','IdGT' => $model['IdGT']], ['title' => 'Modificar Grupo Trabajo.', 'class' => 'btn btn-default']);
                 },
                 'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="glyphicon glyphicon-trash"></i>',['borrar','IdGT' => $model['IdGT']], ['title' => 'Borra Grupo Trabajo.', 'class' => 'btn btn-link',
+                    return Html::a('<i class="glyphicon glyphicon-trash"></i>',['borrar','IdGT' => $model['IdGT']], ['title' => 'Borra Grupo Trabajo.', 'class' => 'btn btn-default',
                         'data' => [
                             'confirm' => 'Esta seguro que desea borrar el Grupo de Trabajo?',
                             'method' => 'post'
@@ -79,13 +80,13 @@ $gridColumns = [
                         ]);
                 },
                 'listarusuarios' => function($url, $model, $key){
-                    return Html::a('<i class="glyphicon glyphicon-user"></i>',['listar-usuarios','IdGT' => $model['IdGT']], ['title' => 'Lista Usuarios Grupo Trabajo.','class' => 'btn btn-link']);
+                    return Html::a('<i class="glyphicon glyphicon-user"></i>',['listar-usuarios','IdGT' => $model['IdGT']], ['title' => 'Lista Usuarios Grupo Trabajo.','class' => 'btn btn-default']);
                 },
                 'baja' => function($url, $model, $key){
-                    return Html::a('<i class="glyphicon glyphicon-remove"></i>',['baja','IdGT' => $model['IdGT']], ['title' => 'Da de baja Grupo Trabajo.', 'class' => 'btn btn-link']);
+                    return Html::a('<i class="glyphicon glyphicon-remove"></i>',['baja','IdGT' => $model['IdGT']], ['title' => 'Da de baja Grupo Trabajo.', 'class' => 'btn btn-default']);
                 },
                 'activar' => function($url, $model, $key){
-                    return Html::a('<i class="glyphicon glyphicon-ok"></i>',['activar','IdGT' => $model['IdGT']], ['title' => 'Activa Grupo Trabajo.','class' => 'btn btn-link']);
+                    return Html::a('<i class="glyphicon glyphicon-ok"></i>',['activar','IdGT' => $model['IdGT']], ['title' => 'Activa Grupo Trabajo.','class' => 'btn btn-default']);
                 }     
         ]
     ], 
@@ -93,8 +94,18 @@ $gridColumns = [
 
 ?>
   
-<?= Yii::$app->session->getFlash('alert'); ?>
- 
+<?php if(Yii::$app->session->getFlash('alert')){
+    echo Alert::widget([
+        'type' => Alert::TYPE_DANGER,
+        'title' => 'Cuidado!',
+        'icon' => 'glyphicon glyphicon-info-sign',
+        'body' => Yii::$app->session->getFlash('alert'),
+        'showSeparator' => true,
+        'delay' => 8000
+    ]);
+    }
+?>
+
 <div>
     <?= GridView::widget([
         'moduleId' => 'gridviewKrajee',
@@ -111,7 +122,7 @@ $gridColumns = [
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-list"></i> Grupos de Trabajo</h3>',
-            'type' => GridView::TYPE_PRIMARY,
+            'type' => GridView::TYPE_SUCCESS,
         ],
     ]);   
     ?>

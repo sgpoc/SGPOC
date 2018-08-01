@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
-
+use kartik\alert\Alert;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UsuariosBusqueda */
@@ -87,10 +87,10 @@ $gridColumns = [
         'template' => '{modificar} {borrar} {baja} {activar}',
         'buttons' => [
                 'modificar' => function($url, $model, $key){ 
-                    return Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['modificar','IdUsuario' => $model['IdUsuario']], ['title' => 'Modificar Usuario.', 'class' => 'btn btn-link']);
+                    return Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['modificar','IdUsuario' => $model['IdUsuario']], ['title' => 'Modificar Usuario.', 'class' => 'btn btn-default']);
                 },
                 'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="glyphicon glyphicon-trash"></i>',['borrar','IdUsuario' => $model['IdUsuario']], ['title' => 'Borra Usuario.', 'class' => 'btn btn-link',
+                    return Html::a('<i class="glyphicon glyphicon-trash"></i>',['borrar','IdUsuario' => $model['IdUsuario']], ['title' => 'Borra Usuario.', 'class' => 'btn btn-default',
                         'data' => [
                             'confirm' => 'Esta seguro que desea borrar el Usuario?',
                             'method' => 'post'
@@ -98,10 +98,10 @@ $gridColumns = [
                         ]);
                 },
                 'baja' => function($url, $model, $key){
-                    return Html::a('<i class="glyphicon glyphicon-remove"></i>',['baja','IdUsuario' => $model['IdUsuario']], ['title' => 'Da de baja Usuario.', 'class' => 'btn btn-link']);
+                    return Html::a('<i class="glyphicon glyphicon-remove"></i>',['baja','IdUsuario' => $model['IdUsuario']], ['title' => 'Da de baja Usuario.', 'class' => 'btn btn-default']);
                 },
                 'activar' => function($url, $model, $key){
-                    return Html::a('<i class="glyphicon glyphicon-ok"></i>',['activar','IdUsuario' => $model['IdUsuario']], ['title' => 'Activa Usuario.','class' => 'btn btn-link']);
+                    return Html::a('<i class="glyphicon glyphicon-ok"></i>',['activar','IdUsuario' => $model['IdUsuario']], ['title' => 'Activa Usuario.','class' => 'btn btn-default']);
                 }     
         ]
     ], 
@@ -109,7 +109,17 @@ $gridColumns = [
 
 ?>
   
-<?= Yii::$app->session->getFlash('alert'); ?>
+<?php if(Yii::$app->session->getFlash('alert')){
+    echo Alert::widget([
+        'type' => Alert::TYPE_DANGER,
+        'title' => 'Cuidado!',
+        'icon' => 'glyphicon glyphicon-info-sign',
+        'body' => Yii::$app->session->getFlash('alert'),
+        'showSeparator' => true,
+        'delay' => 8000
+    ]);
+    }
+?>
 
 <div>
     <?= GridView::widget([

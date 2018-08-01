@@ -1,22 +1,34 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-
+use kartik\form\ActiveForm;
+use kartik\alert\Alert;
 
 $this->title = 'Grupos Trabajo';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<?= Yii::$app->session->getFlash('alert'); ?>
+
+<?php if(Yii::$app->session->getFlash('alert')){
+    echo Alert::widget([
+        'type' => Alert::TYPE_DANGER,
+        'title' => 'Cuidado!',
+        'icon' => 'glyphicon glyphicon-info-sign',
+        'body' => Yii::$app->session->getFlash('alert'),
+        'showSeparator' => true,
+        'delay' => 8000
+    ]);
+    }
+?>
+
 <div>
     <h1> Modificación Grupo de Trabajo </h1>
     <?php $form = ActiveForm::begin(); ?>
       
-        <?= $form->field($model, 'GrupoTrabajo')->textInput()->label('Nombre') ?>
-        <?= $form->field($model, 'Mail')->input('email') ?>
+        <?= $form->field($model, 'GrupoTrabajo',['addon' => ['prepend' => ['content'=>'N']]])->textInput(['placeholder'=>'Ingrese el nombre ...'])->label('Nombre') ?>
+        <?= $form->field($model, 'Mail', ['addon' => ['prepend' => ['content'=>'@']]])->textInput(['placeholder'=>'Ingrese una dirección de Email válida ...']); ?>
     
-        <?= html::submitButton('Modificar',['class'=>'btn btn-primary pull-left']); ?>
-        <?= Html::a('<i class="fa fa-arrow-circle-left"></i> Volver', Yii::$app->request->referrer,['class'=>'btn btn-primary pull-right']); ?>    
+        <?= html::submitButton('Modificar',['class'=>'btn btn-success pull-left']); ?>
+        <?= Html::a('<i class="fa fa-arrow-circle-left"></i> Volver', Yii::$app->request->referrer,['class'=>'btn btn-success pull-right']); ?>    
     <?php ActiveForm::end() ?>
 
 </div>

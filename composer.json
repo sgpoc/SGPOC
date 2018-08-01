@@ -21,7 +21,9 @@
         "kartik-v/yii2-widget-sidenav": "*",
         "kartik-v/yii2-grid": "@dev",
         "rmrevin/yii2-fontawesome": "2.10.*",
-        "kartik-v/yii2-widget-select2": "^2.1"
+        "kartik-v/yii2-widget-select2": "^2.1",
+        "kartik-v/yii2-widget-activeform": "@dev",
+        "kartik-v/yii2-widget-alert": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
