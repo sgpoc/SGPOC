@@ -27,7 +27,7 @@ class FamiliasController extends Controller
     public function actionListarSubfamilias()
     {    
         $gestor = new GestorFamilias;
-        $pIdFamilia = Yii::$app->request-get>'IdFamilia';
+        $pIdFamilia = Yii::$app->request->get('IdFamilia');
         $subfamilias = $gestor->ListarSubfamilias($pIdFamilia);
         $dataProvider = new ArrayDataProvider([
               'allModels' => $subfamilias,

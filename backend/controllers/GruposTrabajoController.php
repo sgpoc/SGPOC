@@ -98,7 +98,7 @@ class GruposTrabajoController extends Controller
                 return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
             }
             else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);            
                 return $this->render('modificar',['model' => $model]);
             }
         }
