@@ -1,0 +1,68 @@
+body {
+	background-image: url(https://wallpaper-house.com/data/out/12/wallpaper2you_481705.jpg);	
+}
+
+#slider {
+	margin-top: 60px;
+	margin-bottom: 60px;
+	margin-left: 60px;
+	margin-right: 60px;
+}
+
+#slider .item {
+	height: 400px;
+}
+
+#slide1 {
+	background: url(https://www.rendersarquitectura.com/wp-content/uploads/2014/06/Renders_arquitectura_mornington_australia_01.jpg) center no-repeat;
+}	
+
+#slide2 {
+	background: url(http://www.propimage.com/img/proyectos/20/galeria/big/mi-3d-alta-res.jpg) center no-repeat;
+}		
+
+#slide3 {
+	background: url(http://www.rendersarquitectura.com/wp-content/uploads/2013/10/renders_arquitextura_exterior_02.jpg) center no-repeat;
+}		
+
+.carousel-caption {
+	font-size: 18px;
+}
+
+.icon-prev, .icon-next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+/* Add a black background color to the top navigation */
+.navbar-static-top {
+	background-color: #ffffff;
+    opacity: .1;
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.nav navbar-nav .li {
+    float: right;
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+
+
+
+
+

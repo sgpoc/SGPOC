@@ -13,42 +13,34 @@ use app\models\UsuariosBuscar;
 
 
 class UsuariosController extends Controller
-{
-    public function actionIndex()
-    {
-        
-    }
-    
+{   
     public function actionListar()
     {       
         $gestor = new GestorUsuarios;
-        $usuarios = $gestor->Listar();
-        $dataProvider = new ArrayDataProvider([
-            'allModels' => $usuarios,
-            'pagination' => ['pagesize' => 10,],
-        ]);
-        return $this->render('listar',['dataProvider' => $dataProvider]);
-    }
-    
-    public function actionBuscar()
-    {
-        $model = new UsuariosBuscar;
-        $gestor = new GestorUsuarios;
-    
-        if($model->load(Yii::$app->request->post()) && $model->validate())
+        $searchModel = new UsuariosBuscar;
+        $roles = $gestor->ListarRoles();
+        $listDataU = ArrayHelper::map($roles,'IdRol','Rol');
+        if($searchModel->load(Yii::$app->request->get()) && $searchModel->validate())
         {
-            $pCadena = $model->pCadena;
-            $pIncluyeBajas = $model->pIncluyeBajas;
-            $usuarios = $gestor->Buscar($pCadena, $pIncluyeBajas);
+            $pNombre = $searchModel['Nombre'];
+            $pApellido = $searchModel['Apellido'];
+            $pEmail = $searchModel['Email'];
+            $pIdRol = $searchModel['Rol'][0];
+            $pEstado = $searchModel['Estado'];
+            $usuarios = $gestor->Buscar($pNombre, $pApellido, $pEmail, $pIdRol, $pEstado);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $usuarios,
-                'pagination' => ['pagesize' => 10,],
+                'pagination' => ['pagesize' => 5,],
             ]);
-            return $this->render('listar',['dataProvider' => $dataProvider]);
+            return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listData' => $listDataU]);
         }
-        else
-        {
-            return $this->render('buscar',['model' => $model]);
+        else{
+            $usuarios = $gestor->Listar();
+            $dataProvider = new ArrayDataProvider([
+                'allModels' => $usuarios,
+                'pagination' => ['pagesize' => 5,],
+            ]);
+            return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listData' => $listDataU]);
         }
     }
     
@@ -79,11 +71,11 @@ class UsuariosController extends Controller
             }
             else{
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->render('alta',['model' => $model, 'listData' => $listData, 'listDataU' => $listDataU]);
+                return $this->renderAjax('alta',['model' => $model, 'listData' => $listData, 'listDataU' => $listDataU]);
             }
         }
         else{
-            return $this->render('alta',['model' => $model, 'listData' => $listData, 'listDataU' => $listDataU]);
+            return $this->renderAjax('alta',['model' => $model, 'listData' => $listData, 'listDataU' => $listDataU]);
         }
     }
     
@@ -92,6 +84,7 @@ class UsuariosController extends Controller
         $model = new Usuarios;
         $gestor = new GestorUsuarios;
         $pIdUsuario = Yii::$app->request->get('IdUsuario');
+        $usuario = $gestor->Dame($pIdUsuario);
         if($model->load(Yii::$app->request->post()))// && ($model->validate()))
         {
             $pNombre = $model->Nombre;
@@ -105,11 +98,11 @@ class UsuariosController extends Controller
             }
             else{
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->render('modificar',['model' => $model]);
+                return $this->renderAjax('modificar',['model' => $model]);
             }
         }
         else{
-           return $this->render('modificar',['model' => $model]);
+           return $this->renderAjax('modificar',['model' => $model, 'usuario' => $usuario ]);
         }
     }
     

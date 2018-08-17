@@ -5,7 +5,6 @@ use kartik\form\ActiveForm;
 use kartik\password\PasswordInput;
 use yii\jui\AutoComplete;
 
-
 ?>
 
 <?php if(Yii::$app->session->getFlash('alert')){

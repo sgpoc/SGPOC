@@ -2,15 +2,16 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
-use kartik\alert\Alert;
+use kartik\widgets\Growl;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UsuariosBusqueda */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Grupos Trabajo';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'SGPOC | Grupos Trabajo';
 
 
 $colorPluginOptions =  [
@@ -46,7 +47,7 @@ $gridColumns = [
         'attribute' => 'GrupoTrabajo',
         'label' => 'Nombre',
         'vAlign' => 'middle',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
+        'contentOptions' => ['class' => 'kartik-sheet-style'],
     ],
     [
         'class' => 'kartik\grid\DataColumn',
@@ -56,7 +57,7 @@ $gridColumns = [
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
-        'class' => 'kartik\grid\DataColumn',
+        'class' => 'kartik\grid\BooleanColumn',
         'attribute' => 'Estado',
         'vAlign' => 'middle',
         'hAlign' => 'center'
@@ -68,25 +69,65 @@ $gridColumns = [
         'width' => '240px',
         'template' => '{modificar} {borrar} {baja} {activar} {listarusuarios}',
         'buttons' => [
-                'modificar' => function($url, $model, $key){ 
-                    return Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['modificar','IdGT' => $model['IdGT']], ['title' => 'Modificar Grupo Trabajo.', 'class' => 'btn btn-default']);
+                'modificar' => function($url, $model, $key){
+                    return Html::button('<i class="fa fa-pencil"></i>',
+                            [
+                                'value'=>Url::to(['sgpoc/backend/web/grupos-trabajo/modificar','IdGT'=>$model['IdGT']]),
+                                'class'=>'btn btn-link', 
+                                'id'=>'modalButton',
+                                'data-toggle'=>'modal',
+                                'data-target'=>'#modal',
+                                'title'=>'Modificar Grupo de Trabajo'
+                            ]);
                 },
                 'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="glyphicon glyphicon-trash"></i>',['borrar','IdGT' => $model['IdGT']], ['title' => 'Borra Grupo Trabajo.', 'class' => 'btn btn-default',
-                        'data' => [
-                            'confirm' => 'Esta seguro que desea borrar el Grupo de Trabajo?',
-                            'method' => 'post'
-                           ]
-                        ]);
+                    return Html::a('<i class="fa fa-trash-o"></i>',
+                            [
+                                'borrar','IdGT' => $model['IdGT']
+                            ], 
+                            [ 
+                                'class'=>'btn btn-link',
+                                'title'=>'Borrar Grupo Trabajo',
+                                'data'=>[
+                                    'confirm'=>'Esta seguro que desea borrar el Grupo de Trabajo?',
+                                    'method'=>'post'
+                                ]
+                            ]);
                 },
                 'listarusuarios' => function($url, $model, $key){
-                    return Html::a('<i class="glyphicon glyphicon-user"></i>',['listar-usuarios','IdGT' => $model['IdGT']], ['title' => 'Lista Usuarios Grupo Trabajo.','class' => 'btn btn-default']);
+                    //return Html::button('<i class="glyphicon glyphicon-user"></i>',['value'=>Url::to('/sgpoc/backend/web/grupos-trabajo/listar-usuarios'), 'class'=>'btn btn-default', 'id'=>'modalButton']]);
+                    return Html::a('<i class="fa fa-user"></i>',
+                            [
+                                'listar-usuarios','IdGT'=>$model['IdGT']
+                            ], 
+                            [
+                                'title' => 'Listar Usuarios Grupo Trabajo',
+                                'class' => 'btn btn-link'
+                            ]);
                 },
                 'baja' => function($url, $model, $key){
-                    return Html::a('<i class="glyphicon glyphicon-remove"></i>',['baja','IdGT' => $model['IdGT']], ['title' => 'Da de baja Grupo Trabajo.', 'class' => 'btn btn-default']);
+                    if($model['Estado'] === '1'){
+                        return Html::a('<i class="fa fa-toggle-on"></i>',
+                                [
+                                    'baja','IdGT' => $model['IdGT']
+                                ], 
+                                [
+                                    'title' => 'Dar de baja Grupo Trabajo', 
+                                    'class' => 'btn btn-link'
+                                ]);
+                    }
                 },
                 'activar' => function($url, $model, $key){
-                    return Html::a('<i class="glyphicon glyphicon-ok"></i>',['activar','IdGT' => $model['IdGT']], ['title' => 'Activa Grupo Trabajo.','class' => 'btn btn-default']);
+                    if($model['Estado'] === '0'){
+                        return Html::a('<i class="fa fa-toggle-off"></i>',
+                                [
+                                    'activar','IdGT' => $model['IdGT']
+                                ], 
+                                [
+                                    'title' => 'Activar Grupo Trabajo',
+                                    'class' => 'btn btn-link'
+                                ]);
+                    }
                 }     
         ]
     ], 
@@ -95,34 +136,63 @@ $gridColumns = [
 ?>
   
 <?php if(Yii::$app->session->getFlash('alert')){
-    echo Alert::widget([
-        'type' => Alert::TYPE_DANGER,
-        'title' => 'Cuidado!',
-        'icon' => 'glyphicon glyphicon-info-sign',
-        'body' => Yii::$app->session->getFlash('alert'),
-        'showSeparator' => true,
-        'delay' => 8000
+    echo Growl::widget([
+    'type' => Growl::TYPE_DANGER,
+    'title' => 'Cuidado!',
+    'icon' => 'glyphicon glyphicon-remove-sign',
+    'body' => Yii::$app->session->getFlash('alert'),
+    'showSeparator' => true,
+    'delay' => 1500,
+    'pluginOptions' => [
+        'showProgressbar' => false,
+        'placement' => [
+            'from' => 'top',
+            'align' => 'center',
+        ]
+    ]
     ]);
     }
 ?>
 
+
 <div>
     <?= GridView::widget([
         'moduleId' => 'gridviewKrajee',
+        'pjax'=>true,
+        'pjaxSettings'=>[
+            'neverTimeout'=>true,
+        ],
         'dataProvider' => $dataProvider,
-        //'filterModel' => $searchModel,
+        'filterModel' => $searchModel,
         'columns' => $gridColumns,
+        'exportConfig' => [
+                GridView::EXCEL => ['label' => 'Descargar como EXCEL'],
+                GridView::TEXT => ['label' => 'Descargar como TEXTO'],
+                GridView::PDF => ['label' => 'Descargar como PDF'],
+         ],
         'toolbar' => [
             [
                 'content' => 
-                    Html::a('<i class="glyphicon glyphicon-plus"></i>', ['alta'], ['title' => 'Crear nuevo Grupo de Trabajo.', 'class' => 'btn btn-success']).' '.
-                    Html::a('<i class="glyphicon glyphicon-search"></i>', ['buscar'], ['title' => 'Busca Grupo de Trabajo.', 'class' => 'btn btn-default'])
+                    Html::button('<i class="glyphicon glyphicon-plus"></i>',
+                            [
+                                'value'=>Url::to('/sgpoc/backend/web/grupos-trabajo/alta'),
+                                'class'=>'btn btn-success', 
+                                'id'=>'modalButton',
+                                'title'=>'Crear Grupo de Trabajo'
+                            ]).' '.
+                    Html::a('<i class="glyphicon glyphicon-repeat"></i>', 
+                            ['grupos-trabajo/listar'], 
+                            [
+                                'data-pjax' => 0, 
+                                'class' => 'btn btn-default', 
+                                'title' => 'Actualizar'
+                            ])
             ],
             '{export}',
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-list"></i> Grupos de Trabajo</h3>',
-            'type' => GridView::TYPE_SUCCESS,
+            'type' => GridView::TYPE_PRIMARY,
         ],
     ]);   
     ?>

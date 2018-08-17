@@ -38,12 +38,10 @@ use kartik\widgets\Growl;
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?= $form->field($model, 'IdGT')->dropDownList($listData, ['prompt' => 'Seleccione uno ...' ])->label('Grupo de Trabajo');  ?>
-            <?= $form->field($model, 'IdRol')->dropDownList($listDataU, ['prompt' => 'Seleccione uno ...' ])->label('Rol');  ?>
-            <?= $form->field($model, 'Nombre', ['addon' => ['prepend' => ['content'=>'N']]])->textInput(['placeholder'=>'Ingrese el nombre ...']) ?>
-            <?= $form->field($model, 'Apellido', ['addon' => ['prepend' => ['content'=>'A']]])->textInput(['placeholder'=>'Ingrese el apellido ...']) ?>
-            <?= $form->field($model, 'Email', ['addon' => ['prepend' => ['content'=>'@']]])->input(['autocomplete'=>'off'])->textInput(['placeholder'=>'Ingrese una dirección de Email válida ...']) ?>
-            <?= $form->field($model, 'Password', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-lock"></i>']]])->passwordInput(['placeholder'=>'Ingrese la contraseña ...'])->input(['autocomplete'=>'off']) ?>
+            <?= $form->field($model, 'IdSubFamilia')->dropDownList($listData, ['prompt' => 'Seleccione uno ...' ])->label('SubFamilia');  ?>
+            <?= $form->field($model, 'IdUnidad')->dropDownList($listDataU, ['prompt' => 'Seleccione uno ...' ])->label('Unidad');  ?>
+            <?= $form->field($model, 'Insumo', ['addon' => ['prepend' => ['content'=>'I']]])->textInput(['placeholder'=>'Ingrese el nombre ...']) ?>
+            <?= $form->field($model, 'TipoInsumo', ['addon' => ['prepend' => ['content'=>'TI']]])->textInput(['placeholder'=>'Ingrese el tipo ...']) ?>
         </div>
     </div>
     <div class="modal-footer">

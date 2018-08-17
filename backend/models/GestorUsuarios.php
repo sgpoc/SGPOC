@@ -21,11 +21,14 @@ class GestorUsuarios
         return $roles;
     }
     
-    public function Buscar($pCadena,$pIncluyeBajas){
-        $sql = 'CALL ssp_buscar_usuario(:pCadena, :pIncluyeBajas)';
+    public function Buscar($pNombre, $pApellido, $pEmail, $pIdRol, $pEstado){
+        $sql = 'CALL ssp_buscar_usuarios(:pNombre, :pApellido, :pEmail, :pIdRol, :pEstado)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pCadena', $pCadena)
-                ->bindValue('pIncluyeBajas',$pIncluyeBajas);
+                ->bindValue('pNombre', $pNombre)
+                ->bindValue('pApellido',$pApellido)
+                ->bindValue('pEmail', $pEmail)
+                ->bindValue('pIdRol', $pIdRol)
+                ->bindValue('pEstado', $pEstado);
         $usuarios = $comando->queryAll();
         return $usuarios;
     }
@@ -75,6 +78,14 @@ class GestorUsuarios
     public function Activar($pIdUsuario)
     {
         $sql = 'CALL ssp_activar_usuario(:pIdUsuario)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdUsuario', $pIdUsuario);
+        return $comando->queryAll();
+    }
+    
+    public function Dame($pIdUsuario)
+    {
+        $sql = 'CALL ssp_dame_usuario(:pIdUsuario)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdUsuario', $pIdUsuario);
         return $comando->queryAll();

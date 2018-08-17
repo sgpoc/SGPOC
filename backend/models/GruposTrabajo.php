@@ -31,32 +31,11 @@ class GruposTrabajo extends Model
     public function attributeLabels()
     {
         return [
-            'IdGT' => 'Id Gt',
+            'IdGT' => 'Grupo Trabajo',
             'GrupoTrabajo' => 'Grupo Trabajo',
             'Mail' => 'Mail',
             'Estado' => 'Estado',
         ];
     }
-    /*
-    public function dameGrupoTrabajo($pIdGT)
-    {
-        return $this->queryOne($pIdGT);
-    }
 
-    public function getFamilias()
-    {
-        return $this->hasMany(Familias::className(), ['IdGT' => 'IdGT']);
-    }
-
-    public function getObras()
-    {
-        return $this->hasMany(Obras::className(), ['IdGT' => 'IdGT']);
-    }
-
-    public function getUsuarios()
-    {
-        return $this->hasMany(Usuarios::className(), ['IdGT' => 'IdGT']);
-    }
-    
-*/
 }

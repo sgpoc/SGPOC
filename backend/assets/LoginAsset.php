@@ -12,13 +12,13 @@ class LoginAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/bootstrap.min.css',
-        'css/font-aweasome.min.css',
-        'css/ionicons.min.css',
-        'css/AdminLTELogin.css',
-        '/plugins/iCheck/square/blue.css',
+        'css/Login.css',
     ];
     public $js = [
+        'js/jquery-ui.min.js',
+        'js/jquery.slimscroll.min.js',
+        'js/jquery.sparkline.min.js',
+        'js/bootstrap.min.js',
         'plugins/iCheck/icheck.min.js'
     ];
     public $depends = [

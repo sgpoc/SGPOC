@@ -12,7 +12,7 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/bootstrap.min.css',
+        'css/bootstrap.css',
         'css/font-aweasome.min.css',
         'css/ionicons.min.css',
         'css/AdminLTE.min.css',
@@ -29,6 +29,8 @@ class AppAsset extends AssetBundle
         'js/adminlte.min.js',
         'js/dashboard.js',
         'js/main.js',
+        'js/modal.js',
+        'js/bootbox.min.js',
         'plugins/iCheck/icheck.min.js'
     ];
     public $depends = [
