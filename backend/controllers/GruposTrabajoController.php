@@ -14,49 +14,44 @@ class GruposTrabajoController extends Controller
     public function actionListar()
     {       
         $gestor = new GestorGruposTrabajo;
-        $grupostrabajo = $gestor->Listar();
-        $dataProvider = new ArrayDataProvider([
-            'allModels' => $grupostrabajo,
-            'pagination' => ['pagesize' => 5,],
-        ]);
-        return $this->render('listar',['dataProvider' => $dataProvider]);//, 'searchModel' => $searchModel]);
+        $searchModel = new GruposTrabajoBuscar;
+        if($searchModel->load(Yii::$app->request->get()) && $searchModel->validate())
+        {
+            $pGrupoTrabajo = $searchModel['GrupoTrabajo'];
+            $pMail = $searchModel['Mail'];
+            $pEstado = $searchModel['Estado'];
+            $grupostrabajo = $gestor->Buscar($pGrupoTrabajo, $pMail, $pEstado);
+            $dataProvider = new ArrayDataProvider([
+                'allModels' => $grupostrabajo,
+                'pagination' => ['pagesize' => 5,],
+            ]);
+            return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel]);
+        }
+        else{
+            $grupostrabajo = $gestor->Listar();
+            $dataProvider = new ArrayDataProvider([
+                'allModels' => $grupostrabajo,
+                'pagination' => ['pagesize' => 5,],
+            ]);
+            return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel]);
+        }
     }
     
     public function actionListarUsuarios()
     {    
+        $gestor = new GestorUsuarios;
         $gestorgt = new GestorGruposTrabajo;
+        $roles = $gestor->ListarRoles();
+        $listDataU = ArrayHelper::map($roles,'IdRol','Rol');
         $pIdGT = Yii::$app->request->get('IdGT');
         $usuarios = $gestorgt->ListarUsuarios($pIdGT);
         $dataProvider = new ArrayDataProvider([
               'allModels' => $usuarios,
               'pagination' => ['pagesize' => 5,],
         ]);
-        return $this->render('//usuarios/listar',['dataProvider' => $dataProvider]);
+        return $this->render('/usuarios/listar',['dataProvider' => $dataProvider]);
         
     }
-    
-    public function actionBuscar()
-    {
-        $model = new GruposTrabajoBuscar;
-        $gestor = new GestorGruposTrabajo;
-    
-        if($model->load(Yii::$app->request->post()) && $model->validate())
-        {
-            $pCadena = $model->pCadena;
-            $pIncluyeBajas = $model->pIncluyeBajas;
-            $grupostrabajo = $gestor->Buscar($pCadena, $pIncluyeBajas);
-            $dataProvider = new ArrayDataProvider([
-                'allModels' => $grupostrabajo,
-                'pagination' => ['pagesize' => 5,],
-            ]);
-            return $this->render('listar',['dataProvider' => $dataProvider]);
-        }
-        else
-        {
-            return $this->render('buscar',['model' => $model]);
-        }
-    }
-    
     
     public function actionAlta()
     {
@@ -75,11 +70,11 @@ class GruposTrabajoController extends Controller
             }
             else{
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->render('alta',['model' => $model]);
+                return $this->renderAjax('alta',['model' => $model]);
             }
         }
         else{
-            return $this->render('alta',['model' => $model]);
+            return $this->renderAjax('alta',['model' => $model]);
         }
     }
     
@@ -95,15 +90,16 @@ class GruposTrabajoController extends Controller
             $mensaje = $gestor->Modificar($pIdGT, $pGrupoTrabajo, $pMail);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
                 return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
             }
             else{
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);            
-                return $this->render('modificar',['model' => $model]);
+                return $this->renderAjax('modificar',['model' => $model]);
             }
         }
         else{
-           return $this->render('modificar',['model' => $model]);
+            return $this->renderAjax('modificar',['model' => $model]);
         }
     }
     

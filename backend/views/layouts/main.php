@@ -5,8 +5,7 @@
 
 use backend\assets\AppAsset;
 use yii\helpers\Html;
-
-
+use yii\bootstrap\Modal;
 
 AppAsset::register($this);
 ?>
@@ -20,10 +19,11 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <link rel="icon" href="https://foxico.io/static/uploads/logofile-83defe355ce588c170b2d3eb2d74bca7.png" type="image/ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <?php $this->head() ?>
 </head>
-<body class="hold-transimition skin-green fixed sidebar-mini">
+<body class="hold-transimition skin-blue fixed sidebar-collapse sidebar-mini">
 <?php $this->beginBody() ?>
 <div class="wrapper">
     <header class="main-header">
@@ -88,7 +88,7 @@ AppAsset::register($this);
                     </a>
                 </li>
                 <li>
-                    <a href="/sgpoc/backend/web/familias/listar">
+                    <a href="/sgpoc/backend/web/insumos/listar">
                         <i class="fa fa-wrench"></i>
                         <span>Insumos</span>
                     </a>
@@ -169,4 +169,6 @@ AppAsset::register($this);
 <?php $this->endBody() ?>
 </body>
 </html>
+
+
 <?php $this->endPage() ?>

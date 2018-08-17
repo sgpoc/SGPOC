@@ -44,9 +44,9 @@ class Usuarios extends Model
     public function attributeLabels()
     {
         return [
-            'IdUsuario' => 'Id Usuario',
-            'IdGT' => 'Id Gt',
-            'IdRol' => 'Id Rol',
+            'IdUsuario' => 'Usuario',
+            'IdGT' => 'Grupo Trabajo',
+            'IdRol' => 'Rol',
             'Nombre' => 'Nombre',
             'Apellido' => 'Apellido',
             'Rol' => 'Rol',
