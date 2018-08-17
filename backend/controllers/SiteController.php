@@ -62,6 +62,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout = 'index';
         return $this->render('index');
     }
 
@@ -72,9 +73,9 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        $this->layout = 'login';
+        $this->layout = 'index';
         if (!Yii::$app->user->isGuest) {
-            return $this->redirect('/sgpoc/backend/web/site/index');
+            return $this->redirect('/sgpoc/backend/web/site/home');
         }
 
         $model = new LoginForm();
@@ -93,7 +94,7 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
-        $this->layout = 'login';
+        $this->layout = 'index';
         Yii::$app->user->logout();
         return $this->redirect('/sgpoc/backend/web/site/login');
     }

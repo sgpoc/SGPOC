@@ -22,11 +22,12 @@ class GestorGruposTrabajo
         return $usuarios;
     }
 
-    public function Buscar($pCadena,$pIncluyeBajas){
-        $sql = 'CALL ssp_buscar_grupotrabajo(:pCadena, :pIncluyeBajas)';
+    public function Buscar($pGrupoTrabajo, $pMail, $pEstado){
+        $sql = 'CALL ssp_buscar_grupotrabajo(:pGrupoTrabajo, :pMail, :pEstado)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pCadena', $pCadena)
-                ->bindValue('pIncluyeBajas',$pIncluyeBajas);
+                ->bindValue('pGrupoTrabajo', $pGrupoTrabajo)
+                ->bindValue('pMail', $pMail)
+                ->bindValue('pEstado',$pEstado);
         $grupostrabajo = $comando->queryAll();
         return $grupostrabajo;
     }

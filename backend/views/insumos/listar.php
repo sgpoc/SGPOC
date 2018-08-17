@@ -5,7 +5,7 @@ use kartik\grid\GridView;
 use kartik\widgets\Growl;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
-use yii\widgets\Pjax;
+use kartik\widgets\DepDrop;
 
 
 
@@ -13,7 +13,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\UsuariosBusqueda */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'SGPOC | Usuarios';
+$this->title = 'SGPOC | Insumos';
 
 $colorPluginOptions =  [
     'showPalette' => true,
@@ -45,91 +45,85 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Nombre',
+        'attribute' => 'Insumo',
         'vAlign' => 'middle',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Apellido',
+        'attribute' => 'TipoInsumo',
         'vAlign' => 'middle',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Email',
-        'vAlign' => 'middle',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Rol',
-        'label' => 'Rol',
+        'attribute' => 'Familia',
+        'label' => 'Familia',
         'vAlign' => 'middle',
         'filterType' => GridView::FILTER_SELECT2,
-        'filter'=> $listData,
-        'filterInputOptions' => ['placeholder' => 'Seleccionar Rol'],
+        'filter'=> $listDataF,
+        'filterInputOptions' => ['placeholder' => ''],
         'format' => 'raw',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
-        'class' => 'kartik\grid\BooleanColumn',
-        'attribute' => 'Estado',
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'SubFamilia',
+        'label' => 'SubFamilia',
         'vAlign' => 'middle',
-        'hAlign' => 'center'
+        'filterType' => GridView::FILTER_SELECT2,
+        /*'filterType' => DepDrop::TYPE_SELECT2, [
+            'options'=>['IdSubFamilia'=>'IdSubFamilia'],
+            'pluginOptions'=>[
+                'depends'=>['IdFamilia'],
+                'placeholder'=>'Selecccionar SubFamilia ...',
+                //'url'=Url::to('/sgpoc/backend/web/subfamilias/listar')
+            ]
+        ],*/    
+        'filter'=> $listDataSF,
+        'filterInputOptions' => ['placeholder' => ''],
+        'format' => 'raw',
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'Abreviatura',
+        'label' => 'Unidad',
+        'vAlign' => 'middle',
+        'filterType' => GridView::FILTER_SELECT2,
+        'filter'=> $listDataU,
+        'filterInputOptions' => ['placeholder' => ''],
+        'format' => 'raw',
+        'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => '\kartik\grid\ActionColumn',
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' => '{modificar} {borrar} {baja} {activar}',
+        'template' => '{modificar} {borrar}',
         'buttons' => [
                 'modificar' => function($url, $model, $key){ 
                     return  Html::button('<i class="fa fa-pencil"></i>',
                             [
-                                'value'=>Url::to(['/usuarios/modificar', 'IdUsuario' => $model['IdUsuario']]), 
+                                'value'=>Url::to(['/insumos/modificar', 'IdInsumo' => $model['IdInsumo']]), 
                                 'class'=>'btn btn-link modalButton',
-                                'title'=>'Modificar Usuario'
+                                'title'=>'Modificar Insumo'
                             ]);
                 },
                 'borrar' => function($url, $model, $key){
                     return Html::a('<i class="fa fa-trash-o"></i>',
                             [
-                                'borrar','IdUsuario' => $model['IdUsuario']
+                                'borrar','IdInsumo' => $model['IdInsumo']
                             ], 
                             [
-                                'title' => 'Borrar Usuario', 
+                                'title' => 'Borrar Insumo', 
                                 'class' => 'btn btn-link',
                                 'data' => [
-                                    'confirm' => 'Esta seguro que desea borrar el Usuario?',
+                                    'confirm' => 'Esta seguro que desea borrar el Insumo?',
                                     'method' => 'post'
                                 ]
                             ]);
-                },        
-                'baja' => function($url, $model, $key){
-                    if($model['Estado'] === '1'){
-                        return  Html::a('<i class="fa fa-toggle-on"></i>',
-                                [
-                                    'baja','IdUsuario' => $model['IdUsuario']
-                                ], 
-                                [
-                                    'title' => 'Dar de baja Usuario', 
-                                    'class' => 'btn btn-link'
-                                ]);
-                    }
-                },
-                'activar' => function($url, $model, $key){
-                    if($model['Estado'] === '0'){
-                        return Html::a('<i class="fa fa-toggle-off"></i>',
-                                [
-                                    'activar','IdUsuario' => $model['IdUsuario']
-                                ], 
-                                [
-                                    'title' => 'Activar Usuario',
-                                    'class' => 'btn btn-link'
-                                ]);
-                    }
                 }     
         ]
     ], 
@@ -159,7 +153,7 @@ $gridColumns = [
 
 <?php
     Modal::begin([
-            'header'=>'<h2>Usuarios</h2>',
+            'header'=>'<h2>Insumos</h2>',
             'footer'=>'',
             'id'=>'modal',
             'size'=>'modal-lg',
@@ -187,12 +181,12 @@ $gridColumns = [
             [
                 'content' => Html::button('<i class="glyphicon glyphicon-plus"></i>',
                             [
-                                'value'=>Url::to('/sgpoc/backend/web/usuarios/alta'), 
+                                'value'=>Url::to('/sgpoc/backend/web/insumos/alta'), 
                                 'class'=>'btn btn-success modalButton',
-                                'title'=>'Crear Usuario'
+                                'title'=>'Crear Insumo'
                             ]).' '.
                             Html::a('<i class="glyphicon glyphicon-repeat"></i>', 
-                            ['usuarios/listar'], 
+                            ['insumos/listar'], 
                             [
                                 'data-pjax' => 0, 
                                 'class' => 'btn btn-default', 
@@ -202,7 +196,7 @@ $gridColumns = [
             '{export}',
         ],
         'panel' => [
-            'heading' => '<h3 class="panel-title"><i class="fa fa-user"></i> Usuarios</h3>',
+            'heading' => '<h3 class="panel-title"><i class="fa fa-wrench"></i> Insumos</h3>',
             'type' => GridView::TYPE_PRIMARY,
         ],
     ]);   
