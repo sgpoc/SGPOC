@@ -137,11 +137,6 @@ $gridColumns = [
          ],
         'toolbar' => [
             [
-<<<<<<< HEAD
-                'content' => 
-                    Html::a('<i class="glyphicon glyphicon-plus"></i>', ['alta'], ['title' => 'Crear nueva Familia.', 'class' => 'btn btn-success']).' '.
-                    Html::a('<i class="glyphicon glyphicon-search"></i>', ['buscar'], ['title' => 'Buscar Familia.', 'class' => 'btn btn-default'])
-=======
                 'content' =>Html::button('<i class="glyphicon glyphicon-plus"></i>',
                             [
                                 'value'=>Url::to('/sgpoc/backend/web/familias/alta'), 
@@ -155,7 +150,6 @@ $gridColumns = [
                                 'class' => 'btn btn-default', 
                                 'title' => 'Actualizar'
                             ])
->>>>>>> development
             ],
             '{export}',
         ],
