@@ -13,23 +13,23 @@ use kartik\widgets\Growl;
 ?>
 
 <?php if(Yii::$app->session->getFlash('alert')){
-    echo Growl::widget([
-    'type' => Growl::TYPE_DANGER,
-    'title' => 'Cuidado!',
-    'icon' => 'glyphicon glyphicon-remove-sign',
-    'body' => Yii::$app->session->getFlash('alert'),
-    'showSeparator' => true,
-    'delay' => 1000,
-    'pluginOptions' => [
-        'showProgressbar' => false,
-        'placement' => [
-            'from' => 'top',
-            'align' => 'center',
+        echo Growl::widget([
+        'type' => Growl::TYPE_DANGER,
+        'title' => 'Cuidado!',
+        'icon' => 'glyphicon glyphicon-remove-sign',
+        'body' => Yii::$app->session->getFlash('alert'),
+        'showSeparator' => true,
+        'delay' => 1000,
+        'pluginOptions' => [
+            'showProgressbar' => false,
+            'placement' => [
+                'from' => 'top',
+                'align' => 'center',
+            ]
         ]
-    ]
-    ]);
+        ]);
     }
-?>
+?>  
 
 <?php $form = ActiveForm::begin(); ?>
 <div class="modal-content">
@@ -41,7 +41,7 @@ use kartik\widgets\Growl;
             <?= $form->field($model, 'IdSubFamilia')->dropDownList($listData, ['prompt' => 'Seleccione uno ...' ])->label('SubFamilia');  ?>
             <?= $form->field($model, 'IdUnidad')->dropDownList($listDataU, ['prompt' => 'Seleccione uno ...' ])->label('Unidad');  ?>
             <?= $form->field($model, 'Insumo', ['addon' => ['prepend' => ['content'=>'I']]])->textInput(['placeholder'=>'Ingrese el nombre ...']) ?>
-            <?= $form->field($model, 'TipoInsumo', ['addon' => ['prepend' => ['content'=>'TI']]])->textInput(['placeholder'=>'Ingrese el tipo ...']) ?>
+            <?= $form->field($model, 'TipoInsumo', ['addon' => ['prepend' => ['content'=>'T']]])->textInput(['placeholder'=>'Ingrese el tipo ...']) ?>
         </div>
     </div>
     <div class="modal-footer">
@@ -49,3 +49,5 @@ use kartik\widgets\Growl;
     </div>
 </div>
 <?php ActiveForm::end() ?>
+
+

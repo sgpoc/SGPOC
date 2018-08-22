@@ -84,7 +84,7 @@ AppAsset::register($this);
                 <li>
                     <a href="/sgpoc/backend/web/subfamilias/listar">
                         <i class="glyphicon glyphicon-list"></i>
-                        <span>Tipos de Insumo</span>
+                        <span>SubFamilias</span>
                     </a>
                 </li>
                 <li>
@@ -118,7 +118,7 @@ AppAsset::register($this);
                     </a>
                 </li>
                 <li>
-                    <a href="/sgpoc/backend/web/familias/listar">
+                    <a href="/sgpoc/backend/web/obras/listar">
                         <i class="fa fa-building"></i>
                         <span>Obras</span>
                     </a>

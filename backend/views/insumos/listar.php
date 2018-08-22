@@ -9,6 +9,7 @@ use kartik\widgets\DepDrop;
 
 
 
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UsuariosBusqueda */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -72,10 +73,10 @@ $gridColumns = [
         'label' => 'SubFamilia',
         'vAlign' => 'middle',
         'filterType' => GridView::FILTER_SELECT2,
-        /*'filterType' => DepDrop::TYPE_SELECT2, [
-            'options'=>['IdSubFamilia'=>'IdSubFamilia'],
+       /*'filterType' => DepDrop::TYPE_SELECT2, [
+            'options'=>['IdSubFamilia'=>$listDataSF[0]['IdSubFamilia']],
             'pluginOptions'=>[
-                'depends'=>['IdFamilia'],
+                'depends'=>$listDataF[0]['IdFamilia'],
                 'placeholder'=>'Selecccionar SubFamilia ...',
                 //'url'=Url::to('/sgpoc/backend/web/subfamilias/listar')
             ]
@@ -179,7 +180,7 @@ $gridColumns = [
          ],
         'toolbar' => [
             [
-                'content' => Html::button('<i class="glyphicon glyphicon-plus"></i>',
+                'content' =>Html::button('<i class="glyphicon glyphicon-plus"></i>',
                             [
                                 'value'=>Url::to('/sgpoc/backend/web/insumos/alta'), 
                                 'class'=>'btn btn-success modalButton',

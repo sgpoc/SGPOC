@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use kartik\form\ActiveForm;
 use kartik\widgets\Growl;
-use kartik\password\PasswordInput;
 
 
 /* @var $this yii\web\View */
@@ -39,12 +38,15 @@ use kartik\password\PasswordInput;
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?= $form->field($model, 'IdGT')->dropDownList($listData, ['prompt' => 'Seleccione uno ...' ])->label('Grupo de Trabajo');  ?>
-            <?= $form->field($model, 'IdRol')->dropDownList($listDataU, ['prompt' => 'Seleccione uno ...' ])->label('Rol');  ?>
-            <?= $form->field($model, 'Nombre', ['addon' => ['prepend' => ['content'=>'N']]])->textInput(['placeholder'=>'Ingrese el nombre ...']) ?>
-            <?= $form->field($model, 'Apellido', ['addon' => ['prepend' => ['content'=>'A']]])->textInput(['placeholder'=>'Ingrese el apellido ...']) ?>
+            <?= $form->field($model, 'IdLocalidad')->dropDownList($listData, ['prompt' => 'Seleccione uno ...' ])->label('Localidad');  ?>
+            <?= $form->field($model, 'Obra', ['addon' => ['prepend' => ['content'=>'N']]])->textInput(['placeholder'=>'Ingrese el nombre de la Obra ...'])->label('Nombre'); ?>
+            <?= $form->field($model, 'Direccion', ['addon' => ['prepend' => ['content'=>'D']]])->textInput(['placeholder'=>'Ingrese la dirección ...']) ?>
+            <?= $form->field($model, 'Propietario', ['addon' => ['prepend' => ['content'=>'P']]])->textInput(['placeholder'=>'Ingrese el propietario ...']) ?>
+            <?= $form->field($model, 'Telefono', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-mobile-phone"></i>']]])->textInput(['placeholder'=>'Ingrese el teléfono del propietario ...']) ?>
             <?= $form->field($model, 'Email', ['addon' => ['prepend' => ['content'=>'@']]])->input(['autocomplete'=>'off'])->textInput(['placeholder'=>'Ingrese una dirección de Email válida ...']) ?>
-            <?= $form->field($model, 'Password', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-lock"></i>']]])->widget(PasswordInput::classname())?>       
+            <?= $form->field($model, 'Comentarios')->textInput(['style'=>'height:100px']) ?>
+            <?= $form->field($model, 'SuperficieTerreno', ['addon' => ['prepend' => ['content'=>'#']]])->textInput(['placeholder'=>'Ingrese la superficie del terreno ...']) ?>
+            <?= $form->field($model, 'SuperficieCubiertaTotal', ['addon' => ['prepend' => ['content'=>'#']]])->textInput(['placeholder'=>'Ingrese la superficie cubierta total ...']) ?>
         </div>
         <div class="modal-footer">
             <?= html::submitButton('Alta',['class'=>'btn btn-success pull-right']); ?>

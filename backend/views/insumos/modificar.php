@@ -2,8 +2,6 @@
 
 use yii\helpers\Html;
 use kartik\form\ActiveForm;
-use kartik\password\PasswordInput;
-use yii\jui\AutoComplete;
 
 ?>
 
@@ -33,10 +31,8 @@ use yii\jui\AutoComplete;
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?= $form->field($model, 'Nombre', ['addon' => ['prepend' => ['content'=>'N']]])->textInput(['placeholder'=>$usuario[0]['Nombre']]) ?>
-            <?= $form->field($model, 'Apellido', ['addon' => ['prepend' => ['content'=>'A']]])->textInput(['placeholder'=>$usuario[0]['Apellido']]) ?>
-            <?= $form->field($model, 'Email', ['addon' => ['prepend' => ['content'=>'@']]])->textInput(['placeholder'=>$usuario[0]['Email']]) ?>
-            <?= $form->field($model, 'Password', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-lock"></i>']]])->widget(PasswordInput::classname())?>
+            <?= $form->field($model, 'Insumo', ['addon' => ['prepend' => ['content'=>'I']]])->textInput(['placeholder'=>$insumo[0]['Insumo']]) ?>
+            <?= $form->field($model, 'TipoInsumo', ['addon' => ['prepend' => ['content'=>'T']]])->textInput(['placeholder'=>$insumo[0]['TipoInsumo']]) ?>
         </div>
     </div>
     <div class="modal-footer">
