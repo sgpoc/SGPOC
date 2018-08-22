@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-//use yii\grid\GridView;
+use kartik\widgets\Growl;
+use yii\bootstrap\Modal;
 use kartik\grid\GridView;
 use yii\helpers\Url;
 
@@ -10,8 +11,7 @@ use yii\helpers\Url;
 /* @var $searchModel app\models\UsuariosBusqueda */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Familias';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'SGPOC | Familias';
 
 
 $colorPluginOptions =  [
@@ -57,18 +57,32 @@ $gridColumns = [
         'template' => '{modificar} {borrar} {listarsubfamilias}',
         'buttons' => [
                 'modificar' => function($url, $model, $key){ 
-                    return Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['modificar','IdFamilia' => $model['IdFamilia']], ['title' => 'Modificar Familia.', 'class' => 'btn btn-link']);
+                    return  Html::button('<i class="fa fa-pencil"></i>',
+                            [
+                                'value'=>Url::to(['/familias/modificar', 'IdFamilia' => $model['IdFamilia']]), 
+                                'class'=>'btn btn-link modalButton',
+                                'title'=>'Modificar Familia'
+                            ]);
                 },
                 'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="glyphicon glyphicon-trash"></i>',['borrar','IdFamilia' => $model['IdFamilia']], ['title' => 'Borra Familia.', 'class' => 'btn btn-link',
-                        'data' => [
-                            'confirm' => 'Esta seguro que desea borrar la Familia?',
-                            'method' => 'post'
-                           ]
-                        ]);
+                    return Html::a('<i class="fa fa-trash-o"></i>',
+                            ['borrar','IdFamilia' => $model['IdFamilia']], 
+                            [
+                                'title' => 'Borrar Familia', 
+                                'class' => 'btn btn-link',
+                                'data' => [
+                                    'confirm' => 'Esta seguro que desea borrar la Familia?',
+                                    'method' => 'post'
+                                ]
+                            ]);
                 },
                 'listarsubfamilias' => function($url, $model, $key){
-                    return Html::a('<i class="glyphicon glyphicon-user"></i>',['listar-subfamilias','IdFamilia' => $model['IdFamilia']], ['title' => 'Lista Subfamilias Familia.','class' => 'btn btn-link']);
+                    return Html::a('<i class="glyphicon glyphicon-th"></i>',
+                            ['listar-subfamilias','IdFamilia' => $model['IdFamilia']], 
+                            [
+                                'title' => 'Lista Subfamilias Familia',
+                                'class' => 'btn btn-link'
+                            ]);
                 },    
         ]
     ], 
@@ -76,29 +90,75 @@ $gridColumns = [
 
 ?>
 
-<?= Yii::$app->session->getFlash('alert'); ?>
+<?php if(Yii::$app->session->getFlash('alert')){
+    echo Growl::widget([
+    'type' => Growl::TYPE_DANGER,
+    'title' => 'Cuidado!',
+    'icon' => 'glyphicon glyphicon-remove-sign',
+    'body' => Yii::$app->session->getFlash('alert'),
+    'showSeparator' => true,
+    'delay' => 1000,
+    'pluginOptions' => [
+        'showProgressbar' => false,
+        'placement' => [
+            'from' => 'top',
+            'align' => 'center',
+        ]
+    ]
+    ]);
+    }
+?>
+
+<?php
+    Modal::begin([
+            'header'=>'<h2>Familias</h2>',
+            'footer'=>'',
+            'id'=>'modal',
+            'size'=>'modal-lg',
+       ]);
+    echo "<div id='modalContent'></div>";
+    Modal::end();
+?>
         
 <div>
     <?= GridView::widget([
         'moduleId' => 'gridviewKrajee',
+        'pjax'=>true,
+        'pjaxSettings'=>[
+            'neverTimeout'=>true,
+        ],
         'dataProvider' => $dataProvider,
-        //'filterModel' => $searchModel,
-        //'filterRowOptions' => ['class' => 'kartik-sheet-style'],
-        //'pjax' => true,
+        'filterModel' => $searchModel,
         'columns' => $gridColumns,
+        'exportConfig' => [
+                GridView::EXCEL => ['label' => 'Descargar como EXCEL'],
+                GridView::TEXT => ['label' => 'Descargar como TEXTO'],
+                GridView::PDF => ['label' => 'Descargar como PDF'],
+         ],
         'toolbar' => [
             [
-                'content' => 
-                    Html::a('<i class="glyphicon glyphicon-plus"></i>', ['alta'], ['title' => 'Crear nueva Familia.', 'class' => 'btn btn-success']).' '.
-                    Html::a('<i class="glyphicon glyphicon-search"></i>', ['buscar'], ['title' => 'Busca Familia.', 'class' => 'btn btn-default'])
+                'content' =>Html::button('<i class="glyphicon glyphicon-plus"></i>',
+                            [
+                                'value'=>Url::to('/sgpoc/backend/web/familias/alta'), 
+                                'class'=>'btn btn-success modalButton',
+                                'title'=>'Crear Familia'
+                            ]).' '.
+                            Html::a('<i class="glyphicon glyphicon-repeat"></i>', 
+                            ['familias/listar'], 
+                            [
+                                'data-pjax' => 0, 
+                                'class' => 'btn btn-default', 
+                                'title' => 'Actualizar'
+                            ])
             ],
             '{export}',
         ],
         'panel' => [
-            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-list"></i> Familias</h3>',
+            'heading' => '<h3 class="panel-title"><i class="fa fa-list"></i> Familias</h3>',
             'type' => GridView::TYPE_PRIMARY,
         ],
     ]);   
     ?>
-    
 </div>
+
+    

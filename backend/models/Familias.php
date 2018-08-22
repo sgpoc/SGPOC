@@ -28,31 +28,12 @@ class Familias extends Model
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
-            'IdFamilia' => 'Id Familia',
-            'IdGT' => 'Id Gt',
+            'IdFamilia' => 'Familia',
+            'IdGT' => 'Grupo de Trabajo',
             'Familia' => 'Familia',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getGT()
-    {
-        return $this->hasOne(Grupostrabajo::className(), ['IdGT' => 'IdGT']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSubfamilias()
-    {
-        return $this->hasMany(Subfamilias::className(), ['IdFamilia' => 'IdFamilia', 'IdGT' => 'IdGT']);
     }
 }

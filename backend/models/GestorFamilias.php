@@ -23,10 +23,11 @@ class GestorFamilias
         return $subfamilias;
     }
     
-    public function Buscar($pCadena){
-        $sql = 'CALL ssp_buscar_familia(:pCadena)';
+    public function Buscar($pFamilia, $pIdGT){
+        $sql = 'CALL ssp_buscar_familia(:pFamilia, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pCadena', $pCadena);
+                ->bindValue('pFamilia', $pFamilia)
+                ->bindValue('pIdGT', $pIdGT);
         $familias = $comando->queryAll();
         return $familias;
     }
@@ -52,6 +53,14 @@ class GestorFamilias
     public function Borrar($pIdFamilia)
     {
         $sql = 'CALL ssp_borrar_familia(:pIdFamilia)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdFamilia', $pIdFamilia);
+        return $comando->queryAll();
+    }
+    
+    public function Dame($pIdFamilia)
+    {
+        $sql = 'CALL ssp_dame_familia(:pIdFamilia)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdFamilia', $pIdFamilia);
         return $comando->queryAll();

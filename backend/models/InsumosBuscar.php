@@ -20,7 +20,7 @@ class InsumosBuscar extends Model
     public function rules()
     {
         return [
-            [['Insumos', 'TipoInsumo'], 'string', 'max' => 100],
+            [['Insumo', 'TipoInsumo'], 'string', 'max' => 100],
             ['Insumo', 'default', 'value' => NULL, 'skipOnEmpty' => FALSE],
             ['TipoInsumo', 'default', 'value' => NULL, 'skipOnEmpty' => FALSE],
             ['Familia', 'default', 'value' => NULL, 'skipOnEmpty' => FALSE],

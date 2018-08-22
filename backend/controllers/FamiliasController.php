@@ -15,13 +15,24 @@ class FamiliasController extends Controller
     {   
         $gestor = new GestorFamilias;
         $pIdGT = Yii::$app->user->identity['IdGT'];
-        $familias = $gestor->Listar($pIdGT);
-        //$searchModel = new FamiliasBuscar;
-        $dataProvider = new ArrayDataProvider([
-            'allModels' => $familias,
-            'pagination' => ['pagesize' => 5,],
-        ]);
-        return $this->render('listar',['dataProvider' => $dataProvider]);//, 'searchModel' => $searchModel]);
+        $searchModel = new FamiliasBuscar;
+        if($searchModel->load(Yii::$app->request->get()) && $searchModel->validate()){
+            $pFamilia = $searchModel['Familia'];
+            $familias = $gestor->Buscar($pFamilia, $pIdGT);
+            $dataProvider = new ArrayDataProvider([
+                'allModels' => $familias,
+                'pagination' => ['pagesize' => 5,],
+            ]);
+            return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel]);
+        }
+        else{
+            $familias = $gestor->Listar($pIdGT);
+            $dataProvider = new ArrayDataProvider([
+                'allModels' => $familias,
+                'pagination' => ['pagesize' => 5,],
+            ]);
+            return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel]);
+        }
     }
     
     public function actionListarSubfamilias()
@@ -35,27 +46,6 @@ class FamiliasController extends Controller
         ]);
         return $this->render('//subfamilias/listar',['dataProvider' => $dataProvider]);
         
-    }
-    
-    public function actionBuscar()
-    {
-        $model = new FamiliasBuscar;
-        $gestor = new GestorFamilias;
-    
-        if($model->load(Yii::$app->request->post()) && $model->validate())
-        {
-            $pCadena = $model->pCadena;
-            $familias = $gestor->Buscar($pCadena);
-            $dataProvider = new ArrayDataProvider([
-                'allModels' => $familias,
-                'pagination' => ['pagesize' => 10,],
-            ]);
-            return $this->render('listar',['dataProvider' => $dataProvider]);
-        }
-        else
-        {
-            return $this->render('buscar',['model' => $model]);
-        }
     }
     
     
@@ -75,11 +65,11 @@ class FamiliasController extends Controller
             }
             else{
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->render('alta',['model' => $model]);
+                return $this->renderAjax('alta',['model' => $model]);
             }
         }
         else{
-            return $this->render('alta',['model' => $model]);
+            return $this->renderAjax('alta',['model' => $model]);
         }
     }
     
@@ -88,6 +78,7 @@ class FamiliasController extends Controller
         $model = new Familias;
         $gestor = new GestorFamilias;
         $pIdFamilia = Yii::$app->request->get('IdFamilia');
+        $familia = $gestor->Dame($pIdFamilia);
         if($model->load(Yii::$app->request->post()))// && ($model->validate()))
         {
             $pFamilia = $model->Familia;
@@ -98,11 +89,11 @@ class FamiliasController extends Controller
             }
             else{
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->render('modificar',['model' => $model]);
+                return $this->renderAjax('modificar',['model' => $model, 'familia' => $familia]);
             }     
         }
         else{
-           return $this->render('modificar',['model' => $model]);
+           return $this->renderAjax('modificar',['model' => $model, 'familia', $familia]);
         }
     }
     

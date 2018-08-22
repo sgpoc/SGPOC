@@ -72,11 +72,8 @@ $gridColumns = [
                 'modificar' => function($url, $model, $key){
                     return Html::button('<i class="fa fa-pencil"></i>',
                             [
-                                'value'=>Url::to(['sgpoc/backend/web/grupos-trabajo/modificar','IdGT'=>$model['IdGT']]),
-                                'class'=>'btn btn-link', 
-                                'id'=>'modalButton',
-                                'data-toggle'=>'modal',
-                                'data-target'=>'#modal',
+                                'value'=>Url::to(['/grupos-trabajo/modificar', 'IdGT' => $model['IdGT']]), 
+                                'class'=>'btn btn-link modalButton',
                                 'title'=>'Modificar Grupo de Trabajo'
                             ]);
                 },
@@ -95,7 +92,6 @@ $gridColumns = [
                             ]);
                 },
                 'listarusuarios' => function($url, $model, $key){
-                    //return Html::button('<i class="glyphicon glyphicon-user"></i>',['value'=>Url::to('/sgpoc/backend/web/grupos-trabajo/listar-usuarios'), 'class'=>'btn btn-default', 'id'=>'modalButton']]);
                     return Html::a('<i class="fa fa-user"></i>',
                             [
                                 'listar-usuarios','IdGT'=>$model['IdGT']
@@ -154,6 +150,17 @@ $gridColumns = [
     }
 ?>
 
+<?php
+    Modal::begin([
+            'header'=>'<h2>Grupos de Trabajo</h2>',
+            'footer'=>'',
+            'id'=>'modal',
+            'size'=>'modal-lg',
+       ]);
+    echo "<div id='modalContent'></div>";
+    Modal::end();
+?>
+
 
 <div>
     <?= GridView::widget([
@@ -176,8 +183,7 @@ $gridColumns = [
                     Html::button('<i class="glyphicon glyphicon-plus"></i>',
                             [
                                 'value'=>Url::to('/sgpoc/backend/web/grupos-trabajo/alta'),
-                                'class'=>'btn btn-success', 
-                                'id'=>'modalButton',
+                                'class'=>'btn btn-success modalButton',
                                 'title'=>'Crear Grupo de Trabajo'
                             ]).' '.
                     Html::a('<i class="glyphicon glyphicon-repeat"></i>', 

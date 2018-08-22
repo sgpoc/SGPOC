@@ -13,18 +13,12 @@ class Subfamilias extends Model
     public $IdGT;
     public $SubFamilia;
 
-    
-    /**
-     * {@inheritdoc}
-     */
+
     public static function tableName()
     {
         return 'subfamilias';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -36,9 +30,6 @@ class Subfamilias extends Model
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
@@ -49,19 +40,4 @@ class Subfamilias extends Model
         ];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getInsumos()
-    {
-        return $this->hasMany(Insumos::className(), ['IdSubFamilia' => 'IdSubFamilia', 'IdFamilia' => 'IdFamilia', 'IdGT' => 'IdGT']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getFamilia()
-    {
-        return $this->hasOne(Familias::className(), ['IdFamilia' => 'IdFamilia', 'IdGT' => 'IdGT']);
-    }
 }
