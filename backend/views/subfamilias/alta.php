@@ -1,24 +1,48 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\form\ActiveForm;
+use kartik\widgets\Growl;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\SubFamiliaBusqueda */
+/* @var $searchModel app\models\UsuariosBusqueda */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-$this->title = 'Tipos de Insumos';
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
-<?= Yii::$app->session->getFlash('alert'); ?>
-<div>
-    <h1>Alta Tipo de Insumo</h1>
-    <?php $form = ActiveForm::begin(); ?>
-    <?= $form->field($model, 'IdFamilia')->dropDownList($listData, ['prompt' => 'Seleccione Uno' ])->label('Familias');  ?>
-    <?= $form->field($model, 'SubFamilia')->textInput()->label('Nombre') ?>
 
-    <?= html::submitButton('Alta',['class'=>'btn btn-primary pull-left']); ?>
-    <?= Html::a('<i class="fa fa-arrow-circle-left"></i> Volver', Yii::$app->request->referrer,['class'=>'btn btn-primary pull-right']); ?>
-    
-<?php ActiveForm::end() ?>
+<?php if(Yii::$app->session->getFlash('alert')){
+    echo Growl::widget([
+    'type' => Growl::TYPE_DANGER,
+    'title' => 'Cuidado!',
+    'icon' => 'glyphicon glyphicon-remove-sign',
+    'body' => Yii::$app->session->getFlash('alert'),
+    'showSeparator' => true,
+    'delay' => 1000,
+    'pluginOptions' => [
+        'showProgressbar' => false,
+        'placement' => [
+            'from' => 'top',
+            'align' => 'center',
+        ]
+    ]
+    ]);
+    }
+?>
 
+
+<?php $form = ActiveForm::begin(); ?>
+<div class="modal-content">
+    <div class="modal-header">
+        <h1 class="modal-title">Alta</h1>   
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <?= $form->field($model, 'IdFamilia')->dropDownList($listData, ['prompt' => 'Seleccione Uno' ])->label('Familias');  ?>
+            <?= $form->field($model, 'SubFamilia', ['addon' => ['prepend' => ['content'=>'SF']]])->textInput(['placeholder'=>'Ingrese el nombre ...'])->label('Nombre') ?>   
+        </div>
+    </div>
+    <div class="modal-footer">
+        <?= html::submitButton('Alta',['class'=>'btn btn-success pull-right']); ?>
+    </div>
 </div>
+<?php ActiveForm::end() ?>

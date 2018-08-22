@@ -54,7 +54,6 @@ class UsuariosController extends Controller
         $listData= ArrayHelper::map($grupostrabajo,'IdGT','GrupoTrabajo');
         $roles = $gestoru->ListarRoles();
         $listDataU = ArrayHelper::map($roles,'IdRol','Rol');
-        
         if($model->load(Yii::$app->request->post())) //&& $model->validate())
         {
             $pIdGT = $model->IdGT;
@@ -98,7 +97,7 @@ class UsuariosController extends Controller
             }
             else{
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('modificar',['model' => $model]);
+                return $this->renderAjax('modificar',['model' => $model, 'usuario' => $usuario ]);
             }
         }
         else{

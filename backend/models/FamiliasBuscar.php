@@ -6,7 +6,7 @@ use yii\base\Model;
 
 class FamiliasBuscar extends Model
 {
-    public $pCadena;
+    public $Familia;
     
     public static function tableName()
     {
@@ -16,14 +16,16 @@ class FamiliasBuscar extends Model
     public function rules()
     {
         return [
-            [['pCadena'], 'required'],
-            [['pCadena'], 'string', 'max' => 100],
+            [['Familia'], 'required'],
+            [['Familia'], 'string', 'max' => 100],
+            [['Familia'],'default', 'value' => NULL, 'skipOnEmpty' => FALSE],
+            [['Familia'], 'safe']
         ];
     }
     
     public function attributeLabels() {
         return [
-           'pCadena' => 'Cadena de Búsqueda',
+           'Familia' => 'Cadena de Búsqueda',
         ];
     }
 }

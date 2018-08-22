@@ -18,16 +18,19 @@ class GestorSubFamilias
      public function ListarInsumos($pIdSubFamilia)
     {       
         $sql = 'CALL ssp_listar_insumossubfamilia(:pIdSubFamilia)';
-        $comando = Yii::$app->db->createCommand($sql);
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdSubFamilia', $pIdSubFamilia);
         $subfamilias = $comando->queryAll();
         return $subfamilias;
     }
  
     
-    public function Buscar($pCadena){
-        $sql = 'CALL ssp_buscar_subfamilia(:pCadena)';
+    public function Buscar($pSubFamilia, $pIdFamilia, $pIdGT){
+        $sql = 'CALL ssp_buscar_subfamilia(:pSubFamilia, :pIdFamilia, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pCadena', $pCadena);
+                ->bindValue('pSubFamilia', $pSubFamilia)
+                ->bindValue('pIdFamilia', $pIdFamilia)
+                ->bindValue('pIdGT', $pIdGT);
         $subfamilia = $comando->queryAll();
         return $subfamilia;
     }
@@ -58,6 +61,13 @@ class GestorSubFamilias
         return $comando->queryAll();
     }
     
+    public function Dame($pIdSubFamilia)
+    {
+        $sql = 'CALL ssp_dame_subfamilia(:pIdSubFamilia)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdSubFamilia', $pIdSubFamilia);
+        return $comando->queryAll();
+    }
 
 }
 
