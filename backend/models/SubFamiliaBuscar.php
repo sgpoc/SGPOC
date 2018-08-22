@@ -28,5 +28,13 @@ class SubFamiliaBuscar extends Model
           
         ];
     }
+    
+    public function search($params){
+        $query = Subfamilias::find()->joinWith(['']);
+        
+    $dataprovider = new ActiveDataProvider([
+        'query' => $query,
+    ]);
+    }
 }
 
