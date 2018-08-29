@@ -28,4 +28,3 @@ LoginAsset::register($this);
 </html>
 
 <?php $this->endPage() ?>
-

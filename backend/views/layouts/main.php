@@ -23,7 +23,7 @@ AppAsset::register($this);
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <?php $this->head() ?>
 </head>
-<body class="hold-transimition skin-black-light fixed sidebar-collapse sidebar-mini">
+<body class="hold-transition skin-black-light sidebar-collapse sidebar-mini">
 <?php $this->beginBody() ?>
 <div class="wrapper">
     <header class="main-header">
@@ -163,7 +163,7 @@ AppAsset::register($this);
         <div class="pull-right hidden-xs">
             <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2018.</strong> Todos los derecho reservados.
+        <strong>Copyright &copy; 2018.</strong> Facundo Ledesma, Juan Pablo Ortiz. Todos los derecho reservados.
     </footer>
 </div>
 <?php $this->endBody() ?>

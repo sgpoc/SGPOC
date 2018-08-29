@@ -1,11 +1,12 @@
 <?php
 
 use kartik\detail\DetailView;
+use yii\helpers\Html;
+use yii\helpers\Url;
 ?>
 
 
 <?php
-
 echo DetailView::widget([
     'model'=>$model,
     'condensed'=>true,
@@ -18,12 +19,18 @@ echo DetailView::widget([
     ],
     'attributes' => [
         [
-            'attribute' => 'Codigo Postal',
-            'value' => $model['CodigoPostal']
+            'attribute' => 'Pagina Web',
+            'value' =>Html::a('Visitar',$model['PaginaWEB']),
+           'format' => 'raw'
+           
         ],
         [
-            'attribute' => 'Pagina WEB',
-            'value' => $model['PaginaWEB']
+            'attribute' => 'Telefono',
+            'value' => $model['Telefono']
+        ],
+        [
+            'attribute' => 'Codigo Postal',
+            'value' => $model['CodigoPostal']
         ],
     ]
     
