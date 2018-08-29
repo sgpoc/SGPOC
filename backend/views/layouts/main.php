@@ -23,7 +23,7 @@ AppAsset::register($this);
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <?php $this->head() ?>
 </head>
-<body class="hold-transimition skin-blue fixed sidebar-collapse sidebar-mini">
+<body class="hold-transimition skin-black-light fixed sidebar-collapse sidebar-mini">
 <?php $this->beginBody() ?>
 <div class="wrapper">
     <header class="main-header">
@@ -94,7 +94,7 @@ AppAsset::register($this);
                     </a>
                 </li>
                 <li>
-                    <a href="/sgpoc/backend/web/familias/listar">
+                    <a href="/sgpoc/backend/web/items/listar">
                         <i class="fa fa-gear"></i>
                         <span>Items</span>
                     </a>
@@ -124,7 +124,7 @@ AppAsset::register($this);
                     </a>
                 </li>
                 <li>
-                    <a href="/sgpoc/backend/web/familias/listar">
+                    <a href="/sgpoc/backend/web/lista-precios/listar">
                         <i class="fa fa-money"></i>
                         <span>Lista de Precios</span>
                     </a>

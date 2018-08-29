@@ -9,6 +9,7 @@ use Yii;
 class Proveedores extends Model
 {
     public $IdProveedor;
+    public $IdGT;
     public $Proveedor;
     public $Domicilio;
     public $CodigoPostal;
@@ -16,18 +17,13 @@ class Proveedores extends Model
     public $Telefono;
     public $PaginaWEB;
     public $Estado;
-    /**
-     * {@inheritdoc}
-     */
+
+    
     public static function tableName()
     {
         return 'proveedores';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-     
     public function rules()
     {
         return [
@@ -40,13 +36,10 @@ class Proveedores extends Model
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
-            'IdProveedor' => 'IdProveedor',
+            'IdProveedor' => 'Proveedor',
             'Proveedor' => 'Proveedor',
             'Domicilio' => 'Domicilio',
             'CodigoPostal' => 'Codigo Postal',
@@ -55,13 +48,5 @@ class Proveedores extends Model
             'PaginaWEB' => 'Pagina Web',
             'Estado' => 'Estado',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getListadeprecios()
-    {
-        return $this->hasMany(Listadeprecios::className(), ['IdProveedor' => 'IdProveedor']);
     }
 }

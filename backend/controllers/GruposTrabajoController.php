@@ -42,15 +42,14 @@ class GruposTrabajoController extends Controller
         $gestor = new GestorUsuarios;
         $gestorgt = new GestorGruposTrabajo;
         $roles = $gestor->ListarRoles();
-        $listDataU = ArrayHelper::map($roles,'IdRol','Rol');
+        $listDataR = ArrayHelper::map($roles,'IdRol','Rol');
         $pIdGT = Yii::$app->request->get('IdGT');
         $usuarios = $gestorgt->ListarUsuarios($pIdGT);
         $dataProvider = new ArrayDataProvider([
               'allModels' => $usuarios,
               'pagination' => ['pagesize' => 5,],
         ]);
-        return $this->render('/usuarios/listar',['dataProvider' => $dataProvider]);
-        
+        return $this->render('/usuarios/listar',['dataProvider' => $dataProvider, 'listaData' => $listDataR]);   
     }
     
     public function actionAlta()
