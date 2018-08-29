@@ -5,17 +5,15 @@ use kartik\grid\GridView;
 use kartik\widgets\Growl;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
-use kartik\widgets\DepDrop;
-
-
+use yii\data\ArrayDataProvider;
+use app\models\GestorItems;
 
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UsuariosBusqueda */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'SGPOC | Insumos';
-
+$this->title = 'SGPOC | Items';
 
 $gridColumns = [
     [
@@ -26,35 +24,37 @@ $gridColumns = [
         'headerOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
+        'class' => 'kartik\grid\ExpandRowColumn',
+        'width' => '50px',
+        'value' => function ($model, $key, $index, $column) {
+            return GridView::ROW_COLLAPSED;
+        },
+        'detail' => function ($model, $key, $index, $column) {
+            $pIdItem = $model['IdItem'];
+            $gestor = new GestorItems;
+            $insumos = $gestor->ListarInsumos($pIdItem);
+            $dataProvider = new ArrayDataProvider([
+                'allModels' => $insumos,
+                'pagination' => ['pagesize' => 15,],
+            ]);
+            return Yii::$app->controller->renderPartial('/items/insumos', ['dataProvider' => $dataProvider]);
+        },
+        'headerOptions' => ['class' => 'kartik-sheet-style'], 
+        'expandOneOnly' => true
+    ],
+    [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Insumo',
+        'attribute' => 'Item',
         'vAlign' => 'middle',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'TipoInsumo',
-        'vAlign' => 'middle',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Familia',
-        'label' => 'Familia',
+        'attribute' => 'RubroItem',
+        'label' => 'Rubro Item',
         'vAlign' => 'middle',
         'filterType' => GridView::FILTER_SELECT2,
-        'filter'=> $listDataF,
-        'filterInputOptions' => ['placeholder' => ''],
-        'format' => 'raw',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'SubFamilia',
-        'label' => 'SubFamilia',
-        'vAlign' => 'middle',
-        'filterType' => GridView::FILTER_SELECT2,
-        'filter'=> $listDataSF,
+        'filter'=> $listDataRI,
         'filterInputOptions' => ['placeholder' => ''],
         'format' => 'raw',
         'contentOptions' => ['class' => 'kartik-sheet-style']
@@ -75,30 +75,38 @@ $gridColumns = [
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' => '{modificar} {borrar}',
+        'template' => '{agregar-insumo} {modificar} {borrar}',
         'buttons' => [
+                'agregar-insumo' => function($url, $model, $key){
+                    return  Html::button('<i class="fa fa-plus"></i>',
+                            [
+                                'value'=>Url::to(['/items/agregar-insumo', 'IdItem' => $model['IdItem']]), 
+                                'class'=>'btn btn-link modalButton',
+                                'title'=>'Agregar Insumo al Item'
+                            ]);
+                }, 
                 'modificar' => function($url, $model, $key){ 
                     return  Html::button('<i class="fa fa-pencil"></i>',
                             [
-                                'value'=>Url::to(['/insumos/modificar', 'IdInsumo' => $model['IdInsumo']]), 
+                                'value'=>Url::to(['/items/modificar', 'IdItem' => $model['IdItem']]), 
                                 'class'=>'btn btn-link modalButton',
-                                'title'=>'Modificar Insumo'
+                                'title'=>'Modificar Item'
                             ]);
                 },
                 'borrar' => function($url, $model, $key){
                     return Html::a('<i class="fa fa-trash-o"></i>',
                             [
-                                'borrar','IdInsumo' => $model['IdInsumo']
+                                'borrar','IdItem' => $model['IdItem']
                             ], 
                             [
-                                'title' => 'Borrar Insumo', 
+                                'title' => 'Borrar Item', 
                                 'class' => 'btn btn-link',
                                 'data' => [
-                                    'confirm' => 'Esta seguro que desea borrar el Insumo?',
+                                    'confirm' => 'Esta seguro que desea borrar el Item?',
                                     'method' => 'post'
                                 ]
                             ]);
-                }     
+                }
         ]
     ], 
 ];
@@ -127,7 +135,7 @@ $gridColumns = [
 
 <?php
     Modal::begin([
-            'header'=>'<h2>Insumos</h2>',
+            'header'=>'<h2>Items</h2>',
             'footer'=>'',
             'id'=>'modal',
             'size'=>'modal-lg',
@@ -153,14 +161,14 @@ $gridColumns = [
          ],
         'toolbar' => [
             [
-                'content' =>Html::button('<i class="glyphicon glyphicon-plus"></i>',
+                'content' => Html::button('<i class="glyphicon glyphicon-plus"></i>',
                             [
-                                'value'=>Url::to('/sgpoc/backend/web/insumos/alta'), 
+                                'value'=>Url::to('/sgpoc/backend/web/items/alta'), 
                                 'class'=>'btn btn-success modalButton',
-                                'title'=>'Crear Insumo'
+                                'title'=>'Crear Item'
                             ]).' '.
                             Html::a('<i class="glyphicon glyphicon-repeat"></i>', 
-                            ['insumos/listar'], 
+                            ['items/listar'], 
                             [
                                 'data-pjax' => 0, 
                                 'class' => 'btn btn-default', 
@@ -170,11 +178,9 @@ $gridColumns = [
             '{export}',
         ],
         'panel' => [
-            'heading' => '<h3 class="panel-title"><i class="fa fa-wrench"></i> Insumos</h3>',
+            'heading' => '<h3 class="panel-title"><i class="fa fa-gear"></i> Items</h3>',
             'type' => GridView::TYPE_DEFAULT,
         ],
     ]);   
     ?>
 </div>
-
-

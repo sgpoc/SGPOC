@@ -10,8 +10,8 @@ class Insumos extends Model
 {
     public $IdInsumo;
     public $IdSubFamilia;
-    //public $IdFamilia;
-    //public $IdGT;
+    public $IdFamilia;
+    public $IdGT;
     public $IdUnidad;
     public $TipoInsumo;
     public $Insumo;
@@ -25,11 +25,11 @@ class Insumos extends Model
     {
         return [
             [['IdSubFamilia', 'IdUnidad', 'TipoInsumo', 'Insumo'], 'required'],
-            [['IdSubFamilia',/* 'IdFamilia', 'IdGT',*/ 'IdUnidad'], 'integer'],
+            [['IdSubFamilia','IdFamilia', 'IdGT', 'IdUnidad'], 'integer'],
             [['TipoInsumo'], 'string', 'max' => 100],
             [['Insumo'], 'string', 'max' => 100],
             [['Insumo'], 'unique'],
-            [['IdSubFamilia'/*, 'IdFamilia', 'IdGT'*/], 'exist', 'skipOnError' => true, 'targetClass' => Subfamilias::className(), 'targetAttribute' => ['IdSubFamilia' => 'IdSubFamilia'/*, 'IdFamilia' => 'IdFamilia', 'IdGT' => 'IdGT'*/]],
+            [['IdSubFamilia', 'IdFamilia', 'IdGT'], 'exist', 'skipOnError' => true, 'targetClass' => Subfamilias::className(), 'targetAttribute' => ['IdSubFamilia' => 'IdSubFamilia'/*, 'IdFamilia' => 'IdFamilia', 'IdGT' => 'IdGT'*/]],
         ];
     }
 
@@ -38,8 +38,8 @@ class Insumos extends Model
         return [
             'IdInsumo' => 'Insumo',
             'IdSubFamilia' => 'SubFamilia',
-      //      'IdFamilia' => 'Familia',
-        //    'IdGT' => 'Grupo de Trabajo',
+            'IdFamilia' => 'Familia',
+            'IdGT' => 'Grupo de Trabajo',
             'IdUnidad' => 'Unidad',
             'TipoInsumo' => 'Tipo de Insumo',
             'Insumo' => 'Insumo',

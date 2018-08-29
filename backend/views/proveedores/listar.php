@@ -15,26 +15,6 @@ use yii\widgets\Pjax;
 
 $this->title = 'SGPOC | Proveedores';
 
-$colorPluginOptions =  [
-    'showPalette' => true,
-    'showPaletteOnly' => true,
-    'showSelectionPalette' => true,
-    'showAlpha' => false,
-    'allowEmpty' => false,
-    'preferredFormat' => 'name',
-    'palette' => [
-        [
-            "white", "black", "grey", "silver", "gold", "brown", 
-        ],
-        [
-            "red", "orange", "yellow", "indigo", "maroon", "pink"
-        ],
-        [
-            "blue", "green", "violet", "cyan", "magenta", "purple", 
-        ],
-    ]
-];
-
 $gridColumns = [
     [
         'class' => 'kartik\grid\SerialColumn',
@@ -42,6 +22,18 @@ $gridColumns = [
         'width' => '36px',
         'header' => '#',
         'headerOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\ExpandRowColumn',
+        'width' => '50px',
+        'value' => function ($model, $key, $index, $column) {
+            return GridView::ROW_COLLAPSED;
+        },
+        'detail' => function ($model, $key, $index, $column) {
+            return Yii::$app->controller->renderPartial('/proveedores/detalles', ['model' => $model]);
+        },
+        'headerOptions' => ['class' => 'kartik-sheet-style'], 
+        'expandOneOnly' => true
     ],
     [
         'class' => 'kartik\grid\DataColumn',
@@ -88,7 +80,7 @@ $gridColumns = [
                                 'borrar','IdProveedor' => $model['IdProveedor']
                             ], 
                             [
-                                'title' => 'Borrar Usuario', 
+                                'title' => 'Borrar Proveedor', 
                                 'class' => 'btn btn-link',
                                 'data' => [
                                     'confirm' => 'Esta seguro que desea borrar el Proveedor?',
@@ -112,7 +104,7 @@ $gridColumns = [
                     if($model['Estado'] === '0'){
                         return Html::a('<i class="fa fa-toggle-off"></i>',
                                 [
-                                    'activar','Proveedor' => $model['Proveedor']
+                                    'activar','IdProveedor' => $model['IdProveedor']
                                 ], 
                                 [
                                     'title' => 'Activar Proveedor',
@@ -191,8 +183,8 @@ $gridColumns = [
             '{export}',
         ],
         'panel' => [
-            'heading' => '<h3 class="panel-title"><i class="fa fa-user"></i> Proveedores</h3>',
-            'type' => GridView::TYPE_PRIMARY,
+            'heading' => '<h3 class="panel-title"><i class="fa fa-truck"></i> Proveedores</h3>',
+            'type' => GridView::TYPE_DEFAULT,
         ],
     ]);   
     ?>

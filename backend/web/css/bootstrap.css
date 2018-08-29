@@ -4122,7 +4122,7 @@ fieldset[disabled] .btn-danger:hover {
 
 .btn-link {
     font-weight: 400;
-    color: #337ab7;
+    color: #666;
     border-radius: 0
 }
 
@@ -5674,9 +5674,9 @@ fieldset[disabled] .navbar-inverse .btn-link:hover {
     padding: 6px 12px;
     margin-left: -1px;
     line-height: 1.42857143;
-    color: #337ab7;
+    color: #666;
     text-decoration: none;
-    background-color: #fff;
+    background-color: #fafafa;
     border: 1px solid #ddd
 }
 
@@ -5710,10 +5710,10 @@ fieldset[disabled] .navbar-inverse .btn-link:hover {
 .pagination>.active>span:focus,
 .pagination>.active>span:hover {
     z-index: 3;
-    color: #fff;
+    color: #666;
     cursor: default;
-    background-color: #337ab7;
-    border-color: #337ab7
+    background-color: #fafafa;
+    border-color: #666
 }
 
 .pagination>.disabled>a,
