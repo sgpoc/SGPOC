@@ -28,7 +28,8 @@
         "kartik-v/yii2-mpdf": "@dev",
         "kartik-v/yii2-widgets": "*",
         "kartik-v/yii2-password": "@dev",
-        "kartik-v/yii2-detail-view": "*"
+        "kartik-v/yii2-detail-view": "*",
+        "dmstr/yii2-adminlte-asset": "^2.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

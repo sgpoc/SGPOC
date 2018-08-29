@@ -26,7 +26,7 @@ class ProveedoresController extends Controller
                 'allModels' => $proveedores,
                 'pagination' => ['pagesize' => 5,],
             ]);
-            return $this->redirect('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel]);
+            return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel]);
         }
         else{
             $proveedores = $gestor->Listar();
@@ -133,7 +133,7 @@ class ProveedoresController extends Controller
     public function actionActivar()
     {
         $gestor = new GestorProveedores;
-        $pIdUsuario = Yii::$app->request->get('IdProveedor');
+        $pIdProveedor = Yii::$app->request->get('IdProveedor');
         $mensaje = $gestor->Activar($pIdProveedor);
         if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
          {

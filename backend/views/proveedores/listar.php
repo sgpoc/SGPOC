@@ -44,6 +44,18 @@ $gridColumns = [
         'headerOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
+    'class' => 'kartik\grid\ExpandRowColumn',
+    'width' => '50px',
+    'value' => function ($model, $key, $index, $column) {
+        return GridView::ROW_COLLAPSED;
+    },
+    'detail' => function ($model, $key, $index, $column) {
+        return Yii::$app->controller->renderPartial('detalles', ['model' => $model]);
+    },
+    'headerOptions' => ['class' => 'kartik-sheet-style'],
+    'expandOneOnly' => true
+    ],
+    [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'Proveedor',
         'vAlign' => 'middle',
