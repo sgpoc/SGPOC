@@ -202,7 +202,7 @@ $gridColumns = [
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="fa fa-user"></i> Usuarios</h3>',
-            'type' => GridView::TYPE_PRIMARY,
+            'type' => GridView::TYPE_DEFAULT,
         ],
     ]);   
     ?>
