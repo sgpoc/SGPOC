@@ -5,17 +5,34 @@ use kartik\grid\GridView;
 use kartik\widgets\Growl;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
-use kartik\widgets\DepDrop;
-
-
+use yii\data\ArrayDataProvider;
 
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UsuariosBusqueda */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'SGPOC | Insumos';
+$this->title = 'SGPOC | Lista de Precios';
 
+$colorPluginOptions =  [
+    'showPalette' => true,
+    'showPaletteOnly' => true,
+    'showSelectionPalette' => true,
+    'showAlpha' => false,
+    'allowEmpty' => false,
+    'preferredFormat' => 'name',
+    'palette' => [
+        [
+            "white", "black", "grey", "silver", "gold", "brown", 
+        ],
+        [
+            "red", "orange", "yellow", "indigo", "maroon", "pink"
+        ],
+        [
+            "blue", "green", "violet", "cyan", "magenta", "purple", 
+        ],
+    ]
+];
 
 $gridColumns = [
     [
@@ -71,34 +88,48 @@ $gridColumns = [
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'PrecioLista',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'FechaUltimaActualizacion',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
         'class' => '\kartik\grid\ActionColumn',
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' => '{modificar} {borrar}',
+        'template' => '{alta}',
         'buttons' => [
                 'modificar' => function($url, $model, $key){ 
                     return  Html::button('<i class="fa fa-pencil"></i>',
                             [
-                                'value'=>Url::to(['/insumos/modificar', 'IdInsumo' => $model['IdInsumo']]), 
+                                'value'=>Url::to('/lista-precios/modificar'),//, 'IdInsumo' => $model['IdInsumo'], 'IdProveedor' => $model['IdProveedor'], 'IdLocalidad' => $model['IdLocalidad']]), 
                                 'class'=>'btn btn-link modalButton',
-                                'title'=>'Modificar Insumo'
+                                'title'=>'Modificar Precio de Lista o Fecha Ultima Act.'
                             ]);
                 },
                 'borrar' => function($url, $model, $key){
                     return Html::a('<i class="fa fa-trash-o"></i>',
                             [
-                                'borrar','IdInsumo' => $model['IdInsumo']
+                                'borrar'//,'IdInsumo' => 'IdInsumo' => $model['IdInsumo'], 'IdProveedor' => $model['IdProveedor'], 'IdLocalidad' => $model['IdLocalidad']
                             ], 
                             [
-                                'title' => 'Borrar Insumo', 
+                                'title' => 'Borrar Insumo de la Lista', 
                                 'class' => 'btn btn-link',
                                 'data' => [
                                     'confirm' => 'Esta seguro que desea borrar el Insumo?',
                                     'method' => 'post'
                                 ]
                             ]);
-                }     
+                }  
         ]
     ], 
 ];
@@ -127,7 +158,7 @@ $gridColumns = [
 
 <?php
     Modal::begin([
-            'header'=>'<h2>Insumos</h2>',
+            'header'=>'<h2>Lista Precios</h2>',
             'footer'=>'',
             'id'=>'modal',
             'size'=>'modal-lg',
@@ -155,12 +186,12 @@ $gridColumns = [
             [
                 'content' =>Html::button('<i class="glyphicon glyphicon-plus"></i>',
                             [
-                                'value'=>Url::to('/sgpoc/backend/web/insumos/alta'), 
+                                'value'=>Url::to('/sgpoc/backend/web/lista-precios/agregar'), 
                                 'class'=>'btn btn-success modalButton',
-                                'title'=>'Crear Insumo'
+                                'title'=>'Agregar Insumo a Lista'
                             ]).' '.
                             Html::a('<i class="glyphicon glyphicon-repeat"></i>', 
-                            ['insumos/listar'], 
+                            ['lista-precios/listar'], 
                             [
                                 'data-pjax' => 0, 
                                 'class' => 'btn btn-default', 
@@ -170,11 +201,9 @@ $gridColumns = [
             '{export}',
         ],
         'panel' => [
-            'heading' => '<h3 class="panel-title"><i class="fa fa-wrench"></i> Insumos</h3>',
-            'type' => GridView::TYPE_DEFAULT,
+            'heading' => '<h3 class="panel-title"><i class="fa fa-money"></i> Lista de Precios</h3>',//.' '.$model['Proveedor'].' '.$model['Localidad'],
+            'type' => GridView::TYPE_PRIMARY,
         ],
     ]);   
     ?>
 </div>
-
-

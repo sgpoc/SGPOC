@@ -94,7 +94,7 @@ AppAsset::register($this);
                     </a>
                 </li>
                 <li>
-                    <a href="/sgpoc/backend/web/familias/listar">
+                    <a href="/sgpoc/backend/web/items/listar">
                         <i class="fa fa-gear"></i>
                         <span>Items</span>
                     </a>
@@ -124,7 +124,7 @@ AppAsset::register($this);
                     </a>
                 </li>
                 <li>
-                    <a href="/sgpoc/backend/web/familias/listar">
+                    <a href="/sgpoc/backend/web/lista-precios/listar">
                         <i class="fa fa-money"></i>
                         <span>Lista de Precios</span>
                     </a>

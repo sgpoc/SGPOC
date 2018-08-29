@@ -13,27 +13,6 @@ use yii\helpers\Url;
 
 $this->title = 'SGPOC | Familias';
 
-
-$colorPluginOptions =  [
-    'showPalette' => true,
-    'showPaletteOnly' => true,
-    'showSelectionPalette' => true,
-    'showAlpha' => false,
-    'allowEmpty' => false,
-    'preferredFormat' => 'name',
-    'palette' => [
-        [
-            "white", "black", "grey", "silver", "gold", "brown", 
-        ],
-        [
-            "red", "orange", "yellow", "indigo", "maroon", "pink"
-        ],
-        [
-            "blue", "green", "violet", "cyan", "magenta", "purple", 
-        ],
-    ]
-];
-
 $gridColumns = [
     [
         'class' => 'kartik\grid\SerialColumn',
@@ -137,11 +116,6 @@ $gridColumns = [
          ],
         'toolbar' => [
             [
-<<<<<<< HEAD
-                'content' => 
-                    Html::a('<i class="glyphicon glyphicon-plus"></i>', ['alta'], ['title' => 'Crear nueva Familia.', 'class' => 'btn btn-success']).' '.
-                    Html::a('<i class="glyphicon glyphicon-search"></i>', ['buscar'], ['title' => 'Buscar Familia.', 'class' => 'btn btn-default'])
-=======
                 'content' =>Html::button('<i class="glyphicon glyphicon-plus"></i>',
                             [
                                 'value'=>Url::to('/sgpoc/backend/web/familias/alta'), 
@@ -155,13 +129,12 @@ $gridColumns = [
                                 'class' => 'btn btn-default', 
                                 'title' => 'Actualizar'
                             ])
->>>>>>> development
             ],
             '{export}',
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="fa fa-list"></i> Familias</h3>',
-            'type' => GridView::TYPE_PRIMARY,
+            'type' => GridView::TYPE_DEFAULT,
         ],
     ]);   
     ?>

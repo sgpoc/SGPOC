@@ -35,14 +35,11 @@ use yii\jui\AutoComplete;
     <div class="modal-body">
         <div class="form-group">
             <?= $form->field($model, 'Proveedor', ['addon' => ['prepend' => ['content'=>'N']]])->textInput(['placeholder'=>'']) ?>
-            <?= $form->field($model, 'Domicilio', ['addon' => ['prepend' => ['content'=>'A']]])->textInput(['placeholder'=>'']) ?>
-            <?= $form->field($model, 'CodigoPostal', ['addon' => ['prepend' => ['content'=>'@']]])->textInput(['placeholder'=>'']) ?>
+            <?= $form->field($model, 'Domicilio', ['addon' => ['prepend' => ['content'=>'D']]])->textInput(['placeholder'=>'']) ?>
+            <?= $form->field($model, 'CodigoPostal', ['addon' => ['prepend' => ['content'=>'#']]])->textInput(['placeholder'=>'']) ?>
             <?= $form->field($model, 'Email', ['addon' => ['prepend' => ['content'=>'@']]])->textInput(['placeholder'=>'']) ?>
-            <?= $form->field($model, 'Telefono', ['addon' => ['prepend' => ['content'=>'@']]])->textInput(['placeholder'=>'']) ?>
-            <?= $form->field($model, 'PaginaWEB', ['addon' => ['prepend' => ['content'=>'@']]])->textInput(['placeholder'=>'']) ?>
-           
-
-          
+            <?= $form->field($model, 'Telefono', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-mobile-phone"></i>']]])->textInput(['placeholder'=>'']) ?>
+            <?= $form->field($model, 'PaginaWEB', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-globe"></i>']]])->textInput(['placeholder'=>'']) ?>  
         </div>
     </div>
     <div class="modal-footer">

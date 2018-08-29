@@ -39,13 +39,11 @@ use kartik\widgets\Growl;
     <div class="modal-body">
         <div class="form-group">
             <?= $form->field($model, 'Proveedor', ['addon' => ['prepend' => ['content'=>'N']]])->textInput(['placeholder'=>'Ingrese el nombre del proveedor ...']) ?>
-            <?= $form->field($model, 'Domicilio', ['addon' => ['prepend' => ['content'=>'A']]])->textInput(['placeholder'=>'Ingrese el Domicilio ...']) ?>
-            <?= $form->field($model, 'CodigoPostal', ['addon' => ['prepend' => ['content'=>'A']]])->textInput(['placeholder'=>'Ingrese el COdigo Postal ...']) ?>
+            <?= $form->field($model, 'Domicilio', ['addon' => ['prepend' => ['content'=>'D']]])->textInput(['placeholder'=>'Ingrese el Domicilio ...']) ?>
+            <?= $form->field($model, 'CodigoPostal', ['addon' => ['prepend' => ['content'=>'#']]])->textInput(['placeholder'=>'Ingrese el Código Postal ...']) ?>
             <?= $form->field($model, 'Email', ['addon' => ['prepend' => ['content'=>'@']]])->input(['autocomplete'=>'off'])->textInput(['placeholder'=>'Ingrese una dirección de Email válida ...']) ?>
-            <?= $form->field($model, 'Telefono', ['addon' => ['prepend' => ['content'=>'A']]])->textInput(['placeholder'=>'Ingrese el Telefono ...']) ?>
-            <?= $form->field($model, 'PaginaWEB', ['addon' => ['prepend' => ['content'=>'A']]])->textInput(['placeholder'=>'Ingrese la pagina web ...']) ?>
-            
-            
+            <?= $form->field($model, 'Telefono', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-mobile-phone"></i>']]])->textInput(['placeholder'=>'Ingrese el Telefono ...']) ?>
+            <?= $form->field($model, 'PaginaWEB', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-globe"></i>']]])->textInput(['placeholder'=>'Ingrese la pagina web ...']) ?>
         </div>
     </div>
     <div class="modal-footer">

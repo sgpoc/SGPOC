@@ -13,27 +13,6 @@ use yii\helpers\Url;
 
 $this->title = 'SGPOC | Grupos Trabajo';
 
-
-$colorPluginOptions =  [
-    'showPalette' => true,
-    'showPaletteOnly' => true,
-    'showSelectionPalette' => true,
-    'showAlpha' => false,
-    'allowEmpty' => false,
-    'preferredFormat' => 'name',
-    'palette' => [
-        [
-            "white", "black", "grey", "silver", "gold", "brown", 
-        ],
-        [
-            "red", "orange", "yellow", "indigo", "maroon", "pink"
-        ],
-        [
-            "blue", "green", "violet", "cyan", "magenta", "purple", 
-        ],
-    ]
-];
-
 $gridColumns = [
     [
         'class' => 'kartik\grid\SerialColumn',
@@ -92,13 +71,11 @@ $gridColumns = [
                             ]);
                 },
                 'listarusuarios' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-user"></i>',
+                    return Html::button('<i class="fa fa-user"></i>',
                             [
-                                'listar-usuarios','IdGT'=>$model['IdGT']
-                            ], 
-                            [
-                                'title' => 'Listar Usuarios Grupo Trabajo',
-                                'class' => 'btn btn-link'
+                                'value'=>Url::to(['/grupos-trabajo/listar-usuarios', 'IdGT' => $model['IdGT']]), 
+                                'class'=>'btn btn-link modalButton',
+                                'title'=>'Listar Usuarios'
                             ]);
                 },
                 'baja' => function($url, $model, $key){
@@ -197,8 +174,8 @@ $gridColumns = [
             '{export}',
         ],
         'panel' => [
-            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-list"></i> Grupos de Trabajo</h3>',
-            'type' => GridView::TYPE_PRIMARY,
+            'heading' => '<h3 class="panel-title"><i class="fa fa-graduation-cap"></i> Grupos de Trabajo</h3>',
+            'type' => GridView::TYPE_DEFAULT,
         ],
     ]);   
     ?>
