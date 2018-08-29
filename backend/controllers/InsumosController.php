@@ -28,7 +28,6 @@ class InsumosController extends Controller
         $listDataF = ArrayHelper::map($familias,'IdFamilia','Familia');
         $subfamilias = $gestorsf->Listar($pIdGT);
         $listDataSF = ArrayHelper::map($subfamilias,'IdSubFamilia','SubFamilia');
-        //var_dump($subfamilias);
         if($searchModel->load(Yii::$app->request->get()) && $searchModel->validate())
         {
             $pInsumo = $searchModel['Insumo'];

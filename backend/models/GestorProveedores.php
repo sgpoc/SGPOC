@@ -7,35 +7,37 @@ use Yii;
 
 class GestorProveedores 
 {
-    public function Listar() {
-        $sql = 'CALL ssp_listar_proveedores';
-        $comando = Yii::$app->db->createCommand($sql);
+    public function Listar($pIdGT) {
+        $sql = 'CALL ssp_listar_proveedores(:pIdGT)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdGT', $pIdGT);
         $proveedores = $comando->queryAll();
         return $proveedores;
     } 
     
-     public function Buscar($pProveedor, $pDomicilio, $pEmail, $pEstado){
-        $sql = 'CALL ssp_buscar_proveedor(:pProveedor, :pDomicilio, :pEmail, :pEstado)';
+     public function Buscar($pProveedor, $pDomicilio, $pEmail, $pEstado, $pIdGT){
+        $sql = 'CALL ssp_buscar_proveedor(:pProveedor, :pDomicilio, :pEmail, :pEstado, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pProveedor', $pProveedor)
                 ->bindValue('pDomicilio',$pDomicilio)
                 ->bindValue('pEmail', $pEmail)
-                ->bindValue('pEstado', $pEstado);
+                ->bindValue('pEstado', $pEstado)
+                ->bindValue('pIdGT', $pIdGT);
         $proveedores = $comando->queryAll();
         return $proveedores;
     }
     
-    public function Alta($pProveedor, $pDomicilio, $pCodigoPostal, $pEmail, $pTelefono, $pPaginaWeb)
+    public function Alta($pProveedor, $pDomicilio, $pCodigoPostal, $pEmail, $pTelefono, $pPaginaWeb, $pIdGT)
     {
-        $sql = 'CALL ssp_alta_proveedor(:pProveedor, :pDomicilio, :pCodigoPostal, :pEmail, :pTelefono, :pPaginaWeb)';
+        $sql = 'CALL ssp_alta_proveedor(:pProveedor, :pDomicilio, :pCodigoPostal, :pEmail, :pTelefono, :pPaginaWeb, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pProveedor', $pProveedor)
                 ->bindValue('pDomicilio',$pDomicilio)
                 ->bindValue('pCodigoPostal', $pCodigoPostal)
                 ->bindValue('pEmail', $pEmail)
                 ->bindValue('pTelefono', $pTelefono)
-                ->bindValue('pPaginaWeb', $pPaginaWeb);
-                
+                ->bindValue('pPaginaWeb', $pPaginaWeb)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
     
@@ -49,8 +51,7 @@ class GestorProveedores
                 ->bindValue('pCodigoPostal', $pCodigoPostal)
                 ->bindValue('pEmail', $pEmail)
                 ->bindValue('pTelefono', $pTelefono)
-                ->bindValue('pPaginaWeb', $pPaginaWeb);
-                
+                ->bindValue('pPaginaWeb', $pPaginaWeb);           
         return $comando->queryAll();
     }
     
