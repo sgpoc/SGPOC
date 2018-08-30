@@ -1,34 +1,29 @@
 <?php
 
 namespace backend\assets;
-
+use Yii;
 use yii\web\AssetBundle;
+use yii\web\View;
 
 /**
  * Main backend application asset bundle.
  */
-class LoginAsset extends AssetBundle
+class IndexAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/style.css',
-        "css/bootstrap.min.css",
-        "css/font-awesome.min.css",
-	"css/form-elements.css"
-       
+        'css/Indexstyle.css',
+    
     ];
     public $js = [
-       "js/jquery-1.11.1.min.js",
-       "js/bootstrap.min.js",
-       "js/jquery.backstretch.min.js",
-       "js/scripts.js"
-        
+  
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
-
+        '\rmrevin\yii\fontawesome\AssetBundle',
     ];
 }
+
 

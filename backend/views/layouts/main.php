@@ -28,8 +28,8 @@ AppAsset::register($this);
 <div class="wrapper">
     <header class="main-header">
         <a href="/sgpoc/backend/web/site/index" class="logo">
-            <span class="logo-mini"><img class ="img-circle" src="https://www.suny.edu/media/suny/content-assets/brand-guidelines/SUNY-circle-tm-160x160.jpg" alt='logo' width="40" height="40" align="middle" /></span>
-            <span style="font-family:Bahnschrift Light;" class="logo-lg"><img class ="img-circle" src="https://www.suny.edu/media/suny/content-assets/brand-guidelines/SUNY-circle-tm-160x160.jpg" alt='logo' width="40" height="40" align="middle" /> SGPOC</span>
+            <span class="logo-mini"><img class ="img-circle" src="http://www.fau.unt.edu.ar/wp-content/themes/fau/images/logo.png" alt='logo' width="40" height="40" align="middle" /></span>
+            <span style="font-family:Bahnschrift Light;" class="logo-lg"><img class ="img-circle" src="http://www.fau.unt.edu.ar/wp-content/themes/fau/images/logo.png" alt='logo' width="40" height="40" align="middle" /> SGPOC</span>
         </a>
         <nav class="navbar navbar-static-top">
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"></a>
@@ -37,17 +37,16 @@ AppAsset::register($this);
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="https://pixel.nymag.com/imgs/custom/tvrecaps/recaps-south-park-160x160.png" class="user-image" alt='mario'>
+                            <img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png" class="user-image" alt='mario'>
                             <span class="hidden-xs"><?= Yii::$app->user->identity['Nombre']?></span> 
                             <span class="hiddex-xs"><?= Yii::$app->user->identity['Apellido']?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
-                                <img src="https://pixel.nymag.com/imgs/custom/tvrecaps/recaps-south-park-160x160.png"  class="img-circle" alt='mario'/>
+                                <img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png"  class="img-circle" alt='mario'/>
                                 <p>
                                     <span class="hidden-xs"><?= Yii::$app->user->identity['Nombre']?></span> 
                                     <span class="hiddex-xs"><?= Yii::$app->user->identity['Apellido']?></span>
-                                    <small>Miembro desde Nov. 2012</small>
                                 </p>
                             </li>
                             <li class="user-body">
@@ -56,9 +55,6 @@ AppAsset::register($this);
                                 </div>
                             </li>
                         </ul>
-                    </li>
-                    <li class="dropdown user user-menu">
-                        <a href="">Contacto</a>
                     </li>
                 </ul>
             </div>

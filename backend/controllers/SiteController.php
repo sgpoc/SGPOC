@@ -62,7 +62,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        //$this->layout = 'index';
+        
         return $this->render('index');
     }
 
@@ -75,7 +75,7 @@ class SiteController extends Controller
     {
         $this->layout = 'index';
         if (!Yii::$app->user->isGuest) {
-            return $this->redirect('/sgpoc/backend/web/site/home');
+            return $this->redirect('/sgpoc/backend/web/site/index');
         }
 
         $model = new LoginForm();
