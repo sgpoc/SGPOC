@@ -1,0 +1,24 @@
+.content-wrapper{
+    background: url(https://thumbs.dreamstime.com/z/black-white-template-4551784.jpg);
+     background-size: 1500px 800px;
+ 
+   
+}
+
+.cuerpo h1{
+    font-size: 10rem;
+    color: #000;
+}
+
+.cuerpo h2{
+    font-size: 4.5rem;
+    color: #000;
+}
+
+.center{
+        display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 75px;
+}
