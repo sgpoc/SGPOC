@@ -14,11 +14,12 @@ class GestorItems
         return $items;
     } 
     
-    public function ListarInsumos($pIdItem)
+    public function ListarInsumos($pIdItem, $pIdGT)
     {       
-        $sql = 'CALL ssp_listar_insumos_item(:pIdItem)';
+        $sql = 'CALL ssp_listar_insumos_item(:pIdItem, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdItem', $pIdItem);
+                ->bindValue('pIdItem', $pIdItem)
+                ->bindValue('pIdGT', $pIdGT);
         $insumos = $comando->queryAll();
         return $insumos;
     }  

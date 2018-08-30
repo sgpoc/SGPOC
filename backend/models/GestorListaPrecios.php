@@ -5,15 +5,13 @@ use Yii;
 
 class GestorListaPrecios
 {
-    public function Listar($pIdProveedor, $pIdLocalidad, $pIdGT)
+    public function Listar($pIdGT)
     {       
-        $sql = 'CALL ssp_listar_insumos_listasprecio(:pIdProveedor, :pIdLocalidad, :pIdGT)';
+        $sql = 'CALL ssp_listar_listasprecio(:pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdProveedor', $pIdProveedor)
-                ->bindValue('pIdLocalidad', $pIdLocalidad)
                 ->bindValue('pIdGT', $pIdGT);
-        $insumos = $comando->queryAll();
-        return $insumos;
+        $listaprecios = $comando->queryAll();
+        return $listaprecios;
     }
     
     public function ListarLocalidades()
@@ -24,16 +22,19 @@ class GestorListaPrecios
         return $localidades;
     } 
     
-    public function ListarProveedores()
+    public function ListarInsumos($pIdProveedor, $pIdLocalidad, $pIdGT)
     {       
-        $sql = 'CALL ssp_listar_proveedores()';
-        $comando = Yii::$app->db->createCommand($sql);
-        $proveedores = $comando->queryAll();
-        return $proveedores;
-    }   
+        $sql = 'CALL ssp_listar_insumos_listaprecios(:pIdProveedor, :pIdLocalidad, :pIdGT)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdProveedor', $pIdProveedor)
+                ->bindValue('pIdLocalidad', $pIdLocalidad)
+                ->bindValue('pIdGT', $pIdGT);
+        $insumos = $comando->queryAll();
+        return $insumos;
+    }  
     
     public function Buscar($pIdProveedor, $pIdLocalidad, $pIdGT){
-        $sql = 'CALL ssp_buscar_insumos_listaprecios(:pIdProveedor, :pIdLocalidad, :pIdGT)';
+        $sql = 'CALL ssp_buscar_listaprecios(:pIdProveedor, :pIdLocalidad, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdProveedor', $pIdProveedor)
                 ->bindValue('pIdLocalidad',$pIdLocalidad)
@@ -42,81 +43,50 @@ class GestorListaPrecios
         return $obras;
     }
     
-    public function Alta($pIdGT, $pIdLocalidad, $pObra, $pDireccion, $pPropietario, $pTelefono, $pEmail, $pComentarios, $pSuperficieTerreno, $pSuperficieCubiertaTotal)
+    public function Alta($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pPrecioLista, $pFechaUltimaActualizacion, $pIdGT)
     {
-        $sql = 'CALL ssp_alta_obra(:pIdGT, :pIdLocalidad, :pObra, :pDireccion, :pPropietario, :pTelefono, :pEmail, :pComentarios, :pSuperficieTerreno, :pSuperficieCubiertaTotal)';
+        $sql = 'CALL ssp_alta_listaprecios(:pIdProveedor, :pIdLocalidad, :pIdInsumo, :pPrecioLista, :pFechaUltimaActualizacion, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdGT', $pIdGT)
+                ->bindValue('pIdProveedor',$pIdProveedor)
                 ->bindValue('pIdLocalidad',$pIdLocalidad)
-                ->bindValue('pObra', $pObra)
-                ->bindValue('pDireccion', $pDireccion)
-                ->bindValue('pPropietario', $pPropietario)
-                ->bindValue('pTelefono', $pTelefono)
-                ->bindValue('pEmail', $pEmail)
-                ->bindValue('pComentarios', $pComentarios)
-                ->bindValue('pSuperficieTerreno', $pSuperficieTerreno)
-                ->bindValue('pSuperficieCubiertaTotal', $pSuperficieCubiertaTotal);
+                ->bindValue('pIdInsumo', $pIdInsumo)
+                ->bindValue('pPrecioLista', $pPrecioLista)
+                ->bindValue('pFechaUltimaActualizacion', $pFechaUltimaActualizacion)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
     
-    public function Modificar($pIdObra, $pObra, $pDireccion, $pPropietario, $pTelefono, $pEmail, $pComentarios, $pSuperficieTerreno, $pSuperficieCubiertaTotal)
+    public function AgregarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pPrecioLista, $pFechaUltimaActualizacion)
     {
-        $sql = 'CALL ssp_modificar_obra(:pIdGT, :pIdLocalidad, :pObra, :pDireccion, :Propietario, :pTelefono, :pEmail, :pComentarios, :pSuperficieTerreno, :pSuperficieCubiertaTotal)';
+        $sql = 'CALL ssp_agregar_insumo_listaprecios(:pIdProveedor, :pIdLocalidad, :pIdInsumo, :pPrecioLista, :pFechaUltimaActualizacion)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdObra', $pIdObra)
-                ->bindValue('pObra', $pObra)
-                ->bindValue('pDireccion', $pDireccion)
-                ->bindValue('pPropietario', $pPropietario)
-                ->bindValue('pTelefono', $pTelefono)
-                ->bindValue('pEmail', $pEmail)
-                ->bindValue('pComentarios', $pComentarios)
-                ->bindValue('pSuperficieTerreno', $pSuperficieTerreno)
-                ->bindValue('pSuperficieCubiertaTotal', $pSuperficieCubiertaTotal);
+                ->bindValue('pIdProveedor', $pIdProveedor)
+                ->bindValue('pIdLocalidad', $pIdLocalidad)
+                ->bindValue('pIdInsumo',$pIdInsumo)
+                ->bindValue('pPrecioLista',$pPrecioLista)
+                ->bindValue('pFechaUltimaActualizacion',$pFechaUltimaActualizacion);
         return $comando->queryAll();
     }
     
-    public function Borrar($pIdObra)
+    public function BorrarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo)
     {
-        $sql = 'CALL ssp_borrar_obra(:pIdObra)';
+        $sql = 'CALL ssp_borrar_insumo_listaprecios(:pIdProveedor, :pIdLocalidad, :pIdInsumo)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdObra', $pIdObra);
+                ->bindValue('pIdProveedor', $pIdProveedor)
+                ->bindValue('pIdLocalidad', $pIdLocalidad)
+                ->bindValue('pIdInsumo',$pIdInsumo);
         return $comando->queryAll();
     }
     
-    public function Baja($pIdObra)
+    public function ModificarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pPrecioLista, $pFechaUltimaActualizacion)
     {
-        $sql = 'CALL ssp_baja_obra(:pIdObra)';
+        $sql = 'CALL ssp_modificar_insumo_listaprecios(:pIdProveedor, :pIdLocalidad, :pIdInsumo, :pPrecioLista, :pFechaUltimaActualizacion)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdObra', $pIdObra);
+                ->bindValue('pIdProveedor', $pIdProveedor)
+                ->bindValue('pIdLocalidad', $pIdLocalidad)
+                ->bindValue('pIdInsumo',$pIdInsumo)
+                ->bindValue('pPrecioLista',$pPrecioLista)
+                ->bindValue('pFechaUltimaActualizacion',$pFechaUltimaActualizacion);
         return $comando->queryAll();
-    }
-    
-    public function Activar($pIdObra)
-    {
-        $sql = 'CALL ssp_activar_obra(:pIdObra)';
-        $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdObra', $pIdObra);
-        return $comando->queryAll();
-    }
-    
-    public function Finalizar($pIdObra)
-    {
-        $sql = 'CALL ssp_finalizar_obra(:pIdObra)';
-        $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdObra', $pIdObra);
-        return $comando->queryAll();
-    }
-    
-    public function Dame($pIdObra)
-    {
-        $sql = 'CALL ssp_dame_obra(:pIdObra)';
-        $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdObra', $pIdObra);
-        return $comando->queryAll();
-    }
-    
-    public function Estados()
-    {
-        return $estados = ['0' => null, '1' => 'A', '2' => 'B', '3' => 'F'];
     }
 }

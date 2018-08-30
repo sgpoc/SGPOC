@@ -30,9 +30,10 @@ $gridColumns = [
             return GridView::ROW_COLLAPSED;
         },
         'detail' => function ($model, $key, $index, $column) {
+            $pIdGT = Yii::$app->user->identity['IdGT'];
             $pIdItem = $model['IdItem'];
             $gestor = new GestorItems;
-            $insumos = $gestor->ListarInsumos($pIdItem);
+            $insumos = $gestor->ListarInsumos($pIdItem, $pIdGT);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $insumos,
                 'pagination' => ['pagesize' => 15,],

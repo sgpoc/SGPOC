@@ -4,9 +4,12 @@ namespace backend\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\data\ArrayDataProvider;
+use yii\helpers\ArrayHelper;
 use app\models\GestorGruposTrabajo;
 use app\models\GruposTrabajo;
 use app\models\GruposTrabajoBuscar;
+use app\models\GestorUsuarios;
+use app\models\UsuariosBuscar;
 
 
 class GruposTrabajoController extends Controller
@@ -39,17 +42,7 @@ class GruposTrabajoController extends Controller
     
     public function actionListarUsuarios()
     {    
-        $gestor = new GestorUsuarios;
-        $gestorgt = new GestorGruposTrabajo;
-        $roles = $gestor->ListarRoles();
-        $listDataR = ArrayHelper::map($roles,'IdRol','Rol');
-        $pIdGT = Yii::$app->request->get('IdGT');
-        $usuarios = $gestorgt->ListarUsuarios($pIdGT);
-        $dataProvider = new ArrayDataProvider([
-              'allModels' => $usuarios,
-              'pagination' => ['pagesize' => 5,],
-        ]);
-        return $this->render('/usuarios/listar',['dataProvider' => $dataProvider, 'listaData' => $listDataR]);   
+        
     }
     
     public function actionAlta()
