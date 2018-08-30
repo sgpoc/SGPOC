@@ -78,7 +78,6 @@ class ObrasController extends Controller
             }
         }
         else{
-            //var_dump($listData);
             return $this->renderAjax('alta',['model' => $model, 'listData' => $listData]);
         }
     }
