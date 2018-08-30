@@ -23,7 +23,7 @@ AppAsset::register($this);
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <?php $this->head() ?>
 </head>
-<body class="hold-transition skin-black-light sidebar-collapse sidebar-mini">
+<body class="hold-transition skin-black-light sidebar-collapse fixed sidebar-mini">
 <?php $this->beginBody() ?>
 <div class="wrapper">
     <header class="main-header">

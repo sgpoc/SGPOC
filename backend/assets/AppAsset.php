@@ -4,9 +4,6 @@ namespace backend\assets;
 
 use yii\web\AssetBundle;
 
-/**
- * Main backend application asset bundle.
- */
 class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
@@ -20,6 +17,7 @@ class AppAsset extends AssetBundle
         '/plugins/iCheck/square/blue.css',
     ];
     public $js = [
+        'js/jquery-3.3.1.js',
         'js/bootstrap/bootstrap.min.js',
         'js/jquery-ui.min.js',
         'js/raphael-min.js',
@@ -29,7 +27,7 @@ class AppAsset extends AssetBundle
         'js/adminlte.min.js',
         'js/dashboard.js',
         'js/main.js',
-        'js/modal.js',
+        'js/custom.js',
         'js/bootbox.min.js',
         'plugins/iCheck/icheck.min.js'
     ];

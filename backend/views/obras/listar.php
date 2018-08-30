@@ -138,7 +138,6 @@ $gridColumns = [
                                     'finalizar','IdObra' => $model['IdObra']
                                 ], 
                                 [
-                                    'title' => 'Finalizar Obra',
                                     'class' => 'btn btn-link'
                                 ]);
                         

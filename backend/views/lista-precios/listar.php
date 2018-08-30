@@ -6,33 +6,13 @@ use kartik\widgets\Growl;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
 use yii\data\ArrayDataProvider;
-
+use app\models\GestorListaPrecios;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UsuariosBusqueda */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'SGPOC | Lista de Precios';
-
-$colorPluginOptions =  [
-    'showPalette' => true,
-    'showPaletteOnly' => true,
-    'showSelectionPalette' => true,
-    'showAlpha' => false,
-    'allowEmpty' => false,
-    'preferredFormat' => 'name',
-    'palette' => [
-        [
-            "white", "black", "grey", "silver", "gold", "brown", 
-        ],
-        [
-            "red", "orange", "yellow", "indigo", "maroon", "pink"
-        ],
-        [
-            "blue", "green", "violet", "cyan", "magenta", "purple", 
-        ],
-    ]
-];
 
 $gridColumns = [
     [
@@ -43,62 +23,44 @@ $gridColumns = [
         'headerOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Insumo',
-        'vAlign' => 'middle',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
+        'class' => 'kartik\grid\ExpandRowColumn',
+        'width' => '50px',
+        'value' => function ($model, $key, $index, $column) {
+            return GridView::ROW_COLLAPSED;
+        },
+        'detail' => function ($model, $key, $index, $column) {
+            $pIdProveedor = $model['IdProveedor'];
+            $pIdLocalidad = $model['IdLocalidad'];
+            $pIdGT = Yii::$app->user->identity['IdGT'];
+            $gestor = new GestorListaPrecios;
+            $insumos = $gestor->ListarInsumos($pIdProveedor, $pIdLocalidad, $pIdGT);
+            $dataProvider = new ArrayDataProvider([
+                'allModels' => $insumos,
+                'pagination' => ['pagesize' => 15,],
+            ]);
+            return Yii::$app->controller->renderPartial('/lista-precios/insumos', ['dataProvider' => $dataProvider]);
+        },
+        'headerOptions' => ['class' => 'kartik-sheet-style'], 
+        'expandOneOnly' => true
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'TipoInsumo',
-        'vAlign' => 'middle',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Familia',
-        'label' => 'Familia',
+        'attribute' => 'Proveedor',
         'vAlign' => 'middle',
         'filterType' => GridView::FILTER_SELECT2,
-        'filter'=> $listDataF,
+        'filter'=> $listDataP,
         'filterInputOptions' => ['placeholder' => ''],
         'format' => 'raw',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'SubFamilia',
-        'label' => 'SubFamilia',
+        'attribute' => 'Localidad',
         'vAlign' => 'middle',
         'filterType' => GridView::FILTER_SELECT2,
-        'filter'=> $listDataSF,
+        'filter'=> $listDataL,
         'filterInputOptions' => ['placeholder' => ''],
         'format' => 'raw',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Abreviatura',
-        'label' => 'Unidad',
-        'vAlign' => 'middle',
-        'filterType' => GridView::FILTER_SELECT2,
-        'filter'=> $listDataU,
-        'filterInputOptions' => ['placeholder' => ''],
-        'format' => 'raw',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'PrecioLista',
-        'vAlign' => 'middle',
-        'hAlign' => 'center',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'FechaUltimaActualizacion',
-        'vAlign' => 'middle',
-        'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
@@ -106,30 +68,16 @@ $gridColumns = [
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' => '{alta}',
+        'template' => '{agregar-insumo}',
         'buttons' => [
-                'modificar' => function($url, $model, $key){ 
-                    return  Html::button('<i class="fa fa-pencil"></i>',
+                'agregar-insumo' => function($url, $model, $key){
+                    return  Html::button('<i class="fa fa-plus"></i>',
                             [
-                                'value'=>Url::to('/lista-precios/modificar'),//, 'IdInsumo' => $model['IdInsumo'], 'IdProveedor' => $model['IdProveedor'], 'IdLocalidad' => $model['IdLocalidad']]), 
+                                'value'=>Url::to(['/lista-precios/agregar-insumo', 'IdProveedor' => $model['IdProveedor'], 'IdLocalidad' => $model['IdLocalidad']]), 
                                 'class'=>'btn btn-link modalButton',
-                                'title'=>'Modificar Precio de Lista o Fecha Ultima Act.'
+                                'title'=>'Agregar Insumo a la Lista de Precios'
                             ]);
-                },
-                'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-trash-o"></i>',
-                            [
-                                'borrar'//,'IdInsumo' => 'IdInsumo' => $model['IdInsumo'], 'IdProveedor' => $model['IdProveedor'], 'IdLocalidad' => $model['IdLocalidad']
-                            ], 
-                            [
-                                'title' => 'Borrar Insumo de la Lista', 
-                                'class' => 'btn btn-link',
-                                'data' => [
-                                    'confirm' => 'Esta seguro que desea borrar el Insumo?',
-                                    'method' => 'post'
-                                ]
-                            ]);
-                }  
+                }, 
         ]
     ], 
 ];
@@ -186,9 +134,9 @@ $gridColumns = [
             [
                 'content' =>Html::button('<i class="glyphicon glyphicon-plus"></i>',
                             [
-                                'value'=>Url::to('/sgpoc/backend/web/lista-precios/agregar'), 
+                                'value'=>Url::to('/sgpoc/backend/web/lista-precios/alta'), 
                                 'class'=>'btn btn-success modalButton',
-                                'title'=>'Agregar Insumo a Lista'
+                                'title'=>'Crear Lista de Precios'
                             ]).' '.
                             Html::a('<i class="glyphicon glyphicon-repeat"></i>', 
                             ['lista-precios/listar'], 
@@ -201,8 +149,8 @@ $gridColumns = [
             '{export}',
         ],
         'panel' => [
-            'heading' => '<h3 class="panel-title"><i class="fa fa-money"></i> Lista de Precios</h3>',//.' '.$model['Proveedor'].' '.$model['Localidad'],
-            'type' => GridView::TYPE_PRIMARY,
+            'heading' => '<h3 class="panel-title"><i class="fa fa-money"></i> Lista de Precios</h3>',
+            'type' => GridView::TYPE_DEFAULT,
         ],
     ]);   
     ?>

@@ -7,14 +7,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 
-/**
- * Site controller
- */
 class SiteController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
         return [
@@ -43,9 +37,6 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function actions()
     {
         return [
@@ -55,27 +46,16 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
     public function actionIndex()
     {
-        //$this->layout = 'index';
         return $this->render('index');
     }
 
-    /**
-     * Login action.
-     *
-     * @return string
-     */
     public function actionLogin()
     {
         $this->layout = 'index';
         if (!Yii::$app->user->isGuest) {
-            return $this->redirect('/sgpoc/backend/web/site/home');
+            return $this->redirect('/sgpoc/backend/web/site/index');
         }
 
         $model = new LoginForm();
@@ -87,11 +67,6 @@ class SiteController extends Controller
         }
     }
 
-    /**
-     * Logout action.
-     *
-     * @return string
-     */
     public function actionLogout()
     {
         $this->layout = 'index';

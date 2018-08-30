@@ -1,4 +1,4 @@
-<?php 
+<?php //
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
@@ -43,44 +43,45 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Abreviatura',
-        'label' => 'Unidad',
+        'attribute' => 'PrecioLista',
+        'label' => 'Precio de Lista',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'FechaUltimaActualizacion',
+        'label' => 'Fecha Ultima Actualizacion',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\ActionColumn',
-        'header' => 'Incidencia',
-        'vAlign' => 'middle',
-        'width' => '240px',
-        'template' => '{modificar}',
-        'buttons' => [
-                'modificar' => function($url, $model, $key){ 
-                    return  Html::button($model['Incidencia'],
-                            [
-                                'value'=>Url::to(['/items/modificar-incidencia', 'IdInsumo' => $model['IdInsumo'], 'IdItem' => $model['IdItem']]), 
-                                'class'=>'btn btn-link modalButton',
-                                'title'=>'Modificar Incidencia Insumo en Item'
-                            ]);
-                },
-        ]        
-    ],
-    [
-        'class' => '\kartik\grid\ActionColumn',
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' =>  '{borrar}',
+        'template' => '{modificar} {borrar}',
         'buttons' => [
+                'modificar' => function($url, $model, $key){ 
+                    return  Html::button('<i class="fa fa-pencil"></i>',
+                            [
+                                'value'=>Url::to(['/lista-precios/modificar-insumo', 'IdInsumo' => $model['IdInsumo'], 'IdProveedor' => $model['IdProveedor'], 'IdLocalidad' => $model['IdLocalidad']]), 
+                                'class'=>'btn btn-link modalButton',
+                                'title'=>'Modificar Insumo en Lista de Precio'
+                            ]);
+                },
                 'borrar' => function($url, $model, $key){
                     return Html::a('<i class="fa fa-trash-o"></i>',
                             [
-                                'borrar-insumo', 'IdInsumo' => $model['IdInsumo'], 'IdItem' => $model['IdItem']
+                                'borrar-insumo', 'IdInsumo' => $model['IdInsumo'],  'IdProveedor' => $model['IdProveedor'], 'IdLocalidad' => $model['IdLocalidad']
                             ], 
                             [
-                                'title' => 'Borrar Insumo del Item', 
+                                'title' => 'Borrar Insumo de la Lista de Precio', 
                                 'class' => 'btn btn-link',
                                 'data' => [
-                                    'confirm' => 'Esta seguro que desea borrar el Insumo del Item?',
+                                    'confirm' => 'Esta seguro que desea borrar el Insumo de la Lista de Precio?',
                                     'method' => 'post'
                                 ]
                             ]);
