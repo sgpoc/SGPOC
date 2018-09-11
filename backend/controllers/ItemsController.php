@@ -89,7 +89,7 @@ class ItemsController extends Controller
         $gestor = new GestorItems;
         $pIdItem = Yii::$app->request->get('IdItem');
         $item = $gestor->Dame($pIdItem);
-        if($model->load(Yii::$app->request->post()))// && ($model->validate()))
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pItem = $model->Item;
             $mensaje = $gestor->Modificar($pIdItem, $pItem);
@@ -131,7 +131,7 @@ class ItemsController extends Controller
         $pIdItem= Yii::$app->request->get('IdItem');
         $insumos = $gestori->Listar($pIdGT);
         $listDataI = ArrayHelper::map($insumos,'IdInsumo','Insumo');
-        if($model->load(Yii::$app->request->post())) //&& $model->validate())
+        if($model->load(Yii::$app->request->post()) && $model->validate())
         {
             $pIdInsumo = $model->IdInsumo;
             $pIncidencia = $model->Incidencia;
