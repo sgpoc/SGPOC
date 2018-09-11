@@ -36,7 +36,7 @@ AppAsset::register($this);
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded='true'>
                             <img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png" class="user-image" alt='mario'>
                             <span class="hidden-xs"><?= Yii::$app->user->identity['Nombre']?></span> 
                             <span class="hiddex-xs"><?= Yii::$app->user->identity['Apellido']?></span>
@@ -96,7 +96,7 @@ AppAsset::register($this);
                     </a>
                 </li>
                 <li>
-                    <a href="/sgpoc/backend/web/familias/listar">
+                    <a href="/sgpoc/backend/web/elementos-constructivos/listar">
                         <i class="fa fa-gears"></i>
                         <span>Elementos Constructivos</span>
                     </a>
