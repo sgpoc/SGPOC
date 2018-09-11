@@ -36,7 +36,7 @@ $gridColumns = [
             $insumos = $gestor->ListarInsumos($pIdItem, $pIdGT);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $insumos,
-                'pagination' => ['pagesize' => 15,],
+                'pagination' => ['pagesize' => 5,],
             ]);
             return Yii::$app->controller->renderPartial('/items/insumos', ['dataProvider' => $dataProvider]);
         },
@@ -65,6 +65,7 @@ $gridColumns = [
         'attribute' => 'Abreviatura',
         'label' => 'Unidad',
         'vAlign' => 'middle',
+        'hAlign' => 'center',
         'filterType' => GridView::FILTER_SELECT2,
         'filter'=> $listDataU,
         'filterInputOptions' => ['placeholder' => ''],

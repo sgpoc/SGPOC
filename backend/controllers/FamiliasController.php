@@ -54,7 +54,7 @@ class FamiliasController extends Controller
         $model = new Familias;
         $gestor = new GestorFamilias;
         
-        if($model->load(Yii::$app->request->post())) //&& $model->validate())
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pIdGT = Yii::$app->user->identity['IdGT'];
             $pFamilia = $model->Familia;
@@ -79,7 +79,7 @@ class FamiliasController extends Controller
         $gestor = new GestorFamilias;
         $pIdFamilia = Yii::$app->request->get('IdFamilia');
         $familia = $gestor->Dame($pIdFamilia);
-        if($model->load(Yii::$app->request->post()))// && ($model->validate()))
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pFamilia = $model->Familia;
             $mensaje = $gestor->Modificar($pIdFamilia, $pFamilia);

@@ -2,8 +2,8 @@
 
 namespace app\models;
 
-use yii\base\Model;
 use Yii;
+use yii\base\Model;
 
 
 class Insumos extends Model
@@ -24,12 +24,11 @@ class Insumos extends Model
     public function rules()
     {
         return [
-            [['IdSubFamilia', 'IdUnidad', 'TipoInsumo', 'Insumo'], 'required'],
+            [['IdSubFamilia', 'IdUnidad', 'TipoInsumo', 'Insumo'], 'required', 'on' => 'alta-insumo'],
+            [['TipoInsumo', 'Insumo'], 'required'],
             [['IdSubFamilia','IdFamilia', 'IdGT', 'IdUnidad'], 'integer'],
             [['TipoInsumo'], 'string', 'max' => 100],
-            [['Insumo'], 'string', 'max' => 100],
-            [['Insumo'], 'unique'],
-            [['IdSubFamilia', 'IdFamilia', 'IdGT'], 'exist', 'skipOnError' => true, 'targetClass' => Subfamilias::className(), 'targetAttribute' => ['IdSubFamilia' => 'IdSubFamilia'/*, 'IdFamilia' => 'IdFamilia', 'IdGT' => 'IdGT'*/]],
+            [['Insumo'], 'string', 'max' => 100]
         ];
     }
 

@@ -29,13 +29,12 @@ class Obras extends Model
     public function rules()
     {
         return [
-            [['IdGT', 'IdLocalidad', 'Obra', 'Direccion', 'Propietario', 'Telefono', 'SuperficieTerreno', 'SuperficieCubiertaTotal', 'Estado'], 'required'],
+            [['IdLocalidad', 'Obra', 'Direccion', 'Propietario', 'Telefono', 'SuperficieTerreno', 'SuperficieCubiertaTotal'], 'required', 'on' => 'alta-obra'],
+            [['Obra', 'Direccion', 'Propietario', 'Telefono', 'SuperficieTerreno', 'SuperficieCubiertaTotal'], 'required'],
             [['IdGT', 'IdLocalidad'], 'integer'],
             [['Comentarios'], 'string'],
             [['Obra', 'Direccion', 'Propietario', 'Telefono', 'Email'], 'string', 'max' => 100],
             [['Estado'], 'string', 'max' => 1],
-            [['Obra', 'IdGT'], 'unique', 'targetAttribute' => ['Obra', 'IdGT']],
-            [['IdGT'], 'exist', 'skipOnError' => true, 'targetClass' => Grupostrabajo::className(), 'targetAttribute' => ['IdGT' => 'IdGT']],
         ];
     }
 

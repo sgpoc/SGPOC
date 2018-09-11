@@ -49,13 +49,11 @@ class GruposTrabajoController extends Controller
     {
         $model = new GruposTrabajo;
         $gestor = new GestorGruposTrabajo;
-        
-        if($model->load(Yii::$app->request->post()))// && $model->validate())
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pGrupoTrabajo = $model->GrupoTrabajo;
             $pMail = $model->Mail;
             $mensaje = $gestor->Alta($pGrupoTrabajo, $pMail);
-
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
                 return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
@@ -75,23 +73,24 @@ class GruposTrabajoController extends Controller
         $model = new GruposTrabajo;
         $gestor = new GestorGruposTrabajo;
         $pIdGT = Yii::$app->request->get('IdGT');
-        if($model->load(Yii::$app->request->post()))// && ($model->validate()))
+        $grupotrabajo = $gestor->Dame($pIdGT);
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pGrupoTrabajo = $model->GrupoTrabajo;
             $pMail = $model->Mail;
             $mensaje = $gestor->Modificar($pIdGT, $pGrupoTrabajo, $pMail);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
                 return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
             }
             else{
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);            
-                return $this->renderAjax('modificar',['model' => $model]);
+                return $this->renderAjax('modificar',['model' => $model, 'grupotrabajo' => $grupotrabajo]);
             }
         }
         else{
-            return $this->renderAjax('modificar',['model' => $model]);
+            //var_dump($grupotrabajo[0]['GrupoTrabajo']);
+            return $this->renderAjax('modificar',['model' => $model, 'grupotrabajo' => $grupotrabajo]);
         }
     }
     

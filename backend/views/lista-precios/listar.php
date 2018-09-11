@@ -36,7 +36,7 @@ $gridColumns = [
             $insumos = $gestor->ListarInsumos($pIdProveedor, $pIdLocalidad, $pIdGT);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $insumos,
-                'pagination' => ['pagesize' => 15,],
+                'pagination' => ['pagesize' => 5,],
             ]);
             return Yii::$app->controller->renderPartial('/lista-precios/insumos', ['dataProvider' => $dataProvider]);
         },

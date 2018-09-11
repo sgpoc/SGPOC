@@ -25,6 +25,7 @@ $gridColumns = [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'TipoInsumo',
         'vAlign' => 'middle',
+        'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
@@ -52,7 +53,7 @@ $gridColumns = [
     [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'FechaUltimaActualizacion',
-        'label' => 'Fecha Ultima Actualizacion',
+        'label' => 'Fecha Ultima Actualización',
         'vAlign' => 'middle',
         'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
@@ -91,7 +92,7 @@ $gridColumns = [
 ];
 
                 
-?>
+?> 
   
 <?php if(Yii::$app->session->getFlash('alert')){
     echo Growl::widget([

@@ -45,7 +45,7 @@ class ProveedoresController extends Controller
         $model = new Proveedores;
         $gestorp = new GestorProveedores;
         $pIdGT = Yii::$app->user->identity['IdGT'];
-        if($model->load(Yii::$app->request->post())) //&& $model->validate())
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pProveedor = $model->Proveedor;
             $pDomicilio = $model->Domicilio;
@@ -74,16 +74,16 @@ class ProveedoresController extends Controller
         $gestor = new GestorProveedores;
         $pIdProveedor = Yii::$app->request->get('IdProveedor');
         $proveedor = $gestor->Dame($pIdProveedor);       
-        if($model->load(Yii::$app->request->post() && $model->validate()))
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pProveedor = $model->Proveedor;
-            $pDomicilio = $model->Apellido;
+            $pDomicilio = $model->Domicilio;
             $pEmail = $model->Email;
             $pTelefono = $model->Telefono;
             $pCodigoPostal = $model->CodigoPostal;
             $pPaginaWeb = $model->PaginaWEB;
             $pEstado = $model->Estado;
-            $mensaje = $gestor->Modificar($pIdProveedor,$pProveedor, $pDomicilio, $pCodigoPostal, $pEmail, $pTelefono, $pPaginaWeb, $pEstado);
+            $mensaje = $gestor->Modificar($pIdProveedor, $pProveedor, $pDomicilio, $pCodigoPostal, $pEmail, $pTelefono, $pPaginaWeb, $pEstado);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
                 return $this->redirect('/sgpoc/backend/web/proveedores/listar');

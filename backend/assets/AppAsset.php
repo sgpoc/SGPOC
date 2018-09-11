@@ -10,17 +10,14 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/bootstrap.css',
-        'css/font-aweasome.min.css',
-        'css/ionicons.min.css',
+        'css/font-awesome.min.css',
+        'css/ionicons.css',
         'css/AdminLTE.min.css',
         'css/skins/_all-skins.min.css',
-        '/plugins/iCheck/square/blue.css',
     ];
     public $js = [
-        'js/jquery-3.3.1.js',
-        'js/bootstrap/bootstrap.min.js',
         'js/jquery-ui.min.js',
-        'js/raphael-min.js',
+        'js/raphael.min.js',
         'js/jquery.sparkline.min.js',
         'js/jquery.slimscroll.min.js',
         'js/fastclick.js',
@@ -28,8 +25,6 @@ class AppAsset extends AssetBundle
         'js/dashboard.js',
         'js/main.js',
         'js/custom.js',
-        'js/bootbox.min.js',
-        'plugins/iCheck/icheck.min.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

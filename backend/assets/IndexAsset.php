@@ -5,9 +5,6 @@ use Yii;
 use yii\web\AssetBundle;
 use yii\web\View;
 
-/**
- * Main backend application asset bundle.
- */
 class IndexAsset extends AssetBundle
 {
     public $basePath = '@webroot';

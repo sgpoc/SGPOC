@@ -55,6 +55,7 @@ class ItemsController extends Controller
     public function actionAlta()
     {
         $model = new Items;
+        $model->scenario = 'alta-item';
         $gestor = new GestorItems;
         $gestori = new GestorInsumos;
         $rubrositem = $gestor->ListarRubrosItem();

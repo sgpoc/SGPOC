@@ -35,6 +35,7 @@ $gridColumns = [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'TipoInsumo',
         'vAlign' => 'middle',
+        'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
@@ -64,6 +65,7 @@ $gridColumns = [
         'attribute' => 'Abreviatura',
         'label' => 'Unidad',
         'vAlign' => 'middle',
+        'hAlign' => 'center',
         'filterType' => GridView::FILTER_SELECT2,
         'filter'=> $listDataU,
         'filterInputOptions' => ['placeholder' => ''],

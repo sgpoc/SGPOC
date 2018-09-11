@@ -25,6 +25,7 @@ $gridColumns = [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'TipoInsumo',
         'vAlign' => 'middle',
+        'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
@@ -45,6 +46,8 @@ $gridColumns = [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'Abreviatura',
         'label' => 'Unidad',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
