@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use kartik\form\ActiveForm;
-use kartik\alert\Alert;
+use kartik\widgets\Growl;
+use yii\jui\AutoComplete;
 
 ?>
 
@@ -33,8 +34,8 @@ use kartik\alert\Alert;
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?= $form->field($model, 'GrupoTrabajo',['addon' => ['prepend' => ['content'=>'N']]])->textInput(['placeholder'=>'Ingrese el nombre ...'])->label('Nombre') ?>
-            <?= $form->field($model, 'Mail', ['addon' => ['prepend' => ['content'=>'@']]])->textInput(['placeholder'=>'Ingrese una dirección de Email válida ...']); ?>
+            <?= $form->field($model, 'GrupoTrabajo',['addon' => ['prepend' => ['content'=>'N']]])->textInput(['placeholder'=>$grupotrabajo[0]['GrupoTrabajo']]) ?>
+            <?= $form->field($model, 'Mail', ['addon' => ['prepend' => ['content'=>'@']]])->textInput(['placeholder'=>$grupotrabajo[0]['Mail']]); ?>
         </div>
     </div>
     <div class="modal-footer">

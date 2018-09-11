@@ -54,7 +54,7 @@ class GestorObras
     
     public function Modificar($pIdObra, $pObra, $pDireccion, $pPropietario, $pTelefono, $pEmail, $pComentarios, $pSuperficieTerreno, $pSuperficieCubiertaTotal)
     {
-        $sql = 'CALL ssp_modificar_obra(:pIdGT, :pIdLocalidad, :pObra, :pDireccion, :Propietario, :pTelefono, :pEmail, :pComentarios, :pSuperficieTerreno, :pSuperficieCubiertaTotal)';
+        $sql = 'CALL ssp_modificar_obra(:pIdObra, :pObra, :pDireccion, :pPropietario, :pTelefono, :pEmail, :pComentarios, :pSuperficieTerreno, :pSuperficieCubiertaTotal)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdObra', $pIdObra)
                 ->bindValue('pObra', $pObra)

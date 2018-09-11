@@ -55,7 +55,8 @@ class InsumosController extends Controller
     
     public function actionAlta()
     {
-        $model = new Insumos;        
+        $model = new Insumos;
+        $model->scenario = 'alta-insumo';
         $gestor = new GestorInsumos;
         $gestorsf = new GestorSubFamilias;
         $pIdGT = Yii::$app->user->identity['IdGT'];
@@ -63,7 +64,7 @@ class InsumosController extends Controller
         $listData= ArrayHelper::map($subfamilias,'IdSubFamilia','SubFamilia');
         $unidades = $gestor->ListarUnidades();
         $listDataU= ArrayHelper::map($unidades,'IdUnidad','Abreviatura');
-        if($model->load(Yii::$app->request->post()))//&& $model->validate())
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pIdSubFamilia = $model->IdSubFamilia;
             $pIdUnidad = $model->IdUnidad;
@@ -90,7 +91,7 @@ class InsumosController extends Controller
         $gestor = new GestorInsumos;
         $pIdInsumo = Yii::$app->request->get('IdInsumo');
         $insumo = $gestor->Dame($pIdInsumo);
-        if($model->load(Yii::$app->request->post()))// && ($model->validate()))
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pInsumo = $model->Insumo;
             $pTipoInsumo = $model->TipoInsumo;

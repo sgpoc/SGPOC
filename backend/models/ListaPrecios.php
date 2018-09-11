@@ -24,11 +24,10 @@ class ListaPrecios extends Model
     public function rules()
     {
         return [
-            [['IdLocalidad', 'IdInsumo', 'IdSubFamilia', 'IdFamilia', 'IdProveedor', 'IdGT', 'PrecioLista', 'FechaUltimaActualizacion'], 'required'],
+            [['IdLocalidad', 'IdInsumo', 'IdProveedor', 'PrecioLista', 'FechaUltimaActualizacion'], 'required', 'on' => 'alta-lista'],
+            [['IdInsumo', 'PrecioLista', 'FechaUltimaActualizacion'], 'required', 'on' => 'agregar-insumo'],
+            [['PrecioLista', 'FechaUltimaActualizacion'], 'required', 'on' => 'modificar-insumo'],
             [['IdLocalidad', 'IdInsumo', 'IdSubFamilia', 'IdFamilia', 'IdProveedor', 'IdGT'], 'integer'],
-            [['IdInsumo', 'IdSubFamilia', 'IdFamilia', 'IdProveedor', 'IdGT'], 'unique', 'targetAttribute' => ['IdInsumo', 'IdSubFamilia', 'IdFamilia', 'IdProveedor', 'IdGT']],
-            [['IdInsumo', 'IdSubFamilia', 'IdFamilia', 'IdGT'], 'exist', 'skipOnError' => true, 'targetClass' => Insumos::className(), 'targetAttribute' => ['IdInsumo' => 'IdInsumo', 'IdSubFamilia' => 'IdSubFamilia', 'IdFamilia' => 'IdFamilia', 'IdGT' => 'IdGT']],
-            [['IdProveedor'], 'exist', 'skipOnError' => true, 'targetClass' => Proveedores::className(), 'targetAttribute' => ['IdProveedor' => 'IdProveedor']],
         ];
     }
 

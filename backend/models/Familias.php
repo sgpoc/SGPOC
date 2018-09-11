@@ -19,12 +19,10 @@ class Familias extends Model
     public function rules()
     {
         return [
-            [['IdFamilia','IdGT', 'Familia'], 'required'],
+            [['Familia'], 'required'],
             [['IdFamilia'], 'integer'],
             [['IdGT'], 'integer'],
             [['Familia'], 'string', 'max' => 100],
-            [['Familia', 'IdGT'], 'unique', 'targetAttribute' => ['Familia', 'IdGT']],
-            [['IdGT'], 'exist', 'skipOnError' => true, 'targetClass' => Grupostrabajo::className(), 'targetAttribute' => ['IdGT' => 'IdGT']],
         ];
     }
 

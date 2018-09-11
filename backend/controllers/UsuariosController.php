@@ -11,7 +11,6 @@ use app\models\Usuarios;
 use app\models\UsuariosBuscar;
 
 
-
 class UsuariosController extends Controller
 {   
     public function actionListar()
@@ -48,13 +47,14 @@ class UsuariosController extends Controller
     public function actionAlta()
     {
         $model = new Usuarios;
+        $model->scenario = 'alta-usuario';
         $gestoru = new GestorUsuarios;
         $gestorgt = new GestorGruposTrabajo;
         $grupostrabajo = $gestorgt->Listar();
         $listData= ArrayHelper::map($grupostrabajo,'IdGT','GrupoTrabajo');
         $roles = $gestoru->ListarRoles();
         $listDataU = ArrayHelper::map($roles,'IdRol','Rol');
-        if($model->load(Yii::$app->request->post())) //&& $model->validate())
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pIdGT = $model->IdGT;
             $pIdRol = $model->IdRol;
@@ -84,7 +84,7 @@ class UsuariosController extends Controller
         $gestor = new GestorUsuarios;
         $pIdUsuario = Yii::$app->request->get('IdUsuario');
         $usuario = $gestor->Dame($pIdUsuario);
-        if($model->load(Yii::$app->request->post()))// && ($model->validate()))
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pNombre = $model->Nombre;
             $pApellido = $model->Apellido;

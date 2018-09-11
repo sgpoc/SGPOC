@@ -102,13 +102,13 @@ AppAsset::register($this);
                     </a>
                 </li>
                 <li>
-                    <a href="/sgpoc/backend/web/familias/listar">
+                    <a href="/sgpoc/backend/web/computos-metricos/listar">
                         <i class="fa fa-book"></i>
-                        <span>Computo Metrico</span>
+                        <span>Cómputos Métricos</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/sgpoc/backend/web/familias/listar">
+                    <a href="/sgpoc/backend/web/presupuestos/listar">
                         <i class="fa fa-dollar"></i>
                         <span>Presupuestos</span>
                     </a>

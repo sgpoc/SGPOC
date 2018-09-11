@@ -17,29 +17,48 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Insumo',
+        'attribute' => 'Item',
         'vAlign' => 'middle',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'TipoInsumo',
+        'attribute' => 'RubroItem',
+        'vAlign' => 'middle',
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'Descripcion',
+        'vAlign' => 'middle',
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'Cantidad',
         'vAlign' => 'middle',
         'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Familia',
-        'label' => 'Familia',
+        'attribute' => 'Largo',
         'vAlign' => 'middle',
+        'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'SubFamilia',
-        'label' => 'SubFamilia',
+        'attribute' => 'Ancho',
         'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'Alto',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
@@ -52,38 +71,29 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\ActionColumn',
-        'header' => 'Incidencia',
-        'vAlign' => 'middle',
-        'width' => '240px',
-        'template' => '{modificar}',
-        'buttons' => [
-                'modificar' => function($url, $model, $key){ 
-                    return  Html::button($model['Incidencia'],
-                            [
-                                'value'=>Url::to(['/items/modificar-incidencia', 'IdInsumo' => $model['IdInsumo'], 'IdItem' => $model['IdItem']]), 
-                                'class'=>'btn btn-link modalButton',
-                                'title'=>'Modificar Incidencia Insumo en Item'
-                            ]);
-                },
-        ]        
-    ],
-    [
-        'class' => '\kartik\grid\ActionColumn',
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' =>  '{borrar}',
+        'template' => '{modificar} {borrar}',
         'buttons' => [
+                'modificar' => function($url, $model, $key){ 
+                    return  Html::button('<i class="fa fa-pencil"></i>',
+                            [
+                                'value'=>Url::to(['/computos-metricos/modificar-linea', 'IdComputoMetrico' => $model['IdComputoMetrico'], 'NroLinea' => $model['NroLinea']]), 
+                                'class'=>'btn btn-link modalButton',
+                                'title'=>'Modificar Línea Cómputo Métrico'
+                            ]);
+                },
                 'borrar' => function($url, $model, $key){
                     return Html::a('<i class="fa fa-trash-o"></i>',
                             [
-                                'borrar-insumo', 'IdInsumo' => $model['IdInsumo'], 'IdItem' => $model['IdItem']
+                                'borrar-linea', 'IdComputoMetrico' => $model['IdComputoMetrico'], 'NroLinea' => $model['NroLinea'],
                             ], 
                             [
-                                'title' => 'Borrar Insumo del Item', 
+                                'title' => 'Borrar Línea Cómputo Métrico', 
                                 'class' => 'btn btn-link',
                                 'data' => [
-                                    'confirm' => 'Esta seguro que desea borrar el Insumo del Item?',
+                                    'confirm' => 'Esta seguro que desea borrar Línea Cómputo Métrico?',
                                     'method' => 'post'
                                 ]
                             ]);
@@ -116,7 +126,7 @@ $gridColumns = [
 
 <?php
     Modal::begin([
-            'header'=>'<h2>Insumos</h2>',
+            'header'=>'<h2>Cómputos Métricos</h2>',
             'footer'=>'',
             'id'=>'modal',
             'size'=>'modal-lg',

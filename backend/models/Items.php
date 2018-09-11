@@ -21,11 +21,10 @@ class Items extends Model
     public function rules()
     {
         return [
-            [['IdRubroItem', 'IdGT', 'IdUnidad', 'Item'], 'required'],
+            [['IdRubroItem', 'IdUnidad', 'Item'], 'required', 'on' => 'alta-item'],
+            [['Item'], 'required'],
             [['IdRubroItem', 'IdGT', 'IdUnidad'], 'integer'],
             [['Item'], 'string', 'max' => 100],
-            [['Item'], 'unique'],
-            [['IdGT'], 'exist', 'skipOnError' => true, 'targetClass' => Grupostrabajo::className(), 'targetAttribute' => ['IdGT' => 'IdGT']],
         ];
     }
 

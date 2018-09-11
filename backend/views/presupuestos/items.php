@@ -17,28 +17,13 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Insumo',
+        'attribute' => 'Item',
         'vAlign' => 'middle',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'TipoInsumo',
-        'vAlign' => 'middle',
-        'hAlign' => 'center',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Familia',
-        'label' => 'Familia',
-        'vAlign' => 'middle',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'SubFamilia',
-        'label' => 'SubFamilia',
+        'attribute' => 'RubroItem',
         'vAlign' => 'middle',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
@@ -51,41 +36,70 @@ $gridColumns = [
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
-        'class' => 'kartik\grid\ActionColumn',
-        'header' => 'Incidencia',
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'CostoDirecto',
         'vAlign' => 'middle',
-        'width' => '240px',
-        'template' => '{modificar}',
-        'buttons' => [
-                'modificar' => function($url, $model, $key){ 
-                    return  Html::button($model['Incidencia'],
-                            [
-                                'value'=>Url::to(['/items/modificar-incidencia', 'IdInsumo' => $model['IdInsumo'], 'IdItem' => $model['IdItem']]), 
-                                'class'=>'btn btn-link modalButton',
-                                'title'=>'Modificar Incidencia Insumo en Item'
-                            ]);
-                },
-        ]        
+        'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
-        'class' => '\kartik\grid\ActionColumn',
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'Beneficios',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'GastosGenerales',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'CargasSociales',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'IVA',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'PrecioTotal',
+        'label' => 'Precio Total',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\ActionColumn',
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' =>  '{borrar}',
+        'template' => '{modificar} {eleccion-precio}',
         'buttons' => [
-                'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-trash-o"></i>',
+                'modificar' => function($url, $model, $key){ 
+                    return  Html::button('<i class="fa fa-pencil"></i>',
                             [
-                                'borrar-insumo', 'IdInsumo' => $model['IdInsumo'], 'IdItem' => $model['IdItem']
+                                'value'=>Url::to(['/presupuestos/modificar-linea', 'IdPresupuesto' => $model['IdPresupuesto'], 'IdItem' => $model['IdItem']]), 
+                                'class'=>'btn btn-link modalButton',
+                                'title'=>'Modificar Línea Presupuesto'
+                            ]);
+                },
+                'eleccion-precio' => function($url, $model, $key){
+                    return Html::a('<i class="fa fa-dollar"></i>',
+                            [
+                                'eleccion-precio', 'IdPresupuesto' => $model['IdPresupuesto'], 'IdItem' => $model['IdItem'],
                             ], 
                             [
-                                'title' => 'Borrar Insumo del Item', 
+                                'title' => 'Elegir Lista de Precios', 
                                 'class' => 'btn btn-link',
-                                'data' => [
-                                    'confirm' => 'Esta seguro que desea borrar el Insumo del Item?',
-                                    'method' => 'post'
-                                ]
                             ]);
                 }     
         ]
@@ -116,7 +130,7 @@ $gridColumns = [
 
 <?php
     Modal::begin([
-            'header'=>'<h2>Insumos</h2>',
+            'header'=>'<h2>Presupuestos</h2>',
             'footer'=>'',
             'id'=>'modal',
             'size'=>'modal-lg',

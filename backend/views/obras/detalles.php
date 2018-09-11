@@ -26,6 +26,10 @@ echo DetailView::widget([
             'value' => $model['Email']
         ],
         [
+            'attribute' => 'Telefono',
+            'value' => $model['Telefono']
+        ],
+        [
             'attribute' => 'Comentarios',
             'value' => $model['Comentarios']
         ],

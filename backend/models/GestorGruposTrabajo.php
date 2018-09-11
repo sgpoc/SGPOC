@@ -74,4 +74,12 @@ class GestorGruposTrabajo
                 ->bindValue('pIdGT',$pIdGT);
         return $comando->queryAll();
     }
+    
+    public function Dame($pIdGT)
+    {
+        $sql = 'CALL ssp_dame_grupotrabajo(:pIdGT)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdGT',$pIdGT);
+        return $comando->queryAll();
+    }
 }
