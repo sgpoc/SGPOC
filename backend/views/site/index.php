@@ -3,6 +3,8 @@ use backend\assets\IndexAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+/* @var $this yii\web\View */
+
 $this->title = 'SGPOC | Home';
 IndexAsset::register($this);
 ?>
@@ -21,8 +23,7 @@ IndexAsset::register($this);
         Presupuestación de <br>
         <br>
         Obras de Construcción</h2>
-    
-        <img src="http://www.fau.unt.edu.ar/wp-content/themes/fau/images/logo.png" height="150" width="150" class='center'>
+     <img src="http://www.fau.unt.edu.ar/wp-content/themes/fau/images/logo.png" height="150" width="150" class='center'>
     </div>
 </body>
 </html>
