@@ -73,7 +73,7 @@ class ProveedoresController extends Controller
         $model = new Proveedores;
         $gestor = new GestorProveedores;
         $pIdProveedor = Yii::$app->request->get('IdProveedor');
-        $proveedor = $gestor->Dame($pIdProveedor);       
+        $proveedor = $gestor->Dame($pIdProveedor);     
         if($model->load(Yii::$app->request->post() && $model->validate()))
         {
             $pProveedor = $model->Proveedor;

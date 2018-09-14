@@ -79,7 +79,7 @@ class FamiliasController extends Controller
         $gestor = new GestorFamilias;
         $pIdFamilia = Yii::$app->request->get('IdFamilia');
         $familia = $gestor->Dame($pIdFamilia);
-        if($model->load(Yii::$app->request->post()))// && ($model->validate()))
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pFamilia = $model->Familia;
             $mensaje = $gestor->Modificar($pIdFamilia, $pFamilia);
@@ -93,7 +93,7 @@ class FamiliasController extends Controller
             }     
         }
         else{
-           return $this->renderAjax('modificar',['model' => $model, 'familia', $familia]);
+           return $this->renderAjax('modificar',['model' => $model, 'familia' => $familia]);
         }
     }
     

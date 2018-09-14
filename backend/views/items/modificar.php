@@ -33,7 +33,7 @@ use kartik\widgets\Growl;
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?= $form->field($model, 'Item', ['addon' => ['prepend' => ['content'=>'I']]])->textInput(['placeholder'=>'Ingrese el nombre ...']) ?>
+            <?= $form->field($model, 'Item', ['addon' => ['prepend' => ['content'=>'I']]])->textInput(['value'=>$item[0]['Item']]) ?>
         </div>
     </div>
     <div class="modal-footer">

@@ -84,7 +84,7 @@ class UsuariosController extends Controller
         $gestor = new GestorUsuarios;
         $pIdUsuario = Yii::$app->request->get('IdUsuario');
         $usuario = $gestor->Dame($pIdUsuario);
-        if($model->load(Yii::$app->request->post()))// && ($model->validate()))
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pNombre = $model->Nombre;
             $pApellido = $model->Apellido;

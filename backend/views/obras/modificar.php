@@ -38,14 +38,14 @@ use kartik\widgets\Growl;
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?= $form->field($model, 'Obra', ['addon' => ['prepend' => ['content'=>'N']]])->textInput(['placeholder'=>'Ingrese el nombre ...'])->label('Nombre'); ?>
-            <?= $form->field($model, 'Direccion', ['addon' => ['prepend' => ['content'=>'D']]])->textInput(['placeholder'=>'Ingrese la dirección ...']) ?>
-            <?= $form->field($model, 'Propietario', ['addon' => ['prepend' => ['content'=>'P']]])->textInput(['placeholder'=>'Ingrese el propietario ...']) ?>
-            <?= $form->field($model, 'Telefono', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-mobile-phone"></i>']]])->textInput(['placeholder'=>'Ingrese el teléfono del propietario ...']) ?>
-            <?= $form->field($model, 'Email', ['addon' => ['prepend' => ['content'=>'@']]])->input(['autocomplete'=>'off'])->textInput(['placeholder'=>'Ingrese una dirección de Email válida ...']) ?>
-            <?= $form->field($model, 'Comentarios')->textInput(['style'=>'height:100px']) ?>
-            <?= $form->field($model, 'SuperficieTerreno', ['addon' => ['prepend' => ['content'=>'#']]])->textInput(['placeholder'=>'Ingrese la superficie del terreno ...']) ?>
-            <?= $form->field($model, 'SuperficieCubiertaTotal', ['addon' => ['prepend' => ['content'=>'#']]])->textInput(['placeholder'=>'Ingrese la superficie cubierta total ...']) ?>
+            <?= $form->field($model, 'Obra', ['addon' => ['prepend' => ['content'=>'N']]])->textInput(['value'=>$obra[0]['Obra']])  ?>
+            <?= $form->field($model, 'Direccion', ['addon' => ['prepend' => ['content'=>'D']]])->textInput(['value'=>$obra[0]['Direccion']]) ?>
+            <?= $form->field($model, 'Propietario', ['addon' => ['prepend' => ['content'=>'P']]])->textInput(['value'=>$obra[0]['Propietario']]) ?>
+            <?= $form->field($model, 'Telefono', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-mobile-phone"></i>']]])->textInput(['value'=>$obra[0]['Telefono']]) ?>
+            <?= $form->field($model, 'Email', ['addon' => ['prepend' => ['content'=>'@']]])->input(['autocomplete'=>'off'])->textInput(['value'=>$obra[0]['Email']]) ?>
+            <?= $form->field($model, 'Comentarios')->textInput(['value'=>$obra[0]['Comentarios']]) ?>
+            <?= $form->field($model, 'SuperficieTerreno', ['addon' => ['prepend' => ['content'=>'#']]])->textInput(['value'=>$obra[0]['SuperficieTerreno']]) ?>
+            <?= $form->field($model, 'SuperficieCubiertaTotal', ['addon' => ['prepend' => ['content'=>'#']]])->textInput(['value'=>$obra[0]['SuperficieCubiertaTotal']]) ?>
         </div>
         <div class="modal-footer">
             <?= html::submitButton('Modificar',['class'=>'btn btn-success pull-right']); ?>

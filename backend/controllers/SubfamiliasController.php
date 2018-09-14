@@ -78,8 +78,8 @@ class SubfamiliasController extends Controller
         $model = new SubFamilias;
         $gestor = new GestorSubFamilias;
         $pIdSubFamilia = Yii::$app->request->get('IdSubFamilia');
-        //$subfamilia = $gestor->Dame($pIdSubFamilia);
-        if($model->load(Yii::$app->request->post()))// && ($model->validate()))
+        $subfamilia = $gestor->Dame($pIdSubFamilia);
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pSubFamilia = $model->SubFamilia;
             $mensaje = $gestor->Modificar($pIdSubFamilia, $pSubFamilia);
@@ -89,11 +89,11 @@ class SubfamiliasController extends Controller
             }
             else{
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('modificar',['model' => $model]);//, 'subfamilia' => $subfamilia]);
+                return $this->renderAjax('modificar',['model' => $model, 'subfamilia' => $subfamilia]);
             }
         }
         else{
-           return $this->renderAjax('modificar',['model' => $model]);//, 'subfamilia' => $subfamilia]);
+           return $this->renderAjax('modificar',['model' => $model, 'subfamilia' => $subfamilia]);
         }
     }
     

@@ -34,8 +34,8 @@ use kartik\widgets\Growl;
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?=  
-    $form->field($model, 'ElementoConstructivo', ['addon' => ['prepend' => ['content'=>'I']]])->textInput(['placeholder'=>'Ingrese el nombre ...'])
+            <?=
+     $form->field($model, 'ElementoConstructivo', ['addon' => ['prepend' => ['content'=>'I']]])->textInput(['value'=>$ElementoConstructivo[0]['ElementoConstructivo']]) 
         ?>
         </div>
     </div>

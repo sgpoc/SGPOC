@@ -8,6 +8,7 @@ requirejs.config({
 
 requirejs(['jquery', 'moment', 'daterangepicker'] , function ($, moment) {
 $(document).ready(function() {
+    
 
   $('#config-text').keyup(function() {
     eval($(this).val());
