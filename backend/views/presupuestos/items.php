@@ -37,73 +37,11 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'CostoDirecto',
+        'attribute' => 'PrecioItem',
+        'label' => 'Precio',
         'vAlign' => 'middle',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Beneficios',
-        'vAlign' => 'middle',
-        'hAlign' => 'center',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'GastosGenerales',
-        'vAlign' => 'middle',
-        'hAlign' => 'center',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'CargasSociales',
-        'vAlign' => 'middle',
-        'hAlign' => 'center',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'IVA',
-        'vAlign' => 'middle',
-        'hAlign' => 'center',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'PrecioTotal',
-        'label' => 'Precio Total',
-        'vAlign' => 'middle',
-        'hAlign' => 'center',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\ActionColumn',
-        'header' => 'Acciones',
-        'vAlign' => 'middle',
-        'width' => '240px',
-        'template' => '{modificar} {eleccion-precio}',
-        'buttons' => [
-                'modificar' => function($url, $model, $key){ 
-                    return  Html::button('<i class="fa fa-pencil"></i>',
-                            [
-                                'value'=>Url::to(['/presupuestos/modificar-linea', 'IdPresupuesto' => $model['IdPresupuesto'], 'IdItem' => $model['IdItem']]), 
-                                'class'=>'btn btn-link modalButton',
-                                'title'=>'Modificar Línea Presupuesto'
-                            ]);
-                },
-                'eleccion-precio' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-dollar"></i>',
-                            [
-                                'eleccion-precio', 'IdPresupuesto' => $model['IdPresupuesto'], 'IdItem' => $model['IdItem'],
-                            ], 
-                            [
-                                'title' => 'Elegir Lista de Precios', 
-                                'class' => 'btn btn-link',
-                            ]);
-                }     
-        ]
-    ], 
 ];
 
                 

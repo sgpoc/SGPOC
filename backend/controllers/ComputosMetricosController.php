@@ -12,6 +12,7 @@ use app\models\ComputosMetricos;
 use app\models\LineaComputoMetrico;
 use app\models\GestorInsumos;
 use app\models\GestorItems;
+use app\models\GestorElementosConstructivos;
 
 class ComputosMetricosController extends Controller
 {   
@@ -121,14 +122,14 @@ class ComputosMetricosController extends Controller
         $gestor = new GestorComputosMetricos;
         $gestori = new GestorItems;
         $gestorin = new GestorInsumos;
-        //$gestorec = new GestorElementosConstructivos;
+        $gestorec = new GestorElementosConstructivos;
         $pIdComputoMetrico = Yii::$app->request->get('IdComputoMetrico');
         $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdItem= Yii::$app->request->post('IdItem');
         $items = $gestori->Listar($pIdGT);
         $listDataI = ArrayHelper::map($items,'IdItem','Item');
-        //$elementos = $gestorec->Listar($pIdGT);
-        //$listDataE = ArrayHelper::map($elementos,'IdElementoConstructivo','ElementoConstructivo');
+        $elementos = $gestorec->Listar($pIdGT);
+        $listDataE = ArrayHelper::map($elementos,'IdElementoConstructivo','ElementoConstructivo');
         $unidades = $gestorin->ListarUnidades($pIdGT);
         $listDataU = ArrayHelper::map($unidades,'IdUnidad','Abreviatura');
         $computo = $gestor->Dame($pIdComputoMetrico);
@@ -141,7 +142,7 @@ class ComputosMetricosController extends Controller
                 $pIdElementoConstructivo = null;
                 $pIdUnidad = $model->IdUnidad;
                 $pDescripcion = $model->Descripcion;
-                $pCantidad = floatval($model->Cantidad);
+                $pCantidad = $model->Cantidad;
                 $pLargo = $model->Largo;
                 $pAncho = $model->Ancho;
                 $pAlto = $model->Alto;
