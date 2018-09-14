@@ -78,7 +78,11 @@ class GruposTrabajoController extends Controller
         $model = new GruposTrabajo;
         $gestor = new GestorGruposTrabajo;
         $pIdGT = Yii::$app->request->get('IdGT');
+<<<<<<< HEAD
         $grupotrabajo = $gestor->Dame($pIdGT);
+=======
+        $gt = $gestor->Dame($pIdGT);
+>>>>>>> JuanPablo
         if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pGrupoTrabajo = $model->GrupoTrabajo;
@@ -90,11 +94,19 @@ class GruposTrabajoController extends Controller
             }
             else{
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);            
+<<<<<<< HEAD
                 return $this->renderAjax('modificar',['model' => $model, 'grupotrabajo' => $grupotrabajo]);
             }
         }
         else{
             return $this->renderAjax('modificar',['model' => $model, 'grupotrabajo' => $grupotrabajo]);
+=======
+                return $this->renderAjax('modificar',['model' => $model, 'GrupoTrabajo' => $gt]);
+            }
+        }
+        else{
+            return $this->renderAjax('modificar',['model' => $model, 'GrupoTrabajo' => $gt]);
+>>>>>>> JuanPablo
         }
     }
     

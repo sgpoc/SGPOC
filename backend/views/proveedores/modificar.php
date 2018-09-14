@@ -34,12 +34,12 @@ use yii\jui\AutoComplete;
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?= $form->field($model, 'Proveedor', ['addon' => ['prepend' => ['content'=>'N']]])->textInput(['placeholder'=>'']) ?>
-            <?= $form->field($model, 'Domicilio', ['addon' => ['prepend' => ['content'=>'D']]])->textInput(['placeholder'=>'']) ?>
-            <?= $form->field($model, 'CodigoPostal', ['addon' => ['prepend' => ['content'=>'#']]])->textInput(['placeholder'=>'']) ?>
-            <?= $form->field($model, 'Email', ['addon' => ['prepend' => ['content'=>'@']]])->textInput(['placeholder'=>'']) ?>
-            <?= $form->field($model, 'Telefono', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-mobile-phone"></i>']]])->textInput(['placeholder'=>'']) ?>
-            <?= $form->field($model, 'PaginaWEB', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-globe"></i>']]])->textInput(['placeholder'=>'']) ?>  
+            <?= $form->field($model, 'Proveedor', ['addon' => ['prepend' => ['content'=>'N']]])->textInput(['value'=>$proveedor[0]['Proveedor']]) ?>
+            <?= $form->field($model, 'Domicilio', ['addon' => ['prepend' => ['content'=>'D']]])->textInput(['value'=>$proveedor[0]['Domicilio']]) ?>
+            <?= $form->field($model, 'CodigoPostal', ['addon' => ['prepend' => ['content'=>'#']]])->textInput(['value'=>$proveedor[0]['CodigoPostal']]) ?>
+            <?= $form->field($model, 'Email', ['addon' => ['prepend' => ['content'=>'@']]])->textInput(['value'=>$proveedor[0]['Email']])?>
+            <?= $form->field($model, 'Telefono', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-mobile-phone"></i>']]])->textInput(['value'=>$proveedor[0]['Telefono']]) ?>
+            <?= $form->field($model, 'PaginaWEB', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-globe"></i>']]])->textInput(['value'=>$proveedor[0]['PaginaWEB']]) ?>  
         </div>
     </div>
     <div class="modal-footer">

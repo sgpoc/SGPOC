@@ -62,7 +62,7 @@ class ItemsController extends Controller
         $listDataRI = ArrayHelper::map($rubrositem, 'IdRubroItem', 'RubroItem');
         $unidades = $gestori->ListarUnidades();
         $listDataU = ArrayHelper::map($unidades,'IdUnidad','Abreviatura');
-        if($model->load(Yii::$app->request->post())) //&& $model->validate())
+        if($model->load(Yii::$app->request->post()) && $model->validate())
         {
             $pIdGT = Yii::$app->user->identity['IdGT'];
             $pItem= $model->Item;
@@ -103,7 +103,7 @@ class ItemsController extends Controller
             }
         }
         else{
-           return $this->renderAjax('modificar',['model' => $model, 'obra' => $item]);
+           return $this->renderAjax('modificar',['model' => $model, 'item' => $item]);
         }
     }
     

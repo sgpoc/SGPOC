@@ -93,7 +93,7 @@ class FamiliasController extends Controller
             }     
         }
         else{
-           return $this->renderAjax('modificar',['model' => $model, 'familia', $familia]);
+           return $this->renderAjax('modificar',['model' => $model, 'familia' => $familia]);
         }
     }
     
