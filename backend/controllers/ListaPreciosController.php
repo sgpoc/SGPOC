@@ -125,7 +125,7 @@ class ListaPreciosController extends Controller
         }
         else{
             Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-            return $this->redirect('/sgpoc/backend/web/lista-precios/listar');;
+            return $this->redirect('/sgpoc/backend/web/lista-precios/listar');
         }
     }
     
@@ -137,7 +137,9 @@ class ListaPreciosController extends Controller
         $pIdProveedor = Yii::$app->request->get('IdProveedor');
         $pIdLocalidad = Yii::$app->request->get('IdLocalidad');
         $pIdInsumo = Yii::$app->request->get('IdInsumo');
-        if($model->load(Yii::$app->request->post()) && ($model->validate()))
+        $insumo = $gestor->DamePrecioFechaInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo);
+        $model->FechaUltimaActualizacion = $insumo[0]['FechaUltimaActualizacion'];
+        if($model->load(Yii::$app->request->post()) && $model->validate())
         {
             $pPrecioLista = $model->PrecioLista;
             $pFechaUltimaActualizacion = $model->FechaUltimaActualizacion;
@@ -148,11 +150,12 @@ class ListaPreciosController extends Controller
             }
             else{
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('modificar-insumo',['model' => $model]);
+                return $this->renderAjax('modificar-insumo',['model' => $model, 'Insumo'=>$insumo]);
+             
             }
         }
         else{ 
-            return $this->renderAjax('modificar-insumo',['model' => $model]);
+            return $this->renderAjax('modificar-insumo',['model' => $model, 'Insumo'=>$insumo]);
         }
     }
 }

@@ -89,4 +89,15 @@ class GestorListaPrecios
                 ->bindValue('pFechaUltimaActualizacion',$pFechaUltimaActualizacion);
         return $comando->queryAll();
     }
+      
+    public function DamePrecioFechaInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo)
+    {
+        $sql = 'CALL ssp_dame_precio_fecha_insumo(:pIdProveedor, :pIdLocalidad, :pIdInsumo)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdProveedor', $pIdProveedor)
+                ->bindValue('pIdLocalidad', $pIdLocalidad)
+                ->bindValue('pIdInsumo', $pIdInsumo);
+        return $comando->queryAll();
+    }
+    
 }

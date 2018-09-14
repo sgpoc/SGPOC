@@ -31,8 +31,8 @@ use kartik\form\ActiveForm;
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?= $form->field($model, 'Insumo', ['addon' => ['prepend' => ['content'=>'I']]])->textInput(['placeholder'=>$insumo[0]['Insumo']]) ?>
-            <?= $form->field($model, 'TipoInsumo', ['addon' => ['prepend' => ['content'=>'T']]])->textInput(['placeholder'=>$insumo[0]['TipoInsumo']]) ?>
+            <?= $form->field($model, 'Insumo', ['addon' => ['prepend' => ['content'=>'I']]])->textInput(['value'=>$insumo[0]['Insumo']]) ?>
+            <?= $form->field($model, 'TipoInsumo', ['addon' => ['prepend' => ['content'=>'T']]])->textInput(['value'=>$insumo[0]['TipoInsumo']]) ?>
         </div>
     </div>
     <div class="modal-footer">

@@ -38,11 +38,14 @@ use kartik\daterange\DateRangePicker;
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?= $form->field($model, 'PrecioLista', ['addon' => ['prepend' => ['content'=>'$']]])->textInput(['placeholder'=>'Ingrese el Precio de Lista ...']) ?>
-            <?= $form->field($model, 'FechaUltimaActualizacion', [
+            <?= $form->field($model, 'PrecioLista', ['addon' => ['prepend' => ['content'=>'$']]])->textInput(['value'=>$Insumo[0]['PrecioLista']]) ?>
+            <?= 
+                $form->field($model, 'FechaUltimaActualizacion', [
                     'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
                     'options'=>['class'=>'drp-container form-group']
                 ])->widget(DateRangePicker::classname(), [
+                     'model' => $model,
+                     'attribute' => 'FechaUltimaActualizacion',
                     'useWithAddon'=>true,
                     'pluginOptions'=>[
                         'singleDatePicker'=>true,

@@ -1,3 +1,4 @@
+
 <?php
 
 use yii\helpers\Html;
@@ -7,6 +8,8 @@ use kartik\grid\GridView;
 use yii\helpers\Url;
 use app\models\GestorElementosConstructivos;
 use yii\data\ArrayDataProvider;
+use yii\widgets\Pjax;
+
 
 
 $this->title = 'SGPOC | Elementos COnstructivos';
@@ -120,6 +123,7 @@ $gridColumns = [
 ?>
 
 <?php
+
     Modal::begin([
             'header'=>'<h2>Elementos</h2>',
             'footer'=>'',
@@ -127,19 +131,22 @@ $gridColumns = [
             'size'=>'modal-lg',
        ]);
     echo "<div id='modalContent'></div>";
+    
+
+   
     Modal::end();
+
+    
 ?>
-        
+
+<?php Pjax::begin(['id'=>'some_pjax_id']); ?>
 <div>
     <?= GridView::widget([
         'moduleId' => 'gridviewKrajee',
-        'pjax'=>true,
-        'pjaxSettings'=>[
-            'neverTimeout'=>true,
-        ],
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
+        'pjax' => 'true',
         'exportConfig' => [
                 GridView::EXCEL => ['label' => 'Descargar como EXCEL'],
                 GridView::TEXT => ['label' => 'Descargar como TEXTO'],
@@ -170,5 +177,6 @@ $gridColumns = [
     ]);   
     ?>
 </div>
+<?php Pjax::end(); ?>
 
-    
+
