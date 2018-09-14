@@ -39,7 +39,7 @@ use kartik\widgets\Growl;
     <div class="modal-body">
         <div class="form-group">
             <?= $form->field($model, 'IdLocalidad')->dropDownList($listData, ['prompt' => 'Seleccione uno ...' ])->label('Localidad');  ?>
-            <?= $form->field($model, 'Obra', ['addon' => ['prepend' => ['content'=>'N']]])->textInput(['placeholder'=>'Ingrese el nombre de la Obra ...'])->label('Nombre'); ?>
+            <?= $form->field($model, 'Obra', ['addon' => ['prepend' => ['content'=>'N']]])->textInput(['placeholder'=>'Ingrese el nombre de la Obra ...'])->label('Nombre Obra'); ?>
             <?= $form->field($model, 'Direccion', ['addon' => ['prepend' => ['content'=>'D']]])->textInput(['placeholder'=>'Ingrese la dirección ...']) ?>
             <?= $form->field($model, 'Propietario', ['addon' => ['prepend' => ['content'=>'P']]])->textInput(['placeholder'=>'Ingrese el propietario ...']) ?>
             <?= $form->field($model, 'Telefono', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-mobile-phone"></i>']]])->textInput(['placeholder'=>'Ingrese el teléfono del propietario ...']) ?>

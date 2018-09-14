@@ -12,7 +12,7 @@ class GestorPresupuestos
                 ->bindValue('pIdGT', $pIdGT);
         $presupuestos = $comando->queryAll();
         return $presupuestos;
-    } 
+    }
     
     public function Buscar($pIdObra, $pFechaDePresupuesto, $pIdGT){
         $sql = 'CALL ssp_buscar_presupuestos(:pIdObra, :pFechaDePresupuesto, :pIdGT)';
@@ -63,7 +63,7 @@ class GestorPresupuestos
     
     public function ListarItems($pIdPresupuesto, $pIdProveedor, $pIdLocalidad, $pIdGT)
     {   
-        $sql = 'CALL ssp_listar_items_presupuesto(:pIdPresupuesto, :pIdGT)';
+        $sql = 'CALL ssp_listar_items_presupuesto(:pIdPresupuesto, :pIdProveedor, :pIdLocalidad, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdPresupuesto', $pIdPresupuesto)
                 ->bindValue('pIdProveedor', $pIdProveedor)

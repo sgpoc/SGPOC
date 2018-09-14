@@ -7,7 +7,7 @@ use yii\bootstrap\Modal;
 use yii\helpers\Url;
 
 
-$this->title = 'SGPOC | Usuarios';
+$this->title = 'SGPOC | Usuarios Grupo Trabajo';
 
 $gridColumns = [
     [
@@ -40,10 +40,6 @@ $gridColumns = [
         'attribute' => 'Rol',
         'label' => 'Rol',
         'vAlign' => 'middle',
-        'filterType' => GridView::FILTER_SELECT2,
-        'filter'=> $listData,
-        'filterInputOptions' => ['placeholder' => 'Seleccionar Rol'],
-        'format' => 'raw',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
@@ -51,7 +47,7 @@ $gridColumns = [
         'attribute' => 'Estado',
         'vAlign' => 'middle',
         'hAlign' => 'center'
-    ],
+    ],/*
     [
         'class' => '\kartik\grid\ActionColumn',
         'header' => 'Acciones',
@@ -106,7 +102,7 @@ $gridColumns = [
                     }
                 }     
         ]
-    ], 
+    ],*/ 
 ];
 
                 
@@ -150,35 +146,12 @@ $gridColumns = [
             'neverTimeout'=>true,
         ],
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => $gridColumns,
+        'columns' => $gridColumns,/*
         'exportConfig' => [
                 GridView::EXCEL => ['label' => 'Descargar como EXCEL'],
                 GridView::TEXT => ['label' => 'Descargar como TEXTO'],
                 GridView::PDF => ['label' => 'Descargar como PDF'],
-         ],
-        'toolbar' => [
-            [
-                'content' => Html::button('<i class="glyphicon glyphicon-plus"></i>',
-                            [
-                                'value'=>Url::to('/sgpoc/backend/web/usuarios/alta'), 
-                                'class'=>'btn btn-success modalButton',
-                                'title'=>'Crear Usuario'
-                            ]).' '.
-                            Html::a('<i class="glyphicon glyphicon-repeat"></i>', 
-                            ['usuarios/listar'], 
-                            [
-                                'data-pjax' => 0, 
-                                'class' => 'btn btn-default', 
-                                'title' => 'Actualizar'
-                            ])
-            ],
-            '{export}',
-        ],
-        'panel' => [
-            'heading' => '<h3 class="panel-title"><i class="fa fa-user"></i> Usuarios</h3>',
-            'type' => GridView::TYPE_DEFAULT,
-        ],
+         ],*/
     ]);   
     ?>
 </div>

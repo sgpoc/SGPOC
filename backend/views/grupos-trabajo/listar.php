@@ -71,19 +71,12 @@ $gridColumns = [
                             ]);
                 },
                 'listarusuarios' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-user"></i>',
-                                [
-                                    'listar-usuarios','IdGT' => $model['IdGT']
-                                ], 
-                                [
-                                    'title' => 'Listar Usuarios Grupo Trabajo', 
-                                    'class' => 'btn btn-link'
-                                ]);/*Html::button('<i class="fa fa-user"></i>',
+                    return Html::button('<i class="fa fa-user"></i>',
                             [
                                 'value'=>Url::to(['/grupos-trabajo/listar-usuarios', 'IdGT' => $model['IdGT']]), 
                                 'class'=>'btn btn-link modalButton',
                                 'title'=>'Listar Usuarios'
-                            ]);*/
+                            ]);
                 },
                 'baja' => function($url, $model, $key){
                     if($model['Estado'] === '1'){

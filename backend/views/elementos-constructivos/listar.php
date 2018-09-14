@@ -9,10 +9,6 @@ use app\models\GestorElementosConstructivos;
 use yii\data\ArrayDataProvider;
 
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\ElementosConstructivosBusqueda */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = 'SGPOC | Elementos COnstructivos';
 
 $gridColumns = [

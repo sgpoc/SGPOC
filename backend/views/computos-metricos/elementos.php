@@ -25,6 +25,7 @@ $gridColumns = [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'RubroEC',
         'vAlign' => 'middle',
+        'hAlign' => 'center',  
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
@@ -65,6 +66,7 @@ $gridColumns = [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'Abreviatura',
         'label' => 'Unidad',
+        'vAlign' => 'middle',  
         'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],

@@ -4,12 +4,10 @@ namespace backend\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\data\ArrayDataProvider;
-use yii\helpers\ArrayHelper;
 use app\models\GestorGruposTrabajo;
 use app\models\GruposTrabajo;
 use app\models\GruposTrabajoBuscar;
 use app\models\GestorUsuarios;
-use app\models\UsuariosBuscar;
 
 
 class GruposTrabajoController extends Controller
@@ -42,7 +40,14 @@ class GruposTrabajoController extends Controller
     
     public function actionListarUsuarios()
     {    
-        
+        $gestor = new GestorGruposTrabajo;
+        $pIdGT = Yii::$app->request->get('IdGT');
+        $usuarios = $gestor->ListarUsuarios($pIdGT);
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $usuarios,
+            'pagination' => ['pagesize' => 5,],
+        ]);
+        return $this->renderAjax('usuarios',['dataProvider' => $dataProvider]);
     }
     
     public function actionAlta()
@@ -89,7 +94,6 @@ class GruposTrabajoController extends Controller
             }
         }
         else{
-            //var_dump($grupotrabajo[0]['GrupoTrabajo']);
             return $this->renderAjax('modificar',['model' => $model, 'grupotrabajo' => $grupotrabajo]);
         }
     }
