@@ -660,16 +660,16 @@
         },
         {
             "name": "kartik-v/bootstrap-fileinput",
-            "version": "v4.4.9",
+            "version": "v4.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-                "reference": "b6343494a53733bf827c28869baf4923a65b6711"
+                "reference": "e3126b482e72022b819f4aae58096f3f17d55a90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/b6343494a53733bf827c28869baf4923a65b6711",
-                "reference": "b6343494a53733bf827c28869baf4923a65b6711",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/e3126b482e72022b819f4aae58096f3f17d55a90",
+                "reference": "e3126b482e72022b819f4aae58096f3f17d55a90",
                 "shasum": ""
             },
             "type": "library",
@@ -709,7 +709,7 @@
                 "progress",
                 "upload"
             ],
-            "time": "2018-07-25T16:54:29+00:00"
+            "time": "2018-08-30T02:05:20+00:00"
         },
         {
             "name": "kartik-v/bootstrap-star-rating",
@@ -1016,12 +1016,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-grid.git",
-                "reference": "1d6c7d4bbe587702a7dd74fb2d982490f16e5857"
+                "reference": "0e6ff6cbb68c96453b0806ee9c7ffb08cd8c7b08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/1d6c7d4bbe587702a7dd74fb2d982490f16e5857",
-                "reference": "1d6c7d4bbe587702a7dd74fb2d982490f16e5857",
+                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/0e6ff6cbb68c96453b0806ee9c7ffb08cd8c7b08",
+                "reference": "0e6ff6cbb68c96453b0806ee9c7ffb08cd8c7b08",
                 "shasum": ""
             },
             "require": {
@@ -1061,7 +1061,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2018-07-20T13:57:00+00:00"
+            "time": "2018-09-03T10:39:32+00:00"
         },
         {
             "name": "kartik-v/yii2-helpers",
@@ -1171,12 +1171,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-mpdf.git",
-                "reference": "67980ab7861ae9541b1a1784be8938dbeba13045"
+                "reference": "3060394e4d820170e1b22b9522854880b98f272f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-mpdf/zipball/67980ab7861ae9541b1a1784be8938dbeba13045",
-                "reference": "67980ab7861ae9541b1a1784be8938dbeba13045",
+                "url": "https://api.github.com/repos/kartik-v/yii2-mpdf/zipball/3060394e4d820170e1b22b9522854880b98f272f",
+                "reference": "3060394e4d820170e1b22b9522854880b98f272f",
                 "shasum": ""
             },
             "require": {
@@ -1215,7 +1215,7 @@
                 "utf8",
                 "yii2"
             ],
-            "time": "2017-07-19T09:51:02+00:00"
+            "time": "2018-08-04T16:18:45+00:00"
         },
         {
             "name": "kartik-v/yii2-number",
@@ -1276,22 +1276,27 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-password.git",
-                "reference": "c5ffd95f61340c403a4ccd99089fafb15b9cb2b6"
+                "reference": "88fe8b8840516b6c72c5efd56a775bebbbef0f19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-password/zipball/c5ffd95f61340c403a4ccd99089fafb15b9cb2b6",
-                "reference": "c5ffd95f61340c403a4ccd99089fafb15b9cb2b6",
+                "url": "https://api.github.com/repos/kartik-v/yii2-password/zipball/88fe8b8840516b6c72c5efd56a775bebbbef0f19",
+                "reference": "88fe8b8840516b6c72c5efd56a775bebbbef0f19",
                 "shasum": ""
             },
             "require": {
                 "kartik-v/strength-meter": "~1.1",
-                "kartik-v/yii2-krajee-base": "~1.7"
+                "kartik-v/yii2-krajee-base": "~1.9"
             },
             "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.5.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
-                    "kartik\\password\\": ""
+                    "kartik\\password\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1319,7 +1324,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2018-08-22T15:52:31+00:00"
+            "time": "2018-09-04T13:41:07+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-activeform",
@@ -1327,16 +1332,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-activeform.git",
-                "reference": "a9877e184534558cc318ef290a5f500944f21e8a"
+                "reference": "d6f53b2be7ba1eb955692663211c7be3b5de81f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-activeform/zipball/a9877e184534558cc318ef290a5f500944f21e8a",
-                "reference": "a9877e184534558cc318ef290a5f500944f21e8a",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-activeform/zipball/d6f53b2be7ba1eb955692663211c7be3b5de81f4",
+                "reference": "d6f53b2be7ba1eb955692663211c7be3b5de81f4",
                 "shasum": ""
             },
             "require": {
-                "kartik-v/yii2-krajee-base": "~1.9"
+                "kartik-v/yii2-krajee-base": ">=1.9"
             },
             "type": "yii2-extension",
             "extra": {
@@ -1371,7 +1376,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2018-08-28T12:36:25+00:00"
+            "time": "2018-09-05T05:33:16+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-affix",
@@ -4052,16 +4057,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.3.2",
+            "version": "7.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "34705f81bddc3f505b9599a2ef96e2b4315ba9b8"
+                "reference": "0356331bf62896dc56e3a15030b23b73f38b2935"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/34705f81bddc3f505b9599a2ef96e2b4315ba9b8",
-                "reference": "34705f81bddc3f505b9599a2ef96e2b4315ba9b8",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0356331bf62896dc56e3a15030b23b73f38b2935",
+                "reference": "0356331bf62896dc56e3a15030b23b73f38b2935",
                 "shasum": ""
             },
             "require": {
@@ -4132,7 +4137,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-08-22T06:39:21+00:00"
+            "time": "2018-09-05T09:58:53+00:00"
         },
         {
             "name": "psr/http-message",

@@ -5,6 +5,10 @@ use kartik\form\ActiveForm;
 use kartik\form\ActiveField;
 use kartik\widgets\Growl;
 use kartik\daterange\DateRangePicker;
+use kartik\widgets\DepDrop;
+use yii\helpers\Url;
+use yii\web\Controller;
+
 
 ?>
 
@@ -36,8 +40,15 @@ use kartik\daterange\DateRangePicker;
         <div class="form-group">
             <?= $form->field($modellinea, 'IdProveedor')->dropDownList($listDataP, ['prompt' => 'Seleccione uno ...' ])->label('Proveedor Inicial');  ?>
             <?= $form->field($modellinea, 'IdLocalidad')->dropDownList($listDataL, ['prompt' => 'Seleccione uno ...' ])->label('Localidad Inicial');  ?>
-            <?= $form->field($model, 'IdObra')->dropDownList($listDataO, ['prompt' => 'Seleccione uno ...' ])->label('Obra');  ?>
-            <?= $form->field($model, 'IdComputoMetrico')->dropDownList($listDataCM, ['prompt' => 'Seleccione uno ...' ])->label('Cómputo Métrico');  ?>
+            <?= $form->field($model, 'IdObra')->dropDownList($listDataO, ['id' => 'IdObra', 'prompt' => 'Seleccione uno ...' ])->label('Obra');  ?>
+            <?= $form->field($model, 'IdComputoMetrico')->widget(DepDrop::className(), [
+                'pluginOptions'=>[
+                    'depends'=>['IdObra'],
+                    'placeholder'=>'Selecccione uno ...',
+                    'url'=>Url::to('/sgpoc/backend/web/presupuestos/listar-computos'),
+                ]])
+                ->label('Cómputo Métrico');  
+            ?>
             <?= $form->field($model, 'FechaDePresupuesto', [
                     'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
                     'options'=>['class'=>'drp-container form-group']

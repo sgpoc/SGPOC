@@ -2,11 +2,8 @@
 
 use yii\helpers\Html;
 use kartik\form\ActiveForm;
-use kartik\alert\Alert;
+use kartik\widgets\Growl;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\UsuariosBusqueda */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
 ?>
 

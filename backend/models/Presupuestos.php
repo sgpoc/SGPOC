@@ -22,9 +22,10 @@ class Presupuestos extends Model
     public function rules()
     {
         return [
-            [['IdComputoMetrico', 'IdObra', 'FechaDePresupuesto'], 'required', 'on' => 'alta-presupuesto'],
+            [['IdObra', 'FechaDePresupuesto'], 'required', 'on' => 'alta-presupuesto'],
             [['FechaDePresupuesto'], 'required'],
             [['FechaDePresupuesto'], 'date', 'format' => 'php:Y-m-d'],
+            ['IdComputoMetrico', 'safe']
         ];
     }
 

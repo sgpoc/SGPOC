@@ -105,7 +105,7 @@ AppAsset::register($this);
                     </a>
                 </li>
                 <li>
-                    <a href="/sgpoc/backend/web/presupuestos/listar">
+                    <a href="/sgpoc/backend/web/presupuestos/listar-insumos">
                         <i class="fa fa-dollar"></i>
                         <span>Presupuestos</span>
                     </a>

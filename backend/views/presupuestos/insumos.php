@@ -44,10 +44,55 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'PrecioLista',
-        'label' => 'Precio de Lista',
+        'attribute' => 'PrecioU',
+        'label' => 'Precio Unitario',
         'vAlign' => 'middle',
         'hAlign' => 'center',
+        'format' => ['decimal', 2],
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'Beneficios',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'format' => ['decimal', 2],
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'GastosGenerales',
+        'label' => 'Gastos Generales',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'format' => ['decimal', 2],
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'CargasSociales',
+        'label' => 'Cargas Sociales',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'format' => ['decimal', 2],
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'IVA',
+        'label' => 'IVA',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'format' => ['decimal', 2],
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'Precio',
+        'label' => 'Precio (C/P)',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'format' => ['decimal', 2],
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
@@ -63,30 +108,24 @@ $gridColumns = [
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' => '{modificar} {borrar}',
+        'template' => '{modificar-porcentajes} {eleccion-precio}',
         'buttons' => [
-                'modificar' => function($url, $model, $key){ 
+                'modificar-porcentajes' => function($url, $model, $key){ 
                     return  Html::button('<i class="fa fa-pencil"></i>',
                             [
-                                'value'=>Url::to(['/lista-precios/modificar-insumo', 'IdInsumo' => $model['IdInsumo'], 'IdProveedor' => $model['IdProveedor'], 'IdLocalidad' => $model['IdLocalidad']]), 
+                                'value'=>Url::to(['/presupuestos/modificar-porcentajes','IdPresupuesto' =>$model['IdPresupuesto'], 'IdInsumo' => $model['IdInsumo']]), 
                                 'class'=>'btn btn-link modalButton',
-                                'title'=>'Modificar Insumo en Lista de Precio'
+                                'title'=>'Modificar Porcentajes Insumo'
                             ]);
                 },
-                'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-trash-o"></i>',
+                'eleccion-precio' => function($url, $model, $key){ 
+                    return  Html::button('<i class="fa fa-dollar"></i>',
                             [
-                                'borrar-insumo', 'IdInsumo' => $model['IdInsumo'],  'IdProveedor' => $model['IdProveedor'], 'IdLocalidad' => $model['IdLocalidad']
-                            ], 
-                            [
-                                'title' => 'Borrar Insumo de la Lista de Precio', 
-                                'class' => 'btn btn-link',
-                                'data' => [
-                                    'confirm' => 'Esta seguro que desea borrar el Insumo de la Lista de Precio?',
-                                    'method' => 'post'
-                                ]
+                                'value'=>Url::to(['/presupuestos/eleccion-precio','IdPresupuesto' =>$model['IdPresupuesto'], 'IdInsumo' => $model['IdInsumo']]), 
+                                'class'=>'btn btn-link modalButton',
+                                'title'=>'Elegir Lista de Precios'
                             ]);
-                }     
+                },        
         ]
     ], 
 ];
@@ -115,7 +154,7 @@ $gridColumns = [
 
 <?php
     Modal::begin([
-            'header'=>'<h2>Insumos</h2>',
+            'header'=>'<h2>Presupuestos</h2>',
             'footer'=>'',
             'id'=>'modal',
             'size'=>'modal-lg',

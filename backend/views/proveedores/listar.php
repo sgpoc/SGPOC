@@ -9,10 +9,6 @@ use yii\widgets\Pjax;
 
 
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\ProveedoresBuscar */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = 'SGPOC | Proveedores';
 
 $gridColumns = [
@@ -151,10 +147,14 @@ $gridColumns = [
 
 <div>
     <?= GridView::widget([
+        'id' => 'gridview',
         'moduleId' => 'gridviewKrajee',
         'pjax'=>true,
         'pjaxSettings'=>[
             'neverTimeout'=>true,
+            'options' => [
+                'id' => 'gridview'
+            ]
         ],
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,

@@ -125,6 +125,7 @@ class ItemsController extends Controller
     public function actionAgregarInsumo()
     {
         $model = new ComposicionItem;
+        $model->scenario = 'agregar-insumo';
         $gestor = new GestorItems;
         $gestori = new GestorInsumos;
         $pIdGT = Yii::$app->user->identity['IdGT'];
@@ -153,10 +154,11 @@ class ItemsController extends Controller
     public function actionModificarIncidencia()
     {
         $model = new ComposicionItem;
+        $model->scenario = 'modificar-incidencia';
         $gestor = new GestorItems;
         $pIdItem = Yii::$app->request->get('IdItem');
         $pIdInsumo = Yii::$app->request->get('IdInsumo');
-        if($model->load(Yii::$app->request->post())) //&& $model->validate())
+        if($model->load(Yii::$app->request->post()) && $model->validate())
         {
             $pIncidencia = $model->Incidencia;
             $mensaje = $gestor->ModificarIncidencia($pIdItem, $pIdInsumo, $pIncidencia);

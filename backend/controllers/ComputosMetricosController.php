@@ -27,8 +27,9 @@ class ComputosMetricosController extends Controller
         if($searchModel->load(Yii::$app->request->get()) && $searchModel->validate())
         {
             $pIdObra= $searchModel['Obra'][0];
+            $pDescripcion = $searchModel['Descripcion'];
             $pFechaComputoMetrico = $searchModel['FechaComputoMetrico'];
-            $computos = $gestor->Buscar($pIdObra, $pFechaComputoMetrico, $pIdGT);
+            $computos = $gestor->Buscar($pIdObra, $pDescripcion, $pFechaComputoMetrico, $pIdGT);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $computos,
                 'pagination' => ['pagesize' => 5,],
@@ -58,9 +59,10 @@ class ComputosMetricosController extends Controller
         if($model->load(Yii::$app->request->post()) && $model->validate())
         {
             $pIdObra= $model->IdObra;
+            $pDescripcion = $model->Descripcion;
             $pFechaComputoMetrico = $model->FechaComputoMetrico;
             $pTipoComputo = $model->TipoComputo;
-            $mensaje = $gestor->Alta($pIdObra, $pFechaComputoMetrico, $pTipoComputo);
+            $mensaje = $gestor->Alta($pIdObra, $pDescripcion, $pFechaComputoMetrico, $pTipoComputo);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
                 return $this->redirect('/sgpoc/backend/web/computos-metricos/listar');
@@ -83,9 +85,10 @@ class ComputosMetricosController extends Controller
         $computo = $gestor->Dame($pIdComputoMetrico);
         if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
+            $pDescripcion = $model->Descripcion;
             $pFechaComputoMetrico = $model->FechaComputoMetrico;
             $pTipoComputo = $model->TipoComputo;            
-            $mensaje = $gestor->Modificar($pIdComputoMetrico, $pFechaComputoMetrico, $pTipoComputo);
+            $mensaje = $gestor->Modificar($pIdComputoMetrico, $pDescripcion, $pFechaComputoMetrico, $pTipoComputo);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
                 return $this->redirect('/sgpoc/backend/web/computos-metricos/listar');

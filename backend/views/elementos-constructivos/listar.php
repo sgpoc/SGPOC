@@ -12,7 +12,7 @@ use yii\widgets\Pjax;
 
 
 
-$this->title = 'SGPOC | Elementos COnstructivos';
+$this->title = 'SGPOC | Elementos Constructivos';
 
 $gridColumns = [
     [
@@ -131,12 +131,7 @@ $gridColumns = [
             'size'=>'modal-lg',
        ]);
     echo "<div id='modalContent'></div>";
-    
-
-   
     Modal::end();
-
-    
 ?>
 
 <?php Pjax::begin(['id'=>'some_pjax_id']); ?>
@@ -146,7 +141,7 @@ $gridColumns = [
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
-        'pjax' => 'true',
+        'pjax' => true,
         'exportConfig' => [
                 GridView::EXCEL => ['label' => 'Descargar como EXCEL'],
                 GridView::TEXT => ['label' => 'Descargar como TEXTO'],

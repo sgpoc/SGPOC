@@ -5,11 +5,6 @@ use kartik\form\ActiveForm;
 use kartik\widgets\Growl;
 use kartik\daterange\DateRangePicker;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\UsuariosBusqueda */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-// cambio.
-
 ?>
 
 <?php if(Yii::$app->session->getFlash('alert')){
@@ -46,8 +41,8 @@ use kartik\daterange\DateRangePicker;
                 ])->widget(DateRangePicker::classname(), [
                      'model' => $model,
                      'attribute' => 'FechaUltimaActualizacion',
-                    'useWithAddon'=>true,
-                    'pluginOptions'=>[
+                     'useWithAddon'=>true,
+                     'pluginOptions'=>[
                         'singleDatePicker'=>true,
                         'showDropdowns'=>true
                     ]

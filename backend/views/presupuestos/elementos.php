@@ -17,21 +17,22 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Item',
+        'attribute' => 'ElementoConstructivo',
         'vAlign' => 'middle',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'RubroItem',
+        'attribute' => 'RubroEC',
         'vAlign' => 'middle',
+        'hAlign' => 'center',  
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'Abreviatura',
         'label' => 'Unidad',
-        'vAlign' => 'middle',
+        'vAlign' => 'middle',  
         'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
@@ -40,8 +41,26 @@ $gridColumns = [
         'attribute' => 'Precio',
         'format' => ['decimal',2],
         'vAlign' => 'middle',
+        'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
+    [
+        'class' => 'kartik\grid\ActionColumn',
+        'header' => 'Acciones',
+        'vAlign' => 'middle',
+        'width' => '240px',
+        'template' => '{modificar}',
+        'buttons' => [
+                'modificar' => function($url, $model, $key){ 
+                    return  Html::button('<i class="fa fa-pencil"></i>',
+                            [
+                                'value'=>Url::to('/computos-metricos/modificar-linea'),// 'IdComputoMetrico' => $model['IdComputoMetrico'], 'NroLinea' => $model['NroLinea']]), 
+                                'class'=>'btn btn-link modalButton',
+                                'title'=>'Modificar Línea Cómputo Métrico'
+                            ]);
+                }    
+        ]
+    ], 
 ];
 
                 

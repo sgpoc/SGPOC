@@ -4,12 +4,6 @@ use yii\helpers\Html;
 use kartik\form\ActiveForm;
 use kartik\widgets\Growl;
 
-
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\UsuariosBusqueda */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-// cambio.
-
 ?>
 
 <?php if(Yii::$app->session->getFlash('alert')){
@@ -34,16 +28,14 @@ use kartik\widgets\Growl;
 <?php $form = ActiveForm::begin(); ?>
 <div class="modal-content">
     <div class="modal-header">
-        <h1 class="modal-title">Modificar Línea</h1>   
+        <h1 class="modal-title">Modificar Porcentajes</h1>   
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?= $form->field($model, 'Cantidad', ['addon' => ['prepend' => ['content'=>'#']]])->textInput(['value'=>$lineacomputo[0]['Cantidad']]) ?>
-            <?= $form->field($model, 'Largo', ['addon' => ['prepend' => ['content'=>'L']]])->textInput(['value'=>$lineacomputo[0]['Largo']]) ?>
-            <?= $form->field($model, 'Ancho', ['addon' => ['prepend' => ['content'=>'An']]])->textInput(['value'=>$lineacomputo[0]['Ancho']]) ?>
-            <?= $form->field($model, 'Alto', ['addon' => ['prepend' => ['content'=>'A']]])->textInput(['value'=>$lineacomputo[0]['Alto']]) ?>
-            <?= $form->field($model, 'Descripcion')->textArea(['rows'=>5]) ?>
-        </div>
+            <?= $form->field($model, 'Beneficios', ['addon' => ['prepend' => ['content'=>'B']]])->textInput(['value'=>'']) ?>
+            <?= $form->field($model, 'GastosGenerales', ['addon' => ['prepend' => ['content'=>'GG']]])->textInput(['value'=>'']) ?>
+            <?= $form->field($model, 'CargasSociales', ['addon' => ['prepend' => ['content'=>'CS']]])->textInput(['value'=>'']) ?>
+            <?= $form->field($model, 'IVA', ['addon' => ['prepend' => ['content'=>'I']]])->textInput(['value'=>'']) ?>
     </div>
     <div class="modal-footer">
         <?= html::submitButton('Modificar',['class'=>'btn btn-success pull-right']); ?>

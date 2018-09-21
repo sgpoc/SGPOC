@@ -9,11 +9,6 @@ use kartik\widgets\DepDrop;
 
 
 
-
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\UsuariosBusqueda */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = 'SGPOC | Insumos';
 
 
@@ -140,10 +135,14 @@ $gridColumns = [
 
 <div>
     <?= GridView::widget([
+        'id' => 'gridview',
         'moduleId' => 'gridviewKrajee',
         'pjax'=>true,
         'pjaxSettings'=>[
             'neverTimeout'=>true,
+            'options' => [
+                'id' => 'gridview'
+            ]
         ],
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,

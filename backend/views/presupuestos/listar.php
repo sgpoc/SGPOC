@@ -7,6 +7,8 @@ use yii\bootstrap\Modal;
 use yii\helpers\Url;
 use yii\data\ArrayDataProvider;
 use app\models\GestorComputosMetricos;
+use app\models\GestorPresupuestos;
+use app\models\Presupuestos;
 
 
 $this->title = 'SGPOC | Presupuestos';
@@ -26,27 +28,28 @@ $gridColumns = [
             return GridView::ROW_COLLAPSED;
         },
         'detail' => function ($model, $key, $index, $column) {
-            $pIdGT = Yii::$app->user->identity['IdGT'];
             $pIdComputoMetrico = $model['IdComputoMetrico'];
+            $pIdPresupuesto = $model['IdPresupuesto'];
             $gestor = new GestorComputosMetricos;
+            $gestorp = new GestorPresupuestos;
             $computo = $gestor->Dame($pIdComputoMetrico);
             $tipoComputo = $computo[0]['TipoComputo'];
             if($tipoComputo == 'I')
             {
-                $items = $gestor->ListarItems($pIdComputoMetrico, $pIdGT);
+                $items = $gestorp->ListarItems($pIdPresupuesto);
                 $dataProvider = new ArrayDataProvider([
                     'allModels' => $items,
                     'pagination' => ['pagesize' => 5,],
                 ]);
-                return Yii::$app->controller->renderPartial('/computos-metricos/items', ['dataProvider' => $dataProvider]);
+                return Yii::$app->controller->renderPartial('/presupuestos/items', ['dataProvider' => $dataProvider]);
             }
             else{
-                $elementos = $gestor->ListarElementos($pIdComputoMetrico, $pIdGT);
+                $elementos = $gestorp->ListarElementos($pIdPresupuesto);
                 $dataProvider = new ArrayDataProvider([
                     'allModels' => $elementos,
                     'pagination' => ['pagesize' => 5,],
                 ]);
-                return Yii::$app->controller->renderPartial('/computos-metricos/elementos', ['dataProvider' => $dataProvider]);
+                return Yii::$app->controller->renderPartial('/presupuestos/elementos', ['dataProvider' => $dataProvider]);
             }
         },
         'headerOptions' => ['class' => 'kartik-sheet-style'], 
@@ -72,7 +75,12 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'PrecioTotal',
+        'value' => function($model){
+            $gestor = new GestorPresupuestos;
+            $pIdPresupuesto = $model['IdPresupuesto'];
+            $preciototal = $gestor->CalculoPrecioTotal($pIdPresupuesto);
+            return $preciototal[0]['PrecioTotal'];
+        },
         'label' => 'Precio Total',            
         'vAlign' => 'middle',
         'hAlign' => 'center',   
@@ -84,7 +92,7 @@ $gridColumns = [
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' => '{modificar} {borrar}',
+        'template' => '{modificar} {borrar} {listar-insumos}',
         'buttons' => [
                 'modificar' => function($url, $model, $key){ 
                     return  Html::button('<i class="fa fa-pencil"></i>',
@@ -147,10 +155,14 @@ $gridColumns = [
 
 <div>
     <?= GridView::widget([
+        'id' => 'gridview',
         'moduleId' => 'gridviewKrajee',
         'pjax'=>true,
         'pjaxSettings'=>[
             'neverTimeout'=>true,
+            'options' => [
+                'id' => 'gridview'
+            ]
         ],
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -167,6 +179,13 @@ $gridColumns = [
                                 'value'=>Url::to('/sgpoc/backend/web/presupuestos/alta'), 
                                 'class'=>'btn btn-success modalButton',
                                 'title'=>'Crear Presupuesto'
+                            ]).' '.Html::a('<i class="fa fa-wrench"></i>',
+                            [
+                                'listar-insumos'
+                            ], 
+                            [
+                                'title' => 'Listar Presupuesto por Insumos', 
+                                'class' => 'btn btn-default',
                             ]).' '.
                             Html::a('<i class="glyphicon glyphicon-repeat"></i>', 
                             ['presupuestos/listar'], 

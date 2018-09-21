@@ -6,10 +6,10 @@ use kartik\widgets\Growl;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
 use yii\data\ArrayDataProvider;
-use app\models\GestorComputosMetricos;
+use app\models\GestorPresupuestos;
 
 
-$this->title = 'SGPOC | Cómputos Métricos';
+$this->title = 'SGPOC | Presupuestos';
 
 $gridColumns = [
     [
@@ -26,28 +26,14 @@ $gridColumns = [
             return GridView::ROW_COLLAPSED;
         },
         'detail' => function ($model, $key, $index, $column) {
-            $pIdGT = Yii::$app->user->identity['IdGT'];
-            $pIdComputoMetrico = $model['IdComputoMetrico'];
-            $gestor = new GestorComputosMetricos;
-            $computo = $gestor->Dame($pIdComputoMetrico);
-            $tipoComputo = $computo[0]['TipoComputo'];
-            if($tipoComputo == 'I')
-            {
-                $items = $gestor->ListarItems($pIdComputoMetrico, $pIdGT);
-                $dataProvider = new ArrayDataProvider([
-                    'allModels' => $items,
-                    'pagination' => ['pagesize' => 5,],
-                ]);
-                return Yii::$app->controller->renderPartial('/computos-metricos/items', ['dataProvider' => $dataProvider]);
-            }
-            else{
-                $elementos = $gestor->ListarElementos($pIdComputoMetrico, $pIdGT);
-                $dataProvider = new ArrayDataProvider([
-                    'allModels' => $elementos,
-                    'pagination' => ['pagesize' => 10,],
-                ]);
-                return Yii::$app->controller->renderPartial('/computos-metricos/elementos', ['dataProvider' => $dataProvider]);
-            }
+            $gestor = new GestorPresupuestos;
+            $pIdPresupuesto = $model['IdPresupuesto'];
+            $insumos = $gestor->ListarInsumos($pIdPresupuesto);
+            $dataProvider = new ArrayDataProvider([
+                'allModels' => $insumos,
+                'pagination' => ['pagesize' => 5,],
+            ]);
+            return Yii::$app->controller->renderPartial('insumos',['dataProvider' => $dataProvider]);
         },
         'headerOptions' => ['class' => 'kartik-sheet-style'], 
         'expandOneOnly' => true
@@ -64,16 +50,24 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Descripcion',            
-        'vAlign' => 'middle',            
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],            
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'FechaComputoMetrico',
-        'label' => 'Fecha Cómputo Métrico',            
+        'attribute' => 'FechaDePresupuesto',
+        'label' => 'Fecha Presupuesto',            
         'vAlign' => 'middle',
         'hAlign' => 'center',            
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'value' => function($model){
+            $gestor = new GestorPresupuestos;
+            $pIdPresupuesto = $model['IdPresupuesto'];
+            $preciototal = $gestor->CalculoPrecioTotal($pIdPresupuesto);
+            return $preciototal[0]['PrecioTotal'];
+        },
+        'label' => 'Precio Total',            
+        'vAlign' => 'middle',
+        'hAlign' => 'center',   
+        'format' => ['decimal',2],
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
@@ -81,34 +75,26 @@ $gridColumns = [
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' => '{agregar-linea} {modificar} {borrar}',
+        'template' => '{modificar} {borrar} {listar}',
         'buttons' => [
-                'agregar-linea' => function($url, $model, $key){
-                    return  Html::button('<i class="fa fa-plus"></i>',
-                            [
-                                'value'=>Url::to(['/computos-metricos/agregar-linea', 'IdComputoMetrico' => $model['IdComputoMetrico']]), 
-                                'class'=>'btn btn-link modalButton',
-                                'title'=>'Agregar nueva Linea al Cómputo Métrico'
-                            ]);
-                }, 
                 'modificar' => function($url, $model, $key){ 
                     return  Html::button('<i class="fa fa-pencil"></i>',
                             [
-                                'value'=>Url::to(['/computos-metricos/modificar', 'IdComputoMetrico' => $model['IdComputoMetrico']]),
+                                'value'=>Url::to(['/presupuestos/modificar', 'IdPresupuesto' => $model['IdPresupuesto']]),
                                 'class'=>'btn btn-link modalButton',
-                                'title'=>'Modificar Cómputo Métrico'
+                                'title'=>'Modificar Presupuesto'
                             ]);
                 },
                 'borrar' => function($url, $model, $key){
                     return Html::a('<i class="fa fa-trash-o"></i>',
                             [
-                                'borrar','IdComputoMetrico' => $model['IdComputoMetrico']
+                                'borrar','IdPresupuesto' => $model['IdPresupuesto']
                             ], 
                             [
-                                'title' => 'Borrar Cómputo Métrico', 
+                                'title' => 'Borrar Presupuesto', 
                                 'class' => 'btn btn-link',
                                 'data' => [
-                                    'confirm' => 'Esta seguro que desea borrar el Cómputo Métrico?',
+                                    'confirm' => 'Esta seguro que desea borrar el Presupuesto?',
                                     'method' => 'post'
                                 ]
                             ]);
@@ -141,7 +127,7 @@ $gridColumns = [
 
 <?php
     Modal::begin([
-            'header'=>'<h2>Cómputos Métricos</h2>',
+            'header'=>'<h2>Presupuestos</h2>',
             'footer'=>'',
             'id'=>'modal',
             'size'=>'modal-lg',
@@ -173,12 +159,20 @@ $gridColumns = [
             [
                 'content' => Html::button('<i class="glyphicon glyphicon-plus"></i>',
                             [
-                                'value'=>Url::to('/sgpoc/backend/web/computos-metricos/alta'), 
+                                'value'=>Url::to('/sgpoc/backend/web/presupuestos/alta'), 
                                 'class'=>'btn btn-success modalButton',
-                                'title'=>'Crear Cómputo Métrico'
+                                'title'=>'Crear Presupuesto'
+                            ]).' '.
+                            Html::a('<i class="fa fa-gear"></i>',
+                            [
+                                'listar',
+                            ], 
+                            [
+                                'title' => 'Listar Presupuesto por Items/Elementos', 
+                                'class' => 'btn btn-default',
                             ]).' '.
                             Html::a('<i class="glyphicon glyphicon-repeat"></i>', 
-                            ['computos-metricos/listar'], 
+                            ['presupuestos/listar'], 
                             [
                                 'data-pjax' => 0, 
                                 'class' => 'btn btn-default', 
@@ -188,7 +182,7 @@ $gridColumns = [
             '{export}',
         ],
         'panel' => [
-            'heading' => '<h3 class="panel-title"><i class="fa fa-book"></i> Cómputos Métricos</h3>',
+            'heading' => '<h3 class="panel-title"><i class="fa fa-dollar"></i> Presupuestos</h3>',
             'type' => GridView::TYPE_DEFAULT,
         ],
     ]);   

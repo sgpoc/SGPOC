@@ -7,10 +7,6 @@ use yii\bootstrap\Modal;
 use yii\helpers\Url;
 
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\SubFamiliaBuscar*/
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = 'SGPOC | SubFamilias';
 
 $gridColumns = [
@@ -112,10 +108,14 @@ $gridColumns = [
 
 <div>
     <?= GridView::widget([
+        'id' => 'gridview',
         'moduleId' => 'gridviewKrajee',
         'pjax'=>true,
         'pjaxSettings'=>[
             'neverTimeout'=>true,
+            'options' => [
+                'id' => 'gridview'
+            ]
         ],
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,

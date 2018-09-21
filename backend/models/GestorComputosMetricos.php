@@ -34,31 +34,34 @@ class GestorComputosMetricos
         return $elementos;
     }
     
-    public function Buscar($pIdObra, $pFechaComputoMetrico, $pIdGT){
-        $sql = 'CALL ssp_buscar_computosmetricos(:pIdObra, :pFechaComputoMetrico, :pIdGT)';
+    public function Buscar($pIdObra, $pDescripcion, $pFechaComputoMetrico, $pIdGT){
+        $sql = 'CALL ssp_buscar_computosmetricos(:pIdObra, :pDescripcion, :pFechaComputoMetrico, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdObra', $pIdObra)
+                ->bindValue('pDescripcion', $pDescripcion)
                 ->bindValue('pFechaComputoMetrico',$pFechaComputoMetrico)
                 ->bindValue('pIdGT', $pIdGT);
         $computos = $comando->queryAll();
         return $computos;
     }
     
-    public function Alta($pIdObra, $pFechaComputoMetrico, $pTipoComputo)
+    public function Alta($pIdObra, $pDescripcion, $pFechaComputoMetrico, $pTipoComputo)
     {
-        $sql = 'CALL ssp_alta_computometrico(:pIdObra, :pFechaComputoMetrico, :pTipoComputo)';
+        $sql = 'CALL ssp_alta_computometrico(:pIdObra, :pDescripcion, :pFechaComputoMetrico, :pTipoComputo)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdObra', $pIdObra)
+                ->bindValue('pDescripcion', $pDescripcion)
                 ->bindValue('pFechaComputoMetrico',$pFechaComputoMetrico)
                 ->bindValue('pTipoComputo', $pTipoComputo);
         return $comando->queryAll();
     }
     
-    public function Modificar($pIdComputoMetrico, $pFechaComputoMetrico, $pTipoComputo)
+    public function Modificar($pIdComputoMetrico, $pDescripcion, $pFechaComputoMetrico, $pTipoComputo)
     {
-        $sql = 'CALL ssp_modificar_computometrico(:pIdComputoMetrico, :pFechaComputoMetrico, :pTipoComputo)';
+        $sql = 'CALL ssp_modificar_computometrico(:pIdComputoMetrico, :pDescripcion, :pFechaComputoMetrico, :pTipoComputo)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdComputoMetrico', $pIdComputoMetrico)
+                ->bindValue('pDescripcion', $pDescripcion)
                 ->bindValue('pFechaComputoMetrico', $pFechaComputoMetrico)
                 ->bindValue('pTipoComputo',$pTipoComputo);
         return $comando->queryAll();

@@ -43,8 +43,9 @@ use kartik\daterange\DateRangePicker;
                         'showDropdowns'=>true
                     ]
                 ]); 
-            ?>            
-            <?= $form->field($model, 'TipoComputo', ['addon' => ['prepend' => ['content'=>'T']]])->textInput(['placeholder'=>'Ingrese el Tipo ...']); ?>
+            ?>
+            <?= $form->field($model, 'Descripcion')->textArea(['row'=>5]) ?>            
+            <?= $form->field($model, 'TipoComputo', ['addon' => ['prepend' => ['content'=>'T']]])->textInput(['value'=>$computo[0]['TipoComputo']]); ?>
         </div>
     </div>
     <div class="modal-footer">

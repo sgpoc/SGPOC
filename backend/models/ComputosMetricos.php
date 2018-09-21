@@ -12,6 +12,7 @@ class ComputosMetricos extends Model
     public $IdGT;
     public $FechaComputoMetrico;
     public $TipoComputo;
+    public $Descripcion;
     
     public static function tableName()
     {
@@ -21,10 +22,12 @@ class ComputosMetricos extends Model
     public function rules()
     {
         return [
-            [['IdObra', 'FechaComputoMetrico','TipoComputo'], 'required', 'on' => 'alta-computo'],
+            [['IdObra', 'FechaComputoMetrico','TipoComputo','Descripcion'], 'required', 'on' => 'alta-computo'],
             [['FechaComputoMetrico','TipoComputo'], 'required'],
             [['FechaComputoMetrico'], 'date', 'format' => 'php:Y-m-d'],
             [['TipoComputo'], 'string', 'max' => 1],
+            [['Descripcion'], 'string', 'max' => 100],
+            
         ];
     }
 

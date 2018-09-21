@@ -23,6 +23,15 @@ class GestorObras
         return $localidades;
     }
     
+    public function ListarComputos($pIdObra)
+    {
+        $sql = 'CALL ssp_listar_computos_obra(:pIdObra)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdObra', $pIdObra);
+        $computos = $comando->queryAll();
+        return $computos;
+    }
+    
     public function Buscar($pObra, $pIdLocalidad, $pDireccion, $pEstado, $pIdGT){
         $sql = 'CALL ssp_buscar_obras(:pObra, :pIdLocalidad, :pDireccion, :pEstado, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
