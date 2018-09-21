@@ -54,6 +54,16 @@ return [
                 '<controller:\w+>/<action:\[\w\-]+>' => '<controller>/<action>',
             ),
         ],
+        'assetManager' => [
+            'bundles' => [
+                'yii\bootstrap4\BootstrapAsset' => [
+                    'sourcePath' => '@npm/bootstrap/dist'
+                ],
+                'yii\bootstrap4\BootstrapPluginAsset' => [
+                    'sourcePath' => '@npm/bootstrap/dist'
+                ]
+            ]
+        ]
     ],
     'params' => $params,
     'defaultRoute' => 'site/login',
