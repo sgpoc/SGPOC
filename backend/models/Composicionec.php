@@ -27,9 +27,9 @@ class Composicionec extends Model
     public function rules()
     {
         return [
-            [['IdItem', 'IdElementoConstructivo', 'IdRubroItem', 'IdRubroEC', 'IdGT', 'Incidencia'], 'required'],
-            [['IdItem', 'IdElementoConstructivo', 'IdRubroItem', 'IdRubroEC', 'IdGT'], 'integer'],
             [['Incidencia'], 'number'],
+            [['Incidencia','IdItem'], 'required', 'on' => 'agregar-item-elemento'],
+            [['Incidencia'], 'required','on' => 'modificar-incidencia'],
           ];
     }
 
@@ -39,7 +39,7 @@ class Composicionec extends Model
     public function attributeLabels()
     {
         return [
-            'IdItem' => 'Id Item',
+            'IdItem' => 'Item',
             'IdElementoConstructivo' => 'Id Elemento Constructivo',
             'IdRubroItem' => 'Id Rubro Item',
             'IdRubroEC' => 'Id Rubro Ec',

@@ -125,7 +125,7 @@ class ItemsController extends Controller
     public function actionAgregarInsumo()
     {
         $model = new ComposicionItem;
-        $model->scenario = 'agregar-insumo';
+        $model -> scenario = 'agregar-insumo-item';
         $gestor = new GestorItems;
         $gestori = new GestorInsumos;
         $pIdGT = Yii::$app->user->identity['IdGT'];
@@ -154,10 +154,11 @@ class ItemsController extends Controller
     public function actionModificarIncidencia()
     {
         $model = new ComposicionItem;
-        $model->scenario = 'modificar-incidencia';
+        $model -> scenario = 'modificar-incidencia';
         $gestor = new GestorItems;
         $pIdItem = Yii::$app->request->get('IdItem');
         $pIdInsumo = Yii::$app->request->get('IdInsumo');
+        $incidencia = $gestor->DameIncidenciaInsumoItem($pIdItem, $pIdInsumo);
         if($model->load(Yii::$app->request->post()) && $model->validate())
         {
             $pIncidencia = $model->Incidencia;
@@ -168,11 +169,11 @@ class ItemsController extends Controller
             }
             else{
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('modificar-incidencia',['model' => $model]);
+                return $this->renderAjax('modificar-incidencia',['model' => $model, 'incidencia' => $incidencia]);
             }
         }
         else{ 
-            return $this->renderAjax('modificar-incidencia',['model' => $model]);
+            return $this->renderAjax('modificar-incidencia',['model' => $model, 'incidencia' => $incidencia]);
         }
     }
     

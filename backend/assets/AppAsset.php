@@ -14,6 +14,7 @@ class AppAsset extends AssetBundle
         'css/ionicons.css',
         'css/AdminLTE.min.css',
         'css/skins/_all-skins.min.css',
+        'css/AdminLTE.min.css',
     ];
     public $js = [
         'js/jquery-ui.min.js',
@@ -21,10 +22,10 @@ class AppAsset extends AssetBundle
         'js/jquery.sparkline.min.js',
         'js/jquery.slimscroll.min.js',
         'js/fastclick.js',
-        'js/adminlte.min.js',
         'js/dashboard.js',
         'js/main.js',
         'js/custom.js',
+        'js/adminlte.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

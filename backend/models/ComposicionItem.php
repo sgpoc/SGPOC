@@ -23,9 +23,9 @@ class ComposicionItem extends Model
     public function rules()
     {
         return [
-            [[ 'IdInsumo', 'Incidencia'], 'required', 'on' => 'agregar-insumo'],
-            [[ 'Incidencia'], 'required', 'on' => 'modificar-incidencia'],
-            ['Incidencia', 'number']
+            [['Incidencia'], 'number'],
+            [['Incidencia','IdInsumo'], 'required','on' => 'agregar-insumo-item'],
+            [['Incidencia'], 'required','on' => 'modificar-incidencia'],
         ];
     }
 
