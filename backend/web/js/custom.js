@@ -5,11 +5,11 @@ $("#gridview").on("pjax:success", function() {
 });
 
 function init_click_handlers(){
-	$('.modalButton').click(function modal(e){    
+	$('.modalButton').click(function (e){    
 		e.preventDefault();
-		$('#modal').modal('show')
-			.find('#modalContent')
-			.load($(this).attr('value'));
+		$('#modal').modal('show').find('#modalContent').load($(this).attr('value'));
 	return false;
+        
 	});
+        
 };

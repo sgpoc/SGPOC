@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use kartik\form\ActiveForm;
 use kartik\widgets\Growl;
+use yii\widgets\Pjax;
 
 
 ?>
@@ -26,7 +27,7 @@ use kartik\widgets\Growl;
     }
 ?>  
 
-<?php $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin(['id' => 'alta']); ?>
 <div class="modal-content">
     <div class="modal-header">
         <h1 class="modal-title">Alta</h1>   

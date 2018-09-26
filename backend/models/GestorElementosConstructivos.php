@@ -106,6 +106,25 @@ class GestorElementosConstructivos
         return $comando->queryAll();
           
       }
+      
+        public function DameIncidenciaItemElemento($pIdElemento, $pIdItem){
+        $sql = 'CALL ssp_dame_incidencia_item_elemento(:pIdElemento, :pIdItem)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdElemento', $pIdElemento)
+                ->bindValue('pIdItem', $pIdItem);
+                
+        return $comando->queryAll();
+    }
+    
+        public function ModificarIncidencia($pIdElemento, $pIdItem, $pIncidencia)
+    {
+        $sql = 'CALL ssp_modificar_incidencia_item(:pIdElemento, :pIdItem, :pIncidencia)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdElemento', $pIdElemento)
+                ->bindValue('pIdItem', $pIdItem)
+                ->bindValue('pIncidencia',$pIncidencia);
+        return $comando->queryAll();
+    }
     
       
       

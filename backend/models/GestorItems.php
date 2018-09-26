@@ -107,4 +107,13 @@ class GestorItems
                 ->bindValue('pIdInsumo',$pIdInsumo);
         return $comando->queryAll();
     }
+    
+    public function DameIncidenciaInsumoItem($pIdItem,$pIdInsumo){
+        $sql = 'CALL ssp_dame_incidencia_insumo_item(:pIdItem, :pIdInsumo)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdItem', $pIdItem)
+                ->bindValue('pIdInsumo', $pIdInsumo);
+                
+        return $comando->queryAll();
+    }
 }

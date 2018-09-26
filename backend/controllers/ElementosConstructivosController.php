@@ -66,8 +66,9 @@ class ElementosConstructivosController extends Controller
                 return $this->redirect('/sgpoc/backend/web/elementos-constructivos/listar');
             }
             else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('alta',['model' => $model, 'listDataREC' => $listDataREC, 'listDataU' => $listDataU]);
+             Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+             
+            return $this->renderAjax('alta',['model' => $model, 'listDataREC' => $listDataREC, 'listDataU' => $listDataU]);
             }
         }
         else{ 
@@ -75,6 +76,7 @@ class ElementosConstructivosController extends Controller
         }
     }
     
+ 
     public function actionModificar()
     {
         $model = new Elementosconstructivos;
@@ -117,13 +119,14 @@ class ElementosConstructivosController extends Controller
      public function actionAgregarItem()
     {
         $model = new Composicionec;
+        $model-> scenario = 'agregar-item-elemento';
         $gestor = new GestorElementosConstructivos;
         $gestori = new GestorItems;
         $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdElementoConstructivo= Yii::$app->request->get('IdElementoConstructivo');
         $items = $gestori->Listar($pIdGT);
         $listDataI = ArrayHelper::map($items,'IdItem','Item');
-        if($model->load(Yii::$app->request->post())) //&& $model->validate())
+        if($model->load(Yii::$app->request->post()) && $model->validate())
         {
             $pIdItem = $model->IdItem;
             $pIncidencia = $model->Incidencia;
@@ -158,5 +161,31 @@ class ElementosConstructivosController extends Controller
         }
     }
     
+    
+     public function actionModificarIncidencia()
+    {
+        $model = new Composicionec;
+        $model -> scenario = 'modificar-incidencia';
+        $gestor = new GestorElementosConstructivos;
+        $pIdElemento = Yii::$app->request->get('IdElementoConstructivo');
+        $pIdItem = Yii::$app->request->get('IdItem');
+        $incidencia = $gestor->DameIncidenciaItemElemento($pIdElemento, $pIdItem);
+        if($model->load(Yii::$app->request->post()) && $model->validate())
+        {
+            $pIncidencia = $model->Incidencia;
+            $mensaje = $gestor->ModificarIncidencia($pIdElemento, $pIdItem, $pIncidencia);
+            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
+            {
+                return $this->redirect('/sgpoc/backend/web/elementos-constructivos/listar');
+            }
+            else{
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+                return $this->renderAjax('modificar-incidencia',['model' => $model, 'incidencia' => $incidencia]);
+            }
+        }
+        else{ 
+            return $this->renderAjax('modificar-incidencia',['model' => $model, 'incidencia' => $incidencia]);
+        }
+    }
 
 }
