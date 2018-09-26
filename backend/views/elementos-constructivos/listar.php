@@ -139,14 +139,21 @@ $gridColumns = [
     
 ?>
 
-<?php Pjax::begin(['id'=>'some_pjax_id']); ?>
+
+
 <div>
     <?= GridView::widget([
+        'id' => 'gridview',
         'moduleId' => 'gridviewKrajee',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
-        'pjax' => 'true',
+        'pjax' => true,
+        'pjaxSettings' => [
+          'options' => [
+              'id' => 'gridview'
+          ]  
+        ], 
         'exportConfig' => [
                 GridView::EXCEL => ['label' => 'Descargar como EXCEL'],
                 GridView::TEXT => ['label' => 'Descargar como TEXTO'],
@@ -177,6 +184,6 @@ $gridColumns = [
     ]);   
     ?>
 </div>
-<?php Pjax::end(); ?>
+
 
 
