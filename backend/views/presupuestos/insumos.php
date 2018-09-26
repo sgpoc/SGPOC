@@ -111,7 +111,7 @@ $gridColumns = [
         'template' => '{modificar-porcentajes} {eleccion-precio}',
         'buttons' => [
                 'modificar-porcentajes' => function($url, $model, $key){ 
-                    return  Html::button('<i class="fa fa-pencil"></i>',
+                    return  Html::button('<i class="fa fa-pencil-alt"></i>',
                             [
                                 'value'=>Url::to(['/presupuestos/modificar-porcentajes','IdPresupuesto' =>$model['IdPresupuesto'], 'IdInsumo' => $model['IdInsumo']]), 
                                 'class'=>'btn btn-link modalButton',
@@ -119,7 +119,7 @@ $gridColumns = [
                             ]);
                 },
                 'eleccion-precio' => function($url, $model, $key){ 
-                    return  Html::button('<i class="fa fa-dollar"></i>',
+                    return  Html::button('<i class="fa fa-dollar-sign"></i>',
                             [
                                 'value'=>Url::to(['/presupuestos/eleccion-precio','IdPresupuesto' =>$model['IdPresupuesto'], 'IdInsumo' => $model['IdInsumo']]), 
                                 'class'=>'btn btn-link modalButton',
@@ -171,7 +171,13 @@ $gridColumns = [
             'neverTimeout'=>true,
         ],
         'dataProvider' => $dataProvider,
-        'columns' => $gridColumns
+        'columns' => $gridColumns,
+        'hover' => true,
+        'bordered' => false,
+        'striped' => false,
+        'condensed' => true,
+        'responsive' => true,
+        'responsiveWrap' => true,
     ]);   
     ?>
 </div>

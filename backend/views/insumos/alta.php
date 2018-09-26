@@ -39,7 +39,8 @@ use kartik\widgets\Growl;
         </div>
     </div>
     <div class="modal-footer">
-        <?= html::submitButton('Alta',['class'=>'btn btn-success pull-right', 'id' => 'submitButton']); ?>
+        <?= html::submitButton('Alta',['class'=>'btn btn-success pull-right']); ?>
+        <?= html::button('Cerrar',['class'=>'btn btn-default pull-right', 'data-dismiss'=>'modal']); ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>

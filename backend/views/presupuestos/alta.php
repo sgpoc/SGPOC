@@ -50,7 +50,7 @@ use yii\web\Controller;
                 ->label('Cómputo Métrico');  
             ?>
             <?= $form->field($model, 'FechaDePresupuesto', [
-                    'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
+                    'addon'=>['prepend'=>['content'=>'<i class="far fa-calendar-alt"></i>']],
                     'options'=>['class'=>'drp-container form-group']
                 ])->widget(DateRangePicker::classname(), [
                     'useWithAddon'=>true,
@@ -64,6 +64,7 @@ use yii\web\Controller;
     </div>
     <div class="modal-footer">
         <?= html::submitButton('Alta',['class'=>'btn btn-success pull-right']); ?>
+        <?= html::button('Cerrar',['class'=>'btn btn-default pull-right', 'data-dismiss'=>'modal']); ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>

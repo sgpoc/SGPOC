@@ -37,7 +37,7 @@ class ItemsController extends Controller
             $items = $gestor->Buscar($pItem, $pIdRubroItem, $pIdUnidad, $pIdGT);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $items,
-                'pagination' => ['pagesize' => 10,],
+                'pagination' => ['pagesize' => 9,],
             ]);
             return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listDataU' => $listDataU, 'listDataRI' => $listDataRI]);
         }
@@ -45,7 +45,7 @@ class ItemsController extends Controller
             $items = $gestor->Listar($pIdGT);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $items,
-                'pagination' => ['pagesize' => 10,],
+                'pagination' => ['pagesize' => 9,],
             ]);
             return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listDataU' => $listDataU, 'listDataRI' => $listDataRI]);
         }

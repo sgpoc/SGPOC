@@ -159,10 +159,10 @@ $gridColumns = [
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
         'exportConfig' => [
-                GridView::EXCEL => ['label' => 'Descargar como EXCEL'],
-                GridView::TEXT => ['label' => 'Descargar como TEXTO'],
-                GridView::PDF => ['label' => 'Descargar como PDF'],
-         ],
+                GridView::EXCEL => ['label' => 'EXCEL'],
+                GridView::TEXT => ['label' => 'TEXTO'],
+                GridView::PDF => ['label' => 'PDF'],
+        ],
         'toolbar' => [
             [
                 'content' => Html::button('<i class="fa fa-plus"></i>',
@@ -182,7 +182,7 @@ $gridColumns = [
             '{export}',
         ],
         'export' => [
-            'fontAwesome' => true
+            'icon' => 'fa fa-external-link-alt'
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="fa fa-cog"></i> Items</h3>',

@@ -38,7 +38,7 @@ class InsumosController extends Controller
             $insumos = $gestor->Buscar($pInsumo, $pTipoInsumo, $pIdFamilia, $pIdSubFamilia, $pIdUnidad, $pIdGT);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $insumos,
-                'pagination' => ['pagesize' => 10,],
+                'pagination' => ['pagesize' => 9,],
             ]);
             return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listDataU' => $listDataU, 'listDataF' => $listDataF, 'listDataSF' => $listDataSF]);
         }
@@ -46,7 +46,7 @@ class InsumosController extends Controller
             $insumos = $gestor->Listar($pIdGT);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $insumos,
-                'pagination' => ['pagesize' => 10,],
+                'pagination' => ['pagesize' => 9,],
             ]);
             return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listDataU' => $listDataU, 'listDataF' => $listDataF, 'listDataSF' => $listDataSF]);
         }

@@ -5,11 +5,6 @@ use kartik\form\ActiveForm;
 use kartik\widgets\Growl;
 
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\UsuariosBusqueda */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-// cambio.
-
 ?>
 
 <?php if(Yii::$app->session->getFlash('alert')){
@@ -47,6 +42,7 @@ use kartik\widgets\Growl;
     </div>
     <div class="modal-footer">
         <?= html::submitButton('Modificar',['class'=>'btn btn-success pull-right']); ?>
+        <?= html::button('Cerrar',['class'=>'btn btn-default pull-right', 'data-dismiss'=>'modal']); ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>

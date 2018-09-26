@@ -77,7 +77,7 @@ $gridColumns = [
         'template' => '{modificar} {borrar}',
         'buttons' => [
                 'modificar' => function($url, $model, $key){ 
-                    return  Html::button('<i class="fa fa-pencil"></i>',
+                    return  Html::button('<i class="fa fa-pencil-alt"></i>',
                             [
                                 'value'=>Url::to(['/computos-metricos/modificar-linea', 'IdComputoMetrico' => $model['IdComputoMetrico'], 'NroLinea' => $model['NroLinea']]), 
                                 'class'=>'btn btn-link modalButton',
@@ -85,7 +85,7 @@ $gridColumns = [
                             ]);
                 },
                 'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-trash-o"></i>',
+                    return Html::a('<i class="fa fa-trash"></i>',
                             [
                                 'borrar-linea', 'IdComputoMetrico' => $model['IdComputoMetrico'], 'NroLinea' => $model['NroLinea'],
                             ], 
@@ -143,7 +143,13 @@ $gridColumns = [
             'neverTimeout'=>true,
         ],
         'dataProvider' => $dataProvider,
-        'columns' => $gridColumns
+        'columns' => $gridColumns,
+        'hover' => true,
+        'bordered' => false,
+        'striped' => false,
+        'condensed' => true,
+        'responsive' => true,
+        'responsiveWrap' => true,
     ]);   
     ?>
 </div>

@@ -2,10 +2,11 @@
 
 use backend\assets\AppAsset;
 use yii\helpers\Html;
-use kartik\icons\FontAwesomeAsset;
+use app\assets\FontAsset;
 
-FontAwesomeAsset::register($this);
 AppAsset::register($this);
+FontAsset::register($this);
+
 ?>
 
 <?php $this->beginPage() ?>
@@ -17,8 +18,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link rel="icon" href="https://foxico.io/static/uploads/logofile-83defe355ce588c170b2d3eb2d74bca7.png" type="image/ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="icon" href="http://www.fau.unt.edu.ar/wp-content/themes/fau/images/logo.png" type="image/ico">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" crossorigin="anonymous"></script>
     <?php $this->head() ?>
 </head>
@@ -164,6 +164,4 @@ AppAsset::register($this);
 <?php $this->endBody() ?>
 </body>
 </html>
-
-
 <?php $this->endPage() ?>

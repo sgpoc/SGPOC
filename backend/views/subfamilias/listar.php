@@ -20,18 +20,17 @@ $gridColumns = [
     [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'SubFamilia',
-        'label' => 'Nombre',
+        'label' => 'SubFamilia',
         'vAlign' => 'middle',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'Familia',
-        'label' => 'Nombre',
         'vAlign' => 'middle',
         'filterType' => GridView::FILTER_SELECT2,
         'filter'=> $listData,
-        'filterInputOptions' => ['placeholder' => 'Seleccionar Familia'],
+        'filterInputOptions' => ['placeholder' => ''],
         'format' => 'raw',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
@@ -43,7 +42,7 @@ $gridColumns = [
         'template' => '{modificar} {borrar} {listarinsumos}',
         'buttons' => [
                 'modificar' => function($url, $model, $key){ 
-                    return  Html::button('<i class="fa fa-pencil"></i>',
+                    return  Html::button('<i class="fa fa-pencil-alt"></i>',
                             [
                                 'value'=>Url::to(['/subfamilias/modificar', 'IdSubFamilia' => $model['IdSubFamilia']]), 
                                 'class'=>'btn btn-link modalButton',
@@ -51,7 +50,7 @@ $gridColumns = [
                             ]);
                 },
                 'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-trash-o"></i>',
+                    return Html::a('<i class="fa fa-trash"></i>',
                             ['borrar','IdSubFamilia' => $model['IdSubFamilia']], 
                             [
                                 'title' => 'Borrar SubFamilia', 
@@ -121,19 +120,19 @@ $gridColumns = [
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
         'exportConfig' => [
-                GridView::EXCEL => ['label' => 'Descargar como EXCEL'],
-                GridView::TEXT => ['label' => 'Descargar como TEXTO'],
-                GridView::PDF => ['label' => 'Descargar como PDF'],
+                GridView::EXCEL => ['label' => 'EXCEL'],
+                GridView::TEXT => ['label' => 'TEXTO'],
+                GridView::PDF => ['label' => 'PDF'],
          ],
         'toolbar' => [
             [
-                'content' => Html::button('<i class="glyphicon glyphicon-plus"></i>',
+                'content' => Html::button('<i class="fa fa-plus"></i>',
                             [
                                 'value'=>Url::to('/sgpoc/backend/web/subfamilias/alta'), 
                                 'class'=>'btn btn-success modalButton',
                                 'title'=>'Crear SubFamilia'
                             ]).' '.
-                            Html::a('<i class="glyphicon glyphicon-repeat"></i>', 
+                            Html::a('<i class="fa fa-redo"></i>', 
                             ['subfamilias/listar'], 
                             [
                                 'data-pjax' => 0, 
@@ -143,10 +142,19 @@ $gridColumns = [
             ],
             '{export}',
         ],
+        'export' =>[
+          'icon' => 'fa fa-external-link-alt',  
+        ],
         'panel' => [
-            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-list"></i> SubFamilias</h3>',
+            'heading' => '<h3 class="panel-title"><i class="fa fa-th-list"></i> SubFamilias</h3>',
             'type' => GridView::TYPE_DEFAULT,
         ],
+        'hover' => true,
+        'bordered' => false,
+        'striped' => false,
+        'condensed' => true,
+        'responsive' => true,
+        'responsiveWrap' => true,
     ]);   
     ?>
     

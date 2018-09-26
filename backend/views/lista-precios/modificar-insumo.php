@@ -36,7 +36,7 @@ use kartik\daterange\DateRangePicker;
             <?= $form->field($model, 'PrecioLista', ['addon' => ['prepend' => ['content'=>'$']]])->textInput(['value'=>$Insumo[0]['PrecioLista']]) ?>
             <?= 
                 $form->field($model, 'FechaUltimaActualizacion', [
-                    'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
+                    'addon'=>['prepend'=>['content'=>'<i class="far fa-calendar-alt"></i>']],
                     'options'=>['class'=>'drp-container form-group']
                 ])->widget(DateRangePicker::classname(), [
                      'model' => $model,
@@ -51,6 +51,7 @@ use kartik\daterange\DateRangePicker;
         </div>
         <div class="modal-footer">
             <?= html::submitButton('Modificar',['class'=>'btn btn-success pull-right']); ?>
+            <?= html::button('Cerrar',['class'=>'btn btn-default pull-right', 'data-dismiss'=>'modal']); ?>
         </div>
     </div>
 </div>

@@ -32,7 +32,7 @@ $gridColumns = [
         'template' => '{modificar} {borrar} {listarsubfamilias}',
         'buttons' => [
                 'modificar' => function($url, $model, $key){ 
-                    return  Html::button('<i class="fa fa-pencil"></i>',
+                    return  Html::button('<i class="fa fa-pencil-alt"></i>',
                             [
                                 'value'=>Url::to(['/familias/modificar', 'IdFamilia' => $model['IdFamilia']]), 
                                 'class'=>'btn btn-link modalButton',
@@ -40,7 +40,7 @@ $gridColumns = [
                             ]);
                 },
                 'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-trash-o"></i>',
+                    return Html::a('<i class="fa fa-trash"></i>',
                             ['borrar','IdFamilia' => $model['IdFamilia']], 
                             [
                                 'title' => 'Borrar Familia', 
@@ -52,7 +52,7 @@ $gridColumns = [
                             ]);
                 },
                 'listarsubfamilias' => function($url, $model, $key){
-                    return Html::a('<i class="glyphicon glyphicon-th"></i>',
+                    return Html::a('<i class="fa fa-th-list"></i>',
                             ['listar-subfamilias','IdFamilia' => $model['IdFamilia']], 
                             [
                                 'title' => 'Lista Subfamilias Familia',
@@ -110,19 +110,19 @@ $gridColumns = [
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
         'exportConfig' => [
-                GridView::EXCEL => ['label' => 'Descargar como EXCEL'],
-                GridView::TEXT => ['label' => 'Descargar como TEXTO'],
-                GridView::PDF => ['label' => 'Descargar como PDF'],
+                GridView::EXCEL => ['label' => 'EXCEL'],
+                GridView::TEXT => ['label' => 'TEXTO'],
+                GridView::PDF => ['label' => 'PDF'],
          ],
         'toolbar' => [
             [
-                'content' =>Html::button('<i class="glyphicon glyphicon-plus"></i>',
+                'content' =>Html::button('<i class="fa fa-plus"></i>',
                             [
                                 'value'=>Url::to('/sgpoc/backend/web/familias/alta'), 
                                 'class'=>'btn btn-success modalButton',
                                 'title'=>'Crear Familia'
                             ]).' '.
-                            Html::a('<i class="glyphicon glyphicon-repeat"></i>', 
+                            Html::a('<i class="fa fa-redo"></i>', 
                             ['familias/listar'], 
                             [
                                 'data-pjax' => 0, 
@@ -132,10 +132,19 @@ $gridColumns = [
             ],
             '{export}',
         ],
+        'export' =>[
+          'icon' => 'fa fa-external-link-alt'  
+        ],
         'panel' => [
-            'heading' => '<h3 class="panel-title"><i class="fa fa-list"></i> Familias</h3>',
+            'heading' => '<h3 class="panel-title"><i class="fa fa-th-large"></i> Familias</h3>',
             'type' => GridView::TYPE_DEFAULT,
         ],
+        'hover' => true,
+        'bordered' => false,
+        'striped' => false,
+        'condensed' => true,
+        'responsive' => true,
+        'responsiveWrap' => true,
     ]);   
     ?>
 </div>

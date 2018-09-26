@@ -36,7 +36,9 @@ $gridColumns = [
             return Yii::$app->controller->renderPartial('insumos',['dataProvider' => $dataProvider]);
         },
         'headerOptions' => ['class' => 'kartik-sheet-style'], 
-        'expandOneOnly' => true
+        'expandOneOnly' => true,
+        'expandIcon' => '<i class="far fa-plus-square"></i>',        
+        'collapseIcon' => '<i class="far fa-minus-square"></i>',
     ],
     [
         'class' => 'kartik\grid\DataColumn',
@@ -78,7 +80,7 @@ $gridColumns = [
         'template' => '{modificar} {borrar} {listar}',
         'buttons' => [
                 'modificar' => function($url, $model, $key){ 
-                    return  Html::button('<i class="fa fa-pencil"></i>',
+                    return  Html::button('<i class="fa fa-pencil-alt"></i>',
                             [
                                 'value'=>Url::to(['/presupuestos/modificar', 'IdPresupuesto' => $model['IdPresupuesto']]),
                                 'class'=>'btn btn-link modalButton',
@@ -86,7 +88,7 @@ $gridColumns = [
                             ]);
                 },
                 'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-trash-o"></i>',
+                    return Html::a('<i class="fa fa-trash"></i>',
                             [
                                 'borrar','IdPresupuesto' => $model['IdPresupuesto']
                             ], 
@@ -151,19 +153,19 @@ $gridColumns = [
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
         'exportConfig' => [
-                GridView::EXCEL => ['label' => 'Descargar como EXCEL'],
-                GridView::TEXT => ['label' => 'Descargar como TEXTO'],
-                GridView::PDF => ['label' => 'Descargar como PDF'],
+                GridView::EXCEL => ['label' => 'EXCEL'],
+                GridView::TEXT => ['label' => 'TEXTO'],
+                GridView::PDF => ['label' => 'PDF'],
          ],
         'toolbar' => [
             [
-                'content' => Html::button('<i class="glyphicon glyphicon-plus"></i>',
+                'content' => Html::button('<i class="fa fa-plus"></i>',
                             [
                                 'value'=>Url::to('/sgpoc/backend/web/presupuestos/alta'), 
                                 'class'=>'btn btn-success modalButton',
                                 'title'=>'Crear Presupuesto'
                             ]).' '.
-                            Html::a('<i class="fa fa-gear"></i>',
+                            Html::a('<i class="fa fa-cog"></i>',
                             [
                                 'listar',
                             ], 
@@ -171,7 +173,7 @@ $gridColumns = [
                                 'title' => 'Listar Presupuesto por Items/Elementos', 
                                 'class' => 'btn btn-default',
                             ]).' '.
-                            Html::a('<i class="glyphicon glyphicon-repeat"></i>', 
+                            Html::a('<i class="fa fa-redo"></i>', 
                             ['presupuestos/listar'], 
                             [
                                 'data-pjax' => 0, 
@@ -181,10 +183,19 @@ $gridColumns = [
             ],
             '{export}',
         ],
+        'export' => [
+          'icon' => 'fa fa-external-link-alt'  
+        ],
         'panel' => [
-            'heading' => '<h3 class="panel-title"><i class="fa fa-dollar"></i> Presupuestos</h3>',
+            'heading' => '<h3 class="panel-title"><i class="fa fa-dollar-sign"></i> Presupuestos</h3>',
             'type' => GridView::TYPE_DEFAULT,
         ],
+        'hover' => true,
+        'bordered' => false,
+        'striped' => false,
+        'condensed' => true,
+        'responsive' => true,
+        'responsiveWrap' => true,
     ]);   
     ?>
 </div>

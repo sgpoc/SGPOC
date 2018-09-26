@@ -53,7 +53,7 @@ return [
                 '<controller:\w+>/<action:\[\w\-]+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\[\w\-]+>' => '<controller>/<action>',
             ),
-        ],
+        ],/*
         'assetManager' => [
             'bundles' => [
                 'yii\bootstrap4\BootstrapAsset' => [
@@ -63,7 +63,7 @@ return [
                     'sourcePath' => '@npm/bootstrap/dist'
                 ]
             ]
-        ]
+        ]*/
     ],
     'params' => $params,
     'defaultRoute' => 'site/login',

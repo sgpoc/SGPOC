@@ -32,7 +32,7 @@ class ComputosMetricosController extends Controller
             $computos = $gestor->Buscar($pIdObra, $pDescripcion, $pFechaComputoMetrico, $pIdGT);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $computos,
-                'pagination' => ['pagesize' => 5,],
+                'pagination' => ['pagesize' => 9,],
             ]);
             return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listDataO' => $listDataO]);
         }
@@ -40,7 +40,7 @@ class ComputosMetricosController extends Controller
             $computos = $gestor->Listar($pIdGT);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $computos,
-                'pagination' => ['pagesize' => 5,],
+                'pagination' => ['pagesize' => 9,],
             ]);
             return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listDataO' => $listDataO]);
         }
