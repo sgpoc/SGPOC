@@ -25,15 +25,14 @@ class Usuarios extends Model
     public function rules()
     {
         return [
-            [['IdUsuario','IdGT', 'IdRol', 'Nombre', 'Apellido', 'Email', 'Password', 'Estado'], 'required'],
+            [['IdGT', 'IdRol', 'Nombre', 'Apellido', 'Email', 'Password'], 'required', 'on' => 'alta-usuario'],
+            [['Nombre', 'Apellido', 'Email', 'Password'], 'required'],
             [['IdGT'], 'integer'],
             [['IdUsuario'], 'integer'],
             [['IdRol'], 'integer'],
             [['Nombre', 'Apellido', 'Email'], 'string', 'max' => 100],
             [['Password'], 'string', 'max' => 100],
             [['Estado'], 'string', 'max' => 1],
-            [['auth_key'], 'string', 'max' => 255],
-            [['IdGT'], 'exist', 'skipOnError' => true, 'targetClass' => Grupostrabajo::className(), 'targetAttribute' => ['IdGT' => 'IdGT']],
             [['auth_key'], 'string', 'max' => 255],
         ];
     }

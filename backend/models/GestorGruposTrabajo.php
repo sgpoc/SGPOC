@@ -15,7 +15,7 @@ class GestorGruposTrabajo
     
     public function ListarUsuarios($pIdGT)
     {   
-        $sql = 'CALL ssp_listar_usuariosgrupostrabajo(:pIdGT)';
+        $sql = 'CALL ssp_listar_usuarios_grupotrabajo(:pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdGT', $pIdGT);
         $usuarios = $comando->queryAll();

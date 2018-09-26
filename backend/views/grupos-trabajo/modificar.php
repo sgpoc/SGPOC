@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use kartik\form\ActiveForm;
-use kartik\alert\Alert;
+use kartik\widgets\Growl;
+use yii\jui\AutoComplete;
 
 ?>
 
@@ -33,12 +34,13 @@ use kartik\alert\Alert;
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?= $form->field($model, 'GrupoTrabajo',['addon' => ['prepend' => ['content'=>'N']]])->textInput(['value'=>$GrupoTrabajo[0]['GrupoTrabajo']]) ?>
-            <?= $form->field($model, 'Mail', ['addon' => ['prepend' => ['content'=>'@']]])->textInput(['value'=>$GrupoTrabajo[0]['Mail']]) ?>
+            <?= $form->field($model, 'GrupoTrabajo',['addon' => ['prepend' => ['content'=>'N']]])->textInput(['value'=>$grupotrabajo[0]['GrupoTrabajo']]) ?>
+            <?= $form->field($model, 'Mail', ['addon' => ['prepend' => ['content'=>'@']]])->textInput(['value'=>$grupotrabajo[0]['Mail']]) ?>
         </div>
     </div>
     <div class="modal-footer">
         <?= html::submitButton('Modificar',['class'=>'btn btn-success']); ?>
+        <?= html::button('Cerrar',['class'=>'btn btn-default pull-right', 'data-dismiss'=>'modal']); ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>

@@ -5,10 +5,6 @@ use kartik\form\ActiveForm;
 use kartik\widgets\Growl;
 use kartik\daterange\DateRangePicker;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\UsuariosBusqueda */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-// cambio.
 
 ?>
 
@@ -43,7 +39,7 @@ use kartik\daterange\DateRangePicker;
             <?= $form->field($model, 'IdInsumo')->dropDownList($listDataI, ['prompt' => 'Seleccione uno ...' ])->label('Insumo');  ?>
             <?= $form->field($model, 'PrecioLista', ['addon' => ['prepend' => ['content'=>'$']]])->textInput(['placeholder'=>'Ingrese el Precio de Lista ...']) ?>
             <?= $form->field($model, 'FechaUltimaActualizacion', [
-                    'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
+                    'addon'=>['prepend'=>['content'=>'<i class="far fa-calendar-alt"></i>']],
                     'options'=>['class'=>'drp-container form-group']
                 ])->widget(DateRangePicker::classname(), [
                     'useWithAddon'=>true,
@@ -56,6 +52,7 @@ use kartik\daterange\DateRangePicker;
         </div>
         <div class="modal-footer">
             <?= html::submitButton('Alta',['class'=>'btn btn-success pull-right']); ?>
+            <?= html::button('Cerrar',['class'=>'btn btn-default pull-right', 'data-dismiss'=>'modal']); ?>
         </div>
     </div>
 </div>

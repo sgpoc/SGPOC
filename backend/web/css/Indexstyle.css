@@ -1,24 +1,67 @@
 .content-wrapper{
-    background: url(https://thumbs.dreamstime.com/z/black-white-template-4551784.jpg);
-     background-size: 1500px 800px;
- 
-   
+    background: url(http://3.bp.blogspot.com/-nqaPEylE51g/T7JT2TiRZnI/AAAAAAAABYY/AMHMAhN6-c0/s1600/drawing+bank+of+china+tower+3.jpg) no-repeat right bottom / 265px 660px,
+				url(https://www.ledr.com/colours/white.jpg) no-repeat center / 1800px 1265px;
+	position:relative;				
 }
 
-.cuerpo h1{
-    font-size: 10rem;
+
+.header h1 , .content h2{
+	font-family: "Courier New", Monospace;
     color: #000;
+	text-align: left;
 }
 
-.cuerpo h2{
-    font-size: 4.5rem;
+.header h1{
+    font-size: 85px;
+}
+
+.content h2{
+    font-size: 50px;
+}
+
+.p {
+	text-align:center;
+}
+
+.fau-logo{
+	height: 100px;
+	width: 100px;
+	position: absolute;
+	bottom: 50px;
+	left: 99px;
+}
+
+.app-logo{
+	height: 120px;
+	width: 120px;
+	position: absolute;
+	top: 100px;
+	left: 600px;
+}
+
+
+.boton{
+	position: relative;
+	left: 100px;
+	margin-top: 50px;
+	background-color: white; 
+    color: black; 
+    border: 2px solid #000;
+	border-radius: 50%;
+    padding: 6px 15px;
+    text-align: center;
+    display: inline;
+	font-family: "Courier New", Monospace;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.boton:hover{
+	background-color: #E5EBE5;
+}
+
+.contacto{
+	font-family: "Courier New", Monospace;
     color: #000;
-}
-
-.center{
-        display: block;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    top: 75px;
+	margin-top: 50px;
 }

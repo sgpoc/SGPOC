@@ -8,9 +8,6 @@ use yii\helpers\Url;
 use yii\data\ArrayDataProvider;
 use app\models\GestorListaPrecios;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\UsuariosBusqueda */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'SGPOC | Lista de Precios';
 
@@ -36,12 +33,14 @@ $gridColumns = [
             $insumos = $gestor->ListarInsumos($pIdProveedor, $pIdLocalidad, $pIdGT);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $insumos,
-                'pagination' => ['pagesize' => 15,],
+                'pagination' => ['pagesize' => 5,],
             ]);
             return Yii::$app->controller->renderPartial('/lista-precios/insumos', ['dataProvider' => $dataProvider]);
         },
         'headerOptions' => ['class' => 'kartik-sheet-style'], 
-        'expandOneOnly' => true
+        'expandOneOnly' => true,
+        'expandIcon' => '<i class="far fa-plus-square"></i>',        
+        'collapseIcon' => '<i class="far fa-minus-square"></i>',
     ],
     [
         'class' => 'kartik\grid\DataColumn',
@@ -117,28 +116,32 @@ $gridColumns = [
 
 <div>
     <?= GridView::widget([
+        'id' => 'gridview',
         'moduleId' => 'gridviewKrajee',
         'pjax'=>true,
         'pjaxSettings'=>[
             'neverTimeout'=>true,
+            'options' => [
+                'id' => 'gridview'
+            ]
         ],
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
         'exportConfig' => [
-                GridView::EXCEL => ['label' => 'Descargar como EXCEL'],
-                GridView::TEXT => ['label' => 'Descargar como TEXTO'],
-                GridView::PDF => ['label' => 'Descargar como PDF'],
+                GridView::EXCEL => ['label' => 'EXCEL'],
+                GridView::TEXT => ['label' => 'TEXTO'],
+                GridView::PDF => ['label' => 'PDF'],
          ],
         'toolbar' => [
             [
-                'content' =>Html::button('<i class="glyphicon glyphicon-plus"></i>',
+                'content' =>Html::button('<i class="fa fa-plus"></i>',
                             [
                                 'value'=>Url::to('/sgpoc/backend/web/lista-precios/alta'), 
                                 'class'=>'btn btn-success modalButton',
                                 'title'=>'Crear Lista de Precios'
                             ]).' '.
-                            Html::a('<i class="glyphicon glyphicon-repeat"></i>', 
+                            Html::a('<i class="fa fa-redo"></i>', 
                             ['lista-precios/listar'], 
                             [
                                 'data-pjax' => 0, 
@@ -148,10 +151,19 @@ $gridColumns = [
             ],
             '{export}',
         ],
+        'export' => [
+          'icon' => 'fa fa-external-link-alt'  
+        ],
         'panel' => [
-            'heading' => '<h3 class="panel-title"><i class="fa fa-money"></i> Lista de Precios</h3>',
+            'heading' => '<h3 class="panel-title"><i class="fa fa-file-invoice-dollar"></i> Lista de Precios</h3>',
             'type' => GridView::TYPE_DEFAULT,
         ],
+        'hover' => true,
+        'bordered' => false,
+        'striped' => false,
+        'condensed' => true,
+        'responsive' => true,
+        'responsiveWrap' => true,
     ]);   
     ?>
 </div>

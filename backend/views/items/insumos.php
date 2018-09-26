@@ -25,6 +25,7 @@ $gridColumns = [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'TipoInsumo',
         'vAlign' => 'middle',
+        'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
@@ -45,6 +46,8 @@ $gridColumns = [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'Abreviatura',
         'label' => 'Unidad',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
@@ -72,7 +75,7 @@ $gridColumns = [
         'template' =>  '{borrar}',
         'buttons' => [
                 'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-trash-o"></i>',
+                    return Html::a('<i class="fa fa-trash"></i>',
                             [
                                 'borrar-insumo', 'IdInsumo' => $model['IdInsumo'], 'IdItem' => $model['IdItem']
                             ], 
@@ -130,7 +133,13 @@ $gridColumns = [
             'neverTimeout'=>true,
         ],
         'dataProvider' => $dataProvider,
-        'columns' => $gridColumns
+        'columns' => $gridColumns,
+        'hover' => true,
+        'bordered' => true,
+        'striped' => false,
+        'condensed' => true,
+        'responsive' => true,
+        'responsiveWrap' => true,
     ]);   
     ?>
 </div>

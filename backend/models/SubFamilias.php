@@ -22,20 +22,19 @@ class Subfamilias extends Model
     public function rules()
     {
         return [
-            [['IdFamilia', 'IdGT', 'SubFamilia'], 'required'],
+            [['IdFamilia', 'SubFamilia'], 'required', 'on' => 'alta-subfamilia'],
+            [['SubFamilia'], 'required'],
             [['IdFamilia', 'IdGT'], 'integer'],
             [['SubFamilia'], 'string', 'max' => 100],
-            [['SubFamilia', 'IdFamilia'], 'unique', 'targetAttribute' => ['SubFamilia', 'IdFamilia']],
-            [['IdFamilia', 'IdGT'], 'exist', 'skipOnError' => true, 'targetClass' => Familias::className(), 'targetAttribute' => ['IdFamilia' => 'IdFamilia', 'IdGT' => 'IdGT']],
         ];
     }
 
     public function attributeLabels()
     {
         return [
-            'IdSubFamilia' => 'Id Sub Familia',
-            'IdFamilia' => 'Id Familia',
-            'IdGT' => 'Id Gt',
+            'IdSubFamilia' => 'Sub Familia',
+            'IdFamilia' => 'Familia',
+            'IdGT' => 'Grupo de Trabajo',
             'SubFamilia' => 'Sub Familia',
         ];
     }

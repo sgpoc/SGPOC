@@ -5,9 +5,6 @@ use Yii;
 use yii\web\AssetBundle;
 use yii\web\View;
 
-/**
- * Main backend application asset bundle.
- */
 class IndexAsset extends AssetBundle
 {
     public $basePath = '@webroot';
@@ -17,7 +14,9 @@ class IndexAsset extends AssetBundle
     
     ];
     public $js = [
-  
+        'js/jquery-3.3.1.js',
+        'js/index.js',
+        'js/custom.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

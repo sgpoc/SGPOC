@@ -10,7 +10,9 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/bootstrap.css',
-        'css/ionicons.min.css',
+        'css/font-awesome.min.css',
+        'css/ionicons.css',
+        'css/AdminLTE.min.css',
         'css/skins/_all-skins.min.css',
         'css/AdminLTE.min.css',
     ];

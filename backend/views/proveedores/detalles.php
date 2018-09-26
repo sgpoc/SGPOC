@@ -19,9 +19,9 @@ echo DetailView::widget([
     ],
     'attributes' => [
         [
-            'attribute' => 'Pagina Web',
-            'value' =>Html::a('Visitar',$model['PaginaWEB']),
-           'format' => 'raw'
+            'attribute' => 'Página Web',
+            'value' => Html::a('Ir a la página', 'https://'.''.$model['PaginaWEB'],['target' => '_blank']),
+            'format' => 'raw'
            
         ],
         [

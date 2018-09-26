@@ -35,7 +35,6 @@ class ObrasController extends Controller
                 'allModels' => $obras,
                 'pagination' => ['pagesize' => 5,],
             ]);
-            //var_dump($searchModel['Localidad'][0]);
             return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listDataL' => $listDataL, 'estados' => $estados]);
         }
         else{
@@ -52,10 +51,11 @@ class ObrasController extends Controller
     public function actionAlta()
     {
         $model = new Obras;
+        $model->scenario = 'alta-obra';
         $gestor = new GestorObras;
         $localidades = $gestor->ListarLocalidades();
         $listData = ArrayHelper::map($localidades, 'IdLocalidad', 'Localidad');
-        if($model->load(Yii::$app->request->post())) //&& $model->validate())
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pIdGT = Yii::$app->user->identity['IdGT'];
             $pIdLocalidad = $model->IdLocalidad;
@@ -88,7 +88,7 @@ class ObrasController extends Controller
         $gestor = new GestorObras;
         $pIdObra = Yii::$app->request->get('IdObra');
         $obra = $gestor->Dame($pIdObra);
-        if($model->load(Yii::$app->request->post()))// && ($model->validate()))
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pObra = $model->Obra;
             $pDireccion = $model->Direccion;

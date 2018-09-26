@@ -1,10 +1,9 @@
 <?php
 
 namespace app\models;
-use yii\base\Model;
+
 use Yii;
-
-
+use yii\base\Model;
 
 class Proveedores extends Model
 {
@@ -27,12 +26,10 @@ class Proveedores extends Model
     public function rules()
     {
         return [
-            [['Proveedor', 'Domicilio', 'CodigoPostal', 'Estado'], 'required'],
+            [['Proveedor', 'Domicilio', 'CodigoPostal'], 'required'],
             [['Proveedor', 'Domicilio', 'Email', 'PaginaWEB'], 'string', 'max' => 100],
             [['CodigoPostal'], 'string', 'max' => 15],
             [['Telefono'], 'string', 'max' => 30],
-            [['Estado'], 'string', 'max' => 1],
-            [['Proveedor'], 'unique'],
         ];
     }
 

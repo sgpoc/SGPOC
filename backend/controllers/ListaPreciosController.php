@@ -48,6 +48,7 @@ class ListaPreciosController extends Controller
     public function actionAlta()
     {
         $model = new ListaPrecios;
+        $model->scenario = 'alta-lista';
         $gestorlp = new GestorListaPrecios;
         $gestorp = new GestorProveedores;
         $gestori = new GestorInsumos;
@@ -58,7 +59,7 @@ class ListaPreciosController extends Controller
         $listDataP = ArrayHelper::map($proveedores,'IdProveedor','Proveedor');
         $localidades = $gestorlp->ListarLocalidades();
         $listDataL = ArrayHelper::map($localidades,'IdLocalidad','Localidad');
-        if($model->load(Yii::$app->request->post()))
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pIdProveedor = $model->IdProveedor;
             $pIdLocalidad = $model->IdLocalidad;
@@ -83,6 +84,7 @@ class ListaPreciosController extends Controller
     public function actionAgregarInsumo()
     {
         $model = new ListaPrecios;
+        $model->scenario = 'agregar-insumo';
         $gestor = new GestorListaPrecios;
         $gestori = new GestorInsumos;
         $pIdGT = Yii::$app->user->identity['IdGT'];
@@ -90,7 +92,7 @@ class ListaPreciosController extends Controller
         $pIdLocalidad = Yii::$app->request->get('IdLocalidad');
         $insumos = $gestori->Listar($pIdGT);
         $listDataI = ArrayHelper::map($insumos,'IdInsumo','Insumo');
-        if($model->load(Yii::$app->request->post())) //&& $model->validate())
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pIdInsumo = $model->IdInsumo;
             $pPrecioLista = $model->PrecioLista;
@@ -130,6 +132,7 @@ class ListaPreciosController extends Controller
     public function actionModificarInsumo()
     {
         $model = new ListaPrecios;
+        $model->scenario = 'modificar-insumo';
         $gestor = new GestorListaPrecios;
         $pIdProveedor = Yii::$app->request->get('IdProveedor');
         $pIdLocalidad = Yii::$app->request->get('IdLocalidad');

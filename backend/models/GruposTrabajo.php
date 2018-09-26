@@ -14,17 +14,14 @@ class GruposTrabajo extends Model
     {
         return 'grupostrabajo';
     }
-
     
     public function rules()
     {
         return [
-            [['IdGT', 'GrupoTrabajo', 'Mail', 'Estado'], 'required'],
+            [['GrupoTrabajo', 'Mail'], 'required'],
             [['IdGT'], 'integer'],
-            [['GrupoTrabajo', 'Mail', 'Estado'], 'string', 'max' => 100],
-            [['IdGT'], 'unique'],
-            [['GrupoTrabajo'], 'unique'],
-            [['Mail'], 'email'],
+            [['GrupoTrabajo', 'Mail'], 'string', 'max' => 100],
+            [['Estado'], 'string', 'max' => 1],
         ];
     }
 

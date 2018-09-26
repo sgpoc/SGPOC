@@ -7,10 +7,6 @@ use yii\bootstrap\Modal;
 use yii\helpers\Url;
 
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\UsuariosBusqueda */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = 'SGPOC | Grupos Trabajo';
 
 $gridColumns = [
@@ -49,7 +45,7 @@ $gridColumns = [
         'template' => '{modificar} {borrar} {baja} {activar} {listarusuarios}',
         'buttons' => [
                 'modificar' => function($url, $model, $key){
-                    return Html::button('<i class="fa fa-pencil"></i>',
+                    return Html::button('<i class="fa fa-pencil-alt"></i>',
                             [
                                 'value'=>Url::to(['/grupos-trabajo/modificar', 'IdGT' => $model['IdGT']]), 
                                 'class'=>'btn btn-link modalButton',
@@ -57,7 +53,7 @@ $gridColumns = [
                             ]);
                 },
                 'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-trash-o"></i>',
+                    return Html::a('<i class="fa fa-trash"></i>',
                             [
                                 'borrar','IdGT' => $model['IdGT']
                             ], 
@@ -71,19 +67,12 @@ $gridColumns = [
                             ]);
                 },
                 'listarusuarios' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-user"></i>',
-                                [
-                                    'listar-usuarios','IdGT' => $model['IdGT']
-                                ], 
-                                [
-                                    'title' => 'Listar Usuarios Grupo Trabajo', 
-                                    'class' => 'btn btn-link'
-                                ]);/*Html::button('<i class="fa fa-user"></i>',
+                    return Html::button('<i class="fa fa-user"></i>',
                             [
                                 'value'=>Url::to(['/grupos-trabajo/listar-usuarios', 'IdGT' => $model['IdGT']]), 
                                 'class'=>'btn btn-link modalButton',
                                 'title'=>'Listar Usuarios'
-                            ]);*/
+                            ]);
                 },
                 'baja' => function($url, $model, $key){
                     if($model['Estado'] === '1'){
@@ -148,29 +137,33 @@ $gridColumns = [
 
 <div>
     <?= GridView::widget([
+        'id' => 'gridview',
         'moduleId' => 'gridviewKrajee',
         'pjax'=>true,
         'pjaxSettings'=>[
             'neverTimeout'=>true,
+            'options' => [
+                'id' => 'gridview'
+            ]
         ],
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
         'exportConfig' => [
-                GridView::EXCEL => ['label' => 'Descargar como EXCEL'],
-                GridView::TEXT => ['label' => 'Descargar como TEXTO'],
-                GridView::PDF => ['label' => 'Descargar como PDF'],
+                GridView::EXCEL => ['label' => 'EXCEL'],
+                GridView::TEXT => ['label' => 'TEXTO'],
+                GridView::PDF => ['label' => 'PDF'],
          ],
         'toolbar' => [
             [
                 'content' => 
-                    Html::button('<i class="glyphicon glyphicon-plus"></i>',
+                    Html::button('<i class="fa fa-plus"></i>',
                             [
                                 'value'=>Url::to('/sgpoc/backend/web/grupos-trabajo/alta'),
                                 'class'=>'btn btn-success modalButton',
                                 'title'=>'Crear Grupo de Trabajo'
                             ]).' '.
-                    Html::a('<i class="glyphicon glyphicon-repeat"></i>', 
+                    Html::a('<i class="fa fa-redo"></i>', 
                             ['grupos-trabajo/listar'], 
                             [
                                 'data-pjax' => 0, 
@@ -179,6 +172,9 @@ $gridColumns = [
                             ])
             ],
             '{export}',
+        ],
+        'export' => [
+          'icon' => 'fa fa-external-link-alt'  
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="fa fa-graduation-cap"></i> Grupos de Trabajo</h3>',

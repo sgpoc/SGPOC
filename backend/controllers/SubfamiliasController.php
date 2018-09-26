@@ -30,7 +30,7 @@ class SubfamiliasController extends Controller
             $subfamilias = $gestor->Buscar($pSubFamilia, $pIdFamilia, $pIdGT);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $subfamilias,
-                'pagination' => ['pagesize' => 5,],
+                'pagination' => ['pagesize' => 9,],
             ]);
             return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listData' => $listData]);
         }
@@ -38,7 +38,7 @@ class SubfamiliasController extends Controller
             $subfamilias = $gestor->Listar($pIdGT);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $subfamilias,
-                'pagination' => ['pagesize' => 5,],
+                'pagination' => ['pagesize' => 9,],
             ]);
             return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listData' => $listData]);
         }
@@ -49,12 +49,13 @@ class SubfamiliasController extends Controller
     public function actionAlta()
     {
         $model = new Subfamilias;
+        $model->scenario = 'alta-subfamilia';
         $gestors = new GestorSubFamilias;
         $gestorf = new GestorFamilias();
         $pIdGT = Yii::$app->user->identity['IdGT'];
         $familia = $gestorf->Listar($pIdGT);
         $listDataF= ArrayHelper::map($familia,'IdFamilia','Familia');     
-        if($model->load(Yii::$app->request->post())) //&& $model->validate())
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pIdFamilia = $model->IdFamilia;
             $pSubFamilia = $model->SubFamilia;

@@ -51,7 +51,7 @@ $gridColumns = [
         'template' =>  '{borrar}',
         'buttons' => [
                 'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-trash-o"></i>',
+                    return Html::a('<i class="fa fa-trash"></i>',
                             [
                                 'borrar-item', 'IdItem' => $model['IdItem'], 'IdElementoConstructivo' => $model['IdElementoConstructivo']
                             ], 
@@ -109,7 +109,13 @@ $gridColumns = [
             'neverTimeout'=>true,
         ],
         'dataProvider' => $dataProvider,
-        'columns' => $gridColumns
+        'columns' => $gridColumns,
+        'hover' => true,
+        'bordered' => false,
+        'striped' => false,
+        'condensed' => true,
+        'responsive' => true,
+        'responsiveWrap' => true,
     ]);   
     ?>
 </div>

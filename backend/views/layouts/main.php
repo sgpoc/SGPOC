@@ -1,13 +1,12 @@
 <?php
 
-/* @var $this \yii\web\View */
-/* @var $content string */
-
 use backend\assets\AppAsset;
 use yii\helpers\Html;
-use yii\bootstrap\Modal;
+use app\assets\FontAsset;
 
 AppAsset::register($this);
+FontAsset::register($this);
+
 ?>
 
 <?php $this->beginPage() ?>
@@ -19,8 +18,8 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link rel="icon" href="https://foxico.io/static/uploads/logofile-83defe355ce588c170b2d3eb2d74bca7.png" type="image/ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="icon" href="http://www.fau.unt.edu.ar/wp-content/themes/fau/images/logo.png" type="image/ico">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" crossorigin="anonymous"></script>
     <?php $this->head() ?>
 </head>
 <body class="hold-transition skin-black-light sidebar-collapse fixed sidebar-mini">
@@ -73,13 +72,13 @@ AppAsset::register($this);
                 </li>
                 <li>
                     <a href="/sgpoc/backend/web/familias/listar">
-                        <i class="glyphicon glyphicon-th"></i>
+                        <i class="fa fa-th-large"></i>
                         <span>Familias</span>
                     </a>
                 </li>
                 <li>
                     <a href="/sgpoc/backend/web/subfamilias/listar">
-                        <i class="glyphicon glyphicon-list"></i>
+                        <i class="fa fa-th-list"></i>
                         <span>SubFamilias</span>
                     </a>
                 </li>
@@ -91,25 +90,25 @@ AppAsset::register($this);
                 </li>
                 <li>
                     <a href="/sgpoc/backend/web/items/listar">
-                        <i class="fa fa-gear"></i>
+                        <i class="fa fa-cog"></i>
                         <span>Items</span>
                     </a>
                 </li>
                 <li>
                     <a href="/sgpoc/backend/web/elementos-constructivos/listar">
-                        <i class="fa fa-gears"></i>
+                        <i class="fa fa-cogs"></i>
                         <span>Elementos Constructivos</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/sgpoc/backend/web/familias/listar">
+                    <a href="/sgpoc/backend/web/computos-metricos/listar">
                         <i class="fa fa-book"></i>
-                        <span>Computo Metrico</span>
+                        <span>Cómputos Métricos</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/sgpoc/backend/web/familias/listar">
-                        <i class="fa fa-dollar"></i>
+                    <a href="/sgpoc/backend/web/presupuestos/listar-insumos">
+                        <i class="fa fa-dollar-sign"></i>
                         <span>Presupuestos</span>
                     </a>
                 </li>
@@ -121,7 +120,7 @@ AppAsset::register($this);
                 </li>
                 <li>
                     <a href="/sgpoc/backend/web/lista-precios/listar">
-                        <i class="fa fa-money"></i>
+                        <i class="fa fa-file-invoice-dollar"></i>
                         <span>Lista de Precios</span>
                     </a>
                 </li>
@@ -165,6 +164,4 @@ AppAsset::register($this);
 <?php $this->endBody() ?>
 </body>
 </html>
-
-
 <?php $this->endPage() ?>
