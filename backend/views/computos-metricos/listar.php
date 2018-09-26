@@ -50,7 +50,9 @@ $gridColumns = [
             }
         },
         'headerOptions' => ['class' => 'kartik-sheet-style'], 
-        'expandOneOnly' => true
+        'expandOneOnly' => true,
+        'expandIcon' => '<i class="far fa-plus-square"></i>',        
+        'collapseIcon' => '<i class="far fa-minus-square"></i>',
     ],
     [
         'class' => 'kartik\grid\DataColumn',
@@ -62,6 +64,12 @@ $gridColumns = [
         'format' => 'raw',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'Descripcion',            
+        'vAlign' => 'middle',            
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],            
     [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'FechaComputoMetrico',
@@ -86,7 +94,7 @@ $gridColumns = [
                             ]);
                 }, 
                 'modificar' => function($url, $model, $key){ 
-                    return  Html::button('<i class="fa fa-pencil"></i>',
+                    return  Html::button('<i class="fa fa-pencil-alt"></i>',
                             [
                                 'value'=>Url::to(['/computos-metricos/modificar', 'IdComputoMetrico' => $model['IdComputoMetrico']]),
                                 'class'=>'btn btn-link modalButton',
@@ -94,7 +102,7 @@ $gridColumns = [
                             ]);
                 },
                 'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-trash-o"></i>',
+                    return Html::a('<i class="fa fa-trash"></i>',
                             [
                                 'borrar','IdComputoMetrico' => $model['IdComputoMetrico']
                             ], 
@@ -146,28 +154,32 @@ $gridColumns = [
 
 <div>
     <?= GridView::widget([
+        'id' => 'gridview',
         'moduleId' => 'gridviewKrajee',
         'pjax'=>true,
         'pjaxSettings'=>[
             'neverTimeout'=>true,
+            'options' => [
+                'id' => 'gridview'
+            ]
         ],
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
         'exportConfig' => [
-                GridView::EXCEL => ['label' => 'Descargar como EXCEL'],
-                GridView::TEXT => ['label' => 'Descargar como TEXTO'],
-                GridView::PDF => ['label' => 'Descargar como PDF'],
+                GridView::EXCEL => ['label' => 'EXCEL'],
+                GridView::TEXT => ['label' => 'TEXTO'],
+                GridView::PDF => ['label' => 'PDF'],
          ],
         'toolbar' => [
             [
-                'content' => Html::button('<i class="glyphicon glyphicon-plus"></i>',
+                'content' => Html::button('<i class="fa fa-plus"></i>',
                             [
                                 'value'=>Url::to('/sgpoc/backend/web/computos-metricos/alta'), 
                                 'class'=>'btn btn-success modalButton',
                                 'title'=>'Crear Cómputo Métrico'
                             ]).' '.
-                            Html::a('<i class="glyphicon glyphicon-repeat"></i>', 
+                            Html::a('<i class="fa fa-redo"></i>', 
                             ['computos-metricos/listar'], 
                             [
                                 'data-pjax' => 0, 
@@ -177,10 +189,19 @@ $gridColumns = [
             ],
             '{export}',
         ],
+        'export' => [
+          'icon' => 'fa fa-external-link-alt'  
+        ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="fa fa-book"></i> Cómputos Métricos</h3>',
             'type' => GridView::TYPE_DEFAULT,
         ],
+        'hover' => true,
+        'bordered' => false,
+        'striped' => false,
+        'condensed' => true,
+        'responsive' => true,
+        'responsiveWrap' => true,
     ]);   
     ?>
 </div>

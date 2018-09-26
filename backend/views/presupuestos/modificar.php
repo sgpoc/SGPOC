@@ -34,7 +34,7 @@ use kartik\daterange\DateRangePicker;
     <div class="modal-body">
         <div class="form-group">
             <?= $form->field($model, 'FechaDePresupuesto', [
-                    'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
+                    'addon'=>['prepend'=>['content'=>'<i class="far fa-calendar-alt"></i>']],
                     'options'=>['class'=>'drp-container form-group']
                 ])->widget(DateRangePicker::classname(), [
                     'useWithAddon'=>true,
@@ -48,6 +48,7 @@ use kartik\daterange\DateRangePicker;
     </div>
     <div class="modal-footer">
         <?= html::submitButton('Modificar',['class'=>'btn btn-success pull-right']); ?>
+        <?= html::button('Cerrar',['class'=>'btn btn-default pull-right', 'data-dismiss'=>'modal']); ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>

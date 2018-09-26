@@ -35,6 +35,7 @@ use kartik\daterange\DateRangePicker;
     <div class="modal-body">
         <div class="form-group">
             <?= $form->field($model, 'IdObra')->dropDownList($listDataO, ['prompt' => 'Seleccione uno ...' ])->label('Obra');  ?>
+            <?= $form->field($model, 'Descripcion')->textArea(['row'=>5]) ?>
             <?= $form->field($model, 'FechaComputoMetrico', [
                     'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
                     'options'=>['class'=>'drp-container form-group']
@@ -63,6 +64,7 @@ use kartik\daterange\DateRangePicker;
     </div>
     <div class="modal-footer">
         <?= html::submitButton('Alta',['class'=>'btn btn-success pull-right']); ?>
+        <?= html::button('Cerrar',['class'=>'btn btn-default pull-right', 'data-dismiss'=>'modal']); ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>

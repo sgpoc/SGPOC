@@ -6,10 +6,10 @@ use kartik\widgets\Growl;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
 use yii\data\ArrayDataProvider;
-use app\models\GestorListaPrecios;
+use app\models\GestorPresupuestos;
 
 
-$this->title = 'SGPOC | Lista de Precios';
+$this->title = 'SGPOC | Presupuestos';
 
 $gridColumns = [
     [
@@ -26,16 +26,14 @@ $gridColumns = [
             return GridView::ROW_COLLAPSED;
         },
         'detail' => function ($model, $key, $index, $column) {
-            $pIdProveedor = $model['IdProveedor'];
-            $pIdLocalidad = $model['IdLocalidad'];
-            $pIdGT = Yii::$app->user->identity['IdGT'];
-            $gestor = new GestorListaPrecios;
-            $insumos = $gestor->ListarInsumos($pIdProveedor, $pIdLocalidad, $pIdGT);
+            $gestor = new GestorPresupuestos;
+            $pIdPresupuesto = $model['IdPresupuesto'];
+            $insumos = $gestor->ListarInsumos($pIdPresupuesto);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $insumos,
                 'pagination' => ['pagesize' => 5,],
             ]);
-            return Yii::$app->controller->renderPartial('/lista-precios/insumos', ['dataProvider' => $dataProvider]);
+            return Yii::$app->controller->renderPartial('insumos',['dataProvider' => $dataProvider]);
         },
         'headerOptions' => ['class' => 'kartik-sheet-style'], 
         'expandOneOnly' => true,
@@ -44,22 +42,34 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Proveedor',
+        'attribute' => 'Obra',
         'vAlign' => 'middle',
         'filterType' => GridView::FILTER_SELECT2,
-        'filter'=> $listDataP,
+        'filter'=> $listDataO,
         'filterInputOptions' => ['placeholder' => ''],
         'format' => 'raw',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Localidad',
+        'attribute' => 'FechaDePresupuesto',
+        'label' => 'Fecha Presupuesto',            
         'vAlign' => 'middle',
-        'filterType' => GridView::FILTER_SELECT2,
-        'filter'=> $listDataL,
-        'filterInputOptions' => ['placeholder' => ''],
-        'format' => 'raw',
+        'hAlign' => 'center',            
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'value' => function($model){
+            $gestor = new GestorPresupuestos;
+            $pIdPresupuesto = $model['IdPresupuesto'];
+            $preciototal = $gestor->CalculoPrecioTotal($pIdPresupuesto);
+            return $preciototal[0]['PrecioTotal'];
+        },
+        'label' => 'Precio Total',            
+        'vAlign' => 'middle',
+        'hAlign' => 'center',   
+        'format' => ['decimal',2],
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
@@ -67,16 +77,30 @@ $gridColumns = [
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' => '{agregar-insumo}',
+        'template' => '{modificar} {borrar} {listar}',
         'buttons' => [
-                'agregar-insumo' => function($url, $model, $key){
-                    return  Html::button('<i class="fa fa-plus"></i>',
+                'modificar' => function($url, $model, $key){ 
+                    return  Html::button('<i class="fa fa-pencil-alt"></i>',
                             [
-                                'value'=>Url::to(['/lista-precios/agregar-insumo', 'IdProveedor' => $model['IdProveedor'], 'IdLocalidad' => $model['IdLocalidad']]), 
+                                'value'=>Url::to(['/presupuestos/modificar', 'IdPresupuesto' => $model['IdPresupuesto']]),
                                 'class'=>'btn btn-link modalButton',
-                                'title'=>'Agregar Insumo a la Lista de Precios'
+                                'title'=>'Modificar Presupuesto'
                             ]);
-                }, 
+                },
+                'borrar' => function($url, $model, $key){
+                    return Html::a('<i class="fa fa-trash"></i>',
+                            [
+                                'borrar','IdPresupuesto' => $model['IdPresupuesto']
+                            ], 
+                            [
+                                'title' => 'Borrar Presupuesto', 
+                                'class' => 'btn btn-link',
+                                'data' => [
+                                    'confirm' => 'Esta seguro que desea borrar el Presupuesto?',
+                                    'method' => 'post'
+                                ]
+                            ]);
+                }
         ]
     ], 
 ];
@@ -105,7 +129,7 @@ $gridColumns = [
 
 <?php
     Modal::begin([
-            'header'=>'<h2>Lista Precios</h2>',
+            'header'=>'<h2>Presupuestos</h2>',
             'footer'=>'',
             'id'=>'modal',
             'size'=>'modal-lg',
@@ -135,14 +159,22 @@ $gridColumns = [
          ],
         'toolbar' => [
             [
-                'content' =>Html::button('<i class="fa fa-plus"></i>',
+                'content' => Html::button('<i class="fa fa-plus"></i>',
                             [
-                                'value'=>Url::to('/sgpoc/backend/web/lista-precios/alta'), 
+                                'value'=>Url::to('/sgpoc/backend/web/presupuestos/alta'), 
                                 'class'=>'btn btn-success modalButton',
-                                'title'=>'Crear Lista de Precios'
+                                'title'=>'Crear Presupuesto'
+                            ]).' '.
+                            Html::a('<i class="fa fa-cog"></i>',
+                            [
+                                'listar',
+                            ], 
+                            [
+                                'title' => 'Listar Presupuesto por Items/Elementos', 
+                                'class' => 'btn btn-default',
                             ]).' '.
                             Html::a('<i class="fa fa-redo"></i>', 
-                            ['lista-precios/listar'], 
+                            ['presupuestos/listar'], 
                             [
                                 'data-pjax' => 0, 
                                 'class' => 'btn btn-default', 
@@ -155,7 +187,7 @@ $gridColumns = [
           'icon' => 'fa fa-external-link-alt'  
         ],
         'panel' => [
-            'heading' => '<h3 class="panel-title"><i class="fa fa-file-invoice-dollar"></i> Lista de Precios</h3>',
+            'heading' => '<h3 class="panel-title"><i class="fa fa-dollar-sign"></i> Presupuestos</h3>',
             'type' => GridView::TYPE_DEFAULT,
         ],
         'hover' => true,

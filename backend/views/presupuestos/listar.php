@@ -7,6 +7,8 @@ use yii\bootstrap\Modal;
 use yii\helpers\Url;
 use yii\data\ArrayDataProvider;
 use app\models\GestorComputosMetricos;
+use app\models\GestorPresupuestos;
+use app\models\Presupuestos;
 
 
 $this->title = 'SGPOC | Presupuestos';
@@ -26,31 +28,34 @@ $gridColumns = [
             return GridView::ROW_COLLAPSED;
         },
         'detail' => function ($model, $key, $index, $column) {
-            $pIdGT = Yii::$app->user->identity['IdGT'];
             $pIdComputoMetrico = $model['IdComputoMetrico'];
+            $pIdPresupuesto = $model['IdPresupuesto'];
             $gestor = new GestorComputosMetricos;
+            $gestorp = new GestorPresupuestos;
             $computo = $gestor->Dame($pIdComputoMetrico);
             $tipoComputo = $computo[0]['TipoComputo'];
             if($tipoComputo == 'I')
             {
-                $items = $gestor->ListarItems($pIdComputoMetrico, $pIdGT);
+                $items = $gestorp->ListarItems($pIdPresupuesto);
                 $dataProvider = new ArrayDataProvider([
                     'allModels' => $items,
                     'pagination' => ['pagesize' => 5,],
                 ]);
-                return Yii::$app->controller->renderPartial('/computos-metricos/items', ['dataProvider' => $dataProvider]);
+                return Yii::$app->controller->renderPartial('/presupuestos/items', ['dataProvider' => $dataProvider]);
             }
             else{
-                $elementos = $gestor->ListarElementos($pIdComputoMetrico, $pIdGT);
+                $elementos = $gestorp->ListarElementos($pIdPresupuesto);
                 $dataProvider = new ArrayDataProvider([
                     'allModels' => $elementos,
                     'pagination' => ['pagesize' => 5,],
                 ]);
-                return Yii::$app->controller->renderPartial('/computos-metricos/elementos', ['dataProvider' => $dataProvider]);
+                return Yii::$app->controller->renderPartial('/presupuestos/elementos', ['dataProvider' => $dataProvider]);
             }
         },
         'headerOptions' => ['class' => 'kartik-sheet-style'], 
-        'expandOneOnly' => true
+        'expandOneOnly' => true,
+        'expandIcon' => '<i class="far fa-plus-square"></i>',        
+        'collapseIcon' => '<i class="far fa-minus-square"></i>',
     ],
     [
         'class' => 'kartik\grid\DataColumn',
@@ -72,7 +77,12 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'PrecioTotal',
+        'value' => function($model){
+            $gestor = new GestorPresupuestos;
+            $pIdPresupuesto = $model['IdPresupuesto'];
+            $preciototal = $gestor->CalculoPrecioTotal($pIdPresupuesto);
+            return $preciototal[0]['PrecioTotal'];
+        },
         'label' => 'Precio Total',            
         'vAlign' => 'middle',
         'hAlign' => 'center',   
@@ -84,10 +94,10 @@ $gridColumns = [
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' => '{modificar} {borrar}',
+        'template' => '{modificar} {borrar} {listar-insumos}',
         'buttons' => [
                 'modificar' => function($url, $model, $key){ 
-                    return  Html::button('<i class="fa fa-pencil"></i>',
+                    return  Html::button('<i class="fa fa-pencil-alt"></i>',
                             [
                                 'value'=>Url::to(['/presupuestos/modificar', 'IdPresupuesto' => $model['IdPresupuesto']]),
                                 'class'=>'btn btn-link modalButton',
@@ -95,7 +105,7 @@ $gridColumns = [
                             ]);
                 },
                 'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-trash-o"></i>',
+                    return Html::a('<i class="fa fa-trash"></i>',
                             [
                                 'borrar','IdPresupuesto' => $model['IdPresupuesto']
                             ], 
@@ -147,28 +157,39 @@ $gridColumns = [
 
 <div>
     <?= GridView::widget([
+        'id' => 'gridview',
         'moduleId' => 'gridviewKrajee',
         'pjax'=>true,
         'pjaxSettings'=>[
             'neverTimeout'=>true,
+            'options' => [
+                'id' => 'gridview'
+            ]
         ],
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
         'exportConfig' => [
-                GridView::EXCEL => ['label' => 'Descargar como EXCEL'],
-                GridView::TEXT => ['label' => 'Descargar como TEXTO'],
-                GridView::PDF => ['label' => 'Descargar como PDF'],
+                GridView::EXCEL => ['label' => 'EXCEL'],
+                GridView::TEXT => ['label' => 'TEXTO'],
+                GridView::PDF => ['label' => 'PDF'],
          ],
         'toolbar' => [
             [
-                'content' => Html::button('<i class="glyphicon glyphicon-plus"></i>',
+                'content' => Html::button('<i class="fa fa-plus"></i>',
                             [
                                 'value'=>Url::to('/sgpoc/backend/web/presupuestos/alta'), 
                                 'class'=>'btn btn-success modalButton',
                                 'title'=>'Crear Presupuesto'
+                            ]).' '.Html::a('<i class="fa fa-wrench"></i>',
+                            [
+                                'listar-insumos'
+                            ], 
+                            [
+                                'title' => 'Listar Presupuesto por Insumos', 
+                                'class' => 'btn btn-default',
                             ]).' '.
-                            Html::a('<i class="glyphicon glyphicon-repeat"></i>', 
+                            Html::a('<i class="fa fa-redo"></i>', 
                             ['presupuestos/listar'], 
                             [
                                 'data-pjax' => 0, 
@@ -178,10 +199,19 @@ $gridColumns = [
             ],
             '{export}',
         ],
+        'export' => [
+          'icon' => 'fa fa-external-link-alt'  
+        ],
         'panel' => [
-            'heading' => '<h3 class="panel-title"><i class="fa fa-dollar"></i> Presupuestos</h3>',
+            'heading' => '<h3 class="panel-title"><i class="fa fa-dollar-sign"></i> Presupuestos</h3>',
             'type' => GridView::TYPE_DEFAULT,
         ],
+        'hover' => true,
+        'bordered' => false,
+        'striped' => false,
+        'condensed' => true,
+        'responsive' => true,
+        'responsiveWrap' => true,
     ]);   
     ?>
 </div>

@@ -38,12 +38,13 @@ use yii\jui\AutoComplete;
             <?= $form->field($model, 'Domicilio', ['addon' => ['prepend' => ['content'=>'D']]])->textInput(['value'=>$proveedor[0]['Domicilio']]) ?>
             <?= $form->field($model, 'CodigoPostal', ['addon' => ['prepend' => ['content'=>'#']]])->textInput(['value'=>$proveedor[0]['CodigoPostal']]) ?>
             <?= $form->field($model, 'Email', ['addon' => ['prepend' => ['content'=>'@']]])->textInput(['value'=>$proveedor[0]['Email']])?>
-            <?= $form->field($model, 'Telefono', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-mobile-phone"></i>']]])->textInput(['value'=>$proveedor[0]['Telefono']]) ?>
-            <?= $form->field($model, 'PaginaWEB', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-globe"></i>']]])->textInput(['value'=>$proveedor[0]['PaginaWEB']]) ?>  
+            <?= $form->field($model, 'Telefono', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-mobile-alt"></i>']]])->textInput(['value'=>$proveedor[0]['Telefono']]) ?>
+            <?= $form->field($model, 'PaginaWEB', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-globe-americas"></i>']]])->textInput(['value'=>$proveedor[0]['PaginaWEB']]) ?>  
         </div>
     </div>
     <div class="modal-footer">
         <?= html::submitButton('Modificar',['class'=>'btn btn-success pull-right']); ?>
+        <?= html::button('Cerrar',['class'=>'btn btn-default pull-right', 'data-dismiss'=>'modal']); ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>

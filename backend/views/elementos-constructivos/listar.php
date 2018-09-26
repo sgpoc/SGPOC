@@ -12,7 +12,7 @@ use yii\widgets\Pjax;
 
 
 
-$this->title = 'SGPOC | Elementos COnstructivos';
+$this->title = 'SGPOC | Elementos Constructivos';
 
 $gridColumns = [
     [
@@ -35,12 +35,14 @@ $gridColumns = [
             $items = $gestor->ListarItems($pIdElementoConstructivo, $pIdGT);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $items,
-                'pagination' => ['pagesize' => 15,],
+                'pagination' => ['pagesize' => 5,],
             ]);
             return Yii::$app->controller->renderPartial('/elementos-constructivos/items', ['dataProvider' => $dataProvider]);
         },
         'headerOptions' => ['class' => 'kartik-sheet-style'], 
-        'expandOneOnly' => true
+        'expandOneOnly' => true,
+        'expandIcon' => '<i class="far fa-plus-square"></i>',        
+        'collapseIcon' => '<i class="far fa-minus-square"></i>',
     ],
     [
         'class' => 'kartik\grid\DataColumn',
@@ -78,7 +80,7 @@ $gridColumns = [
                             ]);
                 }, 
                 'modificar' => function($url, $model, $key){ 
-                    return  Html::button('<i class="fa fa-pencil"></i>',
+                    return  Html::button('<i class="fa fa-pencil-alt"></i>',
                             [
                                 'value'=>Url::to(['/elementos-constructivos/modificar', 'IdElementoConstructivo' => $model['IdElementoConstructivo']]), 
                                 'class'=>'btn btn-link modalButton',
@@ -86,7 +88,7 @@ $gridColumns = [
                             ]);
                 },
                 'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-trash-o"></i>',
+                    return Html::a('<i class="fa fa-trash"></i>',
                             ['borrar','IdElementoConstructivo' => $model['IdElementoConstructivo']], 
                             [
                                 'title' => 'Borrar Elemento Constructivo', 
@@ -131,12 +133,7 @@ $gridColumns = [
             'size'=>'modal-lg',
        ]);
     echo "<div id='modalContent'></div>";
-    
-
-   
     Modal::end();
-
-    
 ?>
 
 <?php Pjax::begin(['id'=>'some_pjax_id']); ?>
@@ -146,21 +143,21 @@ $gridColumns = [
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
-        'pjax' => 'true',
+        'pjax' => true,
         'exportConfig' => [
-                GridView::EXCEL => ['label' => 'Descargar como EXCEL'],
-                GridView::TEXT => ['label' => 'Descargar como TEXTO'],
-                GridView::PDF => ['label' => 'Descargar como PDF'],
+                GridView::EXCEL => ['label' => 'EXCEL'],
+                GridView::TEXT => ['label' => 'TEXTO'],
+                GridView::PDF => ['label' => 'PDF'],
          ],
         'toolbar' => [
             [
-                'content' =>Html::button('<i class="glyphicon glyphicon-plus"></i>',
+                'content' =>Html::button('<i class="fa fa-plus"></i>',
                             [
                                 'value'=>Url::to('/sgpoc/backend/web/elementos-constructivos/alta'), 
                                 'class'=>'btn btn-success modalButton',
                                 'title'=>'Crear Elemento'
                             ]).' '.
-                            Html::a('<i class="glyphicon glyphicon-repeat"></i>', 
+                            Html::a('<i class="fa fa-redo"></i>', 
                             ['elementos-constructivos/listar'], 
                             [
                                 'data-pjax' => 0, 
@@ -170,10 +167,19 @@ $gridColumns = [
             ],
             '{export}',
         ],
+        'export' => [
+          'icon' => 'fa fa-external-link-alt'  
+        ],
         'panel' => [
-            'heading' => '<h3 class="panel-title"><i class="fa fa-list"></i> Elementos Constructivos</h3>',
+            'heading' => '<h3 class="panel-title"><i class="fa fa-cogs"></i> Elementos Constructivos</h3>',
             'type' => GridView::TYPE_DEFAULT,
         ],
+        'hover' => true,
+        'bordered' => false,
+        'striped' => false,
+        'condensed' => true,
+        'responsive' => true,
+        'responsiveWrap' => true,
     ]);   
     ?>
 </div>

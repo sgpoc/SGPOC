@@ -9,7 +9,6 @@ class LineaPresupuestos extends Model
 {
     public $IdPresupuesto;
     public $IdComputoMetrico;
-    public $IdItem;
     public $IdInsumo;
     public $IdSubFamilia;
     public $IdFamilia;
@@ -17,7 +16,6 @@ class LineaPresupuestos extends Model
     public $IdLocalidad;
     public $IdProveedor;
     public $IdGT;
-    public $IdRubroItem;
     public $Precio;
     public $Beneficios;
     public $GastosGenerales;
@@ -32,27 +30,26 @@ class LineaPresupuestos extends Model
     public function rules()
     {
         return [
-            [['IdUnidad','Descripcion', 'Cantidad', 'Largo', 'Ancho'], 'required', 'on' => 'agregar-linea'],
-            [['Descripcion', 'Cantidad', 'Largo', 'Ancho'], 'required'],
-            [['Descripcion'], 'string', 'max' => 200],
-            [['Alto'],'default', 'value' => 1, 'skipOnEmpty' => FALSE],
-            [['IdElementoConstructivo', 'IdItem'], 'safe'],
+            [['IdProveedor', 'IdLocalidad'], 'required', 'on' => 'eleccion-precio'],
+            [['Beneficios','GastosGenerales', 'CargasSociales', 'IVA'], 'required', 'on' => 'modificar-porcentajes'],
+            [['Beneficios','GastosGenerales', 'CargasSociales', 'IVA'], 'compare', 'compareValue' => 0, 'operator' => '!=', 'on' => 'modificar-porcentajes'],
         ];
     }
 
     public function attributeLabels()
     {
         return [
+            'IdPresupuesto' => 'Presupuesto',
             'IdComputoMetrico' => 'Cómputo Metrico',
-            'NroLinea' => 'Número de Línea',
+            'IdInsumo' => 'Insumo',
+            'IdSubFamilia' => 'SubFamilia',
+            'IdFamilia' => 'Familia',
             'IdObra' => 'Obra',
+            'IdLocalidad' => 'Localidad',
+            'IdProveedor' => 'Proveedor',
             'IdGT' => 'Grupo de Trabajo',
-            'IdElementoConstructivo' => 'Elemento Constructivo',
-            'IdRubroEC' => 'Rubro Elemento Constructivo',
-            'IdItem' => 'Item',
-            'IdRubroItem' => 'Rubro Item',
-            'IdUnidad' => 'Unidad',
-            'Descripcion' => 'Descripción',
+            'GastosGenerales' => 'Gastos Generales',
+            'CargasSociales' => 'Cargas Sociales',
         ];
     }
 }

@@ -17,54 +17,88 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Item',
+        'attribute' => 'Insumo',
         'vAlign' => 'middle',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'RubroItem',
-        'vAlign' => 'middle',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Descripcion',
-        'vAlign' => 'middle',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Cantidad',
+        'attribute' => 'TipoInsumo',
         'vAlign' => 'middle',
         'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Largo',
+        'attribute' => 'Familia',
+        'label' => 'Familia',
         'vAlign' => 'middle',
-        'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Ancho',
+        'attribute' => 'SubFamilia',
+        'label' => 'SubFamilia',
         'vAlign' => 'middle',
-        'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Alto',
+        'attribute' => 'PrecioU',
+        'label' => 'Precio Unitario',
         'vAlign' => 'middle',
         'hAlign' => 'center',
+        'format' => ['decimal', 2],
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Abreviatura',
-        'label' => 'Unidad',
+        'attribute' => 'Beneficios',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'format' => ['decimal', 2],
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'GastosGenerales',
+        'label' => 'Gastos Generales',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'format' => ['decimal', 2],
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'CargasSociales',
+        'label' => 'Cargas Sociales',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'format' => ['decimal', 2],
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'IVA',
+        'label' => 'IVA',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'format' => ['decimal', 2],
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'Precio',
+        'label' => 'Precio (C/P)',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'format' => ['decimal', 2],
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'FechaUltimaActualizacion',
+        'label' => 'Fecha Ultima Actualización',
         'vAlign' => 'middle',
         'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
@@ -74,36 +108,30 @@ $gridColumns = [
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' => '{modificar} {borrar}',
+        'template' => '{modificar-porcentajes} {eleccion-precio}',
         'buttons' => [
-                'modificar' => function($url, $model, $key){ 
+                'modificar-porcentajes' => function($url, $model, $key){ 
                     return  Html::button('<i class="fa fa-pencil-alt"></i>',
                             [
-                                'value'=>Url::to(['/computos-metricos/modificar-linea', 'IdComputoMetrico' => $model['IdComputoMetrico'], 'NroLinea' => $model['NroLinea']]), 
+                                'value'=>Url::to(['/presupuestos/modificar-porcentajes','IdPresupuesto' =>$model['IdPresupuesto'], 'IdInsumo' => $model['IdInsumo']]), 
                                 'class'=>'btn btn-link modalButton',
-                                'title'=>'Modificar Línea Cómputo Métrico'
+                                'title'=>'Modificar Porcentajes Insumo'
                             ]);
                 },
-                'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-trash"></i>',
+                'eleccion-precio' => function($url, $model, $key){ 
+                    return  Html::button('<i class="fa fa-dollar-sign"></i>',
                             [
-                                'borrar-linea', 'IdComputoMetrico' => $model['IdComputoMetrico'], 'NroLinea' => $model['NroLinea'],
-                            ], 
-                            [
-                                'title' => 'Borrar Línea Cómputo Métrico', 
-                                'class' => 'btn btn-link',
-                                'data' => [
-                                    'confirm' => 'Esta seguro que desea borrar Línea Cómputo Métrico?',
-                                    'method' => 'post'
-                                ]
+                                'value'=>Url::to(['/presupuestos/eleccion-precio','IdPresupuesto' =>$model['IdPresupuesto'], 'IdInsumo' => $model['IdInsumo']]), 
+                                'class'=>'btn btn-link modalButton',
+                                'title'=>'Elegir Lista de Precios'
                             ]);
-                }     
+                },        
         ]
     ], 
 ];
 
                 
-?>
+?> 
   
 <?php if(Yii::$app->session->getFlash('alert')){
     echo Growl::widget([
@@ -126,7 +154,7 @@ $gridColumns = [
 
 <?php
     Modal::begin([
-            'header'=>'<h2>Cómputos Métricos</h2>',
+            'header'=>'<h2>Presupuestos</h2>',
             'footer'=>'',
             'id'=>'modal',
             'size'=>'modal-lg',

@@ -30,7 +30,7 @@ class ElementosConstructivosController extends Controller
             $elementos = $gestor->Buscar($pElemento, $pIdRubroEC, $pIdUnidad,$pIdGT);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $elementos,
-                'pagination' => ['pagesize' => 5,],
+                'pagination' => ['pagesize' => 9,],
             ]);
             return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listDataREC' => $listDataREC]);
         }
@@ -38,7 +38,7 @@ class ElementosConstructivosController extends Controller
             $elementos = $gestor->Listar($pIdGT);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $elementos,
-                'pagination' => ['pagesize' => 5,],
+                'pagination' => ['pagesize' => 9,],
             ]);
             return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel,'listDataREC' => $listDataREC]);
         }

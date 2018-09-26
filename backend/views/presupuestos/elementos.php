@@ -6,6 +6,7 @@ use kartik\widgets\Growl;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
 
+
 $gridColumns = [
     [
         'class' => 'kartik\grid\SerialColumn',
@@ -16,54 +17,48 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Item',
+        'attribute' => 'ElementoConstructivo',
         'vAlign' => 'middle',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
-     [
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'RubroEC',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',  
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'Abreviatura',
         'label' => 'Unidad',
+        'vAlign' => 'middle',  
+        'hAlign' => 'center',
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'Precio',
+        'format' => ['decimal',2],
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\ActionColumn',
-        'header' => 'Incidencia',
+        'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
         'template' => '{modificar}',
         'buttons' => [
                 'modificar' => function($url, $model, $key){ 
-                    return  Html::button($model['Incidencia'],
+                    return  Html::button('<i class="fa fa-pencil-alt"></i>',
                             [
-                                'value'=>Url::to(['/elementos-constructivos/modificar-incidencia', 'IdItem' => $model['IdItem'], 'IdElementoConstructivo' => $model['IdElementoConstructivo']]), 
+                                'value'=>Url::to('/computos-metricos/modificar-linea'),// 'IdComputoMetrico' => $model['IdComputoMetrico'], 'NroLinea' => $model['NroLinea']]), 
                                 'class'=>'btn btn-link modalButton',
-                                'title'=>'Modificar Incidencia Item en Elemento'
+                                'title'=>'Modificar Línea Cómputo Métrico'
                             ]);
-                },
-        ]        
-    ],
-    [
-        'class' => '\kartik\grid\ActionColumn',
-        'header' => 'Acciones',
-        'vAlign' => 'middle',
-        'width' => '240px',
-        'template' =>  '{borrar}',
-        'buttons' => [
-                'borrar' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-trash"></i>',
-                            [
-                                'borrar-item', 'IdItem' => $model['IdItem'], 'IdElementoConstructivo' => $model['IdElementoConstructivo']
-                            ], 
-                            [
-                                'title' => 'Borrar Item del Elemento', 
-                                'class' => 'btn btn-link',
-                                'data' => [
-                                    'confirm' => 'Esta seguro que desea borrar el Item del Elemento?',
-                                    'method' => 'post'
-                                ]
-                            ]);
-                }     
+                }    
         ]
     ], 
 ];
@@ -92,7 +87,7 @@ $gridColumns = [
 
 <?php
     Modal::begin([
-            'header'=>'<h2>Items</h2>',
+            'header'=>'<h2>Presupuestos</h2>',
             'footer'=>'',
             'id'=>'modal',
             'size'=>'modal-lg',

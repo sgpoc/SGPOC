@@ -30,7 +30,7 @@ class SubfamiliasController extends Controller
             $subfamilias = $gestor->Buscar($pSubFamilia, $pIdFamilia, $pIdGT);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $subfamilias,
-                'pagination' => ['pagesize' => 5,],
+                'pagination' => ['pagesize' => 9,],
             ]);
             return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listData' => $listData]);
         }
@@ -38,7 +38,7 @@ class SubfamiliasController extends Controller
             $subfamilias = $gestor->Listar($pIdGT);
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $subfamilias,
-                'pagination' => ['pagesize' => 5,],
+                'pagination' => ['pagesize' => 9,],
             ]);
             return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listData' => $listData]);
         }
