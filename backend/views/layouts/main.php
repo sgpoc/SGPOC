@@ -18,7 +18,7 @@ FontAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link rel="icon" href="http://www.fau.unt.edu.ar/wp-content/themes/fau/images/logo.png" type="image/ico">
+    <link rel="icon" href="http://localhost/sgpoc/backend/web/img/logoFAU.png" type="image/ico">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" crossorigin="anonymous"></script>
     <?php $this->head() ?>
 </head>
@@ -27,8 +27,8 @@ FontAsset::register($this);
 <div class="wrapper">
     <header class="main-header">
         <a href="/sgpoc/backend/web/site/index" class="logo">
-            <span class="logo-mini"><img class ="img-circle" src="http://www.fau.unt.edu.ar/wp-content/themes/fau/images/logo.png" alt='logo' width="40" height="40" align="middle" /></span>
-            <span style="font-family:Bahnschrift Light;" class="logo-lg"><img class ="img-circle" src="http://www.fau.unt.edu.ar/wp-content/themes/fau/images/logo.png" alt='logo' width="40" height="40" align="middle" /> SGPOC</span>
+            <span class="logo-mini"><img class ="img-circle" src="http://localhost/sgpoc/backend/web/img/logoFAU.png" alt='logo' width="40" height="40" align="middle" /></span>
+            <span class="logo-lg"><img class ="img-circle" src="http://localhost/sgpoc/backend/web/img/logoFAU.png" alt='logo' width="40" height="40" align="middle" /> SGPOC</span>
         </a>
         <nav class="navbar navbar-static-top">
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"></a>
@@ -36,21 +36,24 @@ FontAsset::register($this);
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded='true'>
-                            <img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png" class="user-image" alt='mario'>
-                            <span class="hidden-xs"><?= Yii::$app->user->identity['Nombre']?></span> 
-                            <span class="hiddex-xs"><?= Yii::$app->user->identity['Apellido']?></span>
+                            <img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png" class="user-image" alt='imagen usuario'>
+                            <span class="hiddex-xs"><?= Yii::$app->user->identity['Apellido']?>,</span>
+                            <span class="hidden-xs"><?= Yii::$app->user->identity['Nombre']?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
-                                <img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png"  class="img-circle" alt='mario'/>
+                                <img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png"  class="img-circle" alt='imagen usuario'/>
                                 <p>
-                                    <span class="hidden-xs"><?= Yii::$app->user->identity['Nombre']?></span> 
-                                    <span class="hiddex-xs"><?= Yii::$app->user->identity['Apellido']?></span>
+                                    <span class="hiddex-xs"><?= Yii::$app->user->identity['Apellido']?>,</span>
+                                    <span class="hidden-xs"><?= Yii::$app->user->identity['Nombre']?></span>
                                 </p>
                             </li>
-                            <li class="user-body">
-                                <div class="col-xs4 text-center">
-                                    <a href="/sgpoc/backend/web/site/logout" data-method="post">Logout</a>
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="/sgpoc/backend/web/site/logout" class="btn btn-default btn-flat" data-method="post">Salir</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="/sgpoc/backend/web/site/perfil" class="btn btn-default btn-flat">Perfil</a>
                                 </div>
                             </li>
                         </ul>
@@ -158,7 +161,7 @@ FontAsset::register($this);
         <div class="pull-right hidden-xs">
             <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2018.</strong> Facundo Ledesma, Juan Pablo Ortiz. Todos los derecho reservados.
+        <strong>Copyright &copy; 2018.</strong> Tesis de Grado. Todos los derecho reservados.
     </footer>
 </div>
 <?php $this->endBody() ?>

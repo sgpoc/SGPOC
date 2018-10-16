@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\data\ArrayDataProvider;
+use yii\helpers\Json;
 use app\models\GestorProveedores;
 use app\models\Proveedores;
 use app\models\ProveedoresBuscar;
@@ -146,7 +147,22 @@ class ProveedoresController extends Controller
     }
     
     
-    
+    public function actionListarLocalidades()
+    {
+        $gestorp = new GestorProveedores;
+        if (isset($_POST['depdrop_parents'])) 
+        {
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != null) 
+            {    
+                $pIdProveedor = $parents[0];        
+                $localidades = $gestorp->ListarLocalidades($pIdProveedor);
+                echo Json::encode(['output' => $localidades, 'selected' => '']);
+                return;
+            }
+        }
+        echo Json::encode(['output' => '', 'selected' =>'']);
+    }
 }
        
     

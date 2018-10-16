@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use kartik\form\ActiveForm;
 use kartik\widgets\Growl;
-use kartik\daterange\DateRangePicker;
+use kartik\date\DatePicker;
 
 ?>
 
@@ -33,18 +33,16 @@ use kartik\daterange\DateRangePicker;
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?= $form->field($model, 'FechaDePresupuesto', [
-                    'addon'=>['prepend'=>['content'=>'<i class="far fa-calendar-alt"></i>']],
-                    'options'=>['class'=>'drp-container form-group']
-                ])->widget(DateRangePicker::classname(), [
-                    'useWithAddon'=>true,
+            <?= $form->field($model, 'FechaDePresupuesto')->widget(DatePicker::classname(), [
+                    'options' => ['placeholder' => 'Inregese la Fecha del Presupuesto ...'],
+                    'pickerIcon' => '<i class="far fa-calendar-alt"></i>',
                     'pluginOptions'=>[
-                        'singleDatePicker'=>true,
-                        'showDropdowns'=>true
+                        'todayHighlight' => true,
+                        'todayBtn' => true,
+                        'autoclose' => true
                     ]
                 ]); 
-            ?>            
-        </div>
+            ?>        </div>
     </div>
     <div class="modal-footer">
         <?= html::submitButton('Modificar',['class'=>'btn btn-success pull-right']); ?>

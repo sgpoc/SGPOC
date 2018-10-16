@@ -45,23 +45,6 @@ class PresupuestosController extends Controller
             return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listDataO' => $listDataO]);
         }
     }
-    
-    public function actionListarComputos()
-    {
-        $gestoro = new GestorObras;
-        if (isset($_POST['depdrop_parents'])) 
-        {
-            $parents = $_POST['depdrop_parents'];
-            if ($parents != null) 
-            {    
-                $pIdObra = $parents[0];        
-                $computos = $gestoro->ListarComputos($pIdObra);
-                echo Json::encode(['output' => $computos, 'selected' => '']);
-                return;
-            }
-        }
-        echo Json::encode(['output' => '', 'selected' =>'']);
-    } 
            
     public function actionAlta()
     {
@@ -73,9 +56,9 @@ class PresupuestosController extends Controller
         $gestorp = new GestorProveedores;
         $gestorlp = new GestorListaPrecios;
         $pIdGT = Yii::$app->user->identity['IdGT'];
-        $obras = $gestoro->Listar($pIdGT);
+        $obras = $gestoro->Listar($pIdGT);//sacar bajasy finalizadas
         $listDataO = ArrayHelper::map($obras,'IdObra','Obra');
-        $proveedores = $gestorp->Listar($pIdGT);
+        $proveedores = $gestorp->Listar($pIdGT);//sacar bajas
         $listDataP = ArrayHelper::map($proveedores,'IdProveedor','Proveedor');
         $localidades = $gestorlp->ListarLocalidades();
         $listDataL = ArrayHelper::map($localidades,'IdLocalidad','Localidad');
