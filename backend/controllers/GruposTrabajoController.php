@@ -8,10 +8,52 @@ use app\models\GestorGruposTrabajo;
 use app\models\GruposTrabajo;
 use app\models\GruposTrabajoBuscar;
 use app\models\GestorUsuarios;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use common\models\Usuarios;
 
 
 class GruposTrabajoController extends Controller
 {   
+    
+     public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return Usuarios::isUserAdmin(Yii::$app->user->identity['IdRol']);
+                        }
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
+
+    public function actions()
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+        ];
+    }
+    
+    
     public function actionListar()
     {       
         $gestor = new GestorGruposTrabajo;
