@@ -571,16 +571,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "2.1.5",
+            "version": "2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "54859fabea8b3beecbb1a282888d5c990036b9e3"
+                "reference": "0578b32b30b22de3e8664f797cf846fc9246f786"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/54859fabea8b3beecbb1a282888d5c990036b9e3",
-                "reference": "54859fabea8b3beecbb1a282888d5c990036b9e3",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/0578b32b30b22de3e8664f797cf846fc9246f786",
+                "reference": "0578b32b30b22de3e8664f797cf846fc9246f786",
                 "shasum": ""
             },
             "require": {
@@ -624,7 +624,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2018-08-16T20:49:45+00:00"
+            "time": "2018-09-25T20:47:26+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -1020,16 +1020,16 @@
         },
         {
             "name": "kartik-v/yii2-detail-view",
-            "version": "v1.7.8",
+            "version": "v1.7.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-detail-view.git",
-                "reference": "443949ea924539366dcf6cb97e49edbe548cf8c4"
+                "reference": "65b32b05829970e0eb4f8e185bc8b38ebdf37b4f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-detail-view/zipball/443949ea924539366dcf6cb97e49edbe548cf8c4",
-                "reference": "443949ea924539366dcf6cb97e49edbe548cf8c4",
+                "url": "https://api.github.com/repos/kartik-v/yii2-detail-view/zipball/65b32b05829970e0eb4f8e185bc8b38ebdf37b4f",
+                "reference": "65b32b05829970e0eb4f8e185bc8b38ebdf37b4f",
                 "shasum": ""
             },
             "require": {
@@ -1070,7 +1070,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2018-09-23T04:09:21+00:00"
+            "time": "2018-09-26T14:18:11+00:00"
         },
         {
             "name": "kartik-v/yii2-dialog",
@@ -1125,16 +1125,16 @@
         },
         {
             "name": "kartik-v/yii2-grid",
-            "version": "v3.2.3",
+            "version": "v3.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-grid.git",
-                "reference": "bb3a841ceee259375e07820f250ecfe7297a31bb"
+                "reference": "7f3812404b867769a52471be30a99fcd325b2c0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/bb3a841ceee259375e07820f250ecfe7297a31bb",
-                "reference": "bb3a841ceee259375e07820f250ecfe7297a31bb",
+                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/7f3812404b867769a52471be30a99fcd325b2c0d",
+                "reference": "7f3812404b867769a52471be30a99fcd325b2c0d",
                 "shasum": ""
             },
             "require": {
@@ -1174,7 +1174,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2018-09-22T07:44:31+00:00"
+            "time": "2018-09-26T10:35:07+00:00"
         },
         {
             "name": "kartik-v/yii2-icons",
@@ -1231,16 +1231,16 @@
         },
         {
             "name": "kartik-v/yii2-krajee-base",
-            "version": "v1.9.6",
+            "version": "v1.9.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-krajee-base.git",
-                "reference": "fe4324fca887e3219afb71ee394d6880ccc1812a"
+                "reference": "69e4f7fb2cb215d85b6e66ef9a9a398939d4de06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/fe4324fca887e3219afb71ee394d6880ccc1812a",
-                "reference": "fe4324fca887e3219afb71ee394d6880ccc1812a",
+                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/69e4f7fb2cb215d85b6e66ef9a9a398939d4de06",
+                "reference": "69e4f7fb2cb215d85b6e66ef9a9a398939d4de06",
                 "shasum": ""
             },
             "require": {
@@ -1278,7 +1278,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2018-09-22T07:37:15+00:00"
+            "time": "2018-09-26T10:46:07+00:00"
         },
         {
             "name": "kartik-v/yii2-mpdf",
@@ -1443,16 +1443,16 @@
         },
         {
             "name": "kartik-v/yii2-widget-activeform",
-            "version": "v1.5.4",
+            "version": "v1.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-activeform.git",
-                "reference": "9460f27248a3f481097168234c70a0c7a0559cfc"
+                "reference": "12e82f6bc6d56e13f530d9622164639b39af7d41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-activeform/zipball/9460f27248a3f481097168234c70a0c7a0559cfc",
-                "reference": "9460f27248a3f481097168234c70a0c7a0559cfc",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-activeform/zipball/12e82f6bc6d56e13f530d9622164639b39af7d41",
+                "reference": "12e82f6bc6d56e13f530d9622164639b39af7d41",
                 "shasum": ""
             },
             "require": {
@@ -1491,7 +1491,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2018-09-22T07:40:06+00:00"
+            "time": "2018-09-26T08:06:51+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-affix",

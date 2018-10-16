@@ -2,17 +2,58 @@
 namespace backend\controllers;
 
 use Yii;
+use common\models\Usuarios;
 use yii\web\Controller;
 use yii\helpers\ArrayHelper;
 use yii\data\ArrayDataProvider;
 use app\models\GestorGruposTrabajo;
 use app\models\GestorUsuarios;
-use app\models\Usuarios;
 use app\models\UsuariosBuscar;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+
 
 
 class UsuariosController extends Controller
 {   
+    
+ public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return Usuarios::isUserAdmin(Yii::$app->user->identity['IdRol']);
+                        }
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
+
+    public function actions()
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+        ];
+    }
+    
     public function actionListar()
     {       
         $gestor = new GestorUsuarios;
@@ -62,7 +103,7 @@ class UsuariosController extends Controller
             $pApellido = $model->Apellido;
             $pEmail = $model->Email;
             $pPassword = Yii::$app->security->generatePasswordHash($model->Password);
-            $pauth_key = $model->beforeSave();
+            $pauth_key = $model->beforeGuardar();
             $mensaje = $gestoru->Alta($pIdGT, $pIdRol, $pNombre, $pApellido, $pEmail, $pPassword, $pauth_key);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
