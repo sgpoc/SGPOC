@@ -130,6 +130,9 @@ FontAsset::register($this);
                         <span>Proveedores</span>
                     </a>
                 </li>
+                
+         <?php if(Yii::$app->user->identity['IdRol'] === 1): ?>
+                
                 <li>
                     <a href="/sgpoc/backend/web/usuarios/listar">
                     <i class="fa fa-user"></i>
@@ -142,10 +145,10 @@ FontAsset::register($this);
                         <span>Grupos Trabajo</span>
                     </a>
                 </li>
+                <?php endif; ?>
             </ul>
         </section>
     </aside>
-    
     <div class="content-wrapper">
         <section class="content">
         <div class="box-body">

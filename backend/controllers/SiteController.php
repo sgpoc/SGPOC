@@ -7,6 +7,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 
+
 class SiteController extends Controller
 {
     public function behaviors()
@@ -23,7 +24,7 @@ class SiteController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['logout'],
+                        'actions' => ['logout','login'],
                         'roles' => ['@'],
                     ],
                 ],

@@ -20,6 +20,10 @@ use Yii;
  */
 class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
+    
+    const ROLE_USER = 2;
+    const ROLE_ADMIN = 1;
+    
     /**
      * {@inheritdoc}
      */
@@ -34,15 +38,18 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     public function rules()
     {
         return [
-            [['IdGT', 'Nombre', 'Apellido', 'Rol', 'Email', 'Password', 'Estado'], 'required'],
+            [['IdGT', 'IdRol', 'Nombre', 'Apellido', 'Email', 'Password'], 'required', 'on' => 'alta-usuario'],
+            [['Nombre', 'Apellido', 'Email', 'Password'], 'required'],
             [['IdGT'], 'integer'],
+            [['IdUsuario'], 'integer'],
             [['IdRol'], 'integer'],
             [['Nombre', 'Apellido', 'Email'], 'string', 'max' => 100],
             [['Password'], 'string', 'max' => 100],
             [['Estado'], 'string', 'max' => 1],
             [['auth_key'], 'string', 'max' => 255],
-            [['IdGT'], 'exist', 'skipOnError' => true, 'targetClass' => Grupostrabajo::className(), 'targetAttribute' => ['IdGT' => 'IdGT']],
             [['auth_key'], 'string', 'max' => 255],
+            [['IdRol'], 'default', 'value' => 2],
+            [['IdRol'], 'in', 'range' => [self::ROLE_USER, self::ROLE_ADMIN]],
         ];
     }
 
@@ -52,10 +59,11 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     public function attributeLabels()
     {
         return [
-            'IdUsuario' => 'Id Usuario',
-            'IdGT' => 'Id Gt',
+            'IdUsuario' => 'Usuario',
+            'IdGT' => 'Grupo Trabajo',
             'Nombre' => 'Nombre',
             'Apellido' => 'Apellido',
+            'IdRol' => 'Rol',
             'Rol' => 'Rol',
             'Email' => 'Email',
             'Password' => 'Password',
@@ -99,8 +107,23 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
 
     public static function findIdentityByAccessToken($token, $type = null): \yii\web\IdentityInterface {
         throw new \yii\base\NotSupportedException;
-    }
-
-
+    }  
     
+     
+    public function beforeGuardar()
+    {
+        return $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+    
+    public static function isUserAdmin($IdUsuario)
+{
+      if (static::findOne(['IdUsuario' => $IdUsuario, 'IdRol' => self::ROLE_ADMIN])){
+                        
+             return true;
+      } else {
+                        
+             return false;
+      }
+        
+}
 }
