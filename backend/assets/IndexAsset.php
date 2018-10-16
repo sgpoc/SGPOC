@@ -1,17 +1,15 @@
 <?php
 
 namespace backend\assets;
-use Yii;
+
 use yii\web\AssetBundle;
-use yii\web\View;
 
 class IndexAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/Indexstyle.css',
-    
+        'css/index-style.css'
     ];
     public $js = [
         'js/jquery-3.3.1.js',

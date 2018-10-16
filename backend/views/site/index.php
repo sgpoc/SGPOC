@@ -4,8 +4,10 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
 
-$this->title = 'SGPOC | Home';
 IndexAsset::register($this);
+
+$this->title = 'SGPOC | Home';
+
 ?>
 
 <head>
@@ -23,12 +25,12 @@ IndexAsset::register($this);
     </div>
     <div id='expand' class="contacto" style="display:none;">
         <ul>
-            <li>Popy Wilde | <i class="fa fa-envelope-o"></i> popywilde@gmail.com</li>
-            <li>Otro Docente | <i class="fa fa-envelope-o"></i> otrodocente@gmail.com</li>
+            <li>Popy Wilde | <i class="far fa-envelope"></i> popywilde@gmail.com</li>
+            <li>Otro Docente | <i class="far fa-envelope"></i> otrodocente@gmail.com</li>
         </ul>
     </div> 
     <a href='http://www.fau.unt.edu.ar' target='_blank'>
-        <img class='fau-logo' src='http://www.fau.unt.edu.ar/wp-content/themes/fau/images/logo.png' alt='Logo Fau'>
+        <img class='fau-logo' src='http://localhost/sgpoc/backend/web/img/logoFAU.png' alt='Logo Fau'>
     </a>
 </body>
 </html>

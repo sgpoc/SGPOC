@@ -86,8 +86,12 @@ class GestorProveedores
                 ->bindValue('pIdProveedor', $pIdProveedor);
         return $comando->queryAll();
     }
-        
     
-    
-
+    public function ListarLocalidades($pIdProveedor)
+    {
+        $sql = 'CALL ssp_listar_localidades_proveedor(:pIdProveedor)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdProveedor', $pIdProveedor);
+        return $comando->queryAll();
+    }
 }
