@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use kartik\form\ActiveForm;
 use kartik\form\ActiveField;
 use kartik\widgets\Growl;
-use kartik\daterange\DateRangePicker;
+use kartik\date\DatePicker;
 use kartik\widgets\DepDrop;
 use yii\helpers\Url;
 use yii\web\Controller;
@@ -38,25 +38,31 @@ use yii\web\Controller;
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?= $form->field($modellinea, 'IdProveedor')->dropDownList($listDataP, ['prompt' => 'Seleccione uno ...' ])->label('Proveedor Inicial');  ?>
-            <?= $form->field($modellinea, 'IdLocalidad')->dropDownList($listDataL, ['prompt' => 'Seleccione uno ...' ])->label('Localidad Inicial');  ?>
+            <?= $form->field($modellinea, 'IdProveedor')->dropDownList($listDataP, ['id' => 'IdProveedor', 'prompt' => 'Seleccione uno ...' ])->label('Proveedor Inicial');  ?>
+            <?= $form->field($modellinea, 'IdLocalidad')->widget(DepDrop::className(), [
+                'pluginOptions'=>[
+                    'depends'=>['IdProveedor'],
+                    'placeholder'=>'Selecccione uno ...',
+                    'url'=>Url::to('/sgpoc/backend/web/proveedores/listar-localidades'),
+                ]])
+                ->label('Localidad Inicial');  
+            ?>
             <?= $form->field($model, 'IdObra')->dropDownList($listDataO, ['id' => 'IdObra', 'prompt' => 'Seleccione uno ...' ])->label('Obra');  ?>
             <?= $form->field($model, 'IdComputoMetrico')->widget(DepDrop::className(), [
                 'pluginOptions'=>[
                     'depends'=>['IdObra'],
                     'placeholder'=>'Selecccione uno ...',
-                    'url'=>Url::to('/sgpoc/backend/web/presupuestos/listar-computos'),
+                    'url'=>Url::to('/sgpoc/backend/web/obras/listar-computos'),
                 ]])
                 ->label('Cómputo Métrico');  
             ?>
-            <?= $form->field($model, 'FechaDePresupuesto', [
-                    'addon'=>['prepend'=>['content'=>'<i class="far fa-calendar-alt"></i>']],
-                    'options'=>['class'=>'drp-container form-group']
-                ])->widget(DateRangePicker::classname(), [
-                    'useWithAddon'=>true,
+            <?= $form->field($model, 'FechaDePresupuesto')->widget(DatePicker::classname(), [
+                    'options' => ['placeholder' => 'Inregese la Fecha del Presupuesto ...'],
+                    'pickerIcon' => '<i class="far fa-calendar-alt"></i>',
                     'pluginOptions'=>[
-                        'singleDatePicker'=>true,
-                        'showDropdowns'=>true
+                        'todayHighlight' => true,
+                        'todayBtn' => true,
+                        'autoclose' => true
                     ]
                 ]); 
             ?>

@@ -5,6 +5,7 @@ use Yii;
 use yii\web\Controller;
 use yii\helpers\ArrayHelper;
 use yii\data\ArrayDataProvider;
+use yii\helpers\Json;
 use app\models\GestorGruposTrabajo;
 use app\models\GestorObras;
 use app\models\Obras;
@@ -172,5 +173,22 @@ class ObrasController extends Controller
             return $this->redirect('/sgpoc/backend/web/obras/listar');
          }
     }
+    
+    public function actionListarComputos()
+    {
+        $gestoro = new GestorObras;
+        if (isset($_POST['depdrop_parents'])) 
+        {
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != null) 
+            {    
+                $pIdObra = $parents[0];        
+                $computos = $gestoro->ListarComputos($pIdObra);
+                echo Json::encode(['output' => $computos, 'selected' => '']);
+                return;
+            }
+        }
+        echo Json::encode(['output' => '', 'selected' =>'']);
+    } 
     
 }

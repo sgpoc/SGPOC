@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use kartik\form\ActiveForm;
 use kartik\form\ActiveField;
 use kartik\widgets\Growl;
-use kartik\daterange\DateRangePicker;
+use kartik\date\DatePicker;
 
 ?>
 
@@ -36,14 +36,13 @@ use kartik\daterange\DateRangePicker;
         <div class="form-group">
             <?= $form->field($model, 'IdObra')->dropDownList($listDataO, ['prompt' => 'Seleccione uno ...' ])->label('Obra');  ?>
             <?= $form->field($model, 'Descripcion')->textArea(['row'=>5]) ?>
-            <?= $form->field($model, 'FechaComputoMetrico', [
-                    'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
-                    'options'=>['class'=>'drp-container form-group']
-                ])->widget(DateRangePicker::classname(), [
-                    'useWithAddon'=>true,
+            <?= $form->field($model, 'FechaComputoMetrico')->widget(DatePicker::classname(), [
+                    'options' => ['placeholder' => 'Inregese la Fecha del Computo Metrico ...'],
+                    'pickerIcon' => '<i class="far fa-calendar-alt"></i>',
                     'pluginOptions'=>[
-                        'singleDatePicker'=>true,
-                        'showDropdowns'=>true
+                        'todayHighlight' => true,
+                        'todayBtn' => true,
+                        'autoclose' => true
                     ]
                 ]); 
             ?>            

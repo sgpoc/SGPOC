@@ -97,6 +97,20 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'Proveedor',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'Localidad',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
         'attribute' => 'FechaUltimaActualizacion',
         'label' => 'Fecha Ultima Actualización',
         'vAlign' => 'middle',

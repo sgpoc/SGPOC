@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use kartik\form\ActiveForm;
 use kartik\widgets\Growl;
-use kartik\daterange\DateRangePicker;
+use kartik\date\DatePicker;
 
 
 ?>
@@ -38,14 +38,13 @@ use kartik\daterange\DateRangePicker;
             <?= $form->field($model, 'IdLocalidad')->dropDownList($listDataL, ['prompt' => 'Seleccione uno ...' ])->label('Localidad');  ?>
             <?= $form->field($model, 'IdInsumo')->dropDownList($listDataI, ['prompt' => 'Seleccione uno ...' ])->label('Insumo');  ?>
             <?= $form->field($model, 'PrecioLista', ['addon' => ['prepend' => ['content'=>'$']]])->textInput(['placeholder'=>'Ingrese el Precio de Lista ...']) ?>
-            <?= $form->field($model, 'FechaUltimaActualizacion', [
-                    'addon'=>['prepend'=>['content'=>'<i class="far fa-calendar-alt"></i>']],
-                    'options'=>['class'=>'drp-container form-group']
-                ])->widget(DateRangePicker::classname(), [
-                    'useWithAddon'=>true,
+            <?= $form->field($model, 'FechaUltimaActualizacion')->widget(DatePicker::classname(), [
+                    'options' => ['placeholder' => 'Inregese la fecha de ultima actualizacion ...'],
+                    'pickerIcon' => '<i class="far fa-calendar-alt"></i>',
                     'pluginOptions'=>[
-                        'singleDatePicker'=>true,
-                        'showDropdowns'=>true
+                        'todayHighlight' => true,
+                        'todayBtn' => true,
+                        'autoclose' => true
                     ]
                 ]); 
             ?>

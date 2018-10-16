@@ -4,44 +4,44 @@ use backend\assets\LoginAsset;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'SGPOC | Login';
 LoginAsset::register($this);
 
+$this->title = 'SGPOC | Login';
+
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap Login Form Template</title>
-</head>
-<body>
-    <div class="top-content">
-        <div class="inner-bg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3 form-box">
-                        <div class="form-top">
-                            <div class="form-top-left">
-                        	<h3>Login a SGPOC</h3>
-                            	<p>Ingrese su Email y Contraseña:</p>
-                            </div>
-                            <div class="form-top-right">
-                        	<i class="fa fa-lock"></i>
-                            </div>
-                        </div>
-                            <div class="form-bottom">
-                                    <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-                                    <?= $form->field($model, 'username', ['options' => ['tag' => 'div','class' => 'form-group field-loginform-username has-feedback required',]])->textInput(['placeholder' => 'Ingrese Email']) ?>
-                                    <?= $form->field($model, 'password', ['options' => ['tag' => 'div','class' => 'form-group field-loginform-password has-feedback required',]])->passwordInput(['placeholder' => 'Ingrese la Contraseña']) ?>
-                                    <?= Html::submitButton('Ingresar', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
-                                    <?php ActiveForm::end(); ?>
-		            </div>
-                    </div>
+
+<body> 
+       <div class="container-login100">
+            <div class="wrap-login100 p-t-50 p-b-50 p-l-15 p-r-15">
+            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+                <div class="login100-form-avatar">
+                    <img src="http://localhost/sgpoc/backend/web/img/logoFAU.png" alt="Logo SGPOC">
                 </div>
+                <span class="login100-form-title p-t-20 p-b-45">
+                    S G P O C
+                </span>
+                <div class="wrap-input100 m-b-10">
+                    <?= $form->field($model, 'username')->textInput(['class' => 'input100', 'placeholder' => 'Ingrese Email', 'autocomplete' => 'off'])->label(false) ?>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-user"></i>
+                    </span>
+                </div> 
+                <div class="wrap-input100 m-b-10">
+                    <?= $form->field($model, 'password')->passwordInput(['class' => 'input100', 'placeholder' => 'Ingrese contrasena', 'autocomplete' => 'off'])->label(false) ?>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                </div>
+                <div class="container-login100-form-btn p-t-10">
+                    <button class="login100-form-btn" type="submit" name="login-button">
+                        Login
+                    </button>
+                </div>
+                <?php ActiveForm::end(); ?>
             </div>
-        </div>
-    </div>
+        </div>   
 </body>
-</html>
+                                    
+                                    
