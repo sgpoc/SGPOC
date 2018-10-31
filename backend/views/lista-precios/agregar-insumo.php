@@ -39,7 +39,9 @@ use kartik\date\DatePicker;
             <?= $form->field($model, 'FechaUltimaActualizacion')->widget(DatePicker::classname(), [
                     'options' => ['placeholder' => 'Inregese la Fecha del Presupuesto ...'],
                     'pickerIcon' => '<i class="far fa-calendar-alt"></i>',
+                    'convertFormat' => true,
                     'pluginOptions'=>[
+                        'format' => 'yyyy-M-dd',
                         'todayHighlight' => true,
                         'todayBtn' => true,
                         'autoclose' => true

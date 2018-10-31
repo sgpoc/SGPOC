@@ -28,10 +28,10 @@ class GruposTrabajoController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['@'],/*
                         'matchCallback' => function ($rule, $action) {
                             return Usuarios::isUserAdmin(Yii::$app->user->identity['IdRol']);
-                        }
+                        }*/
                     ],
                 ],
             ],

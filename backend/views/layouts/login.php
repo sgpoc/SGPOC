@@ -16,7 +16,7 @@ LoginAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link rel="icon" href="http://localhost/sgpoc/backend/web/img/logoFAU.png" type="image/ico">
+    <link rel="icon" href="http://localhost/sgpoc/backend/web/img/logo-sgpoc.png" type="image/ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <?php $this->head() ?>
 </head>

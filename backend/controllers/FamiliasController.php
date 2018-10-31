@@ -35,6 +35,18 @@ class FamiliasController extends Controller
         }
     }
     
+    public function actionListarSubfamilias()
+    {    
+        $gestor = new GestorFamilias;
+        $pIdFamilia = Yii::$app->request->get('IdFamilia');
+        $subfamilias = $gestor->ListarSubfamilias($pIdFamilia);
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $subfamilias,
+            'pagination' => ['pagesize' => 5,],
+        ]);
+        return $this->renderAjax('subfamilias',['dataProvider' => $dataProvider]);
+    }
+    
     
     public function actionAlta()
     {
