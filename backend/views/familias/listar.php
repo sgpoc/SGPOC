@@ -52,11 +52,11 @@ $gridColumns = [
                             ]);
                 },
                 'listarsubfamilias' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-th-list"></i>',
-                            ['listar-subfamilias','IdFamilia' => $model['IdFamilia']], 
+                    return Html::button('<i class="fa fa-th-list"></i>',
                             [
-                                'title' => 'Lista Subfamilias Familia',
-                                'class' => 'btn btn-link'
+                                'value'=>Url::to(['/familias/listar-subfamilias', 'IdFamilia' => $model['IdFamilia']]), 
+                                'class'=>'btn btn-link modalButton',
+                                'title'=>'Listar Subfamilias'
                             ]);
                 },    
         ]

@@ -43,6 +43,18 @@ class SubfamiliasController extends Controller
             return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listData' => $listData]);
         }
     }
+    
+    public function actionListarInsumos()
+    {    
+        $gestor = new GestorSubFamilias;
+        $pIdSubFamilia = Yii::$app->request->get('IdSubFamilia');
+        $insumos = $gestor->ListarInsumos($pIdSubFamilia);
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $insumos,
+            'pagination' => ['pagesize' => 5,],
+        ]);
+        return $this->renderAjax('insumos',['dataProvider' => $dataProvider]);
+    }
 
     
     

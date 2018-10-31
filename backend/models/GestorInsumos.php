@@ -21,6 +21,7 @@ class GestorInsumos
         $unidades = $comando->queryAll();
         return $unidades;
     }
+    
 
     public function Buscar($pInsumo, $pTipoInsumo, $pIdFamilia, $pIdSubFamilia, $pIdUnidad, $pIdGT){
         $sql = 'CALL ssp_buscar_insumos(:pInsumo, :pTipoInsumo, :pIdFamilia, :pIdSubFamilia, :pIdUnidad, :pIdGT)';

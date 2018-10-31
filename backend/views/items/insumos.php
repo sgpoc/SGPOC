@@ -138,8 +138,8 @@ $gridColumns = [
         'bordered' => true,
         'striped' => false,
         'condensed' => true,
-        'responsive' => true,
-        'responsiveWrap' => true,
+        'responsive' => false,
+        'responsiveWrap' => false,
     ]);   
     ?>
 </div>

@@ -14,8 +14,8 @@ $this->title = 'SGPOC | Login';
        <div class="container-login100">
             <div class="wrap-login100 p-t-50 p-b-50 p-l-15 p-r-15">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-                <div class="login100-form-avatar">
-                    <img src="http://localhost/sgpoc/backend/web/img/logoFAU.png" alt="Logo SGPOC">
+                <div style="text-align: center">
+                    <img src="http://localhost/sgpoc/backend/web/img/logo-sgpoc.png" alt="Logo SGPOC">
                 </div>
                 <span class="login100-form-title p-t-20 p-b-45">
                     S G P O C

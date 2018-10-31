@@ -4,37 +4,17 @@ namespace common\models;
 
 use Yii;
 
-/**
- * This is the model class for table "usuarios".
- *
- * @property int $IdUsuario
- * @property int $IdGT
- * @property string $Nombre
- * @property string $Apellido
- * @property string $Rol
- * @property string $Email
- * @property string $Password
- * @property string $Estado
- * @property string $auth_key
- * @property Grupostrabajo $gT
- */
 class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     
     const ROLE_USER = 2;
     const ROLE_ADMIN = 1;
     
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'usuarios';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -53,9 +33,6 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
@@ -72,9 +49,6 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
         ];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getGT()
     {
         return $this->hasOne(Grupostrabajo::className(), ['IdGT' => 'IdGT']);

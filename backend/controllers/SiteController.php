@@ -77,31 +77,4 @@ class SiteController extends Controller
         return $this->redirect('/sgpoc/backend/web/site/login');
     }
     
-    public function actionPerfil()
-    {
-        $model = new Usuarios;
-        $gestor = new GestorUsuarios;
-        $pIdUsuario = Yii::$app->user->identity['IdUsuario'];
-        $usuario =  $gestor->Dame($pIdUsuario);
-        if($model->load(Yii::$app->request->post()) && $model->validate())
-        {
-            $pNombre = $model->Nombre;
-            $pApellido = $model->Apellido;
-            $pEmail = $model->Email;
-            $pPassword = Yii::$app->security->generatePasswordHash($model->Password);
-            $pauth_key = $model->beforeSave();
-            $mensaje = $gestor->Modificar($pIdUsuario, $pNombre, $pApellido, $pEmail, $pPassword, $pauth_key);
-            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-            {
-                return $this->redirect('/sgpoc/backend/web/site/index');
-            }
-            else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->render('perfil',['model' => $model, 'usuario' => $usuario]);
-            }
-        }
-        else{
-            return $this->render('perfil', ['model' => $model, 'usuario' => $usuario]);
-        }
-    }
 }

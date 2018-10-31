@@ -28,6 +28,7 @@ class ListaPrecios extends Model
             [['IdInsumo', 'PrecioLista', 'FechaUltimaActualizacion'], 'required', 'on' => 'agregar-insumo'],
             [['PrecioLista', 'FechaUltimaActualizacion'], 'required', 'on' => 'modificar-insumo'],
             [['IdLocalidad', 'IdInsumo', 'IdSubFamilia', 'IdFamilia', 'IdProveedor', 'IdGT'], 'integer'],
+            [['FechaUltimaActualizacion'], 'date', 'format' => 'php:Y-m-d']
         ];
     }
 
