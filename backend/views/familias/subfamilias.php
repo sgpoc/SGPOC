@@ -7,7 +7,6 @@ use yii\bootstrap\Modal;
 use yii\helpers\Url;
 
 
-$this->title = 'SGPOC | Usuarios Grupo Trabajo';
 
 $gridColumns = [
     [
@@ -19,43 +18,18 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Nombre',
+        'attribute' => 'SubFamilia',
+        'label' => 'SubFamilia',
         'vAlign' => 'middle',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Apellido',
-        'vAlign' => 'middle',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Email',
-        'vAlign' => 'middle',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Rol',
-        'label' => 'Rol',
-        'vAlign' => 'middle',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\BooleanColumn',
-        'attribute' => 'Estado',
-        'vAlign' => 'middle',
-        'hAlign' => 'center'
-    ],
-];
+] 
 
-                
 ?>
 
 <?php
     Modal::begin([
-            'header'=>'<h2>Usuarios</h2>',
+            'header'=>'<h2>SubFamilias</h2>',
             'footer'=>'',
             'id'=>'modal',
             'size'=>'modal-lg',
@@ -63,6 +37,7 @@ $gridColumns = [
     echo "<div id='modalContent'></div>";
     Modal::end();
 ?>
+
 
 <div>
     <?= GridView::widget([
@@ -75,6 +50,5 @@ $gridColumns = [
         'columns' => $gridColumns,
     ]);   
     ?>
+    
 </div>
-
-

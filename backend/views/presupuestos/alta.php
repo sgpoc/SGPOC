@@ -9,7 +9,6 @@ use kartik\widgets\DepDrop;
 use yii\helpers\Url;
 use yii\web\Controller;
 
-
 ?>
 
 <?php if(Yii::$app->session->getFlash('alert')){
@@ -59,7 +58,9 @@ use yii\web\Controller;
             <?= $form->field($model, 'FechaDePresupuesto')->widget(DatePicker::classname(), [
                     'options' => ['placeholder' => 'Inregese la Fecha del Presupuesto ...'],
                     'pickerIcon' => '<i class="far fa-calendar-alt"></i>',
+                    'convertFormat' => true,
                     'pluginOptions'=>[
+                        'format' => 'Y-m-d',    
                         'todayHighlight' => true,
                         'todayBtn' => true,
                         'autoclose' => true

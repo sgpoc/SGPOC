@@ -9,7 +9,7 @@ class IndexAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/index-style.css'
+        'css/index-style.css',
     ];
     public $js = [
         'js/jquery-3.3.1.js',

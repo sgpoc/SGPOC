@@ -62,11 +62,11 @@ $gridColumns = [
                             ]);
                 },
                 'listarinsumos' => function($url, $model, $key){
-                    return Html::a('<i class="fa fa-wrench"></i>',
-                            ['listar-insumos','IdSubFamilia' => $model['IdSubFamilia']], 
+                    return  Html::button('<i class="fa fa-wrench"></i>',
                             [
-                                'title' => 'Listar Insumos',
-                                'class' => 'btn btn-link'
+                                'value'=>Url::to(['/subfamilias/listar-insumos', 'IdSubFamilia' => $model['IdSubFamilia']]), 
+                                'class'=>'btn btn-link modalButton',
+                                'title'=>'Listar Insumos'
                             ]);
                 },    
         ]

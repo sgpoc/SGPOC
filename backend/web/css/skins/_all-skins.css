@@ -564,7 +564,7 @@
 }
 .skin-black-light .sidebar-menu > li > a {
   border-left: 3px solid transparent;
-  font-weight: 600;
+  font-weight: 400;
 }
 .skin-black-light .sidebar-menu > li:hover > a,
 .skin-black-light .sidebar-menu > li.active > a {
@@ -575,7 +575,7 @@
   border-left-color: #ffffff;
 }
 .skin-black-light .sidebar-menu > li.active > a {
-  font-weight: 600;
+  font-weight: 400;
 }
 .skin-black-light .sidebar-menu > li > .treeview-menu {
   background: #f4f4f5;
@@ -594,7 +594,7 @@
   color: #000000;
 }
 .skin-black-light .sidebar-menu .treeview-menu > li.active > a {
-  font-weight: 600;
+  font-weight: 400;
 }
 .skin-black-light .sidebar-form {
   border-radius: 3px;

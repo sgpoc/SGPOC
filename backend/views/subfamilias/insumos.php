@@ -5,9 +5,8 @@ use kartik\grid\GridView;
 use kartik\widgets\Growl;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
+use kartik\widgets\DepDrop;
 
-
-$this->title = 'SGPOC | Usuarios Grupo Trabajo';
 
 $gridColumns = [
     [
@@ -19,43 +18,26 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Nombre',
+        'attribute' => 'Insumo',
         'vAlign' => 'middle',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Apellido',
+        'attribute' => 'TipoInsumo',
         'vAlign' => 'middle',
+        'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Email',
-        'vAlign' => 'middle',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'Rol',
-        'label' => 'Rol',
-        'vAlign' => 'middle',
-        'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],
-    [
-        'class' => 'kartik\grid\BooleanColumn',
-        'attribute' => 'Estado',
-        'vAlign' => 'middle',
-        'hAlign' => 'center'
-    ],
+    ], 
 ];
 
                 
 ?>
+ 
 
 <?php
     Modal::begin([
-            'header'=>'<h2>Usuarios</h2>',
+            'header'=>'<h2>Insumos</h2>',
             'footer'=>'',
             'id'=>'modal',
             'size'=>'modal-lg',
