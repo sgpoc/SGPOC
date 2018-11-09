@@ -24,13 +24,12 @@ class GestorPresupuestos
         return $presupuestos;
     }
     
-    public function Alta($pIdComputoMetrico, $pIdObra, $pIdProveedor, $pIdLocalidad, $pFechaDePresupuesto)
+    public function Alta($pIdComputoMetrico, $pIdObra, $pIdLocalidad, $pFechaDePresupuesto)
     {
-        $sql = 'CALL ssp_alta_presupuesto(:pIdComputoMetrico, :pIdObra, :pIdProveedor, :pIdLocalidad, :pFechaDePresupuesto)';
+        $sql = 'CALL ssp_alta_presupuesto(:pIdComputoMetrico, :pIdObra, :pIdLocalidad, :pFechaDePresupuesto)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdComputoMetrico', $pIdComputoMetrico)
                 ->bindValue('pIdObra', $pIdObra)
-                ->bindValue('pIdProveedor', $pIdProveedor)
                 ->bindValue('pIdLocalidad', $pIdLocalidad)
                 ->bindValue('pFechaDePresupuesto',$pFechaDePresupuesto);
         return $comando->queryAll();

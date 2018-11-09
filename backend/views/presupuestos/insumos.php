@@ -125,7 +125,7 @@ $gridColumns = [
         'template' => '{modificar-porcentajes} {eleccion-precio}',
         'buttons' => [
                 'modificar-porcentajes' => function($url, $model, $key){ 
-                    return  Html::button('<i class="fa fa-pencil-alt"></i>',
+                    return  Html::button('<i class="fa fa-percentage"></i>',
                             [
                                 'value'=>Url::to(['/presupuestos/modificar-porcentajes','IdPresupuesto' =>$model['IdPresupuesto'], 'IdInsumo' => $model['IdInsumo']]), 
                                 'class'=>'btn btn-link modalButton',

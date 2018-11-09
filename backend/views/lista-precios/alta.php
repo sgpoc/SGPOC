@@ -4,7 +4,8 @@ use yii\helpers\Html;
 use kartik\form\ActiveForm;
 use kartik\widgets\Growl;
 use kartik\date\DatePicker;
-
+use kartik\widgets\DepDrop;
+use yii\helpers\Url;
 
 ?>
 
@@ -41,7 +42,9 @@ use kartik\date\DatePicker;
             <?= $form->field($model, 'FechaUltimaActualizacion')->widget(DatePicker::classname(), [
                     'options' => ['placeholder' => 'Inregese la fecha de ultima actualizacion ...'],
                     'pickerIcon' => '<i class="far fa-calendar-alt"></i>',
+                    'convertFormat' => true,
                     'pluginOptions'=>[
+                        'format' => 'yyyy-M-d',
                         'todayHighlight' => true,
                         'todayBtn' => true,
                         'autoclose' => true

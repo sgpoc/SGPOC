@@ -91,7 +91,8 @@ class ProveedoresController extends Controller
             }
             else{
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('modificar',['model' => $model]);
+                return $this->redirect('/sgpoc/backend/web/proveedores/listar');
+                //return $this->renderAjax('modificar',['model' => $model, 'proveedor' => $proveedor]);
             }
         }
         else{

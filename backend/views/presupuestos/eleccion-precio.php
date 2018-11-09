@@ -38,8 +38,15 @@ use yii\web\Controller;
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?= $form->field($model, 'IdProveedor')->dropDownList($listDataP, ['prompt' => 'Seleccione uno ...' ])->label('Proveedor');  ?>
-            <?= $form->field($model, 'IdLocalidad')->dropDownList($listDataL, ['prompt' => 'Seleccione uno ...' ])->label('Localidad');  ?>
+            <?= $form->field($modellinea, 'IdProveedor')->dropDownList($listDataP, ['id' => 'IdProveedor', 'prompt' => 'Seleccione uno ...' ])->label('Proveedor');  ?>
+            <?= $form->field($modellinea, 'IdLocalidad')->widget(DepDrop::className(), [
+                'pluginOptions'=>[
+                    'depends'=>['IdProveedor'],
+                    'placeholder'=>'Selecccione uno ...',
+                    'url'=>Url::to('/sgpoc/backend/web/proveedores/listar-localidades'),
+                ]])
+                ->label('Localidad');  
+            ?>
         </div>
     </div>
     <div class="modal-footer">

@@ -64,7 +64,7 @@ class FamiliasController extends Controller
             }
             else{
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('alta',['model' => $model]);
+                return $this->redirect('/sgpoc/backend/web/familias/listar');
             }
         }
         else{
@@ -88,7 +88,7 @@ class FamiliasController extends Controller
             }
             else{
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('modificar',['model' => $model, 'familia' => $familia]);
+                return $this->redirect('/sgpoc/backend/web/familias/listar');
             }     
         }
         else{

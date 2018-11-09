@@ -9,7 +9,7 @@ class Items extends Model
 {
     public $IdItem;
     public $IdRubroItem;
-    public $IdIdGT;
+    public $IdGT;
     public $IdUnidad;
     public $Item;
     

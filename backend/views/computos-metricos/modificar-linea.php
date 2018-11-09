@@ -37,7 +37,7 @@ use kartik\widgets\Growl;
             <?= $form->field($model, 'Largo', ['addon' => ['prepend' => ['content'=>'L']]])->textInput(['value'=>$lineacomputo[0]['Largo']]) ?>
             <?= $form->field($model, 'Ancho', ['addon' => ['prepend' => ['content'=>'An']]])->textInput(['value'=>$lineacomputo[0]['Ancho']]) ?>
             <?= $form->field($model, 'Alto', ['addon' => ['prepend' => ['content'=>'A']]])->textInput(['value'=>$lineacomputo[0]['Alto']]) ?>
-            <?= $form->field($model, 'Descripcion')->textArea(['rows'=>5]) ?>
+            <?= $form->field($model, 'Descripcion')->textArea(['rows'=>5, 'value'=>$lineacomputo[0]['Descripcion']]) ?>
         </div>
     </div>
     <div class="modal-footer">

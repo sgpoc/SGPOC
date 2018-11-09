@@ -44,23 +44,6 @@ $gridColumns = [
         'hAlign' => 'center',
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
-    [
-        'class' => 'kartik\grid\ActionColumn',
-        'header' => 'Acciones',
-        'vAlign' => 'middle',
-        'width' => '240px',
-        'template' => '{modificar}',
-        'buttons' => [
-                'modificar' => function($url, $model, $key){ 
-                    return  Html::button('<i class="fa fa-pencil-alt"></i>',
-                            [
-                                'value'=>Url::to('/computos-metricos/modificar-linea'),// 'IdComputoMetrico' => $model['IdComputoMetrico'], 'NroLinea' => $model['NroLinea']]), 
-                                'class'=>'btn btn-link modalButton',
-                                'title'=>'Modificar Línea Cómputo Métrico'
-                            ]);
-                }    
-        ]
-    ], 
 ];
 
                 

@@ -44,7 +44,8 @@ use kartik\date\DatePicker;
                         'autoclose' => true
                     ]
                 ]); 
-            ?>        </div>
+            ?>        
+        </div>
     </div>
     <div class="modal-footer">
         <?= html::submitButton('Modificar',['class'=>'btn btn-success pull-right']); ?>

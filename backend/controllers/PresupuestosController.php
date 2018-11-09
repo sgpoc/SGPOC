@@ -65,12 +65,11 @@ class PresupuestosController extends Controller
         if($model->load(Yii::$app->request->post()) && $model->validate())
         {
             $lineapresupuesto = Yii::$app->request->post('LineaPresupuestos');
-            $pIdProveedor = $lineapresupuesto['IdProveedor'];
             $pIdLocalidad = $lineapresupuesto['IdLocalidad'];
             $pIdObra= $model->IdObra;
             $pIdComputoMetrico = $model->IdComputoMetrico;
             $pFechaDePresupuesto = $model->FechaDePresupuesto;
-            $mensaje = $gestor->Alta($pIdComputoMetrico, $pIdObra, $pIdProveedor, $pIdLocalidad, $pFechaDePresupuesto);
+            $mensaje = $gestor->Alta($pIdComputoMetrico, $pIdObra, $pIdLocalidad, $pFechaDePresupuesto);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
                 return $this->redirect('/sgpoc/backend/web/presupuestos/listar');
@@ -160,7 +159,7 @@ class PresupuestosController extends Controller
         $gestor = new GestorPresupuestos;
         $pIdPresupuesto = Yii::$app->request->get('IdPresupuesto');
         $pIdInsumo = Yii::$app->request->get('IdInsumo');
-        //aqui busco los valores viejos
+        $lineapresupuesto = $gestor->DameLinea($pIdPresupuesto, $pIdInsumo);
         if($model->load(Yii::$app->request->post()) && $model->validate())
         {
             $pBeneficios = $model->Beneficios;
@@ -170,15 +169,15 @@ class PresupuestosController extends Controller
             $mensaje = $gestor->ModificarPorcentajes($pIdPresupuesto, $pIdInsumo, $pBeneficios, $pGastosGenerales, $pCargasSociales, $pIVA);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
-                return $this->redirect('/sgpoc/backend/web/presupuestos/listar');
+                return $this->redirect('/sgpoc/backend/web/presupuestos/listar-insumos');
             }
             else{
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('modificar-porcentajes',['model' => $model]);
+                return $this->renderAjax('modificar-porcentajes',['model' => $model, 'lineapresupuesto' => $lineapresupuesto]);
             }
         }
         else{
-            return $this->renderAjax('modificar-porcentajes',['model' => $model]);
+            return $this->renderAjax('modificar-porcentajes',['model' => $model, 'lineapresupuesto' => $lineapresupuesto]);
         }
     }
     
@@ -198,9 +197,6 @@ class PresupuestosController extends Controller
         $listDataL = ArrayHelper::map($localidades,'IdLocalidad','Localidad');
         if($model->load(Yii::$app->request->post()) && $model->validate())
         {
-            /*$lineapresupuesto = Yii::$app->request->post('LineaPresupuestos');
-            $pIdProveedor = $lineapresupuesto['IdProveedor'];
-            $pIdLocalidad = $lineapresupuesto['IdLocalidad'];*/
             $pIdProveedor = $model->IdProveedor;
             $pIdLocalidad = $model->IdLocalidad;
             $mensaje = $gestor->EleccionPrecio($pIdPresupuesto, $pIdInsumo, $pIdProveedor, $pIdLocalidad);
@@ -210,11 +206,11 @@ class PresupuestosController extends Controller
             }
             else{
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('eleccion-precio',['model' => $model, 'listDataP' => $listDataP, 'listDataL' => $listDataL]);
+                return $this->renderAjax('eleccion-precio',['modellinea' => $model, 'listDataP' => $listDataP, 'listDataL' => $listDataL]);
             }
         }
         else{
-            return $this->renderAjax('eleccion-precio',['model' => $model, 'listDataP' => $listDataP, 'listDataL' => $listDataL]);
+            return $this->renderAjax('eleccion-precio',['modellinea' => $model, 'listDataP' => $listDataP, 'listDataL' => $listDataL]);
         }
     }
     
