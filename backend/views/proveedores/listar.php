@@ -22,6 +22,7 @@ $gridColumns = [
     [
         'class' => 'kartik\grid\ExpandRowColumn',
         'width' => '50px',
+        'hiddenFromExport' => false,
         'value' => function ($model, $key, $index, $column) {
             return GridView::ROW_COLLAPSED;
         },

@@ -38,14 +38,14 @@ use kartik\date\DatePicker;
                     'pickerIcon' => '<i class="far fa-calendar-alt"></i>',
                     'convertFormat' => true,
                     'pluginOptions'=>[
-                        'format' => 'yyyy-M-dd',
+                        'format' => 'yyyy-M-d',
                         'todayHighlight' => true,
                         'todayBtn' => true,
                         'autoclose' => true
                     ]
                 ]); 
             ?>
-            <?= $form->field($model, 'Descripcion')->textArea(['row'=>5]) ?>            
+            <?= $form->field($model, 'Descripcion')->textArea(['row'=>5, 'value'=>$computo[0]['Descripcion']]) ?>            
             <?= $form->field($model, 'TipoComputo', ['addon' => ['prepend' => ['content'=>'T']]])->textInput(['value'=>$computo[0]['TipoComputo']]); ?>
         </div>
     </div>

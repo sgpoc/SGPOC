@@ -81,6 +81,8 @@ class ListaPreciosController extends Controller
         }
     }
     
+    /* BORRAR */
+    
     public function actionAgregarInsumo()
     {
         $model = new ListaPrecios;

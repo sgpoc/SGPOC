@@ -39,10 +39,12 @@ use kartik\date\DatePicker;
             <?= $form->field($model, 'FechaComputoMetrico')->widget(DatePicker::classname(), [
                     'options' => ['placeholder' => 'Inregese la Fecha del Computo Metrico ...'],
                     'pickerIcon' => '<i class="far fa-calendar-alt"></i>',
+                    'convertFormat' => true,
                     'pluginOptions'=>[
                         'todayHighlight' => true,
                         'todayBtn' => true,
-                        'autoclose' => true
+                        'autoclose' => true,
+                        'format' => 'yyyy-M-d'
                     ]
                 ]); 
             ?>            

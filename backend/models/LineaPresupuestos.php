@@ -32,7 +32,7 @@ class LineaPresupuestos extends Model
         return [
             [['IdProveedor', 'IdLocalidad'], 'required', 'on' => 'eleccion-precio'],
             [['Beneficios','GastosGenerales', 'CargasSociales', 'IVA'], 'required', 'on' => 'modificar-porcentajes'],
-            [['Beneficios','GastosGenerales', 'CargasSociales', 'IVA'], 'compare', 'compareValue' => 0, 'operator' => '!=', 'on' => 'modificar-porcentajes'],
+            //[['Beneficios','GastosGenerales', 'CargasSociales', 'IVA'], 'compare', 'compareValue' => 0, 'operator' => '!=', 'on' => 'modificar-porcentajes'],
         ];
     }
 
