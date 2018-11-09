@@ -24,6 +24,7 @@ $gridColumns = [
     [
         'class' => 'kartik\grid\ExpandRowColumn',
         'width' => '50px',
+        'hiddenFromExport' =>  false,
         'value' => function ($model, $key, $index, $column) {
             return GridView::ROW_COLLAPSED;
         },
@@ -171,8 +172,14 @@ $gridColumns = [
         'columns' => $gridColumns,
         'exportConfig' => [
                 GridView::EXCEL => ['label' => 'EXCEL'],
-                GridView::TEXT => ['label' => 'TEXTO'],
-                GridView::PDF => ['label' => 'PDF'],
+                GridView::PDF => [
+                    'label' => 'PDF',
+                    'label' => 'PDF',
+                    'filename' => 'presupuesto-items',
+                    'showHeader' => false,
+                    //'showFooter' => false,
+                    'showPageSummary' => false,
+                ],
          ],
         'toolbar' => [
             [
@@ -200,7 +207,8 @@ $gridColumns = [
             '{export}',
         ],
         'export' => [
-          'icon' => 'fa fa-external-link-alt'  
+            'icon' => 'fa fa-external-link-alt',
+            'showConfirmAlert' => false,
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="fa fa-dollar-sign"></i> Presupuestos</h3>',

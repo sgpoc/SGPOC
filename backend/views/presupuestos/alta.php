@@ -37,15 +37,7 @@ use yii\web\Controller;
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?= $form->field($modellinea, 'IdProveedor')->dropDownList($listDataP, ['id' => 'IdProveedor', 'prompt' => 'Seleccione uno ...' ])->label('Proveedor Inicial');  ?>
-            <?= $form->field($modellinea, 'IdLocalidad')->widget(DepDrop::className(), [
-                'pluginOptions'=>[
-                    'depends'=>['IdProveedor'],
-                    'placeholder'=>'Selecccione uno ...',
-                    'url'=>Url::to('/sgpoc/backend/web/proveedores/listar-localidades'),
-                ]])
-                ->label('Localidad Inicial');  
-            ?>
+            <?= $form->field($modellinea, 'IdLocalidad')->dropDownList($listDataL, ['prompt' => 'Seleccione uno ...' ])->label('Localidad');  ?>
             <?= $form->field($model, 'IdObra')->dropDownList($listDataO, ['id' => 'IdObra', 'prompt' => 'Seleccione uno ...' ])->label('Obra');  ?>
             <?= $form->field($model, 'IdComputoMetrico')->widget(DepDrop::className(), [
                 'pluginOptions'=>[
@@ -60,7 +52,7 @@ use yii\web\Controller;
                     'pickerIcon' => '<i class="far fa-calendar-alt"></i>',
                     'convertFormat' => true,
                     'pluginOptions'=>[
-                        'format' => 'Y-m-d',    
+                        'format' => 'yyyy-M-dd',    
                         'todayHighlight' => true,
                         'todayBtn' => true,
                         'autoclose' => true

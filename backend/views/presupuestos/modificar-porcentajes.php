@@ -32,10 +32,10 @@ use kartik\widgets\Growl;
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?= $form->field($model, 'Beneficios', ['addon' => ['prepend' => ['content'=>'B']]])->textInput(['value'=>'']) ?>
-            <?= $form->field($model, 'GastosGenerales', ['addon' => ['prepend' => ['content'=>'GG']]])->textInput(['value'=>'']) ?>
-            <?= $form->field($model, 'CargasSociales', ['addon' => ['prepend' => ['content'=>'CS']]])->textInput(['value'=>'']) ?>
-            <?= $form->field($model, 'IVA', ['addon' => ['prepend' => ['content'=>'I']]])->textInput(['value'=>'']) ?>
+            <?= $form->field($model, 'Beneficios', ['addon' => ['prepend' => ['content'=>'B']]])->textInput(['value'=>$lineapresupuesto[0]['Beneficios']]) ?>
+            <?= $form->field($model, 'GastosGenerales', ['addon' => ['prepend' => ['content'=>'GG']]])->textInput(['value'=>$lineapresupuesto[0]['GastosGenerales']]) ?>
+            <?= $form->field($model, 'CargasSociales', ['addon' => ['prepend' => ['content'=>'CS']]])->textInput(['value'=>$lineapresupuesto[0]['CargasSociales']]) ?>
+            <?= $form->field($model, 'IVA', ['addon' => ['prepend' => ['content'=>'I']]])->textInput(['value'=>$lineapresupuesto[0]['IVA']]) ?>
     </div>
     <div class="modal-footer">
         <?= html::submitButton('Modificar',['class'=>'btn btn-success pull-right']); ?>
