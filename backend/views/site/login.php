@@ -3,11 +3,30 @@
 use backend\assets\LoginAsset;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use kartik\widgets\Growl;
 
 LoginAsset::register($this);
 
 $this->title = 'SGPOC | Login';
 
+?>
+
+<?php if(Yii::$app->session->getFlash('alert')){
+    echo Growl::widget([
+    'type' => Growl::TYPE_DANGER,
+    'title' => 'Error!',
+    'icon' => 'glyphicon glyphicon-remove-sign',
+    'body' => Yii::$app->session->getFlash('alert'),
+    'showSeparator' => true,
+    'pluginOptions' => [
+        'showProgressbar' => false,
+        'placement' => [
+            'from' => 'top',
+            'align' => 'center',
+        ]
+    ]
+    ]);
+    }
 ?>
 
 <body> 

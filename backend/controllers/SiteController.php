@@ -57,18 +57,57 @@ class SiteController extends Controller
     public function actionLogin()
     {
         $this->layout = 'login';
+        $gestor = new GestorUsuarios;
         if (!Yii::$app->user->isGuest) {
             return $this->redirect('/sgpoc/backend/web/site/index');
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            $model->password = '';
-            return $this->render('login', ['model' => $model]);
+        if ($model->load(Yii::$app->request->post())){ //&& $model->login()) {
+           $usuario = $model->username; 
+          $estado = $gestor->dameEstado($model->username);
+          if($model->getUser($usuario)){
+            if($estado[0]['Estado'] == '1'){
+                $model->login();
+                // return $this->redirect('/sgpoc/backend/web/site/index');
+                // $model->login();
+                 return $this->goBack();
+                }    
+                else{
+                    $model->password = '';
+                    Yii::$app->session->setFlash('alert', "El usuario ingresado esta dado de baja.");
+                     return $this->render('login', ['model' => $model]);
+             }
+            }
+            else{
+                   $model->password = '';
+                   Yii::$app->session->setFlash('alert',$estado[0]['Mensaje']);
+                   return $this->render('login', ['model' => $model]);
+            }
+        }
+        else{
+              $model->password = '';
+              return $this->render('login', ['model' => $model]);
         }
     }
+    // public function actionLogin()
+    // {
+    //     $this->layout = 'login';
+    //     $gestor = new GestorUsuarios;
+    //     if (!Yii::$app->user->isGuest) {
+    //         return $this->redirect('/sgpoc/backend/web/site/index');
+    //     }
+
+    //     $model = new LoginForm();
+    //     if ($model->load(Yii::$app->request->post()) && $model->login()) {
+    //       $estado = $gestor->dameEstado($model->username);
+    //         return $this->goBack();
+    //     }
+    //     else{
+    //           $model->password = '';
+    //           return $this->render('login', ['model' => $model]);
+    //     }
+    // }
 
     public function actionLogout()
     {

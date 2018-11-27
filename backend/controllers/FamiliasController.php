@@ -9,6 +9,7 @@ use app\models\Familias;
 use app\models\FamiliasBuscar;
 
 
+
 class FamiliasController extends Controller
 {
     public function actionListar()
@@ -58,19 +59,32 @@ class FamiliasController extends Controller
             $pIdGT = Yii::$app->user->identity['IdGT'];
             $pFamilia = $model->Familia;
             $mensaje = $gestor->Alta($pIdGT, $pFamilia);
+            // if($model->save()){
+            //     echo 1;
+            // }else{
+            //     echo 0;
+            // }
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
-                return $this->redirect('/sgpoc/backend/web/familias/listar');
+                // Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+                return $mensaje[0]['Mensaje'];
+                //return $this->redirect('/sgpoc/backend/web/familias/listar');
             }
             else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->redirect('/sgpoc/backend/web/familias/listar');
+                return $mensaje[0]['Mensaje'];
+                // Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+                // return $this->redirect('/sgpoc/backend/web/familias/listar');
             }
         }
+        // else{
+        //     return $this->renderAjax('alta',['model' => $model]);
+        // }
         else{
             return $this->renderAjax('alta',['model' => $model]);
         }
     }
+
+    
     
     public function actionModificar()
     {

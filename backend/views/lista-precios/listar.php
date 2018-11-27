@@ -67,7 +67,7 @@ $gridColumns = [
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' => '{agregar-insumo}',
+        'template' => '{agregar-insumo} {borrar}',
         'buttons' => [
                 'agregar-insumo' => function($url, $model, $key){
                     return  Html::button('<i class="fa fa-plus"></i>',
@@ -75,6 +75,18 @@ $gridColumns = [
                                 'value'=>Url::to(['/lista-precios/agregar-insumo', 'IdProveedor' => $model['IdProveedor'], 'IdLocalidad' => $model['IdLocalidad']]), 
                                 'class'=>'btn btn-link modalButton',
                                 'title'=>'Agregar Insumo a la Lista de Precios'
+                            ]);
+                },
+                'borrar' => function($url, $model, $key){
+                    return Html::a('<i class="fa fa-trash"></i>',
+                            ['borrar','IdProveedor' => $model['IdProveedor'],'IdLocalidad' => $model['IdLocalidad']], 
+                            [
+                                'title' => 'Borrar Lista de Precios', 
+                                'class' => 'btn btn-link',
+                                'data' => [
+                                    'confirm' => 'Esta seguro que desea borrar la Lista de Precios? Se borrara la lista aunque tenga insumos asociados',
+                                    'method' => 'post'
+                                ]
                             ]);
                 }, 
         ]
