@@ -56,6 +56,14 @@ class GestorListaPrecios
         return $comando->queryAll();
     }
     
+    public function Borrar($pIdProveedor,$pIdLocalidad){
+        $sql = 'CALL ssp_borrar_listaprecios(:pIdProveedor, :pIdLocalidad)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdProveedor', $pIdProveedor)
+                ->bindValue('pIdLocalidad', $pIdLocalidad);
+        return $comando->queryAll();    
+    }
+    
     public function AgregarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pPrecioLista, $pFechaUltimaActualizacion)
     {
         $sql = 'CALL ssp_agregar_insumo_listaprecios(:pIdProveedor, :pIdLocalidad, :pIdInsumo, :pPrecioLista, :pFechaUltimaActualizacion)';

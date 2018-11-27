@@ -37,12 +37,11 @@ class ProveedoresController extends Controller
                 'pagination' => ['pagesize' => 5,],
             ]);
             return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel]);
-            }
+        }
         
     }
     
-    public function actionAlta()
-    {
+    public function actionAlta() {
         $model = new Proveedores;
         $gestorp = new GestorProveedores;
         $pIdGT = Yii::$app->user->identity['IdGT'];
@@ -55,27 +54,20 @@ class ProveedoresController extends Controller
             $pCodigoPostal = $model->CodigoPostal;
             $pPaginaWeb = $model->PaginaWEB;
             $mensaje = $gestorp->Alta($pProveedor, $pDomicilio, $pCodigoPostal, $pEmail, $pTelefono, $pPaginaWeb, $pIdGT);
-            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-            {
-                return $this->redirect('/sgpoc/backend/web/proveedores/listar');
-            }
-            else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('alta',['model' => $model]);
-            }
+            return $mensaje[0]['Mensaje'];
         }
         else{
             return $this->renderAjax('alta',['model' => $model]);
         }
     }
     
-    public function actionModificar(){
+    public function actionModificar() {
       
         $model = new Proveedores;
         $gestor = new GestorProveedores;
         $pIdProveedor = Yii::$app->request->get('IdProveedor');
         $proveedor = $gestor->Dame($pIdProveedor);     
-        if($model->load(Yii::$app->request->post() && $model->validate()))
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pProveedor = $model->Proveedor;
             $pDomicilio = $model->Domicilio;
@@ -85,14 +77,12 @@ class ProveedoresController extends Controller
             $pPaginaWeb = $model->PaginaWEB;
             $pEstado = $model->Estado;
             $mensaje = $gestor->Modificar($pIdProveedor, $pProveedor, $pDomicilio, $pCodigoPostal, $pEmail, $pTelefono, $pPaginaWeb, $pEstado);
-            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-            {
-                return $this->redirect('/sgpoc/backend/web/proveedores/listar');
-            }
-            else{
+            if ((substr($mensaje[0]['Mensaje'], 0, 2)) === 'OK') {
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
                 return $this->redirect('/sgpoc/backend/web/proveedores/listar');
-                //return $this->renderAjax('modificar',['model' => $model, 'proveedor' => $proveedor]);
+            }
+            else {
+                return $mensaje[0]['Mensaje'];
             }
         }
         else{
@@ -101,34 +91,21 @@ class ProveedoresController extends Controller
     }
     
 
-    public function actionBorrar()
-    {
+    public function actionBorrar() {
         $gestor = new GestorProveedores;
         $pIdProveedor = Yii::$app->request->get('IdProveedor');
         $mensaje = $gestor->Borrar($pIdProveedor);
-        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-         {
-            return $this->redirect('/sgpoc/backend/web/proveedores/listar');
-         }
-         else{
-            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-            return $this->redirect('/sgpoc/backend/web/proveedores/listar');
-         }
+        Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+        return $this->redirect('/sgpoc/backend/web/proveedores/listar');    
     }
+    
 
     public function actionBaja()
     {
         $gestor = new GestorProveedores;
         $pIdProveedor = Yii::$app->request->get('IdProveedor');
         $mensaje = $gestor->Baja($pIdProveedor);
-        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-         {
-            return $this->redirect('/sgpoc/backend/web/proveedores/listar');
-         }
-         else{
-            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-            return $this->redirect('/sgpoc/backend/web/proveedores/listar');
-         }
+        Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
         return $this->redirect('/sgpoc/backend/web/proveedores/listar');
     }
     
@@ -137,14 +114,8 @@ class ProveedoresController extends Controller
         $gestor = new GestorProveedores;
         $pIdProveedor = Yii::$app->request->get('IdProveedor');
         $mensaje = $gestor->Activar($pIdProveedor);
-        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-         {
-            return $this->redirect('/sgpoc/backend/web/proveedores/listar');
-         }
-         else{
-            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-            return $this->redirect('/sgpoc/backend/web/proveedores/listar');
-         }
+        Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+        return $this->redirect('/sgpoc/backend/web/proveedores/listar');
     }
     
     

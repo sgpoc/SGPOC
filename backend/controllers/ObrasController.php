@@ -15,8 +15,7 @@ use app\models\ObrasBuscar;
 
 class ObrasController extends Controller
 {   
-    public function actionListar()
-    {
+    public function actionListar() {
         
         $gestor = new GestorObras;
         $searchModel = new ObrasBuscar;
@@ -49,8 +48,7 @@ class ObrasController extends Controller
     }
     
     
-    public function actionAlta()
-    {
+    public function actionAlta() {
         $model = new Obras;
         $model->scenario = 'alta-obra';
         $gestor = new GestorObras;
@@ -69,14 +67,7 @@ class ObrasController extends Controller
             $pSuperficieTerreno = $model->SuperficieTerreno;
             $pSuperficieCubiertaTotal = $model->SuperficieCubiertaTotal;
             $mensaje = $gestor->Alta($pIdGT, $pIdLocalidad, $pObra, $pDireccion, $pPropietario, $pTelefono, $pEmail, $pComentarios, $pSuperficieTerreno, $pSuperficieCubiertaTotal);
-            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-            {
-                return $this->redirect('/sgpoc/backend/web/obras/listar');
-            }
-            else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('alta',['model' => $model, 'listData' => $listData]);
-            }
+            return $mensaje[0]['Mensaje'];
         }
         else{
             return $this->renderAjax('alta',['model' => $model, 'listData' => $listData]);
@@ -102,11 +93,11 @@ class ObrasController extends Controller
             $mensaje = $gestor->Modificar($pIdObra, $pObra, $pDireccion, $pPropietario, $pTelefono, $pEmail, $pComentarios, $pSuperficieTerreno, $pSuperficieCubiertaTotal);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
                 return $this->redirect('/sgpoc/backend/web/obras/listar');
             }
             else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('modificar',['model' => $model, 'obra' => $obra]);
+                return $mensaje[0]['Mensaje'];
             }
         }
         else{
@@ -119,14 +110,8 @@ class ObrasController extends Controller
         $gestor = new GestorObras;
         $pIdObra = Yii::$app->request->get('IdObra');
         $mensaje = $gestor->Borrar($pIdObra);
-        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-         {
-            return $this->redirect('/sgpoc/backend/web/obras/listar');
-         }
-         else{
-            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-            return $this->redirect('/sgpoc/backend/web/obras/listar');
-         }
+        Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+        return $this->redirect('/sgpoc/backend/web/obras/listar');    
     }
 
     public function actionBaja()
@@ -134,14 +119,8 @@ class ObrasController extends Controller
         $gestor = new GestorObras;
         $pIdObra = Yii::$app->request->get('IdObra');
         $mensaje = $gestor->Baja($pIdObra);
-        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-         {
-            return $this->redirect('/sgpoc/backend/web/obras/listar');
-         }
-         else{
-            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-            return $this->redirect('/sgpoc/backend/web/obras/listar');
-         }
+        Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+        return $this->redirect('/sgpoc/backend/web/obras/listar');
     }
     
     public function actionActivar()
@@ -149,14 +128,8 @@ class ObrasController extends Controller
         $gestor = new GestorObras;
         $pIdObra = Yii::$app->request->get('IdObra');
         $mensaje = $gestor->Activar($pIdObra);
-        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-         {
-            return $this->redirect('/sgpoc/backend/web/obras/listar');
-         }
-         else{
-            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-            return $this->redirect('/sgpoc/backend/web/obras/listar');
-         }
+        Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+        return $this->redirect('/sgpoc/backend/web/obras/listar');
     }
     
     public function actionFinalizar()
@@ -164,14 +137,8 @@ class ObrasController extends Controller
         $gestor = new GestorObras;
         $pIdObra = Yii::$app->request->get('IdObra');
         $mensaje = $gestor->Finalizar($pIdObra);
-        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-         {
-            return $this->redirect('/sgpoc/backend/web/obras/listar');
-         }
-         else{
-            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-            return $this->redirect('/sgpoc/backend/web/obras/listar');
-         }
+        Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+        return $this->redirect('/sgpoc/backend/web/obras/listar');
     }
     
     public function actionListarComputos()
