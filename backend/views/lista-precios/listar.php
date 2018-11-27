@@ -67,7 +67,7 @@ $gridColumns = [
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' => '{agregar-insumo}',
+        'template' => '{agregar-insumo} {borrar}',
         'buttons' => [
                 'agregar-insumo' => function($url, $model, $key){
                     return  Html::button('<i class="fa fa-plus"></i>',
@@ -76,7 +76,19 @@ $gridColumns = [
                                 'class'=>'btn btn-link modalButton',
                                 'title'=>'Agregar Insumo a la Lista de Precios'
                             ]);
-                }, 
+                },
+                'borrar' => function($url, $model, $key){
+                    return Html::a('<i class="fa fa-trash"></i>',
+                            ['borrar','IdProveedor' => $model['IdProveedor'], 'IdLocalidad' => $model['IdLocalidad']], 
+                            [
+                                'title' => 'Borrar Lista de Precios', 
+                                'class' => 'btn btn-link',
+                                'data' => [
+                                    'confirm' => 'Esta seguro que desea borrar la Lista de Precios?',
+                                    'method' => 'post'
+                                ]
+                            ]);
+                },
         ]
     ], 
 ];
@@ -85,22 +97,37 @@ $gridColumns = [
 ?>
   
 <?php if(Yii::$app->session->getFlash('alert')){
-    echo Growl::widget([
-    'type' => Growl::TYPE_DANGER,
-    'title' => 'Cuidado!',
-    'icon' => 'glyphicon glyphicon-remove-sign',
-    'body' => Yii::$app->session->getFlash('alert'),
-    'showSeparator' => true,
-    'delay' => 1000,
-    'pluginOptions' => [
-        'showProgressbar' => false,
-        'placement' => [
-            'from' => 'top',
-            'align' => 'center',
-        ]
-    ]
-    ]);
-    }
+            if(substr(Yii::$app->session->getFlash('alert'), 0, 2) != 'OK') {
+                echo Growl::widget([
+                'type' => Growl::TYPE_DANGER,
+                'icon' => 'glyphicon glyphicon-remove-sign',
+                'body' => Yii::$app->session->getFlash('alert'),
+                'delay' => 1000,
+                'pluginOptions' => [
+                    'showProgressbar' => false,
+                    'placement' => [
+                        'from' => 'top',
+                        'align' => 'center',
+                    ]
+                ]
+                ]);
+            }
+            else {
+                echo Growl::widget([
+                'type' => Growl::TYPE_SUCCESS,
+                'icon' => 'glyphicon glyphicon-ok-sign',
+                'body' => Yii::$app->session->getFlash('alert'),
+                'delay' => 1000,
+                'pluginOptions' => [
+                    'showProgressbar' => false,
+                    'placement' => [
+                        'from' => 'top',
+                        'align' => 'center',
+                    ]
+                ]
+                ]);  
+            }
+        }
 ?>
 
 <?php
@@ -130,7 +157,6 @@ $gridColumns = [
         'columns' => $gridColumns,
         'exportConfig' => [
                 GridView::EXCEL => ['label' => 'EXCEL'],
-                GridView::TEXT => ['label' => 'TEXTO'],
                 GridView::PDF => ['label' => 'PDF'],
          ],
         'toolbar' => [

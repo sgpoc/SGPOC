@@ -93,25 +93,7 @@ $gridColumns = [
 
                 
 ?> 
-  
-<?php if(Yii::$app->session->getFlash('alert')){
-    echo Growl::widget([
-    'type' => Growl::TYPE_DANGER,
-    'title' => 'Cuidado!',
-    'icon' => 'glyphicon glyphicon-remove-sign',
-    'body' => Yii::$app->session->getFlash('alert'),
-    'showSeparator' => true,
-    'delay' => 1000,
-    'pluginOptions' => [
-        'showProgressbar' => false,
-        'placement' => [
-            'from' => 'top',
-            'align' => 'center',
-        ]
-    ]
-    ]);
-    }
-?>
+
 
 <?php
     Modal::begin([

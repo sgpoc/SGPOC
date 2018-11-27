@@ -53,7 +53,7 @@ $gridColumns = [
         'expandOneOnly' => true,
         'expandIcon' => '<i class="far fa-plus-square"></i>',        
         'collapseIcon' => '<i class="far fa-minus-square"></i>',
-    ],
+    ],            
     [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'Obra',
@@ -69,7 +69,7 @@ $gridColumns = [
         'attribute' => 'Descripcion',            
         'vAlign' => 'middle',            
         'contentOptions' => ['class' => 'kartik-sheet-style']
-    ],            
+    ],             
     [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'FechaComputoMetrico',
@@ -78,6 +78,13 @@ $gridColumns = [
         'hAlign' => 'center',            
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
+    [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'TipoComputo',            
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],            
     [
         'class' => '\kartik\grid\ActionColumn',
         'header' => 'Acciones',
@@ -123,22 +130,37 @@ $gridColumns = [
 ?>
   
 <?php if(Yii::$app->session->getFlash('alert')){
-    echo Growl::widget([
-    'type' => Growl::TYPE_DANGER,
-    'title' => 'Cuidado!',
-    'icon' => 'glyphicon glyphicon-remove-sign',
-    'body' => Yii::$app->session->getFlash('alert'),
-    'showSeparator' => true,
-    'delay' => 1000,
-    'pluginOptions' => [
-        'showProgressbar' => false,
-        'placement' => [
-            'from' => 'top',
-            'align' => 'center',
-        ]
-    ]
-    ]);
-    }
+            if(substr(Yii::$app->session->getFlash('alert'), 0, 2) != 'OK') {
+                echo Growl::widget([
+                'type' => Growl::TYPE_DANGER,
+                'icon' => 'glyphicon glyphicon-remove-sign',
+                'body' => Yii::$app->session->getFlash('alert'),
+                'delay' => 1000,
+                'pluginOptions' => [
+                    'showProgressbar' => false,
+                    'placement' => [
+                        'from' => 'top',
+                        'align' => 'center',
+                    ]
+                ]
+                ]);
+            }
+            else {
+                echo Growl::widget([
+                'type' => Growl::TYPE_SUCCESS,
+                'icon' => 'glyphicon glyphicon-ok-sign',
+                'body' => Yii::$app->session->getFlash('alert'),
+                'delay' => 1000,
+                'pluginOptions' => [
+                    'showProgressbar' => false,
+                    'placement' => [
+                        'from' => 'top',
+                        'align' => 'center',
+                    ]
+                ]
+                ]);  
+            }
+        }
 ?>
 
 <?php
@@ -168,7 +190,6 @@ $gridColumns = [
         'columns' => $gridColumns,
         'exportConfig' => [
                 GridView::EXCEL => ['label' => 'EXCEL'],
-                GridView::TEXT => ['label' => 'TEXTO'],
                 GridView::PDF => ['label' => 'PDF'],
          ],
         'toolbar' => [

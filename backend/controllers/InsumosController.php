@@ -71,14 +71,7 @@ class InsumosController extends Controller
             $pInsumo = $model->Insumo;
             $pTipoInsumo = $model->TipoInsumo;
             $mensaje = $gestor->Alta($pInsumo, $pTipoInsumo, $pIdSubFamilia, $pIdUnidad);
-            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-            {
-                return $this->redirect('/sgpoc/backend/web/insumos/listar');
-            }
-            else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('alta',['model' => $model, 'listData' => $listData, 'listDataU' => $listDataU]);
-            }
+            return $mensaje[0]['Mensaje'];
         }
         else{
             return $this->renderAjax('alta',['model' => $model, 'listData' => $listData, 'listDataU' => $listDataU]);
@@ -96,13 +89,12 @@ class InsumosController extends Controller
             $pInsumo = $model->Insumo;
             $pTipoInsumo = $model->TipoInsumo;
             $mensaje = $gestor->Modificar($pIdInsumo, $pInsumo, $pTipoInsumo);
-            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-            {
+            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK') {
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
                 return $this->redirect('/sgpoc/backend/web/insumos/listar');
             }
-            else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('modificar',['model' => $model, 'insumo' => $insumo]);
+            else {
+                return $mensaje[0]['Mensaje'];
             }
         }
         else{
@@ -110,19 +102,12 @@ class InsumosController extends Controller
         }
     }
     
-    public function actionBorrar()
-    {
+    public function actionBorrar() {
         $gestor = new GestorInsumos;
         $pIdInsumo = Yii::$app->request->get('IdInsumo');
         $mensaje = $gestor->Borrar($pIdInsumo);
-        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-         {
-            return $this->redirect('/sgpoc/backend/web/insumos/listar');
-         }
-         else{
-            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-            return $this->redirect('/sgpoc/backend/web/insumos/listar');
-         }
+        Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+        return $this->redirect('/sgpoc/backend/web/insumos/listar');
     }
     
 }
