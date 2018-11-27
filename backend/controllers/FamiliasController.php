@@ -9,6 +9,7 @@ use app\models\Familias;
 use app\models\FamiliasBuscar;
 
 
+
 class FamiliasController extends Controller
 {
     public function actionListar()
@@ -60,10 +61,15 @@ class FamiliasController extends Controller
             $mensaje = $gestor->Alta($pIdGT, $pFamilia);
             return $mensaje[0]['Mensaje'];
         }
+        // else{
+        //     return $this->renderAjax('alta',['model' => $model]);
+        // }
         else{
             return $this->renderAjax('alta',['model' => $model]);
         }
     }
+
+    
     
     public function actionModificar()
     {

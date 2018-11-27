@@ -5,7 +5,7 @@ use kartik\widgets\Growl;
 use yii\bootstrap\Modal;
 use kartik\grid\GridView;
 use yii\helpers\Url;
-
+use yii\widgets\Pjax;
 
 $this->title = 'SGPOC | Familias';
 
@@ -110,7 +110,7 @@ $gridColumns = [
     echo "<div id='modalContent'></div>";
     Modal::end();
 ?>
-        
+  
 <div>
     <?= GridView::widget([
         'id' => 'gridview',

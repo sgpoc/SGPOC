@@ -38,6 +38,12 @@ $gridColumns = [
         'hAlign' => 'center'
     ],
     [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'fechaCreacion',
+        'vAlign' => 'middle',
+        'hAlign' => 'center'
+    ],
+    [
         'class' => '\kartik\grid\ActionColumn',
         'header' => 'Acciones',
         'vAlign' => 'middle',

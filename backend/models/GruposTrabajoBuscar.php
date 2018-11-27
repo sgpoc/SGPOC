@@ -6,6 +6,7 @@ use yii\base\Model;
 
 class GruposTrabajoBuscar extends Model
 {
+
     public $GrupoTrabajo;
     public $Mail;
     public $Estado;
