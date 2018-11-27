@@ -90,4 +90,12 @@ class GestorUsuarios
                 ->bindValue('pIdUsuario', $pIdUsuario);
         return $comando->queryAll();
     }
+
+    public function dameEstado($pEmail)
+    {
+        $sql = 'CALL ssp_dame_estado(:pEmail)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pEmail', $pEmail);
+        return $comando->queryAll();
+    }
 }

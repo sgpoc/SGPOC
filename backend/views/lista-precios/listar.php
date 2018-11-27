@@ -79,16 +79,16 @@ $gridColumns = [
                 },
                 'borrar' => function($url, $model, $key){
                     return Html::a('<i class="fa fa-trash"></i>',
-                            ['borrar','IdProveedor' => $model['IdProveedor'], 'IdLocalidad' => $model['IdLocalidad']], 
+                            ['borrar','IdProveedor' => $model['IdProveedor'],'IdLocalidad' => $model['IdLocalidad']], 
                             [
                                 'title' => 'Borrar Lista de Precios', 
                                 'class' => 'btn btn-link',
                                 'data' => [
-                                    'confirm' => 'Esta seguro que desea borrar la Lista de Precios?',
+                                    'confirm' => 'Esta seguro que desea borrar la Lista de Precios? Se borrara la lista aunque tenga insumos asociados',
                                     'method' => 'post'
                                 ]
                             ]);
-                },
+                }, 
         ]
     ], 
 ];
