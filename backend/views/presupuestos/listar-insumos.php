@@ -110,22 +110,37 @@ $gridColumns = [
 ?>
   
 <?php if(Yii::$app->session->getFlash('alert')){
-    echo Growl::widget([
-    'type' => Growl::TYPE_DANGER,
-    'title' => 'Cuidado!',
-    'icon' => 'glyphicon glyphicon-remove-sign',
-    'body' => Yii::$app->session->getFlash('alert'),
-    'showSeparator' => true,
-    'delay' => 1000,
-    'pluginOptions' => [
-        'showProgressbar' => false,
-        'placement' => [
-            'from' => 'top',
-            'align' => 'center',
-        ]
-    ]
-    ]);
-    }
+            if(substr(Yii::$app->session->getFlash('alert'), 0, 2) != 'OK') {
+                echo Growl::widget([
+                'type' => Growl::TYPE_DANGER,
+                'icon' => 'glyphicon glyphicon-remove-sign',
+                'body' => Yii::$app->session->getFlash('alert'),
+                'delay' => 1000,
+                'pluginOptions' => [
+                    'showProgressbar' => false,
+                    'placement' => [
+                        'from' => 'top',
+                        'align' => 'center',
+                    ]
+                ]
+                ]);
+            }
+            else {
+                echo Growl::widget([
+                'type' => Growl::TYPE_SUCCESS,
+                'icon' => 'glyphicon glyphicon-ok-sign',
+                'body' => Yii::$app->session->getFlash('alert'),
+                'delay' => 1000,
+                'pluginOptions' => [
+                    'showProgressbar' => false,
+                    'placement' => [
+                        'from' => 'top',
+                        'align' => 'center',
+                    ]
+                ]
+                ]);  
+            }
+        }
 ?>
 
 <?php

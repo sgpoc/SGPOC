@@ -17,8 +17,7 @@ use app\models\GestorProveedores;
 
 class PresupuestosController extends Controller
 {   
-    public function actionListar()
-    {
+    public function actionListar() {
         $gestor = new GestorPresupuestos;
         $gestoro = new GestorObras;
         $searchModel = new PresupuestosBuscar;
@@ -46,8 +45,7 @@ class PresupuestosController extends Controller
         }
     }
            
-    public function actionAlta()
-    {
+    public function actionAlta() {
         $model = new Presupuestos;
         $modellinea = new LineaPresupuestos;
         $model->scenario = 'alta-presupuesto';
@@ -70,22 +68,14 @@ class PresupuestosController extends Controller
             $pIdComputoMetrico = $model->IdComputoMetrico;
             $pFechaDePresupuesto = $model->FechaDePresupuesto;
             $mensaje = $gestor->Alta($pIdComputoMetrico, $pIdObra, $pIdLocalidad, $pFechaDePresupuesto);
-            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-            {
-                return $this->redirect('/sgpoc/backend/web/presupuestos/listar');
-            }
-            else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('alta',['model' => $model, 'modellinea' => $modellinea, 'listDataO' => $listDataO, 'listDataP' => $listDataP, 'listDataL' => $listDataL]);
-            }
+            return $mensaje[0]['Mensaje'];
         }
         else{
             return $this->renderAjax('alta',['model' => $model, 'modellinea' => $modellinea, 'listDataO' => $listDataO, 'listDataP' => $listDataP, 'listDataL' => $listDataL]);
         }
     }
     
-    public function actionModificar()
-    {
+    public function actionModificar() {
         $model = new Presupuestos;
         $gestor = new GestorPresupuestos;
         $pIdPresupuesto = Yii::$app->request->get('IdPresupuesto');
@@ -96,11 +86,11 @@ class PresupuestosController extends Controller
             $mensaje = $gestor->Modificar($pIdPresupuesto, $pFechaDePresupuesto);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
                 return $this->redirect('/sgpoc/backend/web/presupuestos/listar');
             }
             else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('modificar',['model' => $model, 'presupuesto' => $presupuesto]);
+                return $mensaje[0]['Mensaje'];
             }
         }
         else{
@@ -108,23 +98,15 @@ class PresupuestosController extends Controller
         }
     }
     
-    public function actionBorrar()
-    {
+    public function actionBorrar() {
         $gestor = new GestorPresupuestos;
         $pIdPresupuesto = Yii::$app->request->get('IdPresupuesto');
         $mensaje = $gestor->Borrar($pIdPresupuesto);
-        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-        {
-            return $this->redirect('/sgpoc/backend/web/presupuestos/listar');
-        }
-        else{
-            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-            return $this->redirect('/sgpoc/backend/web/presupuestos/listar');
-        }
+        Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+        return $this->redirect('/sgpoc/backend/web/presupuestos/listar');
     }
     
-    public function actionListarInsumos()
-    {
+    public function actionListarInsumos() {
         $gestor = new GestorPresupuestos;
         $gestoro = new GestorObras;
         $searchModel = new PresupuestosBuscar;
@@ -152,8 +134,7 @@ class PresupuestosController extends Controller
         }
     }
     
-    public function actionModificarPorcentajes()
-    {
+    public function actionModificarPorcentajes() {
         $model = new LineaPresupuestos;
         $model->scenario = 'modificar-porcentajes';
         $gestor = new GestorPresupuestos;
@@ -169,11 +150,11 @@ class PresupuestosController extends Controller
             $mensaje = $gestor->ModificarPorcentajes($pIdPresupuesto, $pIdInsumo, $pBeneficios, $pGastosGenerales, $pCargasSociales, $pIVA);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
                 return $this->redirect('/sgpoc/backend/web/presupuestos/listar-insumos');
             }
             else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('modificar-porcentajes',['model' => $model, 'lineapresupuesto' => $lineapresupuesto]);
+                return $mensaje[0]['Mensaje'];
             }
         }
         else{
@@ -181,8 +162,7 @@ class PresupuestosController extends Controller
         }
     }
     
-    public function actionEleccionPrecio()
-    {
+    public function actionEleccionPrecio() {
         $model = new LineaPresupuestos;
         $model->scenario = 'eleccion-precio';
         $gestor = new GestorPresupuestos;
@@ -202,11 +182,11 @@ class PresupuestosController extends Controller
             $mensaje = $gestor->EleccionPrecio($pIdPresupuesto, $pIdInsumo, $pIdProveedor, $pIdLocalidad);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
                 return $this->redirect('/sgpoc/backend/web/presupuestos/listar-insumos');
             }
             else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('eleccion-precio',['modellinea' => $model, 'listDataP' => $listDataP, 'listDataL' => $listDataL]);
+                return $mensaje[0]['Mensaje'];
             }
         }
         else{

@@ -72,14 +72,7 @@ class SubfamiliasController extends Controller
             $pIdFamilia = $model->IdFamilia;
             $pSubFamilia = $model->SubFamilia;
             $mensaje = $gestors->Alta($pIdFamilia, $pSubFamilia);
-            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-            {
-                return $this->redirect('/sgpoc/backend/web/subfamilias/listar');
-            }
-            else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('alta',['model' => $model,'listData' => $listDataF]);
-            }
+            return $mensaje[0]['Mensaje'];
         }
         else{
             return $this->renderAjax('alta',['model' => $model,'listData' => $listDataF]);
@@ -98,11 +91,11 @@ class SubfamiliasController extends Controller
             $mensaje = $gestor->Modificar($pIdSubFamilia, $pSubFamilia);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
+                Yii::$app->session->setFlash('alert', $mensaje[0]['Mensaje']);
                 return $this->redirect('/sgpoc/backend/web/subfamilias/listar');
             }
             else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('modificar',['model' => $model, 'subfamilia' => $subfamilia]);
+                return $mensaje[0]['Mensaje'];
             }
         }
         else{

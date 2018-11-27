@@ -16,8 +16,7 @@ use app\models\GestorElementosConstructivos;
 
 class ComputosMetricosController extends Controller
 {   
-    public function actionListar()
-    {
+    public function actionListar() {
         $gestor = new GestorComputosMetricos;
         $gestoro = new GestorObras;
         $searchModel = new ComputosMetricosBuscar;
@@ -47,8 +46,7 @@ class ComputosMetricosController extends Controller
     }
     
     
-    public function actionAlta()
-    {
+    public function actionAlta() {
         $model = new ComputosMetricos;
         $model->scenario = 'alta-computo';
         $gestor = new GestorComputosMetricos;
@@ -63,22 +61,14 @@ class ComputosMetricosController extends Controller
             $pFechaComputoMetrico = $model->FechaComputoMetrico;
             $pTipoComputo = $model->TipoComputo;
             $mensaje = $gestor->Alta($pIdObra, $pDescripcion, $pFechaComputoMetrico, $pTipoComputo);
-            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-            {
-                return $this->redirect('/sgpoc/backend/web/computos-metricos/listar');
-            }
-            else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('alta',['model' => $model, 'listDataO' => $listDataO]);
-            }
+            return $mensaje[0]['Mensaje'];
         }
         else{
             return $this->renderAjax('alta',['model' => $model, 'listDataO' => $listDataO]);
         }
     }
     
-    public function actionModificar()
-    {
+    public function actionModificar() {
         $model = new ComputosMetricos;
         $gestor = new GestorComputosMetricos;
         $pIdComputoMetrico = Yii::$app->request->get('IdComputoMetrico');
@@ -91,11 +81,11 @@ class ComputosMetricosController extends Controller
             $mensaje = $gestor->Modificar($pIdComputoMetrico, $pDescripcion, $pFechaComputoMetrico, $pTipoComputo);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
                 return $this->redirect('/sgpoc/backend/web/computos-metricos/listar');
             }
             else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('modificar',['model' => $model, 'computo' => $computo]);
+                return $mensaje[0]['Mensaje'];
             }
         }
         else{
@@ -103,23 +93,15 @@ class ComputosMetricosController extends Controller
         }
     }
     
-    public function actionBorrar()
-    {
+    public function actionBorrar() {
         $gestor = new GestorComputosMetricos;
         $pIdComputoMetrico = Yii::$app->request->get('IdComputoMetrico');
         $mensaje = $gestor->Borrar($pIdComputoMetrico);
-        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-        {
-            return $this->redirect('/sgpoc/backend/web/computos-metricos/listar');
-        }
-        else{
-            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-            return $this->redirect('/sgpoc/backend/web/computos-metricos/listar');
-        }
+        Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+        return $this->redirect('/sgpoc/backend/web/computos-metricos/listar');
     }
     
-    public function actionAgregarLinea()
-    {
+    public function actionAgregarLinea() {
         $model = new LineaComputoMetrico;
         $model->scenario = 'agregar-linea';
         $gestor = new GestorComputosMetricos;
@@ -150,14 +132,7 @@ class ComputosMetricosController extends Controller
                 $pAncho = $model->Ancho;
                 $pAlto = $model->Alto;
                 $mensaje = $gestor->AgregarLinea($pIdComputoMetrico, $pIdGT, $pIdElementoConstructivo, $pIdItem, $pIdUnidad, $pDescripcion, $pCantidad, $pLargo, $pAncho, $pAlto);
-                if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-                {
-                    return $this->redirect('/sgpoc/backend/web/computos-metricos/listar');
-                }
-                else{
-                    Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                    return $this->renderAjax('agregar-item',['model' => $model, 'listDataI' => $listDataI, 'listDataU' => $listDataU]);
-                }
+                return $mensaje[0]['Mensaje'];
             }
             else{ 
                 return $this->renderAjax('agregar-item',['model' => $model, 'listDataI' => $listDataI, 'listDataU' => $listDataU]);
@@ -175,14 +150,7 @@ class ComputosMetricosController extends Controller
                 $pAncho = $model->Ancho;
                 $pAlto = $model->Alto;
                 $mensaje = $gestor->AgregarLinea($pIdComputoMetrico, $pIdGT, $pIdElementoConstructivo, $pIdItem, $pIdUnidad, $pDescripcion, $pCantidad, $pLargo, $pAncho, $pAlto);
-                if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-                {
-                    return $this->redirect('/sgpoc/backend/web/computos-metricos/listar');
-                }
-                else{
-                    Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                    return $this->renderAjax('agregar-elemento',['model' => $model, 'listDataE' => $listDataE, 'listDataU' => $listDataU]);
-                }
+                return $mensaje[0]['Mensaje'];
             }
             else{ 
                 return $this->renderAjax('agregar-elemento',['model' => $model, 'listDataE' => $listDataE, 'listDataU' => $listDataU]);
@@ -190,8 +158,7 @@ class ComputosMetricosController extends Controller
         }
     }
     
-    public function actionModificarLinea()
-    {
+    public function actionModificarLinea() {
         $model = new LineaComputoMetrico;
         $gestor = new GestorComputosMetricos;
         $pIdComputoMetrico = Yii::$app->request->get('IdComputoMetrico');
@@ -205,34 +172,21 @@ class ComputosMetricosController extends Controller
             $pAncho = $model->Ancho;
             $pAlto = $model->Alto;
             $mensaje = $gestor->ModificarLinea($pIdComputoMetrico, $pNroLinea, $pDescripcion, $pCantidad, $pLargo, $pAncho, $pAlto);
-            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-            {
-                return $this->redirect('/sgpoc/backend/web/computos-metricos/listar');
-            }
-            else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('modificar-linea',['model' => $model, 'lineacomputo' => $lineacomputo]);
-            }
+            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+            return $this->redirect('/sgpoc/backend/web/computos-metricos/listar');
         }
         else{
             return $this->renderAjax('modificar-linea',['model' => $model, 'lineacomputo' => $lineacomputo]);
         }
     }
     
-    public function actionBorrarLinea()
-    {
+    public function actionBorrarLinea() {
         $gestor = new GestorComputosMetricos;
         $pIdComputoMetrico = Yii::$app->request->get('IdComputoMetrico');
         $pNroLinea = Yii::$app->request->get('NroLinea');
         $mensaje = $gestor->BorrarLinea($pIdComputoMetrico, $pNroLinea);
-        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-        {
-            return $this->redirect('/sgpoc/backend/web/computos-metricos/listar');
-        }
-        else{
-            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-            return $this->redirect('/sgpoc/backend/web/computos-metricos/listar');
-        }
+        Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+        return $this->redirect('/sgpoc/backend/web/computos-metricos/listar');
     }
     
 }

@@ -14,8 +14,7 @@ use app\models\ComposicionItem;
 
 class ItemsController extends Controller
 {   
-    public function actionListar()
-    {
+    public function actionListar() {
         
         $gestor = new GestorItems;
         $gestori = new GestorInsumos;
@@ -52,8 +51,7 @@ class ItemsController extends Controller
     }
     
     
-    public function actionAlta()
-    {
+    public function actionAlta() {
         $model = new Items;
         $model->scenario = 'alta-item';
         $gestor = new GestorItems;
@@ -69,22 +67,14 @@ class ItemsController extends Controller
             $pIdRubroItem = $model->IdRubroItem;
             $pIdUnidad = $model->IdUnidad;
             $mensaje = $gestor->Alta($pItem, $pIdRubroItem, $pIdUnidad, $pIdGT);
-            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-            {
-                return $this->redirect('/sgpoc/backend/web/items/listar');
-            }
-            else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('alta',['model' => $model, 'listDataRI' => $listDataRI, 'listDataU' => $listDataU]);
-            }
+            return $mensaje[0]['Mensaje'];
         }
         else{ 
             return $this->renderAjax('alta',['model' => $model, 'listDataRI' => $listDataRI, 'listDataU' => $listDataU]);
         }
     }
     
-    public function actionModificar()
-    {
+    public function actionModificar() {
         $model = new Items;
         $gestor = new GestorItems;
         $pIdItem = Yii::$app->request->get('IdItem');
@@ -95,11 +85,11 @@ class ItemsController extends Controller
             $mensaje = $gestor->Modificar($pIdItem, $pItem);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
                 return $this->redirect('/sgpoc/backend/web/items/listar');
             }
             else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('modificar',['model' => $model, 'item' => $item]);
+                return $mensaje[0]['Mensaje'];
             }
         }
         else{
@@ -107,8 +97,7 @@ class ItemsController extends Controller
         }
     }
     
-    public function actionBorrar()
-    {
+    public function actionBorrar() {
         $gestor = new GestorItems;
         $pIdItem= Yii::$app->request->get('IdItem');
         $mensaje = $gestor->Borrar($pIdItem);
@@ -122,8 +111,7 @@ class ItemsController extends Controller
          }
     }
     
-    public function actionAgregarInsumo()
-    {
+    public function actionAgregarInsumo() {
         $model = new ComposicionItem;
         $model -> scenario = 'agregar-insumo-item';
         $gestor = new GestorItems;
@@ -137,22 +125,14 @@ class ItemsController extends Controller
             $pIdInsumo = $model->IdInsumo;
             $pIncidencia = $model->Incidencia;
             $mensaje = $gestor->AgregarInsumo($pIdItem, $pIdInsumo, $pIncidencia);
-            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-            {
-                return $this->redirect('/sgpoc/backend/web/items/listar');
-            }
-            else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('agregar-insumo',['model' => $model, 'listDataI' => $listDataI]);
-            }
+            return $mensaje[0]['Mensaje'];
         }
         else{ 
             return $this->renderAjax('agregar-insumo',['model' => $model, 'listDataI' => $listDataI]);
         }
     }
     
-    public function actionModificarIncidencia()
-    {
+    public function actionModificarIncidencia() {
         $model = new ComposicionItem;
         $model -> scenario = 'modificar-incidencia';
         $gestor = new GestorItems;
@@ -177,8 +157,7 @@ class ItemsController extends Controller
         }
     }
     
-    public function actionBorrarInsumo()
-    {
+    public function actionBorrarInsumo() {
         $gestor = new GestorItems;
         $pIdItem = Yii::$app->request->get('IdItem');
         $pIdInsumo = Yii::$app->request->get('IdInsumo');

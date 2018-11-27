@@ -59,22 +59,7 @@ class FamiliasController extends Controller
             $pIdGT = Yii::$app->user->identity['IdGT'];
             $pFamilia = $model->Familia;
             $mensaje = $gestor->Alta($pIdGT, $pFamilia);
-            // if($model->save()){
-            //     echo 1;
-            // }else{
-            //     echo 0;
-            // }
-            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-            {
-                // Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $mensaje[0]['Mensaje'];
-                //return $this->redirect('/sgpoc/backend/web/familias/listar');
-            }
-            else{
-                return $mensaje[0]['Mensaje'];
-                // Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                // return $this->redirect('/sgpoc/backend/web/familias/listar');
-            }
+            return $mensaje[0]['Mensaje'];
         }
         // else{
         //     return $this->renderAjax('alta',['model' => $model]);
@@ -98,11 +83,11 @@ class FamiliasController extends Controller
             $mensaje = $gestor->Modificar($pIdFamilia, $pFamilia);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
+                Yii::$app->session->setFlash('alert', $mensaje[0]['Mensaje']);
                 return $this->redirect('/sgpoc/backend/web/familias/listar');
             }
             else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->redirect('/sgpoc/backend/web/familias/listar');
+                return $mensaje[0]['Mensaje'];
             }     
         }
         else{
@@ -117,6 +102,7 @@ class FamiliasController extends Controller
         $mensaje = $gestor->Borrar($pIdFamilia);
         if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
         {
+            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
             return $this->redirect('/sgpoc/backend/web/familias/listar');
         }
         else{

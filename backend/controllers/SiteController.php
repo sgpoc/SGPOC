@@ -6,7 +6,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
-use app\models\Usuarios;
+use common\models\Usuarios;
 use app\models\GestorUsuarios;
 
 
@@ -27,7 +27,10 @@ class SiteController extends Controller
                     [
                         'allow' => true,
                         'actions' => ['login','logout'],
-                        'roles' => ['@'],
+                        'roles' => ['@'],/*
+                        'matchCallback' => function ($rule, $action) {
+                            return Usuarios::isUserAdmin(Yii::$app->user->identity['IdRol']);
+                        }*/
                     ],
                 ],
             ],

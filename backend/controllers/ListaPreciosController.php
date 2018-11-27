@@ -14,8 +14,7 @@ use app\models\ListaPrecios;
 
 class ListaPreciosController extends Controller
 {
-    public function actionListar()
-    {
+    public function actionListar() {
         $searchModel = new ListaPreciosBuscar;
         $gestorlp = new GestorListaPrecios;
         $gestorp = new GestorProveedores;
@@ -45,8 +44,7 @@ class ListaPreciosController extends Controller
         }  
     }
     
-    public function actionAlta()
-    {
+    public function actionAlta() {
         $model = new ListaPrecios;
         $model->scenario = 'alta-lista';
         $gestorlp = new GestorListaPrecios;
@@ -67,24 +65,24 @@ class ListaPreciosController extends Controller
             $pPrecioLista = $model->PrecioLista;
             $pFechaUltimaActualizacion = $model->FechaUltimaActualizacion;
             $mensaje = $gestorlp->Alta($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pPrecioLista, $pFechaUltimaActualizacion, $pIdGT);
-            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-            {
-                return $this->redirect('/sgpoc/backend/web/lista-precios/listar');
-            }
-            else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('alta',['model' => $model, 'listDataP' => $listDataP, 'listDataL' => $listDataL, 'listDataI' => $listDataI]);
-            }
+            return $mensaje[0]['Mensaje'];
         }
         else{
             return $this->renderAjax('alta',['model' => $model, 'listDataP' => $listDataP, 'listDataL' => $listDataL, 'listDataI' => $listDataI]);
         }
     }
     
-    /* BORRAR */
+    public function actionBorrar() {
+        $gestor = new GestorListaPrecios;
+        $pIdProveedor = Yii::$app->request->get('IdProveedor');
+        $pIdLocalidad = Yii::$app->request->get('IdLocalidad');
+        $mensaje = $gestor->Borrar($pIdProveedor,$pIdLocalidad);
+        Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+        return $this->redirect('/sgpoc/backend/web/lista-precios/listar');
+    }
     
-    public function actionAgregarInsumo()
-    {
+    
+    public function actionAgregarInsumo() {
         $model = new ListaPrecios;
         $model->scenario = 'agregar-insumo';
         $gestor = new GestorListaPrecios;
@@ -100,39 +98,24 @@ class ListaPreciosController extends Controller
             $pPrecioLista = $model->PrecioLista;
             $pFechaUltimaActualizacion = $model->FechaUltimaActualizacion;
             $mensaje = $gestor->AgregarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pPrecioLista, $pFechaUltimaActualizacion);
-            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-            {
-                return $this->redirect('/sgpoc/backend/web/lista-precios/listar');
-            }
-            else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('agregar-insumo',['model' => $model, 'listDataI' => $listDataI]);
-            }
+            return $mensaje[0]['Mensaje'];
         }
         else{ 
             return $this->renderAjax('agregar-insumo',['model' => $model, 'listDataI' => $listDataI]);
         }
     }
     
-    public function actionBorrarInsumo()
-    {
+    public function actionBorrarInsumo() {
         $gestor = new GestorListaPrecios;
         $pIdProveedor = Yii::$app->request->get('IdProveedor');
         $pIdLocalidad = Yii::$app->request->get('IdLocalidad');
         $pIdInsumo = Yii::$app->request->get('IdInsumo');
         $mensaje = $gestor->BorrarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo);
-        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-        {
-            return $this->redirect('/sgpoc/backend/web/lista-precios/listar');
-        }
-        else{
-            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-            return $this->redirect('/sgpoc/backend/web/lista-precios/listar');
-        }
+        Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+        return $this->redirect('/sgpoc/backend/web/lista-precios/listar');
     }
     
-    public function actionModificarInsumo()
-    {
+    public function actionModificarInsumo() {
         $model = new ListaPrecios;
         $model->scenario = 'modificar-insumo';
         $gestor = new GestorListaPrecios;
@@ -148,12 +131,11 @@ class ListaPreciosController extends Controller
             $mensaje = $gestor->ModificarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pPrecioLista, $pFechaUltimaActualizacion);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
                 return $this->redirect('/sgpoc/backend/web/lista-precios/listar');
             }
             else{
-                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->renderAjax('modificar-insumo',['model' => $model, 'Insumo'=>$insumo]);
-             
+                return $mensaje[0]['Mensaje'];
             }
         }
         else{ 
