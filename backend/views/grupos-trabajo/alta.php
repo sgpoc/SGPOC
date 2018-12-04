@@ -6,6 +6,8 @@ use kartik\form\ActiveForm;
 use backend\assets\AppAsset;
 use kartik\growl\GrowlAsset;
 use kartik\base\AnimateAsset;
+use kartik\date\DatePicker;
+
 
 AppAsset::register($this);
 GrowlAsset::register($this);

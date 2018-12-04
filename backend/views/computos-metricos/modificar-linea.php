@@ -24,8 +24,10 @@ AnimateAsset::register($this);
             <?= $form->field($model, 'Cantidad', ['addon' => ['prepend' => ['content'=>'#']]])->textInput(['value'=>$lineacomputo[0]['Cantidad']]) ?>
             <?= $form->field($model, 'Largo', ['addon' => ['prepend' => ['content'=>'L']]])->textInput(['value'=>$lineacomputo[0]['Largo']]) ?>
             <?= $form->field($model, 'Ancho', ['addon' => ['prepend' => ['content'=>'An']]])->textInput(['value'=>$lineacomputo[0]['Ancho']]) ?>
+            <?php if($lineacomputo[0]['IdUnidad'] == 9): ?>
             <?= $form->field($model, 'Alto', ['addon' => ['prepend' => ['content'=>'A']]])->textInput(['value'=>$lineacomputo[0]['Alto']]) ?>
-            <?= $form->field($model, 'Descripcion')->textArea(['rows'=>5, 'value'=>$lineacomputo[0]['Descripcion']]) ?>
+            <?php endif; ?> 
+            <?= $form->field($model, 'Descripcion')->textArea(['rows'=>5, 'value'=>$lineacomputo[0]['Descripcion']]) ?> 
         </div>
     </div>
     <div class="modal-footer">

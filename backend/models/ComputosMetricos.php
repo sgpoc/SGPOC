@@ -13,6 +13,7 @@ class ComputosMetricos extends Model
     public $FechaComputoMetrico;
     public $TipoComputo;
     public $Descripcion;
+    public $Parcial;
     
     public static function tableName()
     {
@@ -39,6 +40,7 @@ class ComputosMetricos extends Model
             'IdGT' => 'Grupo de Trabajo',
             'FechaComputoMetrico' => 'Fecha Computo Metrico',
             'TipoComputo' => 'Tipo de Cómputo',
+            'Parcial' => 'Parcial',
         ];
     }
 }

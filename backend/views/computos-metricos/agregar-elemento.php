@@ -28,11 +28,16 @@ AnimateAsset::register($this);
                 'pluginOptions' => [
                         'allowClear' => true
             ]])->label('Item');  ?>
-            <?= $form->field($model, 'IdUnidad')->dropDownList($listDataU, ['prompt' => 'Seleccione uno ...' ])->label('Unidad');  ?>
+            <div id="unidad">
+            <?= $form->field($model, 'IdUnidad')->dropDownList($listDataU, ['id' => 'unidad','prompt' => 'Seleccione uno ...'])->label('Unidad');  ?>
+            </div>
             <?= $form->field($model, 'Cantidad', ['addon' => ['prepend' => ['content'=>'#']]])->textInput(['placeholder' => 'Ingrese la cantidad ...']); ?>
             <?= $form->field($model, 'Largo', ['addon' => ['prepend' => ['content'=>'L']]])->textInput(['placeholder'=>'Ingrese el largo ...']) ?>
             <?= $form->field($model, 'Ancho', ['addon' => ['prepend' => ['content'=>'An']]])->textInput(['placeholder'=>'Ingrese el ancho ...']) ?>
-            <?= $form->field($model, 'Alto', ['addon' => ['prepend' => ['content'=>'A']]])->textInput(['placeholder'=>'Ingrese el alto ...']) ?>
+            <div id="alto">
+            <?= $form->field($model, 'Alto', ['addon' => ['prepend' => ['content'=>'A']]])->textInput(['id' => 'alto',
+                'placeholder'=>'Ingrese el alto ...']) ?>
+            </div>
             <?= $form->field($model, 'Descripcion')->textArea(['rows'=>5]) ?>
         </div>
     </div>
@@ -45,4 +50,24 @@ AnimateAsset::register($this);
 
 <?php
 $this->registerJs("VistaModal.init();");
+?>
+
+
+<?php 
+$script = <<< JS
+
+$(document).ready(function(){     $("#alto").hide();
+$('#unidad').on('change', function() {
+  if ( $(event.target).val() == 'M3')
+  {
+    $("#alto").show();
+  }
+  else{
+      $("#alto").hide();
+  }        
+}); 
+});
+
+JS;
+$this->registerJS($script);
 ?>

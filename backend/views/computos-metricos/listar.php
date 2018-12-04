@@ -9,6 +9,7 @@ use yii\data\ArrayDataProvider;
 use app\models\GestorComputosMetricos;
 
 
+
 $this->title = 'SGPOC | Cómputos Métricos';
 
 $gridColumns = [
@@ -128,6 +129,7 @@ $gridColumns = [
 
                 
 ?>
+
   
 <?php if(Yii::$app->session->getFlash('alert')){
             if(substr(Yii::$app->session->getFlash('alert'), 0, 2) != 'OK') {
@@ -211,7 +213,7 @@ $gridColumns = [
             '{export}',
         ],
         'export' => [
-          'icon' => 'fa fa-external-link-alt'  
+          'icon' => 'fa fa-external-link-alt',
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="fa fa-book"></i> Cómputos Métricos</h3>',

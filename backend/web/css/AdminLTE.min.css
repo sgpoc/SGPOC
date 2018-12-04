@@ -508,17 +508,17 @@ a:focus {
     position: relative;
     width: 100%;
     padding: 10px;
-    overflow: hidden
+    overflow: hidden;
 }
 
 .user-panel:before,
 .user-panel:after {
     content: " ";
-    display: table
+    display: table;
 }
 
 .user-panel:after {
-    clear: both
+    clear: both;
 }
 
 .user-panel>.image>img {
@@ -531,25 +531,26 @@ a:focus {
     padding: 5px 5px 5px 15px;
     line-height: 1;
     position: absolute;
-    left: 55px
+    left: 55px;
 }
 
 .user-panel>.info>p {
     font-weight: 600;
-    margin-bottom: 9px
+    margin-bottom: 9px;
 }
 
 .user-panel>.info>a {
     text-decoration: none;
     padding-right: 5px;
     margin-top: 3px;
-    font-size: 11px
+    font-size: 11px;
 }
 
 .user-panel>.info>a>.fa,
 .user-panel>.info>a>.ion,
 .user-panel>.info>a>.glyphicon {
-    margin-right: 3px
+    margin-right: 3px;
+    z-index: 2000;
 }
 
 .sidebar-menu {
@@ -1024,17 +1025,20 @@ a:focus {
 
 .dropdown-menu {
     box-shadow: none;
-    border-color: #eee
+    border-color: #eee;
+      
 }
 
 .dropdown-menu>li>a {
-    color: #777
+    color: #777;
+  
 }
 
 .dropdown-menu>li>a>.glyphicon,
 .dropdown-menu>li>a>.fa,
 .dropdown-menu>li>a>.ion {
-    margin-right: 10px
+    margin-right: 10px;
+      
 }
 
 .dropdown-menu>li>a:hover {
@@ -1043,7 +1047,7 @@ a:focus {
 }
 
 .dropdown-menu>.divider {
-    background-color: #eee
+    background-color: #eee;
 }
 
 .navbar-nav>.notifications-menu>.dropdown-menu,
@@ -1052,7 +1056,8 @@ a:focus {
     width: 280px;
     padding: 0 0 0 0;
     margin: 0;
-    top: 100%
+    top: 100%;
+    
 }
 
 .navbar-nav>.notifications-menu>.dropdown-menu>li,
