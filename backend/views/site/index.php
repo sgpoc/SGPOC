@@ -10,22 +10,17 @@ $this->title = 'SGPOC | Home';
 
 ?>
 
-<head>
-    <title><?php $this->title?></title>
-</head>
-<body class='content-wrapper'>
-    <div class='index-content'>
-        <img class='app-logo' src='http://localhost/sgpoc/backend/web/img/logo-sgpoc.png' alt='Logo App'>
-        <h2>Bienvenidos a</h2>    
-        <h1>SGPOC</h1>
-        <p class="desc">Sistema de Gestión para Presupuestación de Obras de Construcción</p>
-    </div>
-    <div class="footer">
-        <a href='http://www.fau.unt.edu.ar' target='_blank'>
-            <img class='fau-logo' src='http://localhost/sgpoc/backend/web/img/logoFAU.png' alt='Logo Fau'>
-        </a>
-    </div>
-</body>
+<div class='index-content'>
+    <img class='app-logo' src='http://localhost/sgpoc/backend/web/img/logo-sgpoc.png' alt='Logo App' hidden>
+    <h2 class="main-title" hidden>Bienvenidos a</h2>    
+    <h1 class="sub-title" hidden>SGPOC</h1>
+    <p class="desc" hidden>Sistema de Gestión para Presupuestación de Obras de Construcción</p>
+</div>
+<div class="footer">
+    <a href='http://www.fau.unt.edu.ar' target='_blank'>
+        <img class='fau-logo' src='http://localhost/sgpoc/backend/web/img/logoFAU.png' alt='Logo Fau' hidden>
+    </a>
+</div>
 
 
 

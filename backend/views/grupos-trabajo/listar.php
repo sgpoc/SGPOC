@@ -39,7 +39,7 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'fechaCreacion',
+        'attribute' => 'FechaCreacion',
         'vAlign' => 'middle',
         'hAlign' => 'center'
     ],
@@ -172,7 +172,6 @@ $gridColumns = [
         'columns' => $gridColumns,
         'exportConfig' => [
                 GridView::EXCEL => ['label' => 'EXCEL'],
-                GridView::TEXT => ['label' => 'TEXTO'],
                 GridView::PDF => ['label' => 'PDF'],
          ],
         'toolbar' => [

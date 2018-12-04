@@ -28,10 +28,10 @@ class UsuariosController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['@'],/*
                         'matchCallback' => function ($rule, $action) {
                            return Usuarios::isUserAdmin(Yii::$app->user->identity['IdRol']);                 
-                        }
+                        }*/
                     ],
                 ],
             ],
@@ -161,14 +161,8 @@ class UsuariosController extends Controller
         $gestor = new GestorUsuarios;
         $pIdUsuario = Yii::$app->request->get('IdUsuario');
         $mensaje = $gestor->Activar($pIdUsuario);
-        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-        {
-            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-            return $this->redirect('/sgpoc/backend/web/usuarios/listar');
-        }
-        else{
-            return $mensaje[0]['Mensaje'];
-        }
+        Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+        return $this->redirect('/sgpoc/backend/web/usuarios/listar');
     }
     
     public function actionPerfil()
@@ -195,7 +189,7 @@ class UsuariosController extends Controller
             }
         }
         else{
-            return $this->renderAjax('perfil', ['model' => $model, 'usuario' => $usuario]);
+            return $this->render('perfil', ['model' => $model, 'usuario' => $usuario]);
         }
     }
     

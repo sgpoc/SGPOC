@@ -354,6 +354,7 @@ iframe {
 }
 
 .login100-form-btn::before {
+  color: black;
   content: "";
   display: block;
   position: absolute;
@@ -363,8 +364,7 @@ iframe {
   border-radius: 25px;
   top: 0;
   left: 0;
-  background: #005bea;
-  background: -webkit-linear-gradient(left, #3c763d, #28a745);
+  background: -webkit-linear-gradient(left, #7AC396, #7AC396);
   background: -o-linear-gradient(left, #005bea, #00c6fb);
   background: -moz-linear-gradient(left, #005bea, #00c6fb);
   background: linear-gradient(left, #005bea, #00c6fb);

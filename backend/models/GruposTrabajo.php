@@ -9,7 +9,7 @@ class GruposTrabajo extends Model
     public $GrupoTrabajo;
     public $Mail;
     public $Estado;
-    public $fechaCreacion;
+    public $FechaCreacion;
     
     public static function tableName()
     {
@@ -19,11 +19,11 @@ class GruposTrabajo extends Model
     public function rules()
     {
         return [
-            [['GrupoTrabajo', 'Mail','fechaCreacion'], 'required'],
+            [['GrupoTrabajo', 'Mail', 'FechaCreacion'], 'required'],
             [['IdGT'], 'integer'],
             [['GrupoTrabajo', 'Mail'], 'string', 'max' => 100],
             [['Estado'], 'string', 'max' => 1],
-            [['fechaCreacion'], 'date', 'format' => 'php:Y-m-d'],
+            [['FechaCreacion'], 'date', 'format' => 'php:Y-m-d'],
         ];
     }
 
@@ -34,7 +34,7 @@ class GruposTrabajo extends Model
             'GrupoTrabajo' => 'Grupo Trabajo',
             'Mail' => 'Mail',
             'Estado' => 'Estado',
-            'fechaCreacion' => 'Fecha de Creacion',
+            'FechaCreacion' => 'Fecha de Creacion',
         ];
     }
 

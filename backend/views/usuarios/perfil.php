@@ -5,27 +5,8 @@ use kartik\form\ActiveForm;
 use kartik\password\PasswordInput;
 use yii\jui\AutoComplete;
 
-$this->title = 'SGPOC | Perfil' ;
+$this->title = 'SGPOC | Perfil';
 
-?>
-
-<?php if(Yii::$app->session->getFlash('alert')){
-    echo Growl::widget([
-    'type' => Growl::TYPE_DANGER,
-    'title' => 'Cuidado!',
-    'icon' => 'glyphicon glyphicon-remove-sign',
-    'body' => Yii::$app->session->getFlash('alert'),
-    'showSeparator' => true,
-    'delay' => 1000,
-    'pluginOptions' => [
-        'showProgressbar' => false,
-        'placement' => [
-            'from' => 'top',
-            'align' => 'center',
-        ]
-    ]
-    ]);
-    }
 ?>
 
 <?php $form = ActiveForm::begin(); ?>
@@ -43,7 +24,7 @@ $this->title = 'SGPOC | Perfil' ;
     </div>
     <div class="modal-footer">
         <?= html::submitButton('Guardar Cambios',['class'=>'btn btn-success pull-right']); ?>
-        <?= html::a('Volver',Yii::$app->request->referrer, ['class'=>'btn btn-default pull-right']); ?>
+        <?= html::a('Cerrar',Yii::$app->request->referrer, ['class'=>'btn btn-default pull-right']); ?>
     </div>
 </div>
 <?php ActiveForm::end() ?>
