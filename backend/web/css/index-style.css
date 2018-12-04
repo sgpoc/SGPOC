@@ -1,62 +1,67 @@
-.content-wrapper{
-    background: url(http://localhost/sgpoc/backend/web/img/index-arq1.jpg) no-repeat left bottom/ 265px 660px,
-				url(http://localhost/sgpoc/backend/web/img/index-arq2.jpg) no-repeat right / 500px 500px,
-				url(http://localhost/sgpoc/backend/web/img/white-bg.png) no-repeat center / 1920px 1280px;
-	position:relative;	
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.content-wrapper {
+  background: url(http://localhost/sgpoc/backend/web/img/index-arq1.jpg)
+      no-repeat left bottom/ 265px 660px,
+    url(http://localhost/sgpoc/backend/web/img/index-arq2.jpg) no-repeat right /
+      500px 500px,
+    url(http://localhost/sgpoc/backend/web/img/white-bg.png) no-repeat center /
+      1920px 1280px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  z-index: 1;
 }
 
 .index-content .app-logo {
-	height: 150px;
-	width: 150px;
-	margin-left: 125px;
-	margin-right: 150px;
-	margin-bottom: 25px;
+  height: 150px;
+  width: 150px;
+  margin-left: 125px;
+  margin-right: 150px;
+  margin-bottom: 25px;
 }
 
-.index-content h1 , .index-content h2{
-	font-family: "Courier New", Monospace;
-    color: #000;
-	text-align: left;
+.index-content h1,
+.index-content h2 {
+  font-family: "Courier New", Monospace;
+  color: #000;
+  text-align: left;
 }
 
-.index-content h1{
-    font-size: 85px;
-	margin-left: 85px;
-	margin-right: 150px;
+.index-content h1 {
+  font-size: 85px;
+  margin-left: 85px;
+  margin-right: 150px;
 }
 
-.index-content h2{
-    font-size: 50px;
+.index-content h2 {
+  font-size: 50px;
 }
 
 .footer .fau-logo {
-	height: 100px;
-	width: 100px;
-	margin-left: 150px;
-	margin-right: 150px;
-	margin-top: 25px;
+  height: 100px;
+  width: 100px;
+  margin-left: 150px;
+  margin-right: 150px;
+  margin-top: 25px;
 }
 
-
 @media (max-width: 670px) {
-   .content-wrapper{
-		background: url(http://localhost/sgpoc/backend/web/img/white-bg.png) no-repeat center / 1920px 1280px;
-	}
-	
-	.index-content h1{
-		font-size: 50px;
-		text-align:center;
-	}
+  .content-wrapper {
+    background: url(http://localhost/sgpoc/backend/web/img/white-bg.png)
+      no-repeat center / 1920px 1280px;
+  }
 
-	.index-content h2{
-		font-size: 30px;
-		text-align:center;
-	}
+  .index-content h1 {
+    font-size: 50px;
+    text-align: center;
+  }
 
-	.index-content .desc {
-		display: none;
-	}
+  .index-content h2 {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .index-content .desc {
+    display: none;
+  }
 }

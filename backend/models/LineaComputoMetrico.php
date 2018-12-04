@@ -21,6 +21,7 @@ class LineaComputoMetrico extends Model
     public $Largo;
     public $Ancho;
     public $Alto;
+    public $Parcial;
            
     public static function tableName()
     {
@@ -51,6 +52,7 @@ class LineaComputoMetrico extends Model
             'IdRubroItem' => 'Rubro Item',
             'IdUnidad' => 'Unidad',
             'Descripcion' => 'Descripción',
+            'Parcial' => 'Parcial',
         ];
     }
 }

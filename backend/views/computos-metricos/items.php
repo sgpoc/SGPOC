@@ -70,6 +70,14 @@ $gridColumns = [
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
+        'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'Parcial',
+        'label' => 'Parcial',
+        'vAlign' => 'middle',
+        'hAlign' => 'center',
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
         'class' => 'kartik\grid\ActionColumn',
         'header' => 'Acciones',
         'vAlign' => 'middle',
