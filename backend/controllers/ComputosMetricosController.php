@@ -171,7 +171,8 @@ class ComputosMetricosController extends Controller
             $pLargo = $model->Largo;
             $pAncho = $model->Ancho;
             $pAlto = $model->Alto;
-            $mensaje = $gestor->ModificarLinea($pIdComputoMetrico, $pNroLinea, $pDescripcion, $pCantidad, $pLargo, $pAncho, $pAlto);
+            $pParcial = $lineacomputo[0]['Parcial'];
+            $mensaje = $gestor->ModificarLinea($pIdComputoMetrico, $pNroLinea, $pDescripcion, $pCantidad, $pLargo, $pAncho, $pAlto, $pParcial);
             Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
             return $this->redirect('/sgpoc/backend/web/computos-metricos/listar');
         }

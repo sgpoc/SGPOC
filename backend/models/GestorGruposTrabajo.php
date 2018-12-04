@@ -32,7 +32,7 @@ class GestorGruposTrabajo
         return $grupostrabajo;
     }
     
-    public function Alta($pGrupoTrabajo, $pMail)
+    public function Alta($pGrupoTrabajo, $pMail, $pfechaCreacion)
     {
         $sql = 'CALL ssp_alta_grupotrabajo(:pGrupoTrabajo, :pMail, :pfechaCreacion)';
         $comando = Yii::$app->db->createCommand($sql)
@@ -42,7 +42,7 @@ class GestorGruposTrabajo
         return $comando->queryAll();
     }
     
-    public function Modificar($pIdGT, $pGrupoTrabajo, $pMail)
+    public function Modificar($pIdGT, $pGrupoTrabajo, $pMail, $pfechaCreacion)
     {
         $sql = 'CALL ssp_modificar_grupotrabajo(:pIdGT, :pGrupoTrabajo, :pMail, :pfechaCreacion)';
         $comando = Yii::$app->db->createCommand($sql)

@@ -143,19 +143,4 @@ class ListaPreciosController extends Controller
         }
     }
 
-    public function actionBorrar()
-    {
-        $gestor = new GestorListaPrecios;
-        $pIdProveedor = Yii::$app->request->get('IdProveedor');
-        $pIdLocalidad = Yii::$app->request->get('IdLocalidad');
-        $mensaje = $gestor->Borrar($pIdProveedor,$pIdLocalidad);
-        if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
-        {
-            return $this->redirect('/sgpoc/backend/web/lista-precios/listar');
-        }
-        else{
-            Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-            return $this->redirect('/sgpoc/backend/web/lista-precios/listar');
-        }
-    }
 }
