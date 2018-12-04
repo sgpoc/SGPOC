@@ -13,19 +13,18 @@ $this->title = 'SGPOC | Login';
 
 <?php if(Yii::$app->session->getFlash('alert')){
     echo Growl::widget([
-    'type' => Growl::TYPE_DANGER,
-    'title' => 'Error!',
-    'icon' => 'glyphicon glyphicon-remove-sign',
-    'body' => Yii::$app->session->getFlash('alert'),
-    'showSeparator' => true,
-    'pluginOptions' => [
-        'showProgressbar' => false,
-        'placement' => [
-            'from' => 'top',
-            'align' => 'center',
-        ]
-    ]
-    ]);
+                'type' => Growl::TYPE_DANGER,
+                'icon' => 'glyphicon glyphicon-remove-sign',
+                'body' => Yii::$app->session->getFlash('alert'),
+                'delay' => 1000,
+                'pluginOptions' => [
+                    'showProgressbar' => false,
+                    'placement' => [
+                        'from' => 'top',
+                        'align' => 'center',
+                    ]
+                ]
+                ]);
     }
 ?>
 

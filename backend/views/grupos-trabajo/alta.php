@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use kartik\date\DatePicker;
 use kartik\form\ActiveForm;
 use backend\assets\AppAsset;
 use kartik\growl\GrowlAsset;
@@ -22,7 +23,7 @@ AnimateAsset::register($this);
         <div class="form-group">
             <?= $form->field($model, 'GrupoTrabajo',['addon' => ['prepend' => ['content'=>'N']]])->textInput(['placeholder'=>'Ingrese el nombre ...'])->label('Nombre') ?>
             <?= $form->field($model, 'Mail', ['addon' => ['prepend' => ['content'=>'@']]])->textInput(['placeholder'=>'Ingrese una dirección de Email válida ...']); ?>
-            <?= $form->field($model, 'fechaCreacion')->widget(DatePicker::classname(), [
+            <?= $form->field($model, 'FechaCreacion')->widget(DatePicker::classname(), [
                     'options' => ['placeholder' => 'Inregese la fecha de ultima actualizacion ...'],
                     'pickerIcon' => '<i class="far fa-calendar-alt"></i>',
                     'convertFormat' => true,

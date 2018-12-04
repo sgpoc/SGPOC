@@ -28,10 +28,10 @@ class GruposTrabajoController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['@'],/*
                         'matchCallback' => function ($rule, $action) {
                             return Usuarios::isUserAdmin(Yii::$app->user->identity['IdRol']);
-                        }
+                        }*/
                     ],
                 ],
             ],
@@ -96,7 +96,8 @@ class GruposTrabajoController extends Controller
         {
             $pGrupoTrabajo = $model->GrupoTrabajo;
             $pMail = $model->Mail;
-            $mensaje = $gestor->Alta($pGrupoTrabajo, $pMail);
+            $pFechaCreacion = $model->FechaCreacion;
+            $mensaje = $gestor->Alta($pGrupoTrabajo, $pMail, $pFechaCreacion);
             return $mensaje[0]['Mensaje'];
         }
         else{
@@ -104,8 +105,7 @@ class GruposTrabajoController extends Controller
         }
     }
     
-    public function actionModificar()
-    {
+    public function actionModificar() {
         $model = new GruposTrabajo;
         $gestor = new GestorGruposTrabajo;
         $pIdGT = Yii::$app->request->get('IdGT');
@@ -114,8 +114,8 @@ class GruposTrabajoController extends Controller
         {
             $pGrupoTrabajo = $model->GrupoTrabajo;
             $pMail = $model->Mail;
-            $pfechaCreacion = $model->fechaCreacion;
-            $mensaje = $gestor->Modificar($pIdGT, $pGrupoTrabajo, $pMail,$pfechaCreacion);
+            $pFechaCreacion = $model->FechaCreacion;
+            $mensaje = $gestor->Modificar($pIdGT, $pGrupoTrabajo, $pMail, $pFechaCreacion);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
