@@ -142,5 +142,4 @@ class ListaPreciosController extends Controller
             return $this->renderAjax('modificar-insumo',['model' => $model, 'Insumo'=>$insumo]);
         }
     }
-
 }

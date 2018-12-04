@@ -107,7 +107,4 @@ class GestorListaPrecios
                 ->bindValue('pIdInsumo', $pIdInsumo);
         return $comando->queryAll();
     }
-    
-
-
 }

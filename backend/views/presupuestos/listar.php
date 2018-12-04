@@ -78,6 +78,14 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
+        'attribute' => 'Descripcion',
+        'label' => 'Cómputo Métrico',            
+        'vAlign' => 'middle',
+        'hAlign' => 'center',            
+        'contentOptions' => ['class' => 'kartik-sheet-style']
+    ],
+    [
+        'class' => 'kartik\grid\DataColumn',
         'value' => function($model){
             $gestor = new GestorPresupuestos;
             $pIdPresupuesto = $model['IdPresupuesto'];

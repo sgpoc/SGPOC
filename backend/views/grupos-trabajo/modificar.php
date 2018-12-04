@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use kartik\date\DatePicker;
 use kartik\form\ActiveForm;
 use kartik\date\DatePicker;
 use backend\assets\AppAsset;
@@ -23,8 +24,8 @@ AnimateAsset::register($this);
         <div class="form-group">
             <?= $form->field($model, 'GrupoTrabajo',['addon' => ['prepend' => ['content'=>'N']]])->textInput(['value'=>$grupotrabajo[0]['GrupoTrabajo']]) ?>
             <?= $form->field($model, 'Mail', ['addon' => ['prepend' => ['content'=>'@']]])->textInput(['value'=>$grupotrabajo[0]['Mail']]) ?>
-            <?= $form->field($model, 'fechaCreacion')->widget(DatePicker::classname(), [
-                    'options' => ['value' => $grupotrabajo[0]['fechaCreacion']],
+            <?= $form->field($model, 'FechaCreacion')->widget(DatePicker::classname(), [
+                    'options' => ['value' => $grupotrabajo[0]['FechaCreacion']],
                     'pickerIcon' => '<i class="far fa-calendar-alt"></i>',
                     'convertFormat' => true,
                     'pluginOptions'=>[

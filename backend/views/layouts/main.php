@@ -110,7 +110,7 @@ FontAsset::register($this);
                     </a>
                 </li>
                 <li>
-                    <a href="/sgpoc/backend/web/presupuestos/listar-insumos">
+                    <a href="/sgpoc/backend/web/presupuestos/listar">
                         <i class="fa fa-dollar-sign"></i>
                         <span>Presupuestos</span>
                     </a>
