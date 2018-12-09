@@ -1025,7 +1025,7 @@ a:focus {
 .dropdown-menu {
     box-shadow: none;
     border-color: #eee;
-      
+      z-index: 2000;
 }
 
 .dropdown-menu>li>a {

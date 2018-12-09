@@ -34,8 +34,8 @@ FontAsset::register($this);
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"></a>
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded='true'>
+                    <li class="dropdown user user-menu"> 
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded='false'>
                             <img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png" class="user-image" alt='imagen usuario'>
                             <span class="hiddex-xs"><?= Yii::$app->user->identity['Apellido']?></span>
                             <span class="hidden-xs"><?= Yii::$app->user->identity['Nombre']?></span>
