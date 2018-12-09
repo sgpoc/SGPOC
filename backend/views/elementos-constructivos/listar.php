@@ -69,7 +69,7 @@ $gridColumns = [
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' => '{agregar-item} {modificar} {borrar}',
+        'template' => '{agregar-item} {modificar} {borrar} {exportar}',
         'buttons' => [
                 'agregar-item' => function($url, $model, $key){
                     return  Html::button('<i class="fa fa-plus"></i>',
@@ -99,6 +99,18 @@ $gridColumns = [
                                 ]
                             ]);
                 },
+                'exportar' => function($url, $model, $key){
+                    return Html::a('<i class="fas fa-external-link-alt"></i>',
+                            [
+                                'exportar', 'IdElementoConstructivo' => $model['IdElementoConstructivo']
+                            ], 
+                            [
+                                'target' => '_blank', 
+                                'class'=>'btn btn-link',  
+                                'title'=>'exportar' ,
+                                'data-pjax' => 0,   
+                            ]);
+                }
         ]
     ], 
 ] 
@@ -165,10 +177,6 @@ $gridColumns = [
               'id' => 'gridview'
           ]  
         ], 
-        'exportConfig' => [
-                GridView::EXCEL => ['label' => 'EXCEL'],
-                GridView::PDF => ['label' => 'PDF'],
-         ],
         'toolbar' => [
             [
                 'content' =>Html::button('<i class="fa fa-plus"></i>',
@@ -185,10 +193,7 @@ $gridColumns = [
                                 'title' => 'Actualizar'
                             ])
             ],
-            '{export}',
-        ],
-        'export' => [
-          'icon' => 'fa fa-external-link-alt'  
+           
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="fa fa-cogs"></i> Elementos Constructivos</h3>',

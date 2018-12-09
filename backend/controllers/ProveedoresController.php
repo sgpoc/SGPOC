@@ -9,7 +9,7 @@ use yii\helpers\Json;
 use app\models\GestorProveedores;
 use app\models\Proveedores;
 use app\models\ProveedoresBuscar;
-
+use kartik\mpdf\pdf;
 
 class ProveedoresController extends Controller
 {
@@ -135,6 +135,35 @@ class ProveedoresController extends Controller
         }
         echo Json::encode(['output' => '', 'selected' =>'']);
     }
+
+    public function actionExportar() {
+        $gestor = new GestorProveedores;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
+        $proveedores = $gestor->Listar($pIdGT);
+            $dataProvider = new ArrayDataProvider([
+                'allModels' => $proveedores,
+            ]);
+           $data = $this->renderPartial('exportar',['dataProvider' => $dataProvider]);
+           Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+           $pdf = new Pdf([
+            'mode' => Pdf::MODE_CORE, 
+            'destination' => Pdf::DEST_BROWSER,
+            'content' => $data,
+            'options' => [
+                
+            ],
+            'methods' => [
+                'SetTitle' => 'Familias',
+                'SetSubject' => 'Generating PDF files via yii2-mpdf extension has never been easy',
+                'SetHeader' => ['Proveedores||Generado el: ' . date("r")],
+                'SetFooter' => ['|Page {PAGENO}|'],
+                'SetAuthor' => 'Kartik Visweswaran',
+                'SetCreator' => 'Kartik Visweswaran',
+                'SetKeywords' => 'Krajee, Yii2, Export, PDF, MPDF, Output, Privacy, Policy, yii2-mpdf',
+            ]
+        ]);
+        return $pdf->render();
+     }
 }
        
     

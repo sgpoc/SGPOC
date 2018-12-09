@@ -20,11 +20,11 @@ class AppAsset extends AssetBundle
         'js/raphael.min.js',
         'js/jquery.sparkline.min.js',
         'js/jquery.slimscroll.min.js',
-        'js/fastclick.js',
-        'js/dashboard.js',
-        'js/main.js',
-        'js/custom.js',
-        'js/adminlte.min.js',
+       'js/fastclick.js',
+        // 'js/dashboard.js',
+        //'js/main.js',
+         'js/custom.js',
+       'js/adminlte.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -10,7 +10,7 @@ use app\models\ListaPreciosBuscar;
 use app\models\GestorInsumos;
 use app\models\GestorProveedores;
 use app\models\ListaPrecios;
-
+use kartik\mpdf\pdf;
 
 class ListaPreciosController extends Controller
 {
@@ -141,5 +141,41 @@ class ListaPreciosController extends Controller
         else{ 
             return $this->renderAjax('modificar-insumo',['model' => $model, 'Insumo'=>$insumo]);
         }
+    }
+
+    public function actionExportar() {
+        $gestorlp = new GestorListaPrecios;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
+        $pIdProveedor = Yii::$app->request->get('IdProveedor');
+        $pIdLocalidad =  Yii::$app->request->get('IdLocalidad');
+        $lista = $gestorlp->ListaExportar($pIdGT,$pIdProveedor,$pIdLocalidad);
+        $dataProviderLista = new ArrayDataProvider([
+            'allModels' => $lista
+        ]);
+        $insumos = $gestorlp->ListarInsumos($pIdProveedor, $pIdLocalidad, $pIdGT);
+        $dataProviderInsumos = new ArrayDataProvider([
+                'allModels' => $insumos,
+            ]);
+           $data = $this->renderPartial('exportar',['dataProviderLista' => $dataProviderLista,
+           'dataProviderInsumos' => $dataProviderInsumos]);
+           Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+           $pdf = new Pdf([
+            'mode' => Pdf::MODE_CORE, 
+            'destination' => Pdf::DEST_BROWSER,
+            'content' => $data,
+            'options' => [
+                
+            ],
+            'methods' => [
+                'SetTitle' => 'Elemento Constructivo',
+                'SetSubject' => 'Generating PDF files via yii2-mpdf extension has never been easy',
+                'SetHeader' => ['Lista  de Precio de insumos||Generado el: ' . date("r")],
+                'SetFooter' => ['|Page {PAGENO}|'],
+                'SetAuthor' => 'Kartik Visweswaran',
+                'SetCreator' => 'Kartik Visweswaran',
+                'SetKeywords' => 'Krajee, Yii2, Export, PDF, MPDF, Output, Privacy, Policy, yii2-mpdf',
+            ]
+        ]);
+        return $pdf->render();
     }
 }

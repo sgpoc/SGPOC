@@ -550,7 +550,6 @@ a:focus {
 .user-panel>.info>a>.ion,
 .user-panel>.info>a>.glyphicon {
     margin-right: 3px;
-    z-index: 2000;
 }
 
 .sidebar-menu {

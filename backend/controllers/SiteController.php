@@ -62,7 +62,7 @@ class SiteController extends Controller
         $this->layout = 'login';
         $gestor = new GestorUsuarios;
         if (!Yii::$app->user->isGuest) {
-            return $this->redirect('/sgpoc/backend/web/site/index');
+            return $this->redirect('/sgpoc/backend/web/site/login');
         }
 
         $model = new LoginForm();

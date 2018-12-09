@@ -12,14 +12,14 @@ class IndexAsset extends AssetBundle
         'css/index-style.css',
     ];
     public $js = [
-        'js/jquery-3.3.1.js',
+       'js/jquery-3.3.1.js',
         'js/index.js',
         'js/custom.js'
     ];
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-        '\rmrevin\yii\fontawesome\AssetBundle',
+        // 'yii\web\YiiAsset',
+        // 'yii\bootstrap\BootstrapAsset',
+        // '\rmrevin\yii\fontawesome\AssetBundle',
     ];
 }
 

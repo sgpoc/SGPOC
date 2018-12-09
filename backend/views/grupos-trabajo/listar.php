@@ -39,7 +39,7 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'FechaCreacion',
+        'attribute' => 'fechaCreacion',
         'vAlign' => 'middle',
         'hAlign' => 'center'
     ],
@@ -189,12 +189,16 @@ $gridColumns = [
                                 'data-pjax' => 0, 
                                 'class' => 'btn btn-default', 
                                 'title' => 'Actualizar'
-                            ])
+                            ]).' '.
+                            Html::a('<i class="fas fa-external-link-alt"></i>', 
+                            ['grupos-trabajo/exportar'],
+                            [
+                                'data-pjax' => 0, 
+                                'class' => 'btn btn-link', 
+                                'title' => 'exportar',
+                                'target' => '_blank'
+                            ]),
             ],
-            '{export}',
-        ],
-        'export' => [
-          'icon' => 'fa fa-external-link-alt'  
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="fa fa-graduation-cap"></i> Grupos de Trabajo</h3>',

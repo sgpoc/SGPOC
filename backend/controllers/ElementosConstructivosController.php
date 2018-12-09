@@ -11,7 +11,7 @@ use app\models\Elementosconstructivos;
 use app\models\ElementosConstructivosBuscar;
 use yii\helpers\ArrayHelper;
 use app\models\Composicionec;
-
+use kartik\mpdf\Pdf;
 
 
 class ElementosConstructivosController extends Controller
@@ -151,6 +151,43 @@ class ElementosConstructivosController extends Controller
         else{ 
             return $this->renderAjax('modificar-incidencia',['model' => $model, 'incidencia' => $incidencia]);
         }
+    }
+
+    public function actionExportar() {
+
+        $gestor = new GestorElementosConstructivos;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
+        $pIdElementoConstructivo= Yii::$app->request->get('IdElementoConstructivo');
+        $elemento= $gestor->DameElementoExportar($pIdElementoConstructivo,$pIdGT);
+        $dataProviderElemento = new ArrayDataProvider([
+            'allModels' => $elemento,
+         ]);
+         $items = $gestor->ListarItems($pIdElementoConstructivo, $pIdGT);
+         $dataProviderItem = new ArrayDataProvider([
+             'allModels' => $items,
+         ]);
+
+           $data = $this->renderPartial('exportar',['dataProviderItem' => $dataProviderItem,
+           'dataProviderElemento' => $dataProviderElemento]);
+           Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+           $pdf = new Pdf([
+            'mode' => Pdf::MODE_CORE, 
+            'destination' => Pdf::DEST_BROWSER,
+            'content' => $data,
+            'options' => [
+                
+            ],
+            'methods' => [
+                'SetTitle' => 'Elemento Constructivo',
+                'SetSubject' => 'Generating PDF files via yii2-mpdf extension has never been easy',
+                'SetHeader' => ['Elemento Constructivo Detallado con sus Items||Generado el: ' . date("r")],
+                'SetFooter' => ['|Page {PAGENO}|'],
+                'SetAuthor' => 'Kartik Visweswaran',
+                'SetCreator' => 'Kartik Visweswaran',
+                'SetKeywords' => 'Krajee, Yii2, Export, PDF, MPDF, Output, Privacy, Policy, yii2-mpdf',
+            ]
+        ]);
+        return $pdf->render();
     }
 
 }
