@@ -132,4 +132,15 @@ class GestorComputosMetricos
                 ->bindValue('pNroLinea', $pNroLinea);
         return $comando->queryAll();
     }
+
+    public function DameComputoDeObra($pIdGT,$pIdComputoMetrico)
+    {
+        $sql = 'SELECT Obra,Descripcion,FechaComputoMetrico,TipoComputo FROM computosmetricos cm
+                JOIN obras o ON cm.IdObra = o.IdObra
+                WHERE cm.IdGT = :pIdGT AND cm.IdComputoMetrico = :pIdComputoMetrico';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdComputoMetrico', $pIdComputoMetrico)
+                ->bindValue('pIdGT', $pIdGT);
+        return $comando->queryAll();
+    }
 }

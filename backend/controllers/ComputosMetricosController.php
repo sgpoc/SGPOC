@@ -13,6 +13,7 @@ use app\models\LineaComputoMetrico;
 use app\models\GestorInsumos;
 use app\models\GestorItems;
 use app\models\GestorElementosConstructivos;
+use kartik\mpdf\Pdf;
 
 class ComputosMetricosController extends Controller
 {   
@@ -41,7 +42,7 @@ class ComputosMetricosController extends Controller
                 'allModels' => $computos,
                 'pagination' => ['pagesize' => 9,],
             ]);
-            return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listDataO' => $listDataO]);
+             return $this->render('listar',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listDataO' => $listDataO]);
         }
     }
     
@@ -189,6 +190,51 @@ class ComputosMetricosController extends Controller
         Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
         return $this->redirect('/sgpoc/backend/web/computos-metricos/listar');
     }
-    
+
+    public function actionExportar() {
+
+        $gestor = new GestorComputosMetricos;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
+        $pIdComputoMetrico = Yii::$app->request->get('IdComputoMetrico');
+        $tipoComputo = Yii::$app->request->get('tipoComputo');
+        $computos = $gestor->DameComputoDeObra($pIdGT,$pIdComputoMetrico); //con el IdComputo metrico puedo saber el IdObra en la tabla composicioncomputometrico
+            $dataProviderElemento = new ArrayDataProvider([
+                'allModels' => $computos,
+                'pagination' => ['pagesize' => 9,],
+            ]);
+        if( $tipoComputo == 'I'){
+            $items = $gestor->ListarItems($pIdComputoMetrico, $pIdGT);
+            $dataProvider = new ArrayDataProvider([
+                'allModels' => $items,
+            ]);
+        }
+        else{
+            $elementos = $gestor->ListarElementos($pIdComputoMetrico, $pIdGT);
+            $dataProvider = new ArrayDataProvider([
+                'allModels' => $elementos,
+            ]);
+        }
+           $data = $this->renderPartial('exportar',['dataProviderElemento' => $dataProviderElemento,
+           'dataProvider' => $dataProvider, 'tipoComputo' => $tipoComputo]);
+           Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+           $pdf = new Pdf([
+            'mode' => Pdf::MODE_CORE, 
+            'destination' => Pdf::DEST_BROWSER,
+            'content' => $data,
+            'options' => [
+                
+            ],
+            'methods' => [
+                'SetTitle' => 'Elemento Constructivo',
+                'SetSubject' => 'Generating PDF files via yii2-mpdf extension has never been easy',
+                'SetHeader' => ['Computo Metrico Detallado||Generado el: ' . date("r")],
+                'SetFooter' => ['|Page {PAGENO}|'],
+                'SetAuthor' => 'Kartik Visweswaran',
+                'SetCreator' => 'Kartik Visweswaran',
+                'SetKeywords' => 'Krajee, Yii2, Export, PDF, MPDF, Output, Privacy, Policy, yii2-mpdf',
+            ]
+        ]);
+        return $pdf->render();
+    }    
 }
 

@@ -195,12 +195,16 @@ $gridColumns = [
                                 'data-pjax' => 0, 
                                 'class' => 'btn btn-default', 
                                 'title' => 'Actualizar'
-                            ])
+                            ]).' '.
+                            Html::a('<i class="fas fa-external-link-alt"></i>', 
+                            ['proveedores/exportar'],
+                            [
+                                'data-pjax' => 0, 
+                                'class' => 'btn btn-link', 
+                                'title' => 'exportar',
+                                'target' => '_blank'
+                            ]),
             ],
-            '{export}',
-        ],
-        'export' => [
-          'icon' => 'fa fa-external-link-alt'  
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="fa fa-truck"></i> Proveedores</h3>',

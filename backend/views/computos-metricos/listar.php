@@ -91,7 +91,7 @@ $gridColumns = [
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' => '{agregar-linea} {modificar} {borrar}',
+        'template' => '{agregar-linea} {modificar} {borrar} {exportar}',
         'buttons' => [
                 'agregar-linea' => function($url, $model, $key){
                     return  Html::button('<i class="fa fa-plus"></i>',
@@ -121,6 +121,18 @@ $gridColumns = [
                                     'confirm' => 'Esta seguro que desea borrar el Cómputo Métrico?',
                                     'method' => 'post'
                                 ]
+                            ]);
+                },
+                'exportar' => function($url, $model, $key){
+                    return Html::a('<i class="fas fa-external-link-alt"></i>',
+                            [
+                                'exportar', 'IdComputoMetrico' => $model['IdComputoMetrico'], 'tipoComputo' => $model['TipoComputo']
+                            ], 
+                            [
+                                'target' => '_blank', 
+                                'class'=>'btn btn-link',  
+                                'title'=>'exportar' ,
+                                'data-pjax' => 0,   
                             ]);
                 }
         ]
@@ -190,10 +202,6 @@ $gridColumns = [
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
-        'exportConfig' => [
-                GridView::EXCEL => ['label' => 'EXCEL'],
-                GridView::PDF => ['label' => 'PDF'],
-         ],
         'toolbar' => [
             [
                 'content' => Html::button('<i class="fa fa-plus"></i>',
@@ -210,10 +218,6 @@ $gridColumns = [
                                 'title' => 'Actualizar'
                             ])
             ],
-            '{export}',
-        ],
-        'export' => [
-          'icon' => 'fa fa-external-link-alt',
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="fa fa-book"></i> Cómputos Métricos</h3>',

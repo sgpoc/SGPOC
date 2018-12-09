@@ -36,6 +36,7 @@ $gridColumns = [
             ]);
             return Yii::$app->controller->renderPartial('/items/insumos', ['dataProvider' => $dataProvider]);
         },
+        'hiddenFromExport' => false,
         'headerOptions' => ['class' => 'kartik-sheet-style'], 
         'expandOneOnly' => true,
         'expandIcon' => '<i class="far fa-plus-square"></i>',        
@@ -75,7 +76,7 @@ $gridColumns = [
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' => '{agregar-insumo} {modificar} {borrar}',
+        'template' => '{agregar-insumo} {modificar} {borrar} {exportar}',
         'buttons' => [
                 'agregar-insumo' => function($url, $model, $key){
                     return  Html::button('<i class="fa fa-plus"></i>',
@@ -106,6 +107,18 @@ $gridColumns = [
                                     'method' => 'post'
                                 ]
                             ]);
+                },
+                'exportar' => function($url,$model){
+                    return Html::a('<i class="fas fa-external-link-alt"></i>', 
+                            [
+                                'exportar','IdItem' => $model['IdItem'],
+                            ], 
+                            [
+                                'target' => '_blank', 
+                        'class'=>'btn btn-link',  
+                        'title'=>'exportar',
+                        'data-pjax' => 0,   
+                    ]);
                 }
         ]
     ], 
@@ -191,12 +204,9 @@ $gridColumns = [
                                 'data-pjax' => 0, 
                                 'class' => 'btn btn-default', 
                                 'title' => 'Actualizar'
-                            ])
+                            ])       
             ],
-            '{export}',
-        ],
-        'export' => [
-            'icon' => 'fa fa-external-link-alt'
+          
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="fa fa-cog"></i> Items</h3>',

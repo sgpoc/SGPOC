@@ -11,7 +11,8 @@ use app\models\GestorUsuarios;
 use app\models\UsuariosBuscar;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-
+use yii\web\HttpException;
+use kartik\mpdf\pdf;
 
 class UsuariosController extends Controller
 {   
@@ -43,6 +44,15 @@ class UsuariosController extends Controller
             ],
         ];
     }
+
+ public function beforeAction($action)
+{
+  if(Yii::$app->user->identity['IdRol'] == 1)
+  {
+    return parent::beforeAction($action);
+}
+  throw new HttpException('403', 'No se tienen los permisos necesarios para ver la página solicitada.');
+}
 
     public function actions() {
         return [
@@ -192,5 +202,34 @@ class UsuariosController extends Controller
             return $this->render('perfil', ['model' => $model, 'usuario' => $usuario]);
         }
     }
+
+    public function actionExportar() {
+        $gestor = new GestorUsuarios;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
+        $usuarios = $gestor->Listar();
+            $dataProvider = new ArrayDataProvider([
+                'allModels' => $usuarios,
+            ]);
+           $data = $this->renderPartial('exportar',['dataProvider' => $dataProvider]);
+           Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+           $pdf = new Pdf([
+            'mode' => Pdf::MODE_CORE, 
+            'destination' => Pdf::DEST_BROWSER,
+            'content' => $data,
+            'options' => [
+                
+            ],
+            'methods' => [
+                'SetTitle' => 'Familias',
+                'SetSubject' => 'Generating PDF files via yii2-mpdf extension has never been easy',
+                'SetHeader' => ['Usuarios||Generado el: ' . date("r")],
+                'SetFooter' => ['|Page {PAGENO}|'],
+                'SetAuthor' => 'Kartik Visweswaran',
+                'SetCreator' => 'Kartik Visweswaran',
+                'SetKeywords' => 'Krajee, Yii2, Export, PDF, MPDF, Output, Privacy, Policy, yii2-mpdf',
+            ]
+        ]);
+        return $pdf->render();
+     }
     
 }

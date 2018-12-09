@@ -6,7 +6,6 @@ use kartik\widgets\Growl;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
 
-
 $this->title = 'SGPOC | Obras';
 
 $gridColumns = [
@@ -150,7 +149,7 @@ $gridColumns = [
                                 ]);
                         
                     }
-                } 
+                },
         ]
     ], 
 ];
@@ -235,12 +234,16 @@ $gridColumns = [
                                 'data-pjax' => 0, 
                                 'class' => 'btn btn-default', 
                                 'title' => 'Actualizar'
-                            ])
+                            ]).' '.
+                            Html::a('<i class="fas fa-external-link-alt"></i>', 
+                            ['obras/exportar'],
+                            [
+                                'data-pjax' => 0, 
+                                'class' => 'btn btn-link', 
+                                'title' => 'exportar',
+                                'target' => '_blank'
+                            ]),
             ],
-            '{export}',
-        ],
-        'export' => [
-          'icon' => 'fa fa-external-link-alt'  
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="fa fa-building"></i> Obras</h3>',

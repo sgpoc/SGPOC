@@ -68,6 +68,14 @@ class GestorSubFamilias
                 ->bindValue('pIdSubFamilia', $pIdSubFamilia);
         return $comando->queryAll();
     }
-
+    
+    public function DameSubFamiliasConFamilia($pIdGT)
+    {       
+        $sql = 'SELECT Familia,SubFamilia FROM familias f
+                JOIN subfamilias sf ON f.IdGT = sf.IdGT';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdGT', $pIdGT);
+       return $comando->queryAll();
+    }
 }
 
