@@ -32,7 +32,9 @@ AnimateAsset::register($this);
             <?= $form->field($model, 'Cantidad', ['addon' => ['prepend' => ['content'=>'#']]])->textInput(['placeholder' => 'Ingrese la cantidad ...']); ?>
             <?= $form->field($model, 'Largo', ['addon' => ['prepend' => ['content'=>'L']]])->textInput(['placeholder'=>'Ingrese el largo ...']) ?>
             <?= $form->field($model, 'Ancho', ['addon' => ['prepend' => ['content'=>'An']]])->textInput(['placeholder'=>'Ingrese el ancho ...']) ?>
+            <div id="alto">
             <?= $form->field($model, 'Alto', ['addon' => ['prepend' => ['content'=>'A']]])->textInput(['placeholder'=>'Ingrese el alto ...']) ?>            
+           </div>
             <?= $form->field($model, 'Descripcion')->textArea(['rows'=>5]) ?>
         </div>
     </div>
@@ -66,3 +68,4 @@ $('#unidad').on('change', function() {
 JS;
 $this->registerJS($script);
 ?>
+

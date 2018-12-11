@@ -14,6 +14,7 @@ use app\models\Presupuestos;
 use app\models\LineaPresupuestos;
 use app\models\GestorListaPrecios;
 use app\models\GestorProveedores;
+use kartik\mpdf\pdf;
 
 class PresupuestosController extends Controller
 {   
@@ -107,6 +108,7 @@ class PresupuestosController extends Controller
     }
     
     public function actionListarInsumos() {
+        $insumo = true;
         $gestor = new GestorPresupuestos;
         $gestoro = new GestorObras;
         $searchModel = new PresupuestosBuscar;
@@ -130,7 +132,8 @@ class PresupuestosController extends Controller
                 'allModels' => $presupuestos,
                 'pagination' => ['pagesize' => 5,],
             ]);
-            return $this->render('listar-insumos',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listDataO' => $listDataO]);
+
+             return $this->render('listar-insumos',['dataProvider' => $dataProvider, 'searchModel' => $searchModel, 'listDataO' => $listDataO, 'Insumo' => $insumo]);
         }
     }
     
@@ -194,4 +197,110 @@ class PresupuestosController extends Controller
         }
     }
     
+    
+    public function actionExportarInsumos() {
+        $gestor = new GestorPresupuestos;
+        $pIdPresupuesto = Yii::$app->request->get('IdPresupuesto');
+        $pIdGT = Yii::$app->user->identity['IdGT'];
+        $presupuesto = $gestor->DamePresupuestoExportar($pIdPresupuesto,$pIdGT);
+        $dataProviderPresupuesto = new ArrayDataProvider([
+            'allModels' => $presupuesto,
+        ]);
+       $insumos = $gestor->ListarInsumos($pIdPresupuesto);
+       $dataProviderInsumos = new ArrayDataProvider([
+           'allModels' => $insumos,
+           'pagination' => ['pagesize' => 5,],
+       ]);
+           $data = $this->renderPartial('exportar-insumos',['dataProviderPresupuesto' => $dataProviderPresupuesto,
+           'dataProviderInsumos' => $dataProviderInsumos]);
+           Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+           $pdf = new Pdf([
+            'mode' => Pdf::MODE_CORE, 
+            'destination' => Pdf::DEST_BROWSER,
+            'content' => $data,
+            'options' => [
+                
+            ],
+            'methods' => [
+                'SetTitle' => 'Elemento Constructivo',
+                'SetSubject' => 'Generating PDF files via yii2-mpdf extension has never been easy',
+                'SetHeader' => ['Presupuesto||Generado el: ' . date("r")],
+                'SetFooter' => ['|Page {PAGENO}|'],
+                'SetAuthor' => 'Kartik Visweswaran',
+                'SetCreator' => 'Kartik Visweswaran',
+                'SetKeywords' => 'Krajee, Yii2, Export, PDF, MPDF, Output, Privacy, Policy, yii2-mpdf',
+            ]
+        ]);
+        return $pdf->render();
+    }    
+
+    public function actionExportarItems() {
+        $gestor = new GestorPresupuestos;
+        $pIdPresupuesto = Yii::$app->request->get('IdPresupuesto');
+        $pIdGT = Yii::$app->user->identity['IdGT'];
+        $presupuesto = $gestor->DamePresupuestoExportar($pIdPresupuesto,$pIdGT);
+        $dataProviderPresupuesto = new ArrayDataProvider([
+            'allModels' => $presupuesto,
+        ]);
+        $items = $gestor->ListarItems($pIdPresupuesto);
+        $dataProviderItems = new ArrayDataProvider([
+            'allModels' => $items,
+        ]);
+           $data = $this->renderPartial('exportar-item',['dataProviderPresupuesto' => $dataProviderPresupuesto,
+           'dataProviderItems' => $dataProviderItems]);
+           Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+           $pdf = new Pdf([
+            'mode' => Pdf::MODE_CORE, 
+            'destination' => Pdf::DEST_BROWSER,
+            'content' => $data,
+            'options' => [
+                
+            ],
+            'methods' => [
+                'SetTitle' => 'Elemento Constructivo',
+                'SetSubject' => 'Generating PDF files via yii2-mpdf extension has never been easy',
+                'SetHeader' => ['Presupuesto||Generado el: ' . date("r")],
+                'SetFooter' => ['|Page {PAGENO}|'],
+                'SetAuthor' => 'Kartik Visweswaran',
+                'SetCreator' => 'Kartik Visweswaran',
+                'SetKeywords' => 'Krajee, Yii2, Export, PDF, MPDF, Output, Privacy, Policy, yii2-mpdf',
+            ]
+        ]);
+        return $pdf->render();
+    }  
+    
+    public function actionExportarElementos() {
+        $gestor = new GestorPresupuestos;
+        $pIdPresupuesto = Yii::$app->request->get('IdPresupuesto');
+        $pIdGT = Yii::$app->user->identity['IdGT'];
+        $presupuesto = $gestor->DamePresupuestoExportar($pIdPresupuesto,$pIdGT);
+        $dataProviderPresupuesto = new ArrayDataProvider([
+            'allModels' => $presupuesto,
+        ]);
+        $elementos = $gestor->ListarElementos($pIdPresupuesto);
+        $dataProviderElementos = new ArrayDataProvider([
+            'allModels' => $elementos,
+        ]);
+           $data = $this->renderPartial('exportar-elementos',['dataProviderPresupuesto' => $dataProviderPresupuesto,
+           'dataProviderElementos' => $dataProviderElementos]);
+           Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+           $pdf = new Pdf([
+            'mode' => Pdf::MODE_CORE, 
+            'destination' => Pdf::DEST_BROWSER,
+            'content' => $data,
+            'options' => [
+                
+            ],
+            'methods' => [
+                'SetTitle' => 'Elemento Constructivo',
+                'SetSubject' => 'Generating PDF files via yii2-mpdf extension has never been easy',
+                'SetHeader' => ['Presupuesto||Generado el: ' . date("r")],
+                'SetFooter' => ['|Page {PAGENO}|'],
+                'SetAuthor' => 'Kartik Visweswaran',
+                'SetCreator' => 'Kartik Visweswaran',
+                'SetKeywords' => 'Krajee, Yii2, Export, PDF, MPDF, Output, Privacy, Policy, yii2-mpdf',
+            ]
+        ]);
+        return $pdf->render();
+    }    
 }

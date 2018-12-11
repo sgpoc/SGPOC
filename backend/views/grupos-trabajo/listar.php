@@ -39,7 +39,7 @@ $gridColumns = [
     ],
     [
         'class' => 'kartik\grid\DataColumn',
-        'attribute' => 'fechaCreacion',
+        'attribute' => 'FechaCreacion',
         'vAlign' => 'middle',
         'hAlign' => 'center'
     ],
