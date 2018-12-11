@@ -103,7 +103,7 @@ $gridColumns = [
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' => '{modificar} {borrar} {listar-insumos}',
+        'template' => '{modificar} {borrar} {exportar}',
         'buttons' => [
                 'modificar' => function($url, $model, $key){ 
                     return  Html::button('<i class="fa fa-pencil-alt"></i>',
@@ -126,7 +126,38 @@ $gridColumns = [
                                     'method' => 'post'
                                 ]
                             ]);
-                }
+                },
+                'exportar' => function($url, $model, $key){
+                    $pIdComputoMetrico = $model['IdComputoMetrico'];
+                    $gestor = new GestorComputosMetricos;
+                    $computo = $gestor->Dame($pIdComputoMetrico);
+                    $tipoComputo = $computo[0]['TipoComputo'];
+                    if($tipoComputo == 'I')
+                    {
+                        return Html::a('<i class="fas fa-external-link-alt"></i>',
+                        [
+                            'exportar-items', 'IdPresupuesto' => $model['IdPresupuesto']
+                        ], 
+                        [
+                            'target' => '_blank', 
+                            'class'=>'btn btn-link',  
+                            'title'=>'exportar' ,
+                            'data-pjax' => 0,   
+                        ]);
+                    }
+                    else{
+                        return Html::a('<i class="fas fa-external-link-alt"></i>',
+                        [
+                            'exportar-elementos', 'IdPresupuesto' => $model['IdPresupuesto']
+                        ], 
+                        [
+                            'target' => '_blank', 
+                            'class'=>'btn btn-link',  
+                            'title'=>'exportar' ,
+                            'data-pjax' => 0,   
+                        ]);
+                    }
+                },
         ]
     ], 
 ];
@@ -227,11 +258,6 @@ $gridColumns = [
                                 'title' => 'Actualizar'
                             ])
             ],
-            '{export}',
-        ],
-        'export' => [
-            'icon' => 'fa fa-external-link-alt',
-            'showConfirmAlert' => false,
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="fa fa-dollar-sign"></i> Presupuestos</h3>',
