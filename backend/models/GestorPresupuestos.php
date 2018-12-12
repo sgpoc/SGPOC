@@ -128,4 +128,13 @@ class GestorPresupuestos
         $preciototal = $comando->queryAll();
         return $preciototal;
     }
+
+    public function DamePresupuestoExportar($pIdPresupuesto,$pIdGT){
+        $sql = 'CALL dame_precio_final_presupuesto(:pIdPresupuesto,:pIdGT)';
+        $comando = Yii::$app->db->createCommand($sql)
+        ->bindValue('pIdPresupuesto', $pIdPresupuesto)
+        ->bindValue('pIdGT', $pIdGT);
+     return  $comando->queryAll();
+    }
+    
 }
