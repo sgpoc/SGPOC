@@ -14,7 +14,7 @@ class GestorElementosConstructivos
         return $elementos;
     }
     
-     public function ListarRubrosEC()
+    public function ListarRubrosEC()
     {       
         $sql = 'CALL ssp_listar_rubrosec()';
         $comando = Yii::$app->db->createCommand($sql);
@@ -45,42 +45,46 @@ class GestorElementosConstructivos
         return $comando->queryAll();
     }
 
-     public function Dame($pIdElementoConstructivo)
+    public function Dame($pIdElementoConstructivo, $pIdGT)
     {
-        $sql = 'CALL ssp_dame_elementoconstructivo(:pIdElementoConstructivo)';
+        $sql = 'CALL ssp_dame_elementoconstructivo(:pIdElementoConstructivo, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdElementoConstructivo', $pIdElementoConstructivo);
+                ->bindValue('pIdElementoConstructivo', $pIdElementoConstructivo)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
     
-      public function Modificar($pIdElementoConstructivo, $pElementoConstructivo)
+    public function Modificar($pIdElementoConstructivo, $pIdGT, $pElementoConstructivo)
     {
-        $sql = 'CALL ssp_modificar_elementoconstructivo(:pIdElementoConstructivo, :pElementoConstructivo)';
+        $sql = 'CALL ssp_modificar_elementoconstructivo(:pIdElementoConstructivo, :pIdGT, :pElementoConstructivo)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdElementoConstructivo', $pIdElementoConstructivo)
+                ->bindValue('pIdGT', $pIdGT)
                 ->bindValue('pElementoConstructivo',$pElementoConstructivo);
         return $comando->queryAll();
     }
     
-        public function Borrar($pIdElementoConstructivo)
+    public function Borrar($pIdElementoConstructivo, $pIdGT)
     {
-        $sql = 'CALL ssp_borrar_elementoconstructivo(:pIdElementoConstructivo)';
+        $sql = 'CALL ssp_borrar_elementoconstructivo(:pIdElementoConstructivo, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdElementoConstructivo', $pIdElementoConstructivo);
+                ->bindValue('pIdElementoConstructivo', $pIdElementoConstructivo)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
     
-      public function AgregarItem($pIdElementoConstructivo, $pIdItem, $pIncidencia)
+    public function AgregarItem($pIdElementoConstructivo, $pIdItem, $pIdGT, $pIncidencia)
     {
-        $sql = 'CALL ssp_agregar_item_elemento(:pIdElementoConstructivo, :pIdItem, :pIncidencia)';
+        $sql = 'CALL ssp_agregar_item_elemento(:pIdElementoConstructivo, :pIdItem, :pIdGT, :pIncidencia)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdElementoConstructivo', $pIdElementoConstructivo)
                 ->bindValue('pIdItem',$pIdItem)
+                ->bindValue('pIdGT', $pIdGT)
                 ->bindValue('pIncidencia',$pIncidencia);
         return $comando->queryAll();
     }
     
-        public function ListarItems($pIdElementoConstructivo, $pIdGT)
+    public function ListarItems($pIdElementoConstructivo, $pIdGT)
     {       
         $sql = 'CALL ssp_listar_items_elemento(:pIdElementoConstructivo, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
@@ -90,43 +94,46 @@ class GestorElementosConstructivos
         return $items;
     }  
     
-      public function BorrarItem($pIdElementoConstructivo, $pIdItem)
+    public function BorrarItem($pIdElementoConstructivo, $pIdItem, $pIdGT)
     {
-        $sql = 'CALL ssp_borrar_item_elemento(:pIdElementoConstructivo, :pIdItem)';
+        $sql = 'CALL ssp_borrar_item_elemento(:pIdElementoConstructivo, :pIdItem, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdElementoConstructivo', $pIdElementoConstructivo)
-                ->bindValue('pIdItem',$pIdItem);
+                ->bindValue('pIdItem',$pIdItem)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
 
-      public function DameNombre($pIdElementoConstructivo){
+    public function DameNombre($pIdElementoConstructivo, $pIdGT){
            $sql = 'CALL ssp_dame_nombre_elemento(:pIdElementoConstructivo)';
         $comando = Yii::$app->db->createCommand($sql)
-                   ->bindValue('pIdElementoConstructivo', $pIdElementoConstructivo);
+                   ->bindValue('pIdElementoConstructivo', $pIdElementoConstructivo)
+                   ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
           
-      }
-      
-        public function DameIncidenciaItemElemento($pIdElemento, $pIdItem){
-        $sql = 'CALL ssp_dame_incidencia_item_elemento(:pIdElemento, :pIdItem)';
-        $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdElemento', $pIdElemento)
-                ->bindValue('pIdItem', $pIdItem);
-                
-        return $comando->queryAll();
     }
-    
-        public function ModificarIncidencia($pIdElemento, $pIdItem, $pIncidencia)
-    {
-        $sql = 'CALL ssp_modificar_incidencia_item(:pIdElemento, :pIdItem, :pIncidencia)';
+      
+    public function DameIncidenciaItemElemento($pIdElemento, $pIdItem, $pIdGT){
+        $sql = 'CALL ssp_dame_incidencia_item_elemento(:pIdElemento, :pIdItem, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdElemento', $pIdElemento)
                 ->bindValue('pIdItem', $pIdItem)
+                ->bindValue('pIdGT', $pIdGT);
+        return $comando->queryAll();
+    }
+    
+    public function ModificarIncidencia($pIdElemento, $pIdItem, $pIdGT, $pIncidencia)
+    {
+        $sql = 'CALL ssp_modificar_incidencia_item(:pIdElemento, :pIdItem, :pIdGT, :pIncidencia)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdElemento', $pIdElemento)
+                ->bindValue('pIdItem', $pIdItem)
+                ->bindValue('pIdGT', $pIdGT)
                 ->bindValue('pIncidencia',$pIncidencia);
         return $comando->queryAll();
     }
     
-    public function DameElementoExportar($pIdEC,$pIdGT){
+    public function DameElementoExportar($pIdEC, $pIdGT){
         $sql = 'SELECT ElementoConstructivo,RubroEC FROM ElementosConstructivos ec
         JOIN Rubrosec re ON ec.IdRubroEC = re.IdRubroEC
         WHERE ec.IdElementoConstructivo = :pIdEC AND ec.IdGT = :pIdGT';

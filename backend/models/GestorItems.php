@@ -54,65 +54,73 @@ class GestorItems
         return $comando->queryAll();
     }
     
-    public function Modificar($pIdItem, $pItem)
+    public function Modificar($pIdItem, $pIdGT, $pItem)
     {
-        $sql = 'CALL ssp_modificar_item(:pIdItem, :pItem)';
+        $sql = 'CALL ssp_modificar_item(:pIdItem, :pIdGT, :pItem)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdItem', $pIdItem)
+                ->bindValue('pIdGT',$pIdGT)
                 ->bindValue('pItem',$pItem);
         return $comando->queryAll();
     }
     
-    public function Borrar($pIdItem)
+    public function Borrar($pIdItem, $pIdGT)
     {
-        $sql = 'CALL ssp_borrar_item(:pIdItem)';
+        $sql = 'CALL ssp_borrar_item(:pIdItem, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdItem', $pIdItem);
+                ->bindValue('pIdItem', $pIdItem)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
     
-    public function Dame($pIdItem)
+    public function Dame($pIdItem, $pIdGT)
     {
-        $sql = 'CALL ssp_dame_item(:pIdItem)';
+        $sql = 'CALL ssp_dame_item(:pIdItem, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdItem', $pIdItem);
+                ->bindValue('pIdItem', $pIdItem)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
    
-    public function AgregarInsumo($pIdItem, $pIdInsumo, $pIncidencia)
+    public function AgregarInsumo($pIdItem, $pIdInsumo, $pIdGT, $pIncidencia)
     {
-        $sql = 'CALL ssp_agregar_insumo_item(:pIdItem, :pIdInsumo, :pIncidencia)';
+        $sql = 'CALL ssp_agregar_insumo_item(:pIdItem, :pIdInsumo, :pIdGT, :pIncidencia)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdItem', $pIdItem)
                 ->bindValue('pIdInsumo',$pIdInsumo)
+                ->bindValue('pIdGT', $pIdGT)
                 ->bindValue('pIncidencia',$pIncidencia);
         return $comando->queryAll();
     }
     
-    public function ModificarIncidencia($pIdItem, $pIdInsumo, $pIncidencia)
+    public function ModificarIncidencia($pIdItem, $pIdInsumo, $pIdGT, $pIncidencia)
     {
-        $sql = 'CALL ssp_modificar_incidencia_insumo(:pIdItem, :pIdInsumo, :pIncidencia)';
+        $sql = 'CALL ssp_modificar_incidencia_insumo(:pIdItem, :pIdInsumo, :pIdGT, :pIncidencia)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdItem', $pIdItem)
                 ->bindValue('pIdInsumo',$pIdInsumo)
+                ->bindValue('pIdGT', $pIdGT)
                 ->bindValue('pIncidencia',$pIncidencia);
         return $comando->queryAll();
     }
     
-    public function BorrarInsumo($pIdItem, $pIdInsumo)
+    public function BorrarInsumo($pIdItem, $pIdInsumo, $pIdGT)
     {
-        $sql = 'CALL ssp_borrar_insumo_item(:pIdItem, :pIdInsumo)';
+        $sql = 'CALL ssp_borrar_insumo_item(:pIdItem, :pIdInsumo, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdItem', $pIdItem)
-                ->bindValue('pIdInsumo',$pIdInsumo);
+                ->bindValue('pIdInsumo',$pIdInsumo)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
     
-    public function DameIncidenciaInsumoItem($pIdItem,$pIdInsumo){
-        $sql = 'CALL ssp_dame_incidencia_insumo_item(:pIdItem, :pIdInsumo)';
+    public function DameIncidenciaInsumoItem($pIdItem, $pIdInsumo, $pIdGT)
+    {
+        $sql = 'CALL ssp_dame_incidencia_insumo_item(:pIdItem, :pIdInsumo, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdItem', $pIdItem)
-                ->bindValue('pIdInsumo', $pIdInsumo);
+                ->bindValue('pIdInsumo', $pIdInsumo)
+                ->bindValue('pIdGT', $pIdGT);
                 
         return $comando->queryAll();
     }

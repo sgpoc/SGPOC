@@ -77,6 +77,14 @@ class GestorGruposTrabajo
         return $comando->queryAll();
     }
     
+    public function Copiar($pIdGT)
+    {
+        $sql = 'CALL ssp_copiar_datos_plantilla(:pIdGT)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdGT',$pIdGT);
+        return $comando->queryAll();
+    }
+    
      public function Dame($pIdGT)
     {
         $sql = 'CALL ssp_dame_grupotrabajo(:pIdGT)';

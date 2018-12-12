@@ -79,12 +79,13 @@ class ItemsController extends Controller
     public function actionModificar() {
         $model = new Items;
         $gestor = new GestorItems;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdItem = Yii::$app->request->get('IdItem');
-        $item = $gestor->Dame($pIdItem);
+        $item = $gestor->Dame($pIdItem, $pIdGT);
         if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pItem = $model->Item;
-            $mensaje = $gestor->Modificar($pIdItem, $pItem);
+            $mensaje = $gestor->Modificar($pIdItem, $pIdGT, $pItem);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
@@ -101,8 +102,9 @@ class ItemsController extends Controller
     
     public function actionBorrar() {
         $gestor = new GestorItems;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdItem= Yii::$app->request->get('IdItem');
-        $mensaje = $gestor->Borrar($pIdItem);
+        $mensaje = $gestor->Borrar($pIdItem, $pIdGT);
         if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
          {
             return $this->redirect('/sgpoc/backend/web/items/listar');
@@ -126,7 +128,7 @@ class ItemsController extends Controller
         {
             $pIdInsumo = $model->IdInsumo;
             $pIncidencia = $model->Incidencia;
-            $mensaje = $gestor->AgregarInsumo($pIdItem, $pIdInsumo, $pIncidencia);
+            $mensaje = $gestor->AgregarInsumo($pIdItem, $pIdInsumo, $pIdGT, $pIncidencia);
             return $mensaje[0]['Mensaje'];
         }
         else{ 
@@ -138,13 +140,14 @@ class ItemsController extends Controller
         $model = new ComposicionItem;
         $model -> scenario = 'modificar-incidencia';
         $gestor = new GestorItems;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdItem = Yii::$app->request->get('IdItem');
         $pIdInsumo = Yii::$app->request->get('IdInsumo');
-        $incidencia = $gestor->DameIncidenciaInsumoItem($pIdItem, $pIdInsumo);
+        $incidencia = $gestor->DameIncidenciaInsumoItem($pIdItem, $pIdInsumo, $pIdGT);
         if($model->load(Yii::$app->request->post()) && $model->validate())
         {
             $pIncidencia = $model->Incidencia;
-            $mensaje = $gestor->ModificarIncidencia($pIdItem, $pIdInsumo, $pIncidencia);
+            $mensaje = $gestor->ModificarIncidencia($pIdItem, $pIdInsumo, $pIdGT, $pIncidencia);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
                 return $this->redirect('/sgpoc/backend/web/items/listar');
@@ -161,9 +164,10 @@ class ItemsController extends Controller
     
     public function actionBorrarInsumo() {
         $gestor = new GestorItems;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdItem = Yii::$app->request->get('IdItem');
         $pIdInsumo = Yii::$app->request->get('IdInsumo');
-        $mensaje = $gestor->BorrarInsumo($pIdItem, $pIdInsumo);
+        $mensaje = $gestor->BorrarInsumo($pIdItem, $pIdInsumo, $pIdGT);
         if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
         {
             return $this->redirect('/sgpoc/backend/web/items/listar');
@@ -212,26 +216,5 @@ class ItemsController extends Controller
         ]);
         return $pdf->render();
     }
-
-    // public function actionInfo(){
-    //     $gestor = new GestorItems;
-    //     $gestori = new GestorInsumos;
-    //     $pIdGT = Yii::$app->user->identity['IdGT'];
-    //     $pIdItem= Yii::$app->request->get('IdItem');
-    //     $unidades = $gestori->ListarUnidades();
-    //     $item= $gestor->DameRubroItemUnidad($pIdItem);
-    //     $dataProviderItem = new ArrayDataProvider([
-    //         'allModels' => $item,
-    //     ]);
-    //         $gestor = new GestorItems;
-    //         $insumos = $gestor->ListarInsumos($pIdItem, $pIdGT);
-    //         $dataProviderInsumos = new ArrayDataProvider([
-    //             'allModels' => $insumos,
-    //         ]);
-    //         return $this->render('exportar',['dataProviderInsumos' => $dataProviderInsumos,
-    //                                     'dataProviderItem' => $dataProviderItem]);
-                                  
-    //  }
-    
 }
 

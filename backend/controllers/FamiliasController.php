@@ -39,8 +39,9 @@ class FamiliasController extends Controller
     public function actionListarSubfamilias()
     {    
         $gestor = new GestorFamilias;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdFamilia = Yii::$app->request->get('IdFamilia');
-        $subfamilias = $gestor->ListarSubfamilias($pIdFamilia);
+        $subfamilias = $gestor->ListarSubfamilias($pIdFamilia, $pIdGT);
         $dataProvider = new ArrayDataProvider([
             'allModels' => $subfamilias,
             'pagination' => ['pagesize' => 5,],
@@ -61,9 +62,6 @@ class FamiliasController extends Controller
             $mensaje = $gestor->Alta($pIdGT, $pFamilia);
             return $mensaje[0]['Mensaje'];
         }
-        // else{
-        //     return $this->renderAjax('alta',['model' => $model]);
-        // }
         else{
             return $this->renderAjax('alta',['model' => $model]);
         }
@@ -75,12 +73,13 @@ class FamiliasController extends Controller
     {
         $model = new Familias;
         $gestor = new GestorFamilias;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdFamilia = Yii::$app->request->get('IdFamilia');
-        $familia = $gestor->Dame($pIdFamilia);
+        $familia = $gestor->Dame($pIdFamilia, $pIdGT);
         if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pFamilia = $model->Familia;
-            $mensaje = $gestor->Modificar($pIdFamilia, $pFamilia);
+            $mensaje = $gestor->Modificar($pIdFamilia, $pIdGT, $pFamilia);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
                 Yii::$app->session->setFlash('alert', $mensaje[0]['Mensaje']);
@@ -98,8 +97,9 @@ class FamiliasController extends Controller
     public function actionBorrar()
     {
         $gestor = new GestorFamilias;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdFamilia = Yii::$app->request->get('IdFamilia');
-        $mensaje = $gestor->Borrar($pIdFamilia);
+        $mensaje = $gestor->Borrar($pIdFamilia, $pIdGT);
         if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
         {
             Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);

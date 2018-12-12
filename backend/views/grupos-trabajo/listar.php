@@ -47,8 +47,8 @@ $gridColumns = [
         'class' => '\kartik\grid\ActionColumn',
         'header' => 'Acciones',
         'vAlign' => 'middle',
-        'width' => '240px',
-        'template' => '{modificar} {borrar} {baja} {activar} {listarusuarios}',
+        'width' => '270px',
+        'template' => '{modificar} {borrar} {baja} {activar} {listarusuarios} {copiar}',
         'buttons' => [
                 'modificar' => function($url, $model, $key){
                     return Html::button('<i class="fa fa-pencil-alt"></i>',
@@ -103,7 +103,17 @@ $gridColumns = [
                                     'class' => 'btn btn-link'
                                 ]);
                     }
-                }     
+                },
+                'copiar' => function($url, $model, $key){
+                    return Html::a('<i class="fa fa-copy"></i>',
+                                [
+                                    'copiar','IdGT' => $model['IdGT']
+                                ], 
+                                [
+                                    'title' => 'Copiar Datos Plantilla Base al Grupo Trabajo',
+                                    'class' => 'btn btn-link'
+                                ]);
+                }
         ]
     ], 
 ] 
@@ -194,8 +204,8 @@ $gridColumns = [
                             ['grupos-trabajo/exportar'],
                             [
                                 'data-pjax' => 0, 
-                                'class' => 'btn btn-link', 
-                                'title' => 'exportar',
+                                'class' => 'btn btn-default', 
+                                'title' => 'Exportar',
                                 'target' => '_blank'
                             ]),
             ],

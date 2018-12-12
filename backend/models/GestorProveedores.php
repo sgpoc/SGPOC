@@ -41,11 +41,12 @@ class GestorProveedores
         return $comando->queryAll();
     }
     
-    public function Modificar($pIdProveedor,$pProveedor, $pDomicilio, $pCodigoPostal, $pEmail, $pTelefono, $pPaginaWeb)
+    public function Modificar($pIdProveedor, $pIdGT, $pProveedor, $pDomicilio, $pCodigoPostal, $pEmail, $pTelefono, $pPaginaWeb)
     {
-        $sql = 'CALL ssp_modificar_proveedor(:pIdProveedor, :pProveedor, :pDomicilio, :pCodigoPostal, :pEmail, :pTelefono, :pPaginaWeb)';
+        $sql = 'CALL ssp_modificar_proveedor(:pIdProveedor, :pIdGT, :pProveedor, :pDomicilio, :pCodigoPostal, :pEmail, :pTelefono, :pPaginaWeb)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdProveedor', $pIdProveedor) 
+                ->bindValue('pIdProveedor', $pIdProveedor)
+                ->bindValue('pIdGT', $pIdGT)
                 ->bindValue('pProveedor', $pProveedor)
                 ->bindValue('pDomicilio',$pDomicilio)
                 ->bindValue('pCodigoPostal', $pCodigoPostal)
@@ -55,43 +56,48 @@ class GestorProveedores
         return $comando->queryAll();
     }
     
-    public function Borrar($pIdProveedor)
+    public function Borrar($pIdProveedor, $pIdGT)
     {
-        $sql = 'CALL ssp_borrar_proveedor(:pIdProveedor)';
+        $sql = 'CALL ssp_borrar_proveedor(:pIdProveedor, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdProveedor', $pIdProveedor);
+                ->bindValue('pIdProveedor', $pIdProveedor)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
     
-    public function Baja($pIdProveedor)
+    public function Baja($pIdProveedor, $pIdGT)
     {
-        $sql = 'CALL ssp_baja_proveedor(:pIdProveedor)';
+        $sql = 'CALL ssp_baja_proveedor(:pIdProveedor, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdProveedor', $pIdProveedor);
+                ->bindValue('pIdProveedor', $pIdProveedor)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
     
-    public function Activar($pIdProveedor)
+    public function Activar($pIdProveedor, $pIdGT)
     {
-        $sql = 'CALL ssp_activar_proveedor(:pIdProveedor)';
+        $sql = 'CALL ssp_activar_proveedor(:pIdProveedor, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdProveedor', $pIdProveedor);
+                ->bindValue('pIdProveedor', $pIdProveedor)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
     
-    public function Dame($pIdProveedor)
+    public function Dame($pIdProveedor, $pIdGT)
     {
-        $sql = 'CALL ssp_dame_proveedor(:pIdProveedor)';
+        $sql = 'CALL ssp_dame_proveedor(:pIdProveedor, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdProveedor', $pIdProveedor);
+                ->bindValue('pIdProveedor', $pIdProveedor)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
     
-    public function ListarLocalidades($pIdProveedor)
+    public function ListarLocalidades($pIdProveedor, $pIdGT)
     {
-        $sql = 'CALL ssp_listar_localidades_proveedor(:pIdProveedor)';
+        $sql = 'CALL ssp_listar_localidades_proveedor(:pIdProveedor, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdProveedor', $pIdProveedor);
+                ->bindValue('pIdProveedor', $pIdProveedor)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
 }

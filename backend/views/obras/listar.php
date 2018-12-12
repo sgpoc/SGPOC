@@ -239,8 +239,8 @@ $gridColumns = [
                             ['obras/exportar'],
                             [
                                 'data-pjax' => 0, 
-                                'class' => 'btn btn-link', 
-                                'title' => 'exportar',
+                                'class' => 'btn btn-default', 
+                                'title' => 'Exportar',
                                 'target' => '_blank'
                             ]),
             ],
