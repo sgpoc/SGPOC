@@ -109,9 +109,9 @@ class GestorComputosMetricos
         return $comando->queryAll();
     }
     
-    public function ModificarLinea($pIdComputoMetrico, $pNroLinea, $pDescripcion, $pCantidad, $pLargo, $pAncho, $pAlto, $pParcial)
+    public function ModificarLinea($pIdComputoMetrico, $pNroLinea, $pDescripcion, $pCantidad, $pLargo, $pAncho, $pAlto)
     {
-        $sql = 'CALL ssp_modificar_linea_computo(:pIdComputoMetrico, :pNroLinea, :pDescripcion, :pCantidad, :pLargo, :pAncho, :pAlto, :pParcial)';
+        $sql = 'CALL ssp_modificar_linea_computo(:pIdComputoMetrico, :pNroLinea, :pDescripcion, :pCantidad, :pLargo, :pAncho, :pAlto)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdComputoMetrico', $pIdComputoMetrico)
                 ->bindValue('pNroLinea', $pNroLinea)
@@ -119,8 +119,7 @@ class GestorComputosMetricos
                 ->bindValue('pCantidad', $pCantidad)
                 ->bindValue('pLargo', $pLargo)
                 ->bindValue('pAncho', $pAncho)
-                ->bindValue('pAlto', $pAlto)
-                ->bindValue('pParcial', $pParcial);
+                ->bindValue('pAlto', $pAlto);
         return $comando->queryAll();
     }
     

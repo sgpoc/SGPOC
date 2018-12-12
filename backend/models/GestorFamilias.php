@@ -14,11 +14,12 @@ class GestorFamilias
         return $familias;
     }
     
-    public function ListarSubfamilias($pIdFamilia)
+    public function ListarSubfamilias($pIdFamilia, $pIdGT)
     {   
-        $sql = 'CALL ssp_listar_subfamiliasfamilia(:pIdFamilia)';
+        $sql = 'CALL ssp_listar_subfamiliasfamilia(:pIdFamilia, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdFamilia', $pIdFamilia);
+                ->bindValue('pIdFamilia', $pIdFamilia)
+                ->bindValue('pIdGT',$pIdGT);
         $subfamilias = $comando->queryAll();
         return $subfamilias;
     }
@@ -41,28 +42,31 @@ class GestorFamilias
         return $comando->queryAll();
     }
     
-    public function Modificar($pIdFamilia, $pFamilia)
+    public function Modificar($pIdFamilia, $pIdGT, $pFamilia)
     {
-        $sql = 'CALL ssp_modificar_familia(:pIdFamilia, :pFamilia)';
+        $sql = 'CALL ssp_modificar_familia(:pIdFamilia, :pIdGT, :pFamilia)';
         $comando = Yii::$app->db->createCommand($sql)
                  ->bindValue('pIdFamilia', $pIdFamilia)
+                 ->bindValue('pIdGT', $pIdGT)
                  ->bindValue('pFamilia', $pFamilia);
         return $comando->queryAll();
     }
     
-    public function Borrar($pIdFamilia)
+    public function Borrar($pIdFamilia, $pIdGT)
     {
-        $sql = 'CALL ssp_borrar_familia(:pIdFamilia)';
+        $sql = 'CALL ssp_borrar_familia(:pIdFamilia, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdFamilia', $pIdFamilia);
+                ->bindValue('pIdFamilia', $pIdFamilia)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
     
-    public function Dame($pIdFamilia)
+    public function Dame($pIdFamilia, $pIdGT)
     {
-        $sql = 'CALL ssp_dame_familia(:pIdFamilia)';
+        $sql = 'CALL ssp_dame_familia(:pIdFamilia, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdFamilia', $pIdFamilia);
+                ->bindValue('pIdFamilia', $pIdFamilia)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
 

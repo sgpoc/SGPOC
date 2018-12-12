@@ -23,7 +23,7 @@ AnimateAsset::register($this);
     <div class="modal-body">
         <div class="form-group">
             <?= $form->field($model, 'FechaComputoMetrico')->widget(DatePicker::classname(), [
-                    'options' => ['placeholder' => 'Inregese la Fecha del Computo Metrico ...'],
+                    'options' => ['value' => $computo[0]['FechaComputoMetrico']],
                     'pickerIcon' => '<i class="far fa-calendar-alt"></i>',
                     'convertFormat' => true,
                     'pluginOptions'=>[

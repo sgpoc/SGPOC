@@ -20,6 +20,7 @@ AnimateAsset::register($this);
     </div>
     <div class="modal-body">
         <div class="form-group">
+            <?= $form->field($model, 'IdLocalidad')->dropDownList($listData, ['options'=>[$obra[0]['IdLocalidad']=>['selected'=>true]]])->label('Localidad');  ?>
             <?= $form->field($model, 'Obra', ['addon' => ['prepend' => ['content'=>'N']]])->textInput(['value'=>$obra[0]['Obra']])  ?>
             <?= $form->field($model, 'Direccion', ['addon' => ['prepend' => ['content'=>'D']]])->textInput(['value'=>$obra[0]['Direccion']]) ?>
             <?= $form->field($model, 'Propietario', ['addon' => ['prepend' => ['content'=>'P']]])->textInput(['value'=>$obra[0]['Propietario']]) ?>

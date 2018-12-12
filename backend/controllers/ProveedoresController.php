@@ -65,8 +65,9 @@ class ProveedoresController extends Controller
       
         $model = new Proveedores;
         $gestor = new GestorProveedores;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdProveedor = Yii::$app->request->get('IdProveedor');
-        $proveedor = $gestor->Dame($pIdProveedor);     
+        $proveedor = $gestor->Dame($pIdProveedor, $pIdGT);     
         if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pProveedor = $model->Proveedor;
@@ -76,7 +77,7 @@ class ProveedoresController extends Controller
             $pCodigoPostal = $model->CodigoPostal;
             $pPaginaWeb = $model->PaginaWEB;
             $pEstado = $model->Estado;
-            $mensaje = $gestor->Modificar($pIdProveedor, $pProveedor, $pDomicilio, $pCodigoPostal, $pEmail, $pTelefono, $pPaginaWeb, $pEstado);
+            $mensaje = $gestor->Modificar($pIdProveedor, $pIdGT, $pProveedor, $pDomicilio, $pCodigoPostal, $pEmail, $pTelefono, $pPaginaWeb, $pEstado);
             if ((substr($mensaje[0]['Mensaje'], 0, 2)) === 'OK') {
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
                 return $this->redirect('/sgpoc/backend/web/proveedores/listar');
@@ -93,8 +94,9 @@ class ProveedoresController extends Controller
 
     public function actionBorrar() {
         $gestor = new GestorProveedores;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdProveedor = Yii::$app->request->get('IdProveedor');
-        $mensaje = $gestor->Borrar($pIdProveedor);
+        $mensaje = $gestor->Borrar($pIdProveedor, $pIdGT);
         Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
         return $this->redirect('/sgpoc/backend/web/proveedores/listar');    
     }
@@ -103,8 +105,9 @@ class ProveedoresController extends Controller
     public function actionBaja()
     {
         $gestor = new GestorProveedores;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdProveedor = Yii::$app->request->get('IdProveedor');
-        $mensaje = $gestor->Baja($pIdProveedor);
+        $mensaje = $gestor->Baja($pIdProveedor, $pIdGT);
         Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
         return $this->redirect('/sgpoc/backend/web/proveedores/listar');
     }
@@ -112,8 +115,9 @@ class ProveedoresController extends Controller
     public function actionActivar()
     {
         $gestor = new GestorProveedores;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdProveedor = Yii::$app->request->get('IdProveedor');
-        $mensaje = $gestor->Activar($pIdProveedor);
+        $mensaje = $gestor->Activar($pIdProveedor, $pIdGT);
         Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
         return $this->redirect('/sgpoc/backend/web/proveedores/listar');
     }
@@ -122,13 +126,14 @@ class ProveedoresController extends Controller
     public function actionListarLocalidades()
     {
         $gestorp = new GestorProveedores;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         if (isset($_POST['depdrop_parents'])) 
         {
             $parents = $_POST['depdrop_parents'];
             if ($parents != null) 
             {    
                 $pIdProveedor = $parents[0];        
-                $localidades = $gestorp->ListarLocalidades($pIdProveedor);
+                $localidades = $gestorp->ListarLocalidades($pIdProveedor, $pIdGT);
                 echo Json::encode(['output' => $localidades, 'selected' => '']);
                 return;
             }

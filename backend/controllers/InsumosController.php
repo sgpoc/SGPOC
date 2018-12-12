@@ -70,7 +70,7 @@ class InsumosController extends Controller
             $pIdUnidad = $model->IdUnidad;
             $pInsumo = $model->Insumo;
             $pTipoInsumo = $model->TipoInsumo;
-            $mensaje = $gestor->Alta($pInsumo, $pTipoInsumo, $pIdSubFamilia, $pIdUnidad);
+            $mensaje = $gestor->Alta($pInsumo, $pIdGT, $pTipoInsumo, $pIdSubFamilia, $pIdUnidad);
             return $mensaje[0]['Mensaje'];
         }
         else{
@@ -82,13 +82,19 @@ class InsumosController extends Controller
     {
         $model = new Insumos;
         $gestor = new GestorInsumos;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdInsumo = Yii::$app->request->get('IdInsumo');
-        $insumo = $gestor->Dame($pIdInsumo);
+        $gestorsf = new GestorSubFamilias;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
+        $subfamilias = $gestorsf->Listar($pIdGT);
+        $listData= ArrayHelper::map($subfamilias,'IdSubFamilia','SubFamilia');
+        $insumo = $gestor->Dame($pIdInsumo,$pIdGT);
         if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pInsumo = $model->Insumo;
             $pTipoInsumo = $model->TipoInsumo;
-            $mensaje = $gestor->Modificar($pIdInsumo, $pInsumo, $pTipoInsumo);
+            $pIdSubFamilia = $model->IdSubFamilia;
+            $mensaje = $gestor->Modificar($pIdInsumo, $pInsumo, $pTipoInsumo, $pIdSubFamilia);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK') {
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
                 return $this->redirect('/sgpoc/backend/web/insumos/listar');
@@ -98,14 +104,15 @@ class InsumosController extends Controller
             }
         }
         else{
-           return $this->renderAjax('modificar',['model' => $model, 'insumo' => $insumo]);
+            return $this->renderAjax('modificar',['model' => $model, 'insumo' => $insumo,'listData' => $listData]);
         }
     }
     
     public function actionBorrar() {
         $gestor = new GestorInsumos;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdInsumo = Yii::$app->request->get('IdInsumo');
-        $mensaje = $gestor->Borrar($pIdInsumo);
+        $mensaje = $gestor->Borrar($pIdInsumo, $pIdGT);
         Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
         return $this->redirect('/sgpoc/backend/web/insumos/listar');
     }

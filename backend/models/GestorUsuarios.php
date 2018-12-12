@@ -47,15 +47,29 @@ class GestorUsuarios
         return $comando->queryAll();
     }
     
-    public function Modificar($pIdUsuario, $pNombre, $pApellido, $pEmail, $pPassword)
+    public function Modificar($pIdUsuario, $pIdGT, $pIdRol, $pNombre, $pApellido, $pEmail)
     {
-        $sql = 'CALL ssp_modificar_usuario(:pIdUsuario, :pNombre, :pApellido, :pEmail, :pPassword)';
+        $sql = 'CALL ssp_modificar_usuario(:pIdUsuario, :pIdGT, :pIdRol, :pNombre, :pApellido, :pEmail)';
+        $comando = Yii::$app->db->createCommand($sql)
+                 ->bindValue('pIdUsuario', $pIdUsuario)
+                 ->bindValue('pIdGT', $pIdGT)
+                 ->bindValue('pIdRol', $pIdRol)
+                 ->bindValue('pNombre', $pNombre)
+                 ->bindValue('pApellido', $pApellido)
+                 ->bindValue('pEmail', $pEmail);
+        return $comando->queryAll();
+    }
+    
+    public function ModificarPerfil($pIdUsuario, $pNombre, $pApellido, $pEmail, $pPassword, $pauth_key)
+    {
+        $sql = 'CALL ssp_modificar_perfil_usuario(:pIdUsuario, :pNombre, :pApellido, :pEmail, :pPassword, :pauth_key)';
         $comando = Yii::$app->db->createCommand($sql)
                  ->bindValue('pIdUsuario', $pIdUsuario)
                  ->bindValue('pNombre', $pNombre)
                  ->bindValue('pApellido', $pApellido)
                  ->bindValue('pEmail', $pEmail)
-                 ->bindValue('pPassword', $pPassword);
+                 ->bindValue('pPassword', $pPassword)
+                 ->bindValue('pauth_key', $pauth_key);
         return $comando->queryAll();
     }
     

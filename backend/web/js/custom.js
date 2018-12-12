@@ -24,7 +24,7 @@ var VistaModal = {
                     form.serialize() //pone los datos del form en un array
                 )
                 .done(function(result) {
-                    if(result === 'OK.'){
+                    if(result.substring(0,3) === 'OK.'){
                         form.trigger("reset");
                         $.pjax.reload({container:'#gridview'}); 
                         $.notify({

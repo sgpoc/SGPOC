@@ -22,9 +22,9 @@ AnimateAsset::register($this);
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?=
-     $form->field($model, 'ElementoConstructivo', ['addon' => ['prepend' => ['content'=>'I']]])->textInput(['value'=>$ElementoConstructivo[0]['ElementoConstructivo']]) 
-        ?>
+            <?=$form->field($model, 'ElementoConstructivo', ['addon' => ['prepend' => ['content'=>'I']]])->textInput(['value'=>$ElementoConstructivo[0]['ElementoConstructivo']])  ?>
+            <?= $form->field($model, 'IdRubroEC')->dropDownList($listDataREC,  ['options'=>[$ElementoConstructivo[0]['IdRubroEC'] => ['selected' => true]]])->label('Rubro Elemento Constructivo');  ?>
+            <?= $form->field($model, 'IdUnidad')->dropDownList($listDataU, ['options'=>[$ElementoConstructivo[0]['IdUnidad'] => ['selected' => true]]])->label('Unidad');  ?>
         </div>
     </div>
     <div class="modal-footer">

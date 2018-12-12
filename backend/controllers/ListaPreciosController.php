@@ -44,39 +44,12 @@ class ListaPreciosController extends Controller
         }  
     }
     
-    public function actionAlta() {
-        $model = new ListaPrecios;
-        $model->scenario = 'alta-lista';
-        $gestorlp = new GestorListaPrecios;
-        $gestorp = new GestorProveedores;
-        $gestori = new GestorInsumos;
-        $pIdGT = Yii::$app->user->identity['IdGT'];
-        $insumos = $gestori->Listar($pIdGT);
-        $listDataI= ArrayHelper::map($insumos,'IdInsumo','Insumo');
-        $proveedores = $gestorp->Listar($pIdGT);
-        $listDataP = ArrayHelper::map($proveedores,'IdProveedor','Proveedor');
-        $localidades = $gestorlp->ListarLocalidades();
-        $listDataL = ArrayHelper::map($localidades,'IdLocalidad','Localidad');
-        if($model->load(Yii::$app->request->post()) && ($model->validate()))
-        {
-            $pIdProveedor = $model->IdProveedor;
-            $pIdLocalidad = $model->IdLocalidad;
-            $pIdInsumo = $model->IdInsumo;
-            $pPrecioLista = $model->PrecioLista;
-            $pFechaUltimaActualizacion = $model->FechaUltimaActualizacion;
-            $mensaje = $gestorlp->Alta($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pPrecioLista, $pFechaUltimaActualizacion, $pIdGT);
-            return $mensaje[0]['Mensaje'];
-        }
-        else{
-            return $this->renderAjax('alta',['model' => $model, 'listDataP' => $listDataP, 'listDataL' => $listDataL, 'listDataI' => $listDataI]);
-        }
-    }
-    
     public function actionBorrar() {
         $gestor = new GestorListaPrecios;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdProveedor = Yii::$app->request->get('IdProveedor');
         $pIdLocalidad = Yii::$app->request->get('IdLocalidad');
-        $mensaje = $gestor->Borrar($pIdProveedor,$pIdLocalidad);
+        $mensaje = $gestor->Borrar($pIdProveedor, $pIdLocalidad, $pIdGT);
         Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
         return $this->redirect('/sgpoc/backend/web/lista-precios/listar');
     }
@@ -97,7 +70,7 @@ class ListaPreciosController extends Controller
             $pIdInsumo = $model->IdInsumo;
             $pPrecioLista = $model->PrecioLista;
             $pFechaUltimaActualizacion = $model->FechaUltimaActualizacion;
-            $mensaje = $gestor->AgregarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pPrecioLista, $pFechaUltimaActualizacion);
+            $mensaje = $gestor->AgregarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pIdGT, $pPrecioLista, $pFechaUltimaActualizacion);
             return $mensaje[0]['Mensaje'];
         }
         else{ 
@@ -107,10 +80,11 @@ class ListaPreciosController extends Controller
     
     public function actionBorrarInsumo() {
         $gestor = new GestorListaPrecios;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdProveedor = Yii::$app->request->get('IdProveedor');
         $pIdLocalidad = Yii::$app->request->get('IdLocalidad');
         $pIdInsumo = Yii::$app->request->get('IdInsumo');
-        $mensaje = $gestor->BorrarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo);
+        $mensaje = $gestor->BorrarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pIdGT);
         Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
         return $this->redirect('/sgpoc/backend/web/lista-precios/listar');
     }
@@ -119,16 +93,17 @@ class ListaPreciosController extends Controller
         $model = new ListaPrecios;
         $model->scenario = 'modificar-insumo';
         $gestor = new GestorListaPrecios;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdProveedor = Yii::$app->request->get('IdProveedor');
         $pIdLocalidad = Yii::$app->request->get('IdLocalidad');
         $pIdInsumo = Yii::$app->request->get('IdInsumo');
-        $insumo = $gestor->DamePrecioFechaInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo);
+        $insumo = $gestor->DamePrecioFechaInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pIdGT);
         $model->FechaUltimaActualizacion = $insumo[0]['FechaUltimaActualizacion'];
         if($model->load(Yii::$app->request->post()) && $model->validate())
         {
             $pPrecioLista = $model->PrecioLista;
             $pFechaUltimaActualizacion = $model->FechaUltimaActualizacion;
-            $mensaje = $gestor->ModificarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pPrecioLista, $pFechaUltimaActualizacion);
+            $mensaje = $gestor->ModificarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pIdGT, $pPrecioLista, $pFechaUltimaActualizacion);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);

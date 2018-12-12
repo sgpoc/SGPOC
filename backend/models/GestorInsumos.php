@@ -36,40 +36,45 @@ class GestorInsumos
         return $insumos;
     }
     
-    public function Alta($pInsumo, $pTipoInsumo, $pIdSubFamilia, $pIdUnidad)
+    public function Alta($pInsumo, $pIdGT, $pTipoInsumo, $pIdSubFamilia, $pIdUnidad)
     {
-        $sql = 'CALL ssp_alta_insumo(:pInsumo, :pTipoInsumo, :pIdSubFamilia, :pIdUnidad)';
+        $sql = 'CALL ssp_alta_insumo(:pInsumo, :pIdGT, :pTipoInsumo, :pIdSubFamilia, :pIdUnidad)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pInsumo', $pInsumo)
+                ->bindValue('pIdGT',$pIdGT)
                 ->bindValue('pTipoInsumo', $pTipoInsumo)
                 ->bindValue('pIdSubFamilia', $pIdSubFamilia)
                 ->bindValue('pIdUnidad', $pIdUnidad);
         return $comando->queryAll();
     }
     
-    public function Modificar($pIdInsumo, $pInsumo, $pTipoInsumo)
+    public function Modificar($pIdInsumo, $pInsumo, $pTipoInsumo, $pIdSubFamilia)
     {
-        $sql = 'CALL ssp_modificar_insumo(:pIdInsumo, :pInsumo, :pTipoInsumo)';
+        $sql = 'CALL ssp_modificar_insumo(:pIdInsumo, :pInsumo, :pTipoInsumo, :pIdSubFamilia)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdInsumo', $pIdInsumo)
+                ->bindValue('pIdGT', $pIdGT)
                 ->bindValue('pInsumo', $pInsumo)
-                ->bindValue('pTipoInsumo', $pTipoInsumo);
+                ->bindValue('pTipoInsumo', $pTipoInsumo)
+                ->bindValue('pIdSubFamilia', $pIdSubFamilia);
         return $comando->queryAll();
     }
     
-    public function Borrar($pIdInsumo)
+    public function Borrar($pIdInsumo, $pIdGT)
     {
-        $sql = 'CALL ssp_borrar_insumo(:pIdInsumo)';
+        $sql = 'CALL ssp_borrar_insumo(:pIdInsumo, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdInsumo', $pIdInsumo);
+                ->bindValue('pIdInsumo', $pIdInsumo)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
     
-    public function Dame($pIdInsumo)
+    public function Dame($pIdInsumo,$pIdGT)
     {
-        $sql = 'CALL ssp_dame_insumo(:pIdInsumo)';
+        $sql = 'CALL ssp_dame_insumo(:pIdInsumo,:pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdInsumo', $pIdInsumo);
+                ->bindValue('pIdInsumo', $pIdInsumo)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
 

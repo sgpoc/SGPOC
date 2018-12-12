@@ -16,7 +16,6 @@ AppAsset::register($this);
 GrowlAsset::register($this);
 AnimateAsset::register($this);
 
-
 ?>
  
 
@@ -27,7 +26,17 @@ AnimateAsset::register($this);
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <?= $form->field($modellinea, 'IdLocalidad')->dropDownList($listDataL, ['prompt' => 'Seleccione uno ...' ])->label('Localidad');  ?>
+            <?= $form->field($modellinea, 'IdLocalidad', [
+                'hintType' => ActiveField::HINT_SPECIAL,
+                'hintSettings' => [
+                    'placement' => 'right', 
+                    'onLabelClick' => true, 
+                    'onLabelHover' => false
+                ]
+            ])->dropDownList($listDataL, ['prompt' => 'Seleccione uno ...',])
+            ->hint('El Presupuesto se dará de alta con los precios mas bajos encontrados en la Localidad seleccionada.')
+            ->label('Localidad');
+            ?>
             <?= $form->field($model, 'IdObra')->dropDownList($listDataO, ['id' => 'IdObra', 'prompt' => 'Seleccione uno ...' ])->label('Obra');  ?>
             <?= $form->field($model, 'IdComputoMetrico')->widget(DepDrop::className(), [
                 'pluginOptions'=>[

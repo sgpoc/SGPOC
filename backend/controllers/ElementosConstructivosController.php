@@ -70,23 +70,39 @@ class ElementosConstructivosController extends Controller
     public function actionModificar() {
         $model = new Elementosconstructivos;
         $gestor = new GestorElementosConstructivos;
+        $gestori = new GestorInsumos;
+        $rubroselementos = $gestor->ListarRubrosEC();
+        $listDataREC = ArrayHelper::map($rubroselementos, 'IdRubroEC', 'RubroEC');
+        $unidades = $gestori->ListarUnidades();
+        $listDataU = ArrayHelper::map($unidades,'IdUnidad','Abreviatura');
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdElementoConstructivo = Yii::$app->request->get('IdElementoConstructivo');
-        $elemento = $gestor->Dame($pIdElementoConstructivo);
+        $elemento = $gestor->Dame($pIdElementoConstructivo,$pIdGT);
         if($model->load(Yii::$app->request->post()) && $model->validate())
         {
             $pElementoConstructivo = $model->ElementoConstructivo;
-            $mensaje = $gestor->Modificar($pIdElementoConstructivo, $pElementoConstructivo);
-            return $mensaje[0]['Mensaje'];
+            $pIdRubroEC = $model->IdRubroEC;
+            $pIdUnidad = $model->IdUnidad;
+            $mensaje = $gestor->Modificar($pIdElementoConstructivo, $pIdGT, $pElementoConstructivo,$pIdRubroEC,$pIdUnidad);
+            if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
+            {
+                Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+                return $this->redirect('/sgpoc/backend/web/elementos-constructivos/listar');
+            }
+            else{
+                return $mensaje[0]['Mensaje'];
+            }
         }
         else{
-           return $this->renderAjax('modificar',['model' => $model, 'ElementoConstructivo' => $elemento]);
+           return $this->renderAjax('modificar',['model' => $model, 'ElementoConstructivo' => $elemento,'listDataREC' => $listDataREC, 'listDataU' => $listDataU]);
         }
     }
     
     public function actionBorrar() {
         $gestor = new GestorElementosConstructivos();
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdElementoConstructivo= Yii::$app->request->get('IdElementoConstructivo');
-        $mensaje = $gestor->Borrar($pIdElementoConstructivo);
+        $mensaje = $gestor->Borrar($pIdElementoConstructivo, $pIdGT);
         Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
         return $this->redirect('/sgpoc/backend/web/elementos-constructivos/listar');
     }
@@ -104,7 +120,7 @@ class ElementosConstructivosController extends Controller
         {
             $pIdItem = $model->IdItem;
             $pIncidencia = $model->Incidencia;
-            $mensaje = $gestor->AgregarItem($pIdElementoConstructivo, $pIdItem, $pIncidencia);
+            $mensaje = $gestor->AgregarItem($pIdElementoConstructivo, $pIdItem, $pIdGT, $pIncidencia);
             return $mensaje[0]['Mensaje'];
         }
         else{ 
@@ -114,9 +130,10 @@ class ElementosConstructivosController extends Controller
     
     public function actionBorrarItem() {
         $gestor = new GestorElementosConstructivos;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdElementoConstructivo = Yii::$app->request->get('IdElementoConstructivo');
         $pIdItem = Yii::$app->request->get('IdItem');
-        $mensaje = $gestor->BorrarItem($pIdElementoConstructivo, $pIdItem);
+        $mensaje = $gestor->BorrarItem($pIdElementoConstructivo, $pIdItem, $pIdGT);
         if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
         {
             return $this->redirect('/sgpoc/backend/web/elementos-constructivos/listar');
@@ -132,13 +149,14 @@ class ElementosConstructivosController extends Controller
         $model = new Composicionec;
         $model -> scenario = 'modificar-incidencia';
         $gestor = new GestorElementosConstructivos;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdElemento = Yii::$app->request->get('IdElementoConstructivo');
         $pIdItem = Yii::$app->request->get('IdItem');
-        $incidencia = $gestor->DameIncidenciaItemElemento($pIdElemento, $pIdItem);
+        $incidencia = $gestor->DameIncidenciaItemElemento($pIdElemento, $pIdItem, $pIdGT);
         if($model->load(Yii::$app->request->post()) && $model->validate())
         {
             $pIncidencia = $model->Incidencia;
-            $mensaje = $gestor->ModificarIncidencia($pIdElemento, $pIdItem, $pIncidencia);
+            $mensaje = $gestor->ModificarIncidencia($pIdElemento, $pIdItem, $pIdGT, $pIncidencia);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
                 return $this->redirect('/sgpoc/backend/web/elementos-constructivos/listar');
@@ -189,5 +207,37 @@ class ElementosConstructivosController extends Controller
         ]);
         return $pdf->render();
     }
+
+    public function actionExportarTodo() {
+
+        $gestor = new GestorElementosConstructivos;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
+        $pIdElementoConstructivo= Yii::$app->request->get('IdElementoConstructivo');
+        $elemento= $gestor->Listar($pIdGT);
+        $dataProviderElemento = new ArrayDataProvider([
+            'allModels' => $elemento,
+         ]);
+           $data = $this->renderPartial('exportar-todo',['dataProviderElemento' => $dataProviderElemento]);
+           Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+           $pdf = new Pdf([
+            'mode' => Pdf::MODE_CORE, 
+            'destination' => Pdf::DEST_BROWSER,
+            'content' => $data,
+            'options' => [
+                
+            ],
+            'methods' => [
+                'SetTitle' => 'Elemento Constructivo',
+                'SetSubject' => 'Generating PDF files via yii2-mpdf extension has never been easy',
+                'SetHeader' => ['Elemento Constructivo Detallado con sus Items||Generado el: ' . date("r")],
+                'SetFooter' => ['|Page {PAGENO}|'],
+                'SetAuthor' => 'Kartik Visweswaran',
+                'SetCreator' => 'Kartik Visweswaran',
+                'SetKeywords' => 'Krajee, Yii2, Export, PDF, MPDF, Output, Privacy, Policy, yii2-mpdf',
+            ]
+        ]);
+        return $pdf->render();
+    }
+
 
 }

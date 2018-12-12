@@ -54,36 +54,37 @@ $gridColumns = [
     [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'Beneficios',
+        'label' => 'Beneficios (%)',
         'vAlign' => 'middle',
         'hAlign' => 'center',
-        'format' => ['decimal', 2],
+        'format' => ['decimal', 0],
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'GastosGenerales',
-        'label' => 'Gastos Generales',
+        'label' => 'Gastos Generales (%)',
         'vAlign' => 'middle',
         'hAlign' => 'center',
-        'format' => ['decimal', 2],
+        'format' => ['decimal', 0],
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'CargasSociales',
-        'label' => 'Cargas Sociales',
+        'label' => 'Cargas Sociales (%)',
         'vAlign' => 'middle',
         'hAlign' => 'center',
-        'format' => ['decimal', 2],
+        'format' => ['decimal', 0],
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [
         'class' => 'kartik\grid\DataColumn',
         'attribute' => 'IVA',
-        'label' => 'IVA',
+        'label' => 'IVA (%)',
         'vAlign' => 'middle',
         'hAlign' => 'center',
-        'format' => ['decimal', 2],
+        'format' => ['decimal', 0],
         'contentOptions' => ['class' => 'kartik-sheet-style']
     ],
     [

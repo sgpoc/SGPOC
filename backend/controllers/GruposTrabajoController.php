@@ -203,4 +203,12 @@ class GruposTrabajoController extends Controller
         return $pdf->render();
      }
     
+    public function actionCopiar() {
+        $gestor = new GestorGruposTrabajo;
+        $pIdGT = Yii::$app->request->get('IdGT');
+        $mensaje = $gestor->Copiar($pIdGT);
+        Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+        return $this->redirect('/sgpoc/backend/web/grupos-trabajo/listar');
+    }
+    
 }

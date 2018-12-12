@@ -61,11 +61,12 @@ class GestorObras
         return $comando->queryAll();
     }
     
-    public function Modificar($pIdObra, $pObra, $pDireccion, $pPropietario, $pTelefono, $pEmail, $pComentarios, $pSuperficieTerreno, $pSuperficieCubiertaTotal)
+    public function Modificar($pIdObra, $pIdLocalidad, $pObra, $pDireccion, $pPropietario, $pTelefono, $pEmail, $pComentarios, $pSuperficieTerreno, $pSuperficieCubiertaTotal)
     {
-        $sql = 'CALL ssp_modificar_obra(:pIdObra, :pObra, :pDireccion, :pPropietario, :pTelefono, :pEmail, :pComentarios, :pSuperficieTerreno, :pSuperficieCubiertaTotal)';
+        $sql = 'CALL ssp_modificar_obra(:pIdObra, :pIdLocalidad, :pObra, :pDireccion, :pPropietario, :pTelefono, :pEmail, :pComentarios, :pSuperficieTerreno, :pSuperficieCubiertaTotal)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdObra', $pIdObra)
+                ->bindValue('pIdLocalidad', $pIdLocalidad)
                 ->bindValue('pObra', $pObra)
                 ->bindValue('pDireccion', $pDireccion)
                 ->bindValue('pPropietario', $pPropietario)
