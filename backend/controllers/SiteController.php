@@ -66,12 +66,13 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())){ 
            $usuario = $model->username; 
           $estado = $gestor->dameEstado($model->username);
+          $user = $model->getUser($usuario);
           if($model->getUser($usuario)){
             if($estado[0]['Estado'] == '1'){
                 $model->login();
                  return $this->goBack();
                 }    
-                else{
+            else{
                     $model->password = '';
                     Yii::$app->session->setFlash('alert', "El usuario ingresado esta dado de baja.");
                      return $this->render('login', ['model' => $model]);

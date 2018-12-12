@@ -21,6 +21,8 @@ AnimateAsset::register($this);
     <div class="modal-body">
         <div class="form-group">
             <?= $form->field($model, 'Item', ['addon' => ['prepend' => ['content'=>'I']]])->textInput(['value'=>$item[0]['Item']]) ?>
+            <?= $form->field($model, 'IdRubroItem')->dropDownList($listDataRI, ['options'=>[$item[0]['IdRubroItem'] => ['selected' => true]]])->label('Rubro Item');  ?>
+            <?= $form->field($model, 'IdUnidad')->dropDownList($listDataU,  ['options'=>[$item[0]['IdUnidad'] => ['selected' => true]]])->label('Unidad');  ?>
         </div>
     </div>
     <div class="modal-footer">
