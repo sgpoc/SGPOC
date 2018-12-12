@@ -29,8 +29,7 @@ class Obras extends Model
     public function rules()
     {
         return [
-            [['IdLocalidad', 'Obra', 'Direccion', 'Propietario', 'Telefono', 'SuperficieTerreno', 'SuperficieCubiertaTotal'], 'required', 'on' => 'alta-obra'],
-            [['Obra', 'Direccion', 'Propietario', 'Telefono', 'SuperficieTerreno', 'SuperficieCubiertaTotal'], 'required'],
+            [['IdLocalidad', 'Obra', 'Direccion', 'Propietario', 'Telefono', 'SuperficieTerreno', 'SuperficieCubiertaTotal'], 'required'],
             [['IdGT', 'IdLocalidad'], 'integer'],
             [['Comentarios'], 'string'],
             [['Obra', 'Direccion', 'Propietario', 'Telefono', 'Email'], 'string', 'max' => 100],

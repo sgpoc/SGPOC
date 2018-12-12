@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use kartik\form\ActiveForm;
+use kartik\form\ActiveField;
 use backend\assets\AppAsset;
 use kartik\growl\GrowlAsset;
 use kartik\base\AnimateAsset;
@@ -22,7 +23,22 @@ AnimateAsset::register($this);
             <?= $form->field($model, 'IdSubFamilia')->dropDownList($listData, ['prompt' => 'Seleccione uno ...' ])->label('SubFamilia');  ?>
             <?= $form->field($model, 'IdUnidad')->dropDownList($listDataU, ['prompt' => 'Seleccione uno ...' ])->label('Unidad');  ?>
             <?= $form->field($model, 'Insumo', ['addon' => ['prepend' => ['content'=>'I']]])->textInput(['placeholder'=>'Ingrese el nombre ...']) ?>
-            <?= $form->field($model, 'TipoInsumo', ['addon' => ['prepend' => ['content'=>'T']]])->textInput(['placeholder'=>'Ingrese el tipo ...']) ?>
+            <?= $form->field($model, 'TipoInsumo', [
+                'addon' => [
+                    'prepend' => [
+                        'content'=>'T'
+                    ]
+                 ],
+                'hintType' => ActiveField::HINT_SPECIAL,
+                'hintSettings' => [
+                    'placement' => 'right', 
+                    'onLabelClick' => true, 
+                    'onLabelHover' => false
+                ]
+            ])
+            ->textInput(['placeholder'=>'Ingrese el tipo ...'])
+            ->hint('El Tipo de Insumo debe ser obligatoriamente M(refiriendose a Materiales) u O(refiriendose a Mano de Obra).');
+            ?>
         </div>
     </div>
     <div class="modal-footer">
