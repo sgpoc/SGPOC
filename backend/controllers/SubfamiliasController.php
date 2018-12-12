@@ -14,7 +14,6 @@ use kartik\mpdf\pdf;
 
 class SubfamiliasController extends Controller
 {
-    
     public function actionListar()
     {       
         $gestor = new GestorSubFamilias;
@@ -47,8 +46,9 @@ class SubfamiliasController extends Controller
     public function actionListarInsumos()
     {    
         $gestor = new GestorSubFamilias;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdSubFamilia = Yii::$app->request->get('IdSubFamilia');
-        $insumos = $gestor->ListarInsumos($pIdSubFamilia);
+        $insumos = $gestor->ListarInsumos($pIdSubFamilia, $pIdGT);
         $dataProvider = new ArrayDataProvider([
             'allModels' => $insumos,
             'pagination' => ['pagesize' => 5,],
@@ -71,7 +71,7 @@ class SubfamiliasController extends Controller
         {
             $pIdFamilia = $model->IdFamilia;
             $pSubFamilia = $model->SubFamilia;
-            $mensaje = $gestors->Alta($pIdFamilia, $pSubFamilia);
+            $mensaje = $gestors->Alta($pIdFamilia, $pIdGT, $pSubFamilia);
             return $mensaje[0]['Mensaje'];
         }
         else{
@@ -83,12 +83,13 @@ class SubfamiliasController extends Controller
     {
         $model = new SubFamilias;
         $gestor = new GestorSubFamilias;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdSubFamilia = Yii::$app->request->get('IdSubFamilia');
-        $subfamilia = $gestor->Dame($pIdSubFamilia);
+        $subfamilia = $gestor->Dame($pIdSubFamilia, $pIdGT);
         if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pSubFamilia = $model->SubFamilia;
-            $mensaje = $gestor->Modificar($pIdSubFamilia, $pSubFamilia);
+            $mensaje = $gestor->Modificar($pIdSubFamilia, $pIdGT, $pSubFamilia);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
                 Yii::$app->session->setFlash('alert', $mensaje[0]['Mensaje']);
@@ -106,8 +107,9 @@ class SubfamiliasController extends Controller
     public function actionBorrar()
     {
         $gestor = new GestorSubFamilias;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdSubFamilia = Yii::$app->request->get('IdSubFamilia');
-        $mensaje = $gestor->Borrar($pIdSubFamilia);
+        $mensaje = $gestor->Borrar($pIdSubFamilia, $pIdGT);
         if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
          {
             return $this->redirect('/sgpoc/backend/web/subfamilias/listar');

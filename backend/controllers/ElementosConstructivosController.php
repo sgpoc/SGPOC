@@ -70,12 +70,13 @@ class ElementosConstructivosController extends Controller
     public function actionModificar() {
         $model = new Elementosconstructivos;
         $gestor = new GestorElementosConstructivos;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdElementoConstructivo = Yii::$app->request->get('IdElementoConstructivo');
-        $elemento = $gestor->Dame($pIdElementoConstructivo);
+        $elemento = $gestor->Dame($pIdElementoConstructivo, $pIdGT);
         if($model->load(Yii::$app->request->post()) && $model->validate())
         {
             $pElementoConstructivo = $model->ElementoConstructivo;
-            $mensaje = $gestor->Modificar($pIdElementoConstructivo, $pElementoConstructivo);
+            $mensaje = $gestor->Modificar($pIdElementoConstructivo, $pIdGT, $pElementoConstructivo);
             return $mensaje[0]['Mensaje'];
         }
         else{
@@ -85,8 +86,9 @@ class ElementosConstructivosController extends Controller
     
     public function actionBorrar() {
         $gestor = new GestorElementosConstructivos();
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdElementoConstructivo= Yii::$app->request->get('IdElementoConstructivo');
-        $mensaje = $gestor->Borrar($pIdElementoConstructivo);
+        $mensaje = $gestor->Borrar($pIdElementoConstructivo, $pIdGT);
         Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
         return $this->redirect('/sgpoc/backend/web/elementos-constructivos/listar');
     }
@@ -104,7 +106,7 @@ class ElementosConstructivosController extends Controller
         {
             $pIdItem = $model->IdItem;
             $pIncidencia = $model->Incidencia;
-            $mensaje = $gestor->AgregarItem($pIdElementoConstructivo, $pIdItem, $pIncidencia);
+            $mensaje = $gestor->AgregarItem($pIdElementoConstructivo, $pIdItem, $pIdGT, $pIncidencia);
             return $mensaje[0]['Mensaje'];
         }
         else{ 
@@ -114,9 +116,10 @@ class ElementosConstructivosController extends Controller
     
     public function actionBorrarItem() {
         $gestor = new GestorElementosConstructivos;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdElementoConstructivo = Yii::$app->request->get('IdElementoConstructivo');
         $pIdItem = Yii::$app->request->get('IdItem');
-        $mensaje = $gestor->BorrarItem($pIdElementoConstructivo, $pIdItem);
+        $mensaje = $gestor->BorrarItem($pIdElementoConstructivo, $pIdItem, $pIdGT);
         if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
         {
             return $this->redirect('/sgpoc/backend/web/elementos-constructivos/listar');
@@ -132,13 +135,14 @@ class ElementosConstructivosController extends Controller
         $model = new Composicionec;
         $model -> scenario = 'modificar-incidencia';
         $gestor = new GestorElementosConstructivos;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $pIdElemento = Yii::$app->request->get('IdElementoConstructivo');
         $pIdItem = Yii::$app->request->get('IdItem');
-        $incidencia = $gestor->DameIncidenciaItemElemento($pIdElemento, $pIdItem);
+        $incidencia = $gestor->DameIncidenciaItemElemento($pIdElemento, $pIdItem, $pIdGT);
         if($model->load(Yii::$app->request->post()) && $model->validate())
         {
             $pIncidencia = $model->Incidencia;
-            $mensaje = $gestor->ModificarIncidencia($pIdElemento, $pIdItem, $pIncidencia);
+            $mensaje = $gestor->ModificarIncidencia($pIdElemento, $pIdItem, $pIdGT, $pIncidencia);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
                 return $this->redirect('/sgpoc/backend/web/elementos-constructivos/listar');

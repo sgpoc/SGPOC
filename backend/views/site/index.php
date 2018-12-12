@@ -14,10 +14,10 @@ $this->title = 'SGPOC | Home';
 
 
 <div class='index-content'>
-<img class='app-logo' src='http://localhost/sgpoc/backend/web/img/logo-sgpoc.png' alt='Logo App' hidden>
-<h2 class="main-title" hidden>Bienvenidos a</h2>    
-<h1 class="sub-title" hidden>SGPOC</h1>
-<p class="desc" hidden>Sistema de Gestión para Presupuestación de Obras de Construcción</p>
+    <img style="cursor:pointer;" class='app-logo' src='http://localhost/sgpoc/backend/web/img/logo-sgpoc.png' alt='Logo App' hidden>
+    <h2 class="main-title" hidden>Bienvenidos a</h2>    
+    <h1 class="sub-title" hidden>SGPOC</h1>
+    <p class="desc" hidden>Sistema de Gestión para Presupuestación de Obras de Construcción</p>
 </div>
 <div class="footer">
 <a href='http://www.fau.unt.edu.ar' target='_blank'>

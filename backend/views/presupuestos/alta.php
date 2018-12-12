@@ -16,7 +16,6 @@ AppAsset::register($this);
 GrowlAsset::register($this);
 AnimateAsset::register($this);
 
-
 ?>
  
 

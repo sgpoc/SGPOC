@@ -128,8 +128,7 @@ class UsuariosController extends Controller
             $pNombre = $model->Nombre;
             $pApellido = $model->Apellido;
             $pEmail = $model->Email;
-            $pPassword = $model->Password;
-            $mensaje = $gestor->Modificar($pIdUsuario, $pNombre, $pApellido, $pEmail, $pPassword);
+            $mensaje = $gestor->Modificar($pIdUsuario, $pNombre, $pApellido, $pEmail);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);

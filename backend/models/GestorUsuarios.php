@@ -47,15 +47,14 @@ class GestorUsuarios
         return $comando->queryAll();
     }
     
-    public function Modificar($pIdUsuario, $pNombre, $pApellido, $pEmail, $pPassword)
+    public function Modificar($pIdUsuario, $pNombre, $pApellido, $pEmail)
     {
-        $sql = 'CALL ssp_modificar_usuario(:pIdUsuario, :pNombre, :pApellido, :pEmail, :pPassword)';
+        $sql = 'CALL ssp_modificar_usuario(:pIdUsuario, :pNombre, :pApellido, :pEmail)';
         $comando = Yii::$app->db->createCommand($sql)
                  ->bindValue('pIdUsuario', $pIdUsuario)
                  ->bindValue('pNombre', $pNombre)
                  ->bindValue('pApellido', $pApellido)
-                 ->bindValue('pEmail', $pEmail)
-                 ->bindValue('pPassword', $pPassword);
+                 ->bindValue('pEmail', $pEmail);
         return $comando->queryAll();
     }
     

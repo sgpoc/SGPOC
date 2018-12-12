@@ -56,59 +56,65 @@ class GestorListaPrecios
         return $comando->queryAll();
     }
     
-    public function Borrar($pIdProveedor,$pIdLocalidad){
-        $sql = 'CALL ssp_borrar_listaprecios(:pIdProveedor, :pIdLocalidad)';
+    public function Borrar($pIdProveedor, $pIdLocalidad, $pIdGT) 
+    {
+        $sql = 'CALL ssp_borrar_listaprecios(:pIdProveedor, :pIdLocalidad, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdProveedor', $pIdProveedor)
-                ->bindValue('pIdLocalidad', $pIdLocalidad);
+                ->bindValue('pIdLocalidad', $pIdLocalidad)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();    
     }
     
-    public function AgregarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pPrecioLista, $pFechaUltimaActualizacion)
+    public function AgregarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pIdGT, $pPrecioLista, $pFechaUltimaActualizacion)
     {
-        $sql = 'CALL ssp_agregar_insumo_listaprecios(:pIdProveedor, :pIdLocalidad, :pIdInsumo, :pPrecioLista, :pFechaUltimaActualizacion)';
+        $sql = 'CALL ssp_agregar_insumo_listaprecios(:pIdProveedor, :pIdLocalidad, :pIdInsumo, :pIdGT, :pPrecioLista, :pFechaUltimaActualizacion)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdProveedor', $pIdProveedor)
                 ->bindValue('pIdLocalidad', $pIdLocalidad)
                 ->bindValue('pIdInsumo',$pIdInsumo)
+                ->bindValue('pIdGT', $pIdGT)
                 ->bindValue('pPrecioLista',$pPrecioLista)
                 ->bindValue('pFechaUltimaActualizacion',$pFechaUltimaActualizacion);
         return $comando->queryAll();
     }
     
-    public function BorrarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo)
+    public function BorrarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pIdGT)
     {
         $sql = 'CALL ssp_borrar_insumo_listaprecios(:pIdProveedor, :pIdLocalidad, :pIdInsumo)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdProveedor', $pIdProveedor)
                 ->bindValue('pIdLocalidad', $pIdLocalidad)
-                ->bindValue('pIdInsumo',$pIdInsumo);
+                ->bindValue('pIdInsumo',$pIdInsumo)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
     
-    public function ModificarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pPrecioLista, $pFechaUltimaActualizacion)
+    public function ModificarInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pIdGT, $pPrecioLista, $pFechaUltimaActualizacion)
     {
-        $sql = 'CALL ssp_modificar_insumo_listaprecios(:pIdProveedor, :pIdLocalidad, :pIdInsumo, :pPrecioLista, :pFechaUltimaActualizacion)';
+        $sql = 'CALL ssp_modificar_insumo_listaprecios(:pIdProveedor, :pIdLocalidad, :pIdInsumo, :pIdGT, :pPrecioLista, :pFechaUltimaActualizacion)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdProveedor', $pIdProveedor)
                 ->bindValue('pIdLocalidad', $pIdLocalidad)
                 ->bindValue('pIdInsumo',$pIdInsumo)
+                ->bindValue('pIdGT', $pIdGT)
                 ->bindValue('pPrecioLista',$pPrecioLista)
                 ->bindValue('pFechaUltimaActualizacion',$pFechaUltimaActualizacion);
         return $comando->queryAll();
     }
       
-    public function DamePrecioFechaInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo)
+    public function DamePrecioFechaInsumo($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pIdGT)
     {
-        $sql = 'CALL ssp_dame_precio_fecha_insumo(:pIdProveedor, :pIdLocalidad, :pIdInsumo)';
+        $sql = 'CALL ssp_dame_precio_fecha_insumo(:pIdProveedor, :pIdLocalidad, :pIdInsumo, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdProveedor', $pIdProveedor)
                 ->bindValue('pIdLocalidad', $pIdLocalidad)
-                ->bindValue('pIdInsumo', $pIdInsumo);
+                ->bindValue('pIdInsumo', $pIdInsumo)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
 
-    public function ListaExportar($pIdGT,$pIdProveedor,$pIdLocalidad)
+    public function ListaExportar($pIdGT, $pIdProveedor, $pIdLocalidad)
     {       
         $sql = 'SELECT Proveedor,Localidad FROM Proveedores p
                 JOIN listaprecios lp ON lp.IdProveedor = p.IdProveedor

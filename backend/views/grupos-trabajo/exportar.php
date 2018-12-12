@@ -21,7 +21,7 @@ use yii\widgets\ListView;
             'attribute' =>  'Mail',
         ],
         [
-            'attribute' =>  'fechaCreacion',
+            'attribute' =>  'FechaCreacion',
           
         ],
         [

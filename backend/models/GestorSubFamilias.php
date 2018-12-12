@@ -15,11 +15,12 @@ class GestorSubFamilias
         return $subfamilias;
     }
     
-     public function ListarInsumos($pIdSubFamilia)
+     public function ListarInsumos($pIdSubFamilia, $pIdGT)
     {       
-        $sql = 'CALL ssp_listar_insumossubfamilia(:pIdSubFamilia)';
+        $sql = 'CALL ssp_listar_insumossubfamilia(:pIdSubFamilia, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdSubFamilia', $pIdSubFamilia);
+                ->bindValue('pIdSubFamilia', $pIdSubFamilia)
+                ->bindValue('pIdGT', $pIdGT);
         $subfamilias = $comando->queryAll();
         return $subfamilias;
     }
@@ -35,37 +36,41 @@ class GestorSubFamilias
         return $subfamilia;
     }
     
-    public function Alta($pIdFamilia, $pSubFamilia)
+    public function Alta($pIdFamilia, $pIdGT, $pSubFamilia)
     {
-        $sql = 'CALL ssp_alta_subfamilia(:pIdFamilia, :pSubFamilia)';
+        $sql = 'CALL ssp_alta_subfamilia(:pIdFamilia, :pIdGT, :pSubFamilia)';
         $comando = Yii::$app->db->createCommand($sql)
                  ->bindValue('pIdFamilia', $pIdFamilia)
+                 ->bindValue('pIdGT', $pIdGT)
                  ->bindValue('pSubFamilia',$pSubFamilia);
         return $comando->queryAll();
     }
     
-    public function Modificar($pIdSubFamilia, $pSubFamilia)
+    public function Modificar($pIdSubFamilia, $pIdGT, $pSubFamilia)
     {
-        $sql = 'CALL ssp_modificar_subfamilia(:pIdSubFamilia, :pSubFamilia)';
+        $sql = 'CALL ssp_modificar_subfamilia(:pIdSubFamilia, :pIdGT, :pSubFamilia)';
         $comando = Yii::$app->db->createCommand($sql)
                  ->bindValue('pIdSubFamilia', $pIdSubFamilia)
+                 ->bindValue('pIdGT', $pIdGT)
                  ->bindValue('pSubFamilia', $pSubFamilia);
         return $comando->queryAll();
     }
     
-    public function Borrar($pIdSubFamilia)
+    public function Borrar($pIdSubFamilia, $pIdGT)
     {
-        $sql = 'CALL ssp_borrar_subfamilia(:pIdSubFamilia)';
+        $sql = 'CALL ssp_borrar_subfamilia(:pIdSubFamilia, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdSubFamilia', $pIdSubFamilia);
+                ->bindValue('pIdSubFamilia', $pIdSubFamilia)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
     
-    public function Dame($pIdSubFamilia)
+    public function Dame($pIdSubFamilia, $pIdGT)
     {
-        $sql = 'CALL ssp_dame_subfamilia(:pIdSubFamilia)';
+        $sql = 'CALL ssp_dame_subfamilia(:pIdSubFamilia, :pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
-                ->bindValue('pIdSubFamilia', $pIdSubFamilia);
+                ->bindValue('pIdSubFamilia', $pIdSubFamilia)
+                ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
     
