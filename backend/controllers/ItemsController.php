@@ -10,6 +10,8 @@ use app\models\GestorItems;
 use app\models\Items;
 use app\models\ItemsBuscar;
 use app\models\ComposicionItem;
+use kartik\mpdf\Pdf;
+
 
 
 class ItemsController extends Controller
@@ -171,5 +173,65 @@ class ItemsController extends Controller
             return $this->redirect('/sgpoc/backend/web/items/listar');;
         }
     }
+
+    public function actionExportar() {
+        $gestor = new GestorItems;
+        $gestori = new GestorInsumos;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
+        $pIdItem= Yii::$app->request->get('IdItem');
+        $unidades = $gestori->ListarUnidades();
+        $item= $gestor->DameRubroItemUnidad($pIdItem,$pIdGT);
+        $dataProviderItem = new ArrayDataProvider([
+            'allModels' => $item,
+         ]);
+                $gestor = new GestorItems;
+                $insumos = $gestor->ListarInsumos($pIdItem, $pIdGT);
+                $dataProviderInsumos = new ArrayDataProvider([
+                    'allModels' => $insumos,
+                ]);
+
+           $data = $this->renderPartial('exportar',['dataProviderInsumos' => $dataProviderInsumos,
+           'dataProviderItem' => $dataProviderItem]);
+           Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+           $pdf = new Pdf([
+            'mode' => Pdf::MODE_CORE, // leaner size using standard fonts
+            'destination' => Pdf::DEST_BROWSER,
+            'content' => $data,
+            'options' => [
+                // any mpdf options you wish to set
+            ],
+            'methods' => [
+                'SetTitle' => 'Item Detallado',
+                'SetSubject' => 'Generating PDF files via yii2-mpdf extension has never been easy',
+                'SetHeader' => ['Item||Generado el: ' . date("r")],
+                'SetFooter' => ['|Page {PAGENO}|'],
+                'SetAuthor' => 'Kartik Visweswaran',
+                'SetCreator' => 'Kartik Visweswaran',
+                'SetKeywords' => 'Krajee, Yii2, Export, PDF, MPDF, Output, Privacy, Policy, yii2-mpdf',
+            ]
+        ]);
+        return $pdf->render();
+    }
+
+    // public function actionInfo(){
+    //     $gestor = new GestorItems;
+    //     $gestori = new GestorInsumos;
+    //     $pIdGT = Yii::$app->user->identity['IdGT'];
+    //     $pIdItem= Yii::$app->request->get('IdItem');
+    //     $unidades = $gestori->ListarUnidades();
+    //     $item= $gestor->DameRubroItemUnidad($pIdItem);
+    //     $dataProviderItem = new ArrayDataProvider([
+    //         'allModels' => $item,
+    //     ]);
+    //         $gestor = new GestorItems;
+    //         $insumos = $gestor->ListarInsumos($pIdItem, $pIdGT);
+    //         $dataProviderInsumos = new ArrayDataProvider([
+    //             'allModels' => $insumos,
+    //         ]);
+    //         return $this->render('exportar',['dataProviderInsumos' => $dataProviderInsumos,
+    //                                     'dataProviderItem' => $dataProviderItem]);
+                                  
+    //  }
     
 }
+

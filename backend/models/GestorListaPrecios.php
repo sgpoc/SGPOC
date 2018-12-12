@@ -107,4 +107,19 @@ class GestorListaPrecios
                 ->bindValue('pIdInsumo', $pIdInsumo);
         return $comando->queryAll();
     }
+
+    public function ListaExportar($pIdGT,$pIdProveedor,$pIdLocalidad)
+    {       
+        $sql = 'SELECT Proveedor,Localidad FROM Proveedores p
+                JOIN listaprecios lp ON lp.IdProveedor = p.IdProveedor
+                JOIN localidades l ON l.IdLocalidad = lp.Idlocalidad
+                WHERE p.IdProveedor = :pIdProveedor AND p.IdGT = :pIdGT AND lp.IdLocalidad = :pIdLocalidad
+                LIMIT 1';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdProveedor', $pIdProveedor)
+                ->bindValue('pIdLocalidad', $pIdLocalidad)
+                ->bindValue('pIdGT', $pIdGT);
+        return $comando->queryAll();
+    }  
+   
 }

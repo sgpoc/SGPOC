@@ -27,17 +27,12 @@ AnimateAsset::register($this);
                 'options' => ['placeholder' => 'Seleccione un Elemento Constructivo ...'],
                 'pluginOptions' => [
                         'allowClear' => true
-            ]])->label('Item');  ?>
-            <div id="unidad">
-            <?= $form->field($model, 'IdUnidad')->dropDownList($listDataU, ['id' => 'unidad','prompt' => 'Seleccione uno ...'])->label('Unidad');  ?>
-            </div>
+            ]])->label('Elemento Constructivo');  ?>
+            <?= $form->field($model, 'IdUnidad')->dropDownList($listDataU, ['id' => 'unidad','prompt' => 'Seleccione uno ...'])->label('Unidad');  ?>   
             <?= $form->field($model, 'Cantidad', ['addon' => ['prepend' => ['content'=>'#']]])->textInput(['placeholder' => 'Ingrese la cantidad ...']); ?>
             <?= $form->field($model, 'Largo', ['addon' => ['prepend' => ['content'=>'L']]])->textInput(['placeholder'=>'Ingrese el largo ...']) ?>
             <?= $form->field($model, 'Ancho', ['addon' => ['prepend' => ['content'=>'An']]])->textInput(['placeholder'=>'Ingrese el ancho ...']) ?>
-            <div id="alto">
-            <?= $form->field($model, 'Alto', ['addon' => ['prepend' => ['content'=>'A']]])->textInput(['id' => 'alto',
-                'placeholder'=>'Ingrese el alto ...']) ?>
-            </div>
+            <?= $form->field($model, 'Alto', ['addon' => ['prepend' => ['content'=>'A']]])->textInput(['placeholder'=>'Ingrese el alto ...']) ?>            
             <?= $form->field($model, 'Descripcion')->textArea(['rows'=>5]) ?>
         </div>
     </div>

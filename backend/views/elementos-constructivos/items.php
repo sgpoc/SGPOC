@@ -48,7 +48,7 @@ $gridColumns = [
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' =>  '{borrar}',
+        'template' =>  '{borrar} ',
         'buttons' => [
                 'borrar' => function($url, $model, $key){
                     return Html::a('<i class="fa fa-trash"></i>',
@@ -62,8 +62,8 @@ $gridColumns = [
                                     'confirm' => 'Esta seguro que desea borrar el Item del Elemento?',
                                     'method' => 'post'
                                 ]
-                            ]);
-                }     
+                            ]);               
+                }
         ]
     ], 
 ];

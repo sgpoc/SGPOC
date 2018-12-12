@@ -10,7 +10,7 @@ use app\models\GestorFamilias;
 use app\models\GestorSubFamilias;
 use app\models\Insumos;
 use app\models\InsumosBuscar;
-
+use kartik\mpdf\pdf;
 
 
 class InsumosController extends Controller
@@ -109,5 +109,34 @@ class InsumosController extends Controller
         Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
         return $this->redirect('/sgpoc/backend/web/insumos/listar');
     }
+
+    public function actionExportar() {
+        $gestor = new GestorInsumos;
+        $pIdGT = Yii::$app->user->identity['IdGT'];
+        $insumos = $gestor->Listar($pIdGT);
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $insumos,
+        ]);
+           $data = $this->renderPartial('exportar',['dataProvider' => $dataProvider]);
+           Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+           $pdf = new Pdf([
+            'mode' => Pdf::MODE_CORE, 
+            'destination' => Pdf::DEST_BROWSER,
+            'content' => $data,
+            'options' => [
+                
+            ],
+            'methods' => [
+                'SetTitle' => 'Familias',
+                'SetSubject' => 'Generating PDF files via yii2-mpdf extension has never been easy',
+                'SetHeader' => ['Insumos||Generado el: ' . date("r")],
+                'SetFooter' => ['|Page {PAGENO}|'],
+                'SetAuthor' => 'Kartik Visweswaran',
+                'SetCreator' => 'Kartik Visweswaran',
+                'SetKeywords' => 'Krajee, Yii2, Export, PDF, MPDF, Output, Privacy, Policy, yii2-mpdf',
+            ]
+        ]);
+        return $pdf->render();
+     }
     
 }

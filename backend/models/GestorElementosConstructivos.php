@@ -126,7 +126,15 @@ class GestorElementosConstructivos
         return $comando->queryAll();
     }
     
-      
+    public function DameElementoExportar($pIdEC,$pIdGT){
+        $sql = 'SELECT ElementoConstructivo,RubroEC FROM ElementosConstructivos ec
+        JOIN Rubrosec re ON ec.IdRubroEC = re.IdRubroEC
+        WHERE ec.IdElementoConstructivo = :pIdEC AND ec.IdGT = :pIdGT';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdEC', $pIdEC)
+                ->bindValue('pIdGT', $pIdGT);
+        return $comando->queryAll();
+    }
       
     }
 

@@ -67,7 +67,7 @@ $gridColumns = [
         'header' => 'Acciones',
         'vAlign' => 'middle',
         'width' => '240px',
-        'template' => '{agregar-insumo} {borrar}',
+        'template' => '{agregar-insumo} {borrar} {exportar}',
         'buttons' => [
                 'agregar-insumo' => function($url, $model, $key){
                     return  Html::button('<i class="fa fa-plus"></i>',
@@ -79,7 +79,9 @@ $gridColumns = [
                 },
                 'borrar' => function($url, $model, $key){
                     return Html::a('<i class="fa fa-trash"></i>',
-                            ['borrar','IdProveedor' => $model['IdProveedor'],'IdLocalidad' => $model['IdLocalidad']], 
+                            [
+                                'borrar','IdProveedor' => $model['IdProveedor'],'IdLocalidad' => $model['IdLocalidad']
+                            ], 
                             [
                                 'title' => 'Borrar Lista de Precios', 
                                 'class' => 'btn btn-link',
@@ -89,6 +91,18 @@ $gridColumns = [
                                 ]
                             ]);
                 }, 
+                'exportar' => function($url, $model, $key){
+                    return Html::a('<i class="fas fa-external-link-alt"></i>',
+                            [
+                                'exportar', 'IdProveedor' => $model['IdProveedor'],'IdLocalidad' => $model['IdLocalidad']
+                            ], 
+                            [
+                                'target' => '_blank', 
+                                'class'=>'btn btn-link',  
+                                'title'=>'exportar' ,
+                                'data-pjax' => 0,   
+                            ]);
+                }
         ]
     ], 
 ];
@@ -175,10 +189,6 @@ $gridColumns = [
                                 'title' => 'Actualizar'
                             ])
             ],
-            '{export}',
-        ],
-        'export' => [
-          'icon' => 'fa fa-external-link-alt'  
         ],
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="fa fa-file-invoice-dollar"></i> Lista de Precios</h3>',

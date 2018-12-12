@@ -116,4 +116,24 @@ class GestorItems
                 
         return $comando->queryAll();
     }
+
+    public function dameUnidadItem($pIdItem){
+        $sql = 'CALL ssp_dame_incidencia_insumo_item(:pIdItem, :pIdInsumo)';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdItem', $pIdItem);
+           
+                
+        return $comando->queryAll();
+    }
+
+    public function DameRubroItemUnidad($pIdItem,$pIdGT){
+        $sql = 'SELECT Item,RubroItem,Abreviatura FROM Items i
+        JOIN Unidades u ON i.IdUnidad = u.Idunidad
+        JOIN RubrosItem ri ON i.IdRubroItem = ri.IdRubroItem
+        WHERE i.IdItem = :pIdItem AND i.IdGT = :pIdGT';
+        $comando = Yii::$app->db->createCommand($sql)
+                ->bindValue('pIdItem', $pIdItem)
+                ->bindValue('pIdGT', $pIdGT);
+        return $comando->queryAll();
+    }
 }
