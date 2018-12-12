@@ -110,8 +110,12 @@ $gridColumns = [
                                     'copiar','IdGT' => $model['IdGT']
                                 ], 
                                 [
-                                    'title' => 'Copiar Datos Plantilla Base al Grupo Trabajo',
-                                    'class' => 'btn btn-link'
+                                    'title' => 'Copiar Datos Planilla Base al Grupo Trabajo',
+                                    'class' => 'btn btn-link',
+                                    'data'=>[
+                                        'confirm'=>'Esta seguro que desea copiar todos los datos de la planilla base?',
+                                        'method'=>'post'
+                                    ]
                                 ]);
                 }
         ]

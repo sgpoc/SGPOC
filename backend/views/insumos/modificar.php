@@ -21,7 +21,22 @@ AnimateAsset::register($this);
     <div class="modal-body">
         <div class="form-group">
             <?= $form->field($model, 'Insumo', ['addon' => ['prepend' => ['content'=>'I']]])->textInput(['value'=>$insumo[0]['Insumo']]) ?>
-            <?= $form->field($model, 'TipoInsumo', ['addon' => ['prepend' => ['content'=>'T']]])->textInput(['value'=>$insumo[0]['TipoInsumo']]) ?>
+            <?= $form->field($model, 'TipoInsumo', [
+                'addon' => [
+                    'prepend' => [
+                        'content'=>'T'
+                    ]
+                 ],
+                'hintType' => ActiveField::HINT_SPECIAL,
+                'hintSettings' => [
+                    'placement' => 'right', 
+                    'onLabelClick' => true, 
+                    'onLabelHover' => false
+                ]
+            ])
+            ->textInput(['value'=>$insumo[0]['TipoInsumo']])
+            ->hint('El Tipo de Insumo debe ser obligatoriamente M(refiriendose a Materiales) u O(refiriendose a Mano de Obra).');
+            ?>
         </div>
     </div>
     <div class="modal-footer">

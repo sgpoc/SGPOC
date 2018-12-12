@@ -22,6 +22,8 @@ AnimateAsset::register($this);
     </div>
     <div class="modal-body">
         <div class="form-group">
+            <?= $form->field($model, 'IdGT')->dropDownList($listData, ['options'=>[$usuario[0]['IdGT']=>['selected'=>true]]])->label('Grupo de Trabajo');  ?>
+            <?= $form->field($model, 'IdRol')->dropDownList($listDataU, ['options'=>[$usuario[0]['IdRol']=>['selected'=>true]]])->label('Rol');  ?>
             <?= $form->field($model, 'Nombre', ['addon' => ['prepend' => ['content'=>'N']]])->textInput(['value'=>$usuario[0]['Nombre']]) ?>
             <?= $form->field($model, 'Apellido', ['addon' => ['prepend' => ['content'=>'A']]])->textInput(['value'=>$usuario[0]['Apellido']]) ?>
             <?= $form->field($model, 'Email', ['addon' => ['prepend' => ['content'=>'@']]])->textInput(['value'=>$usuario[0]['Email']]) ?>

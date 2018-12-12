@@ -44,34 +44,6 @@ class ListaPreciosController extends Controller
         }  
     }
     
-    public function actionAlta() {
-        $model = new ListaPrecios;
-        $model->scenario = 'alta-lista';
-        $gestorlp = new GestorListaPrecios;
-        $gestorp = new GestorProveedores;
-        $gestori = new GestorInsumos;
-        $pIdGT = Yii::$app->user->identity['IdGT'];
-        $insumos = $gestori->Listar($pIdGT);
-        $listDataI= ArrayHelper::map($insumos,'IdInsumo','Insumo');
-        $proveedores = $gestorp->Listar($pIdGT);
-        $listDataP = ArrayHelper::map($proveedores,'IdProveedor','Proveedor');
-        $localidades = $gestorlp->ListarLocalidades();
-        $listDataL = ArrayHelper::map($localidades,'IdLocalidad','Localidad');
-        if($model->load(Yii::$app->request->post()) && ($model->validate()))
-        {
-            $pIdProveedor = $model->IdProveedor;
-            $pIdLocalidad = $model->IdLocalidad;
-            $pIdInsumo = $model->IdInsumo;
-            $pPrecioLista = $model->PrecioLista;
-            $pFechaUltimaActualizacion = $model->FechaUltimaActualizacion;
-            $mensaje = $gestorlp->Alta($pIdProveedor, $pIdLocalidad, $pIdInsumo, $pPrecioLista, $pFechaUltimaActualizacion, $pIdGT);
-            return $mensaje[0]['Mensaje'];
-        }
-        else{
-            return $this->renderAjax('alta',['model' => $model, 'listDataP' => $listDataP, 'listDataL' => $listDataL, 'listDataI' => $listDataI]);
-        }
-    }
-    
     public function actionBorrar() {
         $gestor = new GestorListaPrecios;
         $pIdGT = Yii::$app->user->identity['IdGT'];

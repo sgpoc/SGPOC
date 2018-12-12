@@ -130,7 +130,7 @@ class GestorPresupuestos
     }
 
     public function DamePresupuestoExportar($pIdPresupuesto,$pIdGT){
-        $sql = 'CALL dame_precio_final_presupuesto(:pIdPresupuesto,:pIdGT)';
+        $sql = 'CALL ssp_dame_precio_final_presupuesto(:pIdPresupuesto,:pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
         ->bindValue('pIdPresupuesto', $pIdPresupuesto)
         ->bindValue('pIdGT', $pIdGT);

@@ -51,7 +51,6 @@ class ObrasController extends Controller
     
     public function actionAlta() {
         $model = new Obras;
-        $model->scenario = 'alta-obra';
         $gestor = new GestorObras;
         $localidades = $gestor->ListarLocalidades();
         $listData = ArrayHelper::map($localidades, 'IdLocalidad', 'Localidad');
@@ -80,9 +79,12 @@ class ObrasController extends Controller
         $model = new Obras;
         $gestor = new GestorObras;
         $pIdObra = Yii::$app->request->get('IdObra');
+        $localidades = $gestor->ListarLocalidades();
+        $listData = ArrayHelper::map($localidades, 'IdLocalidad', 'Localidad');
         $obra = $gestor->Dame($pIdObra);
         if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
+            $pIdLocalidad = $model->IdLocalidad;
             $pObra = $model->Obra;
             $pDireccion = $model->Direccion;
             $pPropietario = $model->Propietario;
@@ -91,7 +93,7 @@ class ObrasController extends Controller
             $pComentarios = $model->Comentarios;
             $pSuperficieTerreno = $model->SuperficieTerreno;
             $pSuperficieCubiertaTotal = $model->SuperficieCubiertaTotal;
-            $mensaje = $gestor->Modificar($pIdObra, $pObra, $pDireccion, $pPropietario, $pTelefono, $pEmail, $pComentarios, $pSuperficieTerreno, $pSuperficieCubiertaTotal);
+            $mensaje = $gestor->Modificar($pIdObra, $pIdLocalidad, $pObra, $pDireccion, $pPropietario, $pTelefono, $pEmail, $pComentarios, $pSuperficieTerreno, $pSuperficieCubiertaTotal);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
@@ -102,7 +104,7 @@ class ObrasController extends Controller
             }
         }
         else{
-           return $this->renderAjax('modificar',['model' => $model, 'obra' => $obra]);
+           return $this->renderAjax('modificar',['model' => $model, 'listData' => $listData, 'obra' => $obra]);
         }
     }
     

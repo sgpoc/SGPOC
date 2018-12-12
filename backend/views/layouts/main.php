@@ -53,7 +53,7 @@ FontAsset::register($this);
                                     <a href="/sgpoc/backend/web/site/logout" class="btn btn-default btn-flat" data-method="post">Salir</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="/sgpoc/backend/web/usuarios/perfil" class="btn btn-default btn-flat">Perfil</a>
+                                    <a href="/sgpoc/backend/web/site/modificar-perfil" class="btn btn-default btn-flat">Perfil</a>
                                 </div>
                             </li>
                         </ul>

@@ -273,7 +273,7 @@ class PresupuestosController extends Controller
         $gestor = new GestorPresupuestos;
         $pIdPresupuesto = Yii::$app->request->get('IdPresupuesto');
         $pIdGT = Yii::$app->user->identity['IdGT'];
-        $presupuesto = $gestor->DamePresupuestoExportar($pIdPresupuesto,$pIdGT);
+        $presupuesto = $gestor->DamePresupuestoExportar($pIdPresupuesto, $pIdGT);
         $dataProviderPresupuesto = new ArrayDataProvider([
             'allModels' => $presupuesto,
         ]);
