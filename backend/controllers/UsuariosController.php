@@ -118,7 +118,11 @@ class UsuariosController extends Controller
     public function actionModificar() {
         $model = new Usuarios;
         $gestor = new GestorUsuarios;
+<<<<<<< HEAD
         $model->scenario = 'modificar-usuario'; // Mismo escenario que el alta
+=======
+        $model->scenario = 'modificar-usuario'; 
+>>>>>>> development
         $gestorgt = new GestorGruposTrabajo;
         $grupostrabajo = $gestorgt->Listar();
         $listData= ArrayHelper::map($grupostrabajo,'IdGT','GrupoTrabajo');

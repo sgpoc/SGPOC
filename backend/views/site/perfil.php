@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use kartik\form\ActiveForm;
 use kartik\password\PasswordInput;
 use kartik\widgets\Growl;
+use kartik\form\ActiveField;
+
 
 $this->title = 'SGPOC | Perfil';
 
@@ -53,7 +55,15 @@ $this->title = 'SGPOC | Perfil';
             <?= $form->field($model, 'Nombre', ['addon' => ['prepend' => ['content'=>'N']]])->textInput(['value'=>$usuario[0]['Nombre']]) ?>
             <?= $form->field($model, 'Apellido', ['addon' => ['prepend' => ['content'=>'A']]])->textInput(['value'=>$usuario[0]['Apellido']]) ?>
             <?= $form->field($model, 'Email', ['addon' => ['prepend' => ['content'=>'@']]])->textInput(['value'=>$usuario[0]['Email']]) ?>
-            <?= $form->field($model, 'Password', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-lock"></i>']]])->passwordInput()?>
+            <?= $form->field($model, 'Password', ['addon' => ['prepend' => ['content'=>'<i class="fa fa-lock"></i>']],
+            'hintType' => ActiveField::HINT_SPECIAL,
+            'hintSettings' => [
+                'placement' => 'right', 
+                'onLabelClick' => true, 
+                'onLabelHover' => false
+            ]])->passwordInput()
+            ->hint('La contraseña puede omitirse, si se omite no se modificar la misma');?>
+            
         </div>
     </div>
     <div class="modal-footer">
