@@ -69,8 +69,12 @@ class SiteController extends Controller
           $user = $model->getUser($usuario);
           if($model->getUser($usuario)){
             if($estado[0]['Estado'] == '1'){
-                $model->login();
+                if($model->login()){
                  return $this->goBack();
+                    }else{
+                        $model->password = '';
+                         return $this->render('login', ['model' => $model]);
+                    }
                 }    
             else{
                     $model->password = '';
@@ -80,12 +84,11 @@ class SiteController extends Controller
             }
             else{
                    $model->password = '';
-                   Yii::$app->session->setFlash('alert',$estado[0]['Mensaje']);
+                  Yii::$app->session->setFlash('alert', "El usuario ingresado no existe.");
                    return $this->render('login', ['model' => $model]);
             }
         }
         else{
-              $model->password = '';
               return $this->render('login', ['model' => $model]);
         }
     }
@@ -103,23 +106,31 @@ class SiteController extends Controller
         $gestor = new GestorUsuarios;
         $model->scenario = 'modificar-perfil';
         $pIdUsuario = Yii::$app->user->identity['IdUsuario'];
+        $pIdGT = Yii::$app->user->identity['IdGT'];
         $usuario =  $gestor->Dame($pIdUsuario);
-        if($model->load(Yii::$app->request->post()) && $model->validate())
-        {
-            $pNombre = $model->Nombre;
-            $pApellido = $model->Apellido;
-            $pEmail = $model->Email;
+        if($model->load(Yii::$app->request->post()) && ($model->validate()))        {
+               // $pIdGT = $model->IdGT;
+                $pIdRol = $model->IdRol;
+                $pNombre = $model->Nombre;
+                $pApellido = $model->Apellido;
+                $pEmail = $model->Email;
+            if($model->Password == ''){
+                $mensaje = $gestor->Modificar($pIdUsuario, $pIdGT, $pIdRol, $pNombre, $pApellido, $pEmail);    
+            }
+            else{
             $pPassword = Yii::$app->security->generatePasswordHash($model->Password);
             $pauth_key = $model->beforeGuardar();
-            $mensaje = $gestor->Modificar($pIdUsuario, $pNombre, $pApellido, $pEmail, $pPassword, $pauth_key);
+            $mensaje = $gestor->ModificarPerfil($pIdUsuario, $pNombre, $pApellido, $pEmail, $pPassword, $pauth_key);
+            }
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
+                $usuario =  $gestor->Dame($pIdUsuario);
                 return $this->render('perfil',['model' => $model, 'usuario' => $usuario]);
             }
             else{
                 Yii::$app->session->setFlash('alert',$mensaje[0]['Mensaje']);
-                return $this->render('perfil',['model' => $model, 'usuario' => $usuario]);
+              return $this->render('perfil',['model' => $model, 'usuario' => $usuario]);
             }
         }
         else{
