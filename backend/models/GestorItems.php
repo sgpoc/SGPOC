@@ -54,13 +54,15 @@ class GestorItems
         return $comando->queryAll();
     }
     
-    public function Modificar($pIdItem, $pIdGT, $pItem)
+    public function Modificar($pIdItem,$pIdGT,$pItem,$pIdRubroItem, $pIdUnidad)
     {
-        $sql = 'CALL ssp_modificar_item(:pIdItem, :pIdGT, :pItem)';
+        $sql = 'CALL ssp_modificar_item(:pIdItem,:pIdGT,:pItem,:pIdRubroItem,:pIdUnidad)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdItem', $pIdItem)
                 ->bindValue('pIdGT',$pIdGT)
-                ->bindValue('pItem',$pItem);
+                ->bindValue('pItem',$pItem)
+                ->bindValue('pIdRubroItem',$pIdRubroItem)
+                ->bindValue('pIdUnidad',$pIdUnidad);
         return $comando->queryAll();
     }
     
@@ -73,9 +75,9 @@ class GestorItems
         return $comando->queryAll();
     }
     
-    public function Dame($pIdItem, $pIdGT)
+    public function Dame($pIdItem,$pIdGT)
     {
-        $sql = 'CALL ssp_dame_item(:pIdItem, :pIdGT)';
+        $sql = 'CALL ssp_dame_item(:pIdItem,:pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdItem', $pIdItem)
                 ->bindValue('pIdGT', $pIdGT);

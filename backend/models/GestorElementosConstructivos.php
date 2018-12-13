@@ -45,22 +45,24 @@ class GestorElementosConstructivos
         return $comando->queryAll();
     }
 
-    public function Dame($pIdElementoConstructivo, $pIdGT)
+     public function Dame($pIdElementoConstructivo,$pIdGT)
     {
-        $sql = 'CALL ssp_dame_elementoconstructivo(:pIdElementoConstructivo, :pIdGT)';
+        $sql = 'CALL ssp_dame_elementoconstructivo(:pIdElementoConstructivo,:pIdGT)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdElementoConstructivo', $pIdElementoConstructivo)
                 ->bindValue('pIdGT', $pIdGT);
         return $comando->queryAll();
     }
     
-    public function Modificar($pIdElementoConstructivo, $pIdGT, $pElementoConstructivo)
+      public function Modificar($pIdElementoConstructivo,$pIdGT, $pElementoConstructivo,$pIdRubroEC,$pIdUnidad)
     {
-        $sql = 'CALL ssp_modificar_elementoconstructivo(:pIdElementoConstructivo, :pIdGT, :pElementoConstructivo)';
+        $sql = 'CALL ssp_modificar_elementoconstructivo(:pIdElementoConstructivo,:pIdGT ,:pElementoConstructivo,:pIdRubroEC,:pIdUnidad)';
         $comando = Yii::$app->db->createCommand($sql)
                 ->bindValue('pIdElementoConstructivo', $pIdElementoConstructivo)
-                ->bindValue('pIdGT', $pIdGT)
-                ->bindValue('pElementoConstructivo',$pElementoConstructivo);
+                ->bindValue('pIdGT',$pIdGT)
+                ->bindValue('pElementoConstructivo',$pElementoConstructivo)
+                ->bindValue('pIdRubroEC',$pIdRubroEC)
+                ->bindValue('pIdUnidad',$pIdUnidad);
         return $comando->queryAll();
     }
     

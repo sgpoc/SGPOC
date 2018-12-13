@@ -10,6 +10,8 @@ use app\models\GestorSubFamilias;
 use app\models\Subfamilias;
 use app\models\SubFamiliaBuscar;
 use kartik\mpdf\pdf;
+use app\models\Familias;
+
 
 
 class SubfamiliasController extends Controller
@@ -80,16 +82,20 @@ class SubfamiliasController extends Controller
     }
     
     public function actionModificar()
-    {
+    {  
         $model = new SubFamilias;
         $gestor = new GestorSubFamilias;
+        $gestorf = new GestorFamilias;
         $pIdGT = Yii::$app->user->identity['IdGT'];
+        $familia = $gestorf->Listar($pIdGT);
+        $listDataF= ArrayHelper::map($familia,'IdFamilia','Familia');
         $pIdSubFamilia = Yii::$app->request->get('IdSubFamilia');
         $subfamilia = $gestor->Dame($pIdSubFamilia, $pIdGT);
         if($model->load(Yii::$app->request->post()) && ($model->validate()))
         {
             $pSubFamilia = $model->SubFamilia;
-            $mensaje = $gestor->Modificar($pIdSubFamilia, $pIdGT, $pSubFamilia);
+            $pIdFamilia = $model->IdFamilia;
+            $mensaje = $gestor->Modificar($pIdSubFamilia, $pSubFamilia,$pIdFamilia);
             if(substr($mensaje[0]['Mensaje'], 0, 2) === 'OK')
             {
                 Yii::$app->session->setFlash('alert', $mensaje[0]['Mensaje']);
@@ -100,7 +106,7 @@ class SubfamiliasController extends Controller
             }
         }
         else{
-           return $this->renderAjax('modificar',['model' => $model, 'subfamilia' => $subfamilia]);
+          return $this->renderAjax('modificar',['model' => $model, 'subfamilia' => $subfamilia,'listData' => $listDataF]);
         }
     }
     

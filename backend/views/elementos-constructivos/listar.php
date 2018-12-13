@@ -191,7 +191,15 @@ $gridColumns = [
                                 'data-pjax' => 0, 
                                 'class' => 'btn btn-default', 
                                 'title' => 'Actualizar'
-                            ])
+                            ]).' '.
+                            Html::a('<i class="fas fa-external-link-alt"></i>', 
+                            ['elementos-constructivos/exportar-todo'],
+                            [
+                                'data-pjax' => 0, 
+                                'class' => 'btn btn-link', 
+                                'title' => 'exportar',
+                                'target' => '_blank'
+                            ]),    
             ],
            
         ],

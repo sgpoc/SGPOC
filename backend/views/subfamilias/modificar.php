@@ -21,6 +21,7 @@ AnimateAsset::register($this);
     <div class="modal-body">
         <div class="form-group">
             <?= $form->field($model, 'SubFamilia', ['addon' => ['prepend' => ['content'=>'SF']]])->textInput(['value'=>$subfamilia[0]['SubFamilia']]) ?>   
+            <?= $form->field($model, 'IdFamilia')->dropDownList($listData, ['options'=>[$subfamilia[0]['IdFamilia'] => ['selected' => true]]])->label('Familias');  ?>
         </div>
     </div>
     <div class="modal-footer">
