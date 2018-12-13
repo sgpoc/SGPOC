@@ -19,7 +19,8 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     {
         return [
             [['IdGT', 'IdRol', 'Nombre', 'Apellido', 'Email', 'Password'], 'required', 'on' => 'alta-usuario'],
-            [['Nombre', 'Apellido', 'Email', 'Password'], 'required', 'on' => 'modificar-perfil'],
+            [['Nombre', 'Apellido', 'Email'], 'required', 'on' => 'modificar-perfil'],
+            [['IdGT', 'IdRol', 'Nombre', 'Apellido', 'Email'], 'required', 'on' => 'modificar-usuario'],
             [['IdGT'], 'integer'],
             [['IdUsuario'], 'integer'],
             [['IdRol'], 'integer'],
